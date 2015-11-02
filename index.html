@@ -8,13 +8,13 @@
     <meta name="author" content="Chefonia">
 
     <title>Chefonia- A place for true chef</title>
-    <link href="foodkart/lib/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="foodkart/css/style.min.css" rel="stylesheet">
-    <link href="foodkart/css/product.css" rel="stylesheet">
-    <link href="foodkart/lib/karbon/overlay.css" rel="stylesheet">
+    <link href="lib/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.min.css" rel="stylesheet">
+    <link href="css/product.css" rel="stylesheet">
+    <link href="lib/karbon/overlay.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
-    <link href="foodkart/css/bootstrap.min.css" rel="stylesheet">
-    <link href="foodkart/css/animate.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <!--<link href="foodkart/css/scrolling-nav.min.css" rel="stylesheet">-->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -25,7 +25,7 @@
     <![endif]-->
 </head>
 
-<body data-ng-cloak data-ng-app="co" >
+<body data-ng-cloak data-ng-app="Chefonia">
 <div class="navbar navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -53,8 +53,8 @@
         <!--/.nav-collapse -->
     </div>
 </div>
-<route-loading-indicator></route-loading-indicator>
-<div ng-if='!isRouteLoading' data-ng-view class="t-content"  data-ng-cloak style="background-color: #fff">
+
+<div data-ng-view class="t-content" data-ng-cloak style="background-color: #fff">
 
 </div>
 <!--
@@ -98,17 +98,22 @@
 </footer>
 -->
 <!-- jQuery -->
-<script src="foodkart/lib/jquery/jquery-2.1.1.min.js"></script>
+<script src="lib/jquery/jquery-2.1.1.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
-<script src="foodkart/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <!-- Scrolling Nav JavaScript -->
-<script src="foodkart/js/jquery.easing.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
 <!--<script src="foodkart/js/scrolling-nav.js"></script>-->
-<script src="foodkart/lib/angular/angular.min.js"></script>
-<script src="foodkart/lib/angular/angular-route.min.js"></script>
-<script src="foodkart/js/script.min.js"></script>
-<script src="foodkart/js/jquery.lettering-0.6.min.js"></script>
-<script src="foodkart/js/jquery.textillate.min.js"></script>
+<script src="lib/angular/angular.min.js"></script>
+<script src="lib/angular/angular-route.min.js"></script>
+<script src="js/script.min.js"></script>
+<script src="js/jquery.lettering-0.6.min.js"></script>
+<script src="js/jquery.textillate.min.js"></script>
+<script src="pages/login/loginController.js"></script>
+<script src="pages/register/registerController.js"></script>
+<script src="services/authenticationService.js"></script>
+<script src="services/flashService.js"></script>
+<script src="services/userService.js"></script>
 </body>
 
 </html>
