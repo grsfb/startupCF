@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1",
+    "fName": "Bajrang",
+    "lName": "Asthana",
+    "line1": "Nigam Colony",
+    "line2": "Pali Road",
+    "city": "Shahdol",
+    "state": "M P",
+    "pin": "484001",
+    "mobile":"9158100044"
+  },
+  {
+    "id": "2",
+    "fName": "Bajrang",
+    "lName": "Asthana",
+    "line1": "Kharadi",
+    "line2": "Kharadi",
+    "city": "Pune",
+    "state": "M H",
+    "pin": "440010",
+    "mobile":"9158100044"
+  }
+]

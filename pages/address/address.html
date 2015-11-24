@@ -1,0 +1,95 @@
+<div data-ng-controller="AddressController as vm">
+    <h3 class="tstyle" style="padding: 10px;">Shipping adress</h3>
+
+    <div style="padding: 10px;">
+        <div class="form-group">
+            <ul style="padding: 0px;">
+                <li data-ng-repeat="address in vm.allAddress">
+                    <div style="position: relative;"><input type="radio" name="payment"
+                                                            id="address" style="position: absolute;" data-ng-click="vm.setShippingAddress(address)">
+                    </div>
+                    <address style="margin-left: 20px;">
+                        <strong>{{address.fName}} {{address.lName}}</strong><br>
+                        {{address.line1}}, {{address.line2}}<br>
+                        {{address.city}}, {{address.state}}, {{address.pin}}<br>
+                        <abbr title="Phone">Mob+:</abbr> {{address.mobile}}
+                    </address>
+                </li>
+            </ul>
+
+            <div>
+                <a class="btn btn-default mybtn" name="add-address" data-ng-click="vm.enableAddressEditor()">
+                    Add New Address</a>
+            </div>
+        </div>
+        <div data-ng-hide="vm.showAddressEditor">
+            <form id="checkout-form" method="post" name="form" role="form" novalidate="novalidate">
+                <div class="row">
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6" ng-class="{'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+                        <label for="firstName" style="margin-left: 5px;">First Name *</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName"
+                               placeholder="First name" required="" data-ng-model="vm.address.fName">
+                        <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6" ng-class="{'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+                        <label for="lastName" style="margin-left: 5px;">Last Name *</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName"
+                               placeholder="Last name" required="" data-ng-model="vm.address.lName">
+                        <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Last name is required</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="line1" style="margin-left: 20px;">Adress *</label>
+
+                    <div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6" ng-class="{'has-error': form.line1.$dirty && form.line1.$error.required }">
+                            <input type="text" class="form-control" id="line1" name="line1"
+                                   placeholder="Appartment Address" required="" data-ng-model="vm.address.line1">
+                            <span ng-show="form.line1.$dirty && form.line1.$error.required" class="help-block">Appartment Address is required</span>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6" ng-class="{'has-error': form.line2.$dirty && form.line2.$error.required }">
+                            <input type="text" class="form-control" id="co-appartment" name="co-appartment"
+                                   placeholder="Landmark" required="" data-ng-model="vm.address.line2">
+                            <span ng-show="form.line2.$dirty && form.line2.$error.required" class="help-block">Landmark is required</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6" ng-class="{'has-error': form.city.$dirty && form.city.$error.required }">
+                        <label for="city" style="margin-left: 5px;">City *</label>
+                        <input type="text" class="form-control" id="city" name="city"
+                               placeholder="City" required="" data-ng-model="vm.address.city">
+                        <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">City is required</span>
+
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6" ng-class="{'has-error': form.state.$dirty && form.state.$error.required }">
+                        <label for="state" style="margin-left: 5px;">State *</label>
+                        <input type="text" class="form-control" id="state" name="state"
+                               placeholder="State" required="" data-ng-model="vm.address.state">
+                        <span ng-show="form.state.$dirty && form.state.$error.required" class="help-block">State is required</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6" ng-class="{'has-error': form.postcode.$dirty && form.postcode.$error.required }">
+                        <label for="postcode" style="margin-left: 5px;">Postcode *</label>
+                        <input type="text" class="form-control" id="postcode" name="postcode"
+                               placeholder="Postcode/ ZIP" required="" data-ng-model="vm.address.zip">
+                        <span ng-show="form.postcode.$dirty && form.postcode.$error.required" class="help-block">Postcode is required</span>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6" ng-class="{'has-error': form.mobile.$dirty && form.mobile.$error.required }">
+                        <label for="mobile" style="margin-left: 5px;">Mobile No. *</label>
+                        <input type="text" class="form-control" id="mobile" name="mobile"
+                               placeholder="Mobile number" required="" data-ng-model="vm.address.mobile">
+                        <span ng-show="form.mobile.$dirty && form.mobile.$error.required" class="help-block">Mobile is required</span>
+                    </div>
+                </div>
+                <div class="row" style="padding-right: 15px;">
+                    <a class="btn btn-default mybtn pull-right"
+                       data-ng-click="vm.cancel();form.$setPristine()">Cancel</a>
+                    <a class="btn btn-default mybtn pull-right mybtn"
+                       data-ng-click="vm.save()" data-ng-disabled="form.$invalid">Save</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

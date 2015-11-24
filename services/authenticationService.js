@@ -17,32 +17,34 @@
 
         function Login(username, password, callback) {
             var response;
-            $http.post('/endpoint/authenticate', { username: username, password: password })
+            $http.post('/endpoint/authenticate', {username: username, password: password})
                 .success(function (response) {
                     callback(response);
                 })
-                .error(function(){
-                    response = { success: false, message: 'Username or password is incorrect' };
+                .error(function () {
+                    response = {success: false, message: 'Username or password is incorrect'};
                     callback(response);
                 });
         }
 
-        function SetCredentials(username, password) {
+        function SetCredentials(username, password, userId) {
+            //add userID in global
             var authdata = Base64.encode(username + ':' + password);
-            $rootScope.globals = {
-                currentUser: {
-                    username: username,
-                    authdata: authdata
-                }
+            $rootScope.currentUser = {
+                userId: userId,
+                username: username,
+                authdata: authdata
             };
 
+            //enable user profile
+            $rootScope.isLoggedIn = true;
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-            $cookieStore.put('globals', $rootScope.globals);
+            $cookieStore.put('currentUser', $rootScope.currentUser);
         }
 
         function ClearCredentials() {
-            $rootScope.globals = {};
-            $cookieStore.remove('globals');
+            $rootScope.currentUser = {};
+            $cookieStore.remove('currentUser');
             $http.defaults.headers.common.Authorization = 'Basic ';
         }
     }
