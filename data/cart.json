@@ -1,0 +1,18 @@
+[
+  {
+    "id":"1",
+    "name":"Achar",
+    "category":"Pickle",
+    "price":50,
+    "quantity":2,
+    "imageURL":"img/pickle.jpeg"
+  },
+  {
+    "id":"2",
+    "name":"Chakli",
+    "category":"Snacks",
+    "price":20,
+    "quantity":1,
+    "imageURL":"img/chakli.jpg"
+  }
+]

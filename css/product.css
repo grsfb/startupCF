@@ -7,12 +7,13 @@
 
 .choose {
     border-top: 1px solid #F7F7F0;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 ul li {
     list-style: none;
 }
+
 .choose ul li a {
     color: #B3AFA8;
     font-family: 'Roboto', sans-serif;
@@ -27,6 +28,7 @@ a {
     -o-transition: 300ms;
     transition: 300ms;
 }
+
 .choose ul li a i {
     margin-right: 5px;
 
@@ -44,8 +46,8 @@ a {
     font-weight: normal;
 }
 
-.tstyle th{
-    text-align: center!important;
+.tstyle th {
+    text-align: center !important;
 }
 
 .cart_quantity_button a {
@@ -66,37 +68,19 @@ a {
     float: left;
     font-size: 16px;
     text-align: center;
-    font-family: 'Roboto',sans-serif;
+    font-family: 'Roboto', sans-serif;
 
 }
 
-.cart_quantity_button{
+.cart_quantity_button {
     padding-left: 20%;
 }
 
-.total_area, #do_action .chose_area {
+.total_area {
     border: 1px solid #E6E4DF;
     color: #696763;
     padding: 30px 25px 30px 0;
     margin-bottom: 80px;
-}
-
-.update {
-    margin-left: 40px;
-}
-
-.update, .check_out {
-    background: #FE980F;
-    border-radius: 0;
-    color: #FFFFFF;
-    margin-top: 18px;
-    border: none;
-    padding: 5px 15px;
-}
-
-
-.check_out {
-    margin-left: 20px;
 }
 
 .total_area ul li {
@@ -112,4 +96,65 @@ ul li {
 
 .total_area span {
     float: right;
+}
+
+.header_top {
+    background: none repeat scroll 0 0 #F0F0E9;
+}
+
+.checkout .payment-method {
+    background: #607d8b;
+}
+
+.checkout .payment-method {
+    width: 100%;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+    background: #ff9016;
+    border-radius: 0;
+    color: #fff;
+}
+
+.checkbox, .radio {
+    padding-left: 0;
+    margin-bottom: 10px;
+}
+
+.radio, .checkbox {
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.radio.light label {
+    color: #fff;
+}
+
+.checkout table {
+    width: 100%;
+    font-size: 1.125em;
+    margin-bottom: 10px;
+}
+
+.checkout table td.border {
+    border-bottom: 1px solid #b2b2b2;
+    padding-bottom: 10px;
+}
+
+.checkout table td {
+    padding-top: 16px;
+}
+
+.checkout table .price {
+    font-weight: 900;
+    text-align: right;
+}
+
+/*
+*Imp
+*/
+.mybtn {
+    background-color: #EB5C31 !important;
+    color: #fff !important;
 }

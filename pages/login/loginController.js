@@ -5,15 +5,17 @@
         .controller('LoginController', LoginController);
     LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService'];
     function LoginController($location, AuthenticationService, FlashService) {
-        var cm = this;
-        cm.login = login;
+        var vm = this;
+        vm.login = login;
         (function initController() {
             // reset login status
             AuthenticationService.ClearCredentials();
         })();
         function login() {
-            cm.dataLoading = true;
-            AuthenticationService.Login(cm.username, cm.password, function (response) {
+            vm.dataLoading = true;
+            AuthenticationService.SetCredentials(vm.username, vm.password);
+            $location.path('/item');
+           /* AuthenticationService.Login(cm.username, cm.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials(cm.username, cm.password);
                     $location.path('/');
@@ -21,7 +23,7 @@
                     FlashService.Error(response.message);
                     cm.dataLoading = false;
                 }
-            });
+            });*/
         };
     }
 

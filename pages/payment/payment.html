@@ -1,0 +1,52 @@
+<div    >
+    <h3 class="tstyle" style="padding: 10px;">Your order</h3>
+
+    <div style="padding: 10px;">
+        <table>
+            <tbody>
+            <tr>
+                <th>Payment Details</th>
+            </tr>
+            <tr>
+                <td class="th">Cart subtotal</td>
+                <td class="price"><i class="fa fa-rupee"></i> {{vm.cartTotal}}</td>
+            </tr>
+            <tr>
+                <td class="th border">Shipping</td>
+                <td class="border" style="text-align: right"><i class="fa fa-rupee"></i> {{vm.shippingCost}}</td>
+            </tr>
+            <tr>
+                <td class="th">Order total</td>
+                <td class="price"> <i class="fa fa-rupee"></i>{{vm.cartTotal+vm.shippingCost}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="payment-method">
+            <div>
+                <label>
+                    Select Payment Method</label>
+            </div>
+            <p>Please use your Order ID as the payment
+                reference.</p>
+
+            <div class="radio light">
+                <label>
+                    <div class="iradio" style="position: relative;"><input type="radio" name="payment"
+                                                                           id="payment02"
+                                                                           style="position: absolute;">
+                    </div>
+                    Cheque Payment</label>
+            </div>
+            <div class="radio light">
+                <label>
+                    <div style="position: relative;"><input type="radio" name="payment"
+                                                            id="payment03"
+                                                            style="position: absolute;">
+                    </div>
+                    PayPal <span class="pp-label"></span></label>
+            </div>
+        </div>
+        <input class="btn btn-block" type="submit" name="place-order"
+               style="background-color: #EB5C31;color: #fff" value="Place order" data-ng-click="vm.checkAndPlaceOrder()">
+    </div>
+</div>
