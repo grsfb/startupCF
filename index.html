@@ -12,9 +12,13 @@
     <link href="css/style.min.css" rel="stylesheet">
     <link href="css/product.css" rel="stylesheet">
     <link href="lib/karbon/overlay.css" rel="stylesheet">
+    <link href="css/frontPage.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
+    <link href="lib/owlCarousel/owl.carousel.css" rel="stylesheet">
+    <link href="lib/owlCarousel/owl.theme.css" rel="stylesheet">
+    <link href="lib/owlCarousel/owl.transitions.css" rel="stylesheet">
     <!-- Custom CSS -->
     <!--<link href="foodkart/css/scrolling-nav.min.css" rel="stylesheet">-->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -38,22 +42,110 @@
                 <img src="brand.png" style="height: 50px;width: 120px;">
             </a>
         </div>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" ng-controller="navController">
             <ul class="nav navbar-nav pull-right">
-                <li><a href="#home" data-toggle="collapse"
-                       data-target=".navbar-collapse.in">Home</a></li>
-                <li><a href="#about-us" data-toggle="collapse"
-                       data-target=".navbar-collapse.in">About us</a></li>
-                <li><a href="#how-it-works" data-toggle="collapse"
-                       data-target=".navbar-collapse.in">How it works</a></li>
-                <li><a href="#contact-us" data-toggle="collapse"
-                       data-target=".navbar-collapse.in">Contact us</a></li>
+                <li style="align-content: center" id="loginNav">
+                    <button type="button" style="width: 100px" class="btn btn-success" data-ng-click="login()">Login</button>
+                </li>
+               <li style="align-content: center" class="cartNav"> <a href="#" style="padding-top: 0px;padding-bottom: 0px;margin-top: 8px"><i class="fontawesome fa fa-shopping-cart fa-2x"></i>
+                   <span class="badge" style="background-color: transparent;vertical-align: top">{{cartItems}}</span></a></li>
+                <li style="align-content: center" class="cartNav"> <a href="#" style="padding-top: 0px;padding-bottom: 0px;margin-top: 8px"><i class="fontawesome fa fa-heart fa-2x"></i>
+                    <span class="badge" style="background-color: transparent;vertical-align: top">{{wishItems}}</span></a></li>
+                <li  style="align-content: center"><div class="dropdown" style="padding-top: 0px;padding-bottom: 0px;margin-top: 8px">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="profileNav" data-toggle="dropdown" style="font-size: 20px;font-weight: 500">Hello, {{loginName}}
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Your Orders</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Sign Out?</a></li>
+                    </ul>
+                </div></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
     </div>
 </div>
+<div ng-include=""></div>
+<div class="modal fade" id="myModal" role="dialog" style="background-color: #122b40">
+    <div class="modal-dialog" style=" align-items: center;">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <a href="#" style="float: right;padding: 5px 5px 5px 5px!important;" class="btn btn-danger btn-circle" data-dismiss="modal"><i class="fontawesome fa fa-close"></i></a>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6  text-center">
+                        <h4 class="loginHeader" style="color: green"> Sign in With Your Chefonia Account! </h4>
+                    </div>
+
+                    <div class="col-md-6 text-center">
+                        <h4 class="loginHeader" style="color: darkred"> Register With Chefonia!</h4>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+                <div class="row">
+
+                <form role="form" class="col-md-5">
+
+                    <div class="form-group">
+                        <label for="usrname"><span class="fontawesome fa fa-user"></span> Username</label>
+                        <input type="text" class="form-control loginInput" id="usrname" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="fontawesome fa fa-anchor"></span> Password</label>
+                        <input type="text" class="form-control loginInput" id="psw" placeholder="Enter password">
+                    </div>
+                    <div class="form-group col-md-6" style="margin-left: -15px">
+                    <button type="submit" class="btn btn-success btn-block loginBtn"><span class="fontawesome fa fa-lock"></span> Login</button>
+                      </div>
+                    <div class="form-group col-md-6 text-left" style="margin-top: 5px;margin-left: -15px!important;"><a> Forgot Password ?</a>
+                    </div>
+                    <div class="col-md-12 text-center">
+<img src="img/OR.png">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12" style="margin-left: -15px;margin-top: 20px">
+                        <label style="font-family:Roboto Condensed, sans-serif;font-size: 24px;font-weight: 300"> Sign in using</label>
+                        </div>
+                    <div class="col-md-12" style="margin-left: -15px;margin-top: 5px">
+                        <button class="btn-default fbLogin"> LOGIN WITH FACEBBOK</button>
+                    </div>
+                </form>
+<div class="col-md-2">&nbsp;</div>
+                <form role="form" class="col-md-5" >
+                    <div class="form-group">
+                        <label for="usrname"><span class="fontawesome fa fa-user"></span> Username</label>
+                        <input type="text" class="form-control loginInput" id="usrname1" placeholder="Enter UserName">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="fontawesome fa fa-anchor"></span> Password</label>
+                        <input type="text" class="form-control loginInput" id="psw1" placeholder="Enter password">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="fontawesome fa fa-edit"></span> Confirm Password</label>
+                        <input type="text" class="form-control loginInput" id="cnfrmpswd" placeholder="Confirm password">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="fontawesome fa fa-pencil"></span> Phone Number</label>
+                        <input type="text" class="form-control loginInput" id="phn" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="fontawesome fa fa-qrcode"></span> Email Address</label>
+                        <input type="text" class="form-control loginInput" id="email" placeholder="Email Address">
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-block loginBtn"><span class="fontawesome fa fa-lock"></span> Sign Up</button>
+                </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
 <div data-ng-view class="t-content" data-ng-cloak style="background-color: #fff">
 
 </div>
@@ -99,6 +191,7 @@
 -->
 <!-- jQuery -->
 <script src="lib/jquery/jquery-2.1.1.min.js"></script>
+<script src="lib/owlCarousel/owl.carousel.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <!-- Scrolling Nav JavaScript -->

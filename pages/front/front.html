@@ -1,0 +1,123 @@
+
+<div class="row">
+    <div class="container-fluid">
+    <div class="frontcontainer frontbackground col-md-12" >
+        <div class="divElement row divElement" >
+            <div class="locationdiv inner-addon left-addon col-md-3 col-sm-3 col-xs-12"
+                 ng-controller="citylistctrl">
+                <span>  <i class="fontawesome fa fa-location-arrow"></i></span>
+                <input data-toggle="dropdown"
+
+                       class="location form-control dropdown-toggle " type="text" placeholder="Current Location"
+                       ng-model="city"
+                       data-ng-keydown="getLocation();">
+
+                <ul class="dropdown-menu list-group-item-heading" style="width: 100%;padding: 0px;margin-top: 5px">
+                    <li class="list-group-item" ng-repeat="city in cityList" data-ng-click="cityChange(city)">{{city}}
+                    </li>
+                </ul>
+                <!--<ul class="dropdown-menu list-group-item-heading" style="position: initial;width: 100%;">-->
+                <!--<li class="list-group-item" ng-repeat="city in ['Pune','Nagpur','Mumbai']" data-ng-click="cityChange(city)">{{city}}</li>-->
+                <!--</ul>-->
+            </div>
+            <div class="fooddiv inner-addon left-addon col-md-7 col-sm-6 col-xs-12"
+                 ng-controller="foodlistctrl">
+                <span>  <i class="fontawesome fa fa-cutlery"></i></span>
+                <input data-toggle="dropdown" class="form-control dropdown-toggle delicacy" type="text"
+                       placeholder="Search Delicacies" ng-model="snack">
+
+
+                <ul class="dropdown-menu list-group" style="width: 100%;z-index: 9999;overflow: visible;padding: 0px;margin-top: 5px">
+
+                    <li class="list-group-item itemlist" ng-repeat="snack in foodList"
+                        data-ng-click="foodChange(snack)">
+                        <span class="badge">Popularity ***</span>{{snack}}
+                    </li>
+                    <li class="list-group-item disabled">Popular Delicacies</li>
+                    <li class="list-group-item" ng-repeat="snack in popularFoodList" data-ng-click="foodChange(snack)">
+                        <span class="badge">Popularity *****</span>{{snack}}
+                    </li>
+                    <li class="list-group-item disabled">Newly Launched Delicacies</li>
+                    <li class="list-group-item" ng-repeat="snack in newFoodList" data-ng-click="foodChange(snack)">
+                        <span class="badge">New</span>{{snack}}
+                    </li>
+                </ul>
+            </div>
+            <div class="searchdiv col-md-2 col-sm-2 col-xs-12" style="padding-left: 0px;padding-right:0px;height: 45px;">
+                <a href="#" class="btn btn-info btn-lg" id="searchbtn">
+                    <span class="fontawesome fa fa-search" style="align-content: center"></span> Search</a>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    </div>
+<div id="test">
+<div class="row container-fluid" style="position: relative">
+    <div class="col-md-12" style="height: 35px;font-family: 'Open Sans', sans-serif;">
+        <h4> <u>Popular Dishes</u></h4>
+    </div>
+    <div class="col-md-12" ng-controller="popularListCtrl">
+        <div style="float: left;position: absolute;top: 50%">
+        <a class="prev" id="popularowlPrev"><i class="fontawesome fa fa-chevron-left"></i></a>
+</div>
+        <div>
+        <data-owl-carousel style="margin-left: 30px;height: 250px; margin-right: 10px;width: auto"; id="owl-demo" class="owl-carousel" data-options="{rewindNav : true}">
+            <div owl-carousel-item="" ng-repeat="item in ::slides" class="item">
+                <div class="thumbnail">
+                <img data-ng-src="{{slides[$index].imageURL}}" alt="product" class="popularimg img-responsive">
+                <h2 style="color: #FE980F"><i class="fa fa-inr"></i> {{slides[$index].price}}</h2>
+                <p>{{slides[$index].name}} - {{slides[$index].quantity}} Kg</p>
+                <div class="caption caption-half-down" >
+                <p>{{slides[$index].name}} - {{slides[$index].quantity}} Kg</p>
+                <h2> <i class="fa fa-inr"></i> {{slides[$index].price}}</h2>
+                </div>
+                <div class="caption caption-half-up" >
+                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                </div>
+                </div>
+            </div>
+        </data-owl-carousel>
+            </div>
+        <div style="position: absolute;bottom: 50%;right: 20px">
+        <a class="next" id="popularowlNext"><i class="fontawesome fa fa-chevron-right"></i></a>
+            </div>
+
+    </div>
+
+        </div>
+
+<div class="row container-fluid" style="position: relative">
+    <div class="col-md-12" style="height: 35px;font-family: 'Open Sans', sans-serif;">
+        <h4> <u>New Dishes</u></h4>
+    </div>
+    <div class="col-md-12" ng-controller="newListCtrl">
+        <div style="float: left;position: absolute;top: 50%">
+            <a class="prev" id="newowlNext"><i class="fontawesome fa fa-chevron-left"></i></a>
+        </div>
+        <div>
+            <data-owl-carousel style="margin-left: 30px;height: 250px; margin-right: 10px;width: auto"; id="owl-demo-new" class="owl-carousel" data-options="{rewindNav : true}">
+                <div owl-carousel-item="" ng-repeat="item in ::newSlides" class="item">
+                    <div class="thumbnail">
+                        <img data-ng-src="{{newSlides[$index].imageURL}}" alt="product" class="popularimg img-responsive">
+                        <h2 style="color: #FE980F"><i class="fa fa-inr"></i> {{newSlides[$index].price}}</h2>
+                        <p>{{newSlides[$index].name}} - {{newSlides[$index].quantity}} Kg</p>
+                        <div class="caption caption-half-down" >
+                            <p>{{newSlides[$index].name}} - {{newSlides[$index].quantity}} Kg</p>
+                            <h2> <i class="fa fa-inr"></i> {{newSlides[$index].price}}</h2>
+                        </div>
+                        <div class="caption caption-half-up" >
+                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </data-owl-carousel>
+        </div>
+        <div style="position: absolute;bottom: 50%;right: 20px">
+            <a class="next newowl" id="newowlPrev"><i class="fontawesome fa fa-chevron-right"></i></a>
+        </div>
+
+    </div>
+
+</div>
+</div>
