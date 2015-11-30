@@ -3,8 +3,8 @@
     angular
         .module('Chefonia')
         .factory('InventoryService', InventoryService);
-    InventoryService.$inject = ['$http', '$rootScope', 'UserService'];
-    function InventoryService($http, $rootScope, UserService) {
+    InventoryService.$inject = ['$http'];
+    function InventoryService($http) {
         var service = {};
         service.getAllItems = getAllItems;
 

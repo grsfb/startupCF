@@ -4,14 +4,11 @@
     angular
         .module('Chefonia')
         .factory('FlashService', FlashService);
-
     FlashService.$inject = ['$rootScope'];
     function FlashService($rootScope) {
         var service = {};
-
         service.Success = Success;
         service.Error = Error;
-
         initService();
 
         return service;
@@ -48,6 +45,7 @@
                 type: 'error',
                 keepAfterLocationChange: keepAfterLocationChange
             };
+            console.log($rootScope.flash.message);
         }
     }
 

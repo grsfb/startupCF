@@ -20,13 +20,13 @@
             </div>
 
             <div class="row" style="padding-left: 15px;">
-                <div class="col-sm-12" style="margin-top: 20px;">
+                <div class="col-sm-12" style="margin-top: 20px;padding-left: 2px;">
                     <a class="btn btn-default mybtn" name="add-address" data-ng-click="vm.enableAddressEditor()">
                         Add New Address</a>
                 </div>
             </div>
         </div>
-        <div data-ng-hide="vm.showAddressEditor">
+        <div data-ng-show="vm.showAddressEditor">
             <form id="checkout-form" method="post" name="form" role="form" novalidate="novalidate">
                 <div class="row">
                     <div class="form-group col-lg-12 col-md-12 col-sm-12"
@@ -92,7 +92,7 @@
                     <a class="btn btn-default pull-right"
                        data-ng-click="vm.cancel();form.$setPristine()">Cancel</a>
                     <a class="btn btn-default mybtn pull-right mybtn"
-                       data-ng-click="vm.save()" data-ng-disabled="form.$invalid">Save</a>
+                       data-ng-click="vm.saveAndClose(vm.address)" data-ng-disabled="form.$invalid">Save</a>
                 </div>
             </form>
         </div>

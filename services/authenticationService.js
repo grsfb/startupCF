@@ -38,7 +38,8 @@
 
             //enable user profile
             $rootScope.isLoggedIn = true;
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            //$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            $http.defaults.headers.common['Content-Type'] = 'application/json';
             $cookieStore.put('currentUser', $rootScope.currentUser);
         }
 

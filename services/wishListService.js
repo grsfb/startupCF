@@ -3,8 +3,8 @@
     angular
         .module('Chefonia')
         .factory('WishListService', WishListService);
-    WishListService.$inject = ['$http', '$rootScope'];
-    function WishListService($http, $rootScope) {
+    WishListService.$inject = ['$http'];
+    function WishListService($http) {
         var service = {};
         service.create = create;
         service.remove=remove;
