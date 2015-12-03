@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="col-sm-6 col-xs-12 col-sm-offset-6">
+        <table class="table table-responsive">
+            <thead>
+            <tr class="tstyle">
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="item in vm.cartItems">
+                <td>{{item.name}}</td>
+                <td><i class="fa fa-inr"></i> {{item.price}}</td>
+                <td>
+                    <div class="cart_quantity_button">
+                        <a class="cart_quantity_down" data-ng-click="vm.minusItemCount(item)" style="cursor: pointer;"> <i class="fa fa-minus" style="padding-top: 5px;"></i> </a>
+                        <input class="cart_quantity_input" type="text" name="quantity" data-ng-model="item.quantity" autocomplete="off"
+                               size="2" readonly>
+                        <a class="cart_quantity_up" data-ng-click="vm.plusItemCount(item)" style="cursor: pointer;"> <i class="fa fa-plus" style="padding-top: 5px;"></i> </a>
+                    </div>
+                </td>
+                <td><i class="fa fa-inr"></i> {{item.price * item.quantity}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="total_area" style="text-align: left">
+            <ul>
+                <li>Cart Sub Total <span><i class="fa fa-inr"></i> {{vm.cartTotal}}</span></li>
+                <li>Shipping Cost <span> <i class="fa fa-inr"></i> {{vm.shippingCost}}</span></li>
+                <li>Total <span><i class="fa fa-inr"></i> {{vm.cartTotal + vm.shippingCost}}</span></li>
+            </ul>
+            <div class="row">
+                <a class="btn btn-default mybtn pull-right" data-ng-click="vm.checkout()" style="margin-right: 15px;">Check Out</a>
+            </div>
+        </div>
+
+    </div>
+</div>

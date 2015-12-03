@@ -1,38 +1,100 @@
 <div class="container">
-    <div class="col-sm-6 col-xs-12 col-sm-offset-6">
-        <table class="table table-responsive">
-            <thead>
-            <tr class="tstyle">
-                <th>Item</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-ng-repeat="item in vm.cartItems">
-                <td>{{item.name}}</td>
-                <td><i class="fa fa-inr"></i> {{item.price}}</td>
-                <td>
-                    <div class="cart_quantity_button">
-                        <a class="cart_quantity_down" data-ng-click="vm.minusItemCount(item)" style="cursor: pointer;"> <i class="fa fa-minus" style="padding-top: 5px;"></i> </a>
-                        <input class="cart_quantity_input" type="text" name="quantity" data-ng-model="item.quantity" autocomplete="off"
-                               size="2" readonly>
-                        <a class="cart_quantity_up" data-ng-click="vm.plusItemCount(item)" style="cursor: pointer;"> <i class="fa fa-plus" style="padding-top: 5px;"></i> </a>
+    <h1 class="page-title">Shopping Bag</h1>
+    <a class="btn btn-default mybtn hidden-lg hidden-sm hidden-md" data-ng-click="vm.checkout()" style="width: 100%;"> Start Checkout</a>
+    <div class="col-sm-8" style="padding: 0px;">
+        <h3 class="tstyle" style="padding: 10px;">Your items</h3>
+        <!--show all items in cart-->
+        <div data-ng-repeat="item in vm.cartItems">
+            <div class="col-sm-12 col-xs-12" style="border-bottom: 1px #B3AFA8 solid">
+                <div class="col-sm-8" style="padding-left: 0px!important; padding-top: 10px;">
+                    <div class="col-sm-4 col-xs-12" style="padding-left: 0px!important;padding-bottom: 10px;">
+                        <img src="img/choco.jpg" class="img-responsive" style="height: 80px;width: 120px;">
                     </div>
-                </td>
-                <td><i class="fa fa-inr"></i> {{item.price * item.quantity}}</td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="total_area" style="text-align: left">
-            <ul>
-                <li>Cart Sub Total <span><i class="fa fa-inr"></i> {{vm.cartTotal}}</span></li>
-                <li>Shipping Cost <span> <i class="fa fa-inr"></i> {{vm.shippingCost}}</span></li>
-                <li>Total <span><i class="fa fa-inr"></i> {{vm.cartTotal + vm.shippingCost}}</span></li>
-            </ul>
-            <div class="row">
-                <a class="btn btn-default mybtn pull-right" data-ng-click="vm.checkout()" style="margin-right: 15px;">Check Out</a>
+                    <div class="col-sm-8 col-xs-12" style="padding: 0px;">
+                        <div>
+                            <div class="col-sm-4 col-xs-4">Item:</div>
+                            <div class="col-sm-8 col-xs-8 "><label>{{item.name}}</label></div>
+                        </div>
+                        <div>
+                            <div class="col-sm-4 col-xs-4">Chef:</div>
+                            <div class="col-sm-8 col-xs-8"><label>{{item.chef}}</label></div>
+                        </div>
+                        <div>
+                            <div class="col-sm-4 col-xs-4">Quantity:</div>
+                            <div class="col-sm-8 col-xs-8"><label>{{item.quantity}}</label></div>
+                        </div>
+                        <div class="hidden-md hidden-lg hidden-sm">
+                            <div class=" col-xs-4">Price:</div>
+                            <div class=" col-xs-8"><label><i class="fa fa-inr"></i> {{item.price * item.quantity}}</label></div>
+                        </div>
+                        <div class="hidden-md hidden-lg hidden-sm">
+                            <div class=" col-xs-4" style="padding-bottom: 10px;">Weight:</div>
+                            <div class=" col-xs-8"><label>{{item.weight}} Kg</label></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 hidden-xs" style="padding-top: 10px;padding-right: 15px;">
+                    <div class="pull-right">
+                        <div class="col-sm-12 pull-right">
+                            <div class="col-sm-4">Price:</div>
+                            <div class="col-sm-8"><label><i class="fa fa-inr"></i> {{item.price * item.quantity}}</label></div>
+                        </div>
+                        <div class="col-sm-12 pull-right">
+                            <div class="col-sm-4">Weight:</div>
+                            <div class="col-sm-8">
+                                <label>{{item.weight}} Kg</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 col-xs-12 order-outer">
+        <h3 class="tstyle col-sm-12 col-xs-12" style="padding: 10px;">Order totals</h3>
+
+        <div class="col-sm-12 tstyle" style="font-size: 14px !important; padding: 20px;">
+            <div class="col-sm-12" style="padding-left: 0px; padding-top: 10px;">
+                <div class="col-sm-12" style="padding: 0px !important;">Merchandise <label class="pull-right"><i class="fa fa-inr"></i> {{vm.cartTotal}}</label></div>
+            </div>
+            <div class="col-sm-12"
+                 style="padding-left: 0px; padding-top:10px;
+                 padding-bottom:10px;border-bottom: 1px #B3AFA8 solid">
+                <div class="col-sm-12" style="padding: 0px !important;">Shipping <label class="pull-right"><i class="fa fa-inr"></i> {{vm.shippingCost}}</label></div>
+            </div>
+            <div class="col-sm-12" style="padding-left: 0px; padding-top: 10px;;">
+                <div class="col-sm-12" style="padding: 0px !important;">Total <label class="pull-right"><i class="fa fa-inr"></i> {{vm.cartTotal+vm.shippingCost}}</label></div>
+            </div>
+            <div class="col-sm-12" style="padding-left:0px;padding-top: 20px;">
+                <a class="btn btn-default mybtn" data-ng-click="vm.checkout()" style="width: 100%;"> Start Checkout</a>
+            </div>
+        </div>
+        <div class="col-sm-12 tstyle" style="font-size: 14px !important; padding: 20px; margin-top: 10px;">
+            <div class="col-sm-12" style="padding-left: 0px; padding-top: 10px; ">
+                <a data-ng-click="vm.enableCouponEditor()"
+                   style="cursor:pointer; text-decoration: none; color: #101010"><i
+                        class="fa fa-plus"></i> Add Promotion</a>
+
+                <div class="row" style="padding: 10px;" data-ng-show="vm.showCouponEditor">
+                    <div class="col-sm-12" style="padding: 0px;">
+                        <div class="hidden-panel" id="coupon">
+                            <form name="form" role="form" method="post">
+                                <div class="form-group"
+                                     ng-class="{'has-error': form.code.$dirty && form.code.$error.required}">
+                                    <label class="sr-only" for="code">Enter coupon code</label>
+                                    <input type="text" class="form-control col-xs-12" id="code" name="code"
+                                           placeholder="Enter coupon code" required="">
+                                    <span ng-show="form.code.$dirty && form.code.$error.required" class="help-block">Coupon code is required</span>
+                                </div>
+                                <input class="btn btn-default mybtn" type="submit" name="apply-coupon"
+                                       value="Apply Coupon" data-ng-click="vm.applyCoupon();form.$setPristine()"
+                                       data-ng-disabled="form.$invalid" style="margin-top: 5px;">
+                                <input class="btn btn-default" type="submit" name="apply-coupon"
+                                       value="Cancel" data-ng-click="vm.cancelCoupon()" style="margin-top: 5px;">
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

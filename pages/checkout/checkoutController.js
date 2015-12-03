@@ -3,35 +3,34 @@
     angular
         .module('Chefonia')
         .controller('CheckoutController', CheckoutController);
-    CheckoutController.$inject = ['$rootScope','$cookieStore', '$location'];
+    CheckoutController.$inject = ['$rootScope', '$cookieStore', '$location', 'FlashService'];
 
-    function CheckoutController($rootScope,$cookieStore, $location) {
+    function CheckoutController($rootScope, $cookieStore, $location, FlashService) {
         var vm = this;
-        vm.enableCouponEditor=enableCouponEditor;
-        vm.applyCoupon=applyCoupon;
-        vm.cancelCoupon=cancelCoupon;
-        vm.shippingCost=$cookieStore.get('shippingCost');
-        vm.cartTotal=$cookieStore.get('cartTotal');
-        vm.showCouponEditor=false;
-        vm.selectedAddress=undefined;
-        vm.checkAndPlaceOrder=checkAndPlaceOrder;
+        vm.shippingCost = $cookieStore.get('shippingCost');
+        vm.cartTotal = $cookieStore.get('cartTotal');
+        vm.removeErrorMsg = removeErrorMsg;
+        vm.checkAndPlaceOrder = checkAndPlaceOrder;
+        vm.order = {};
 
-        function enableCouponEditor(){
-            vm.showCouponEditor=true;
-        }
-
-        function applyCoupon(){
-            vm.showCouponEditor=false;
-        }
-
-        function cancelCoupon(){
-            vm.showCouponEditor=false;
-        }
-
-        function checkAndPlaceOrder(){
-            if($rootScope.selectedAddress){
-                console.log("slected address is "+ String.stringify(vm.selectedAddress));
+        function checkAndPlaceOrder() {
+            vm.order.address = $rootScope.deliverAddress;
+            vm.order.paymentMethod = "COD";
+            if (vm.order.address == undefined) {
+                FlashService.Error("Delivery address is not selected");
             }
+            if (vm.order.paymentMethod == undefined) {
+                FlashService.Error("Payment method is not selected");
+            }
+            if (vm.order.address != undefined && vm.order.paymentMethod != null) {
+                $cookieStore.remove('shippingCost');
+                $cookieStore.remove('cartTotal');
+                $location.path('success');
+            }
+        }
+
+        function removeErrorMsg() {
+            FlashService.clear();
         }
     }
 })();

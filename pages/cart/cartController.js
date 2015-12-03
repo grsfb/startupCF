@@ -11,11 +11,28 @@
         vm.minusItemCount = minusItemCount;
         vm.plusItemCount = plusItemCount;
         vm.checkout=checkout;
+        vm.enableCouponEditor = enableCouponEditor;
+        vm.applyCoupon = applyCoupon;
+        vm.cancelCoupon = cancelCoupon;
+        vm.showCouponEditor = false;
 
         CartService.getCartItems("userId", function (response) {
-            vm.cartItems = response;
+            vm.cartItems = response.data;
             updateCartCost();
         });
+
+        function enableCouponEditor() {
+            vm.showCouponEditor = !vm.showCouponEditor;
+        }
+
+        function applyCoupon() {
+            vm.showCouponEditor = false;
+        }
+
+        function cancelCoupon() {
+            vm.showCouponEditor = false;
+        }
+
 
         function updateCartCost() {
             vm.cartTotal = 0;

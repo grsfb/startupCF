@@ -13,14 +13,14 @@
                             {{address.city}}, {{address.state}}, {{address.zip}}<br>
                             <abbr title="Phone">Mob+:</abbr> {{address.mobile}}
                         </address>
-                        <a ng-if="$index!=vm.selectedIndex" class="btn btn-default" style="margin-bottom: 10px;" data-ng-click="vm.setSelectedAddress(address,$index,selectedIndex)">Deliver on this address</a>
+                        <a ng-if="$index!=vm.selectedIndex" class="btn btn-default" style="margin-bottom: 10px;" data-ng-click="vm.setSelectedAddress(address,$index)">Deliver on this address</a>
                         <a ng-if="$index==vm.selectedIndex" class="btn btn-default deliverySelected" style="margin-bottom: 10px;">Selected delivery address</a>
                     </div>
                 </div>
             </div>
 
             <div class="row" style="padding-left: 15px;">
-                <div class="col-sm-12" style="margin-top: 20px;padding-left: 2px;">
+                <div class="col-sm-12" style="margin-top: 20px;padding-left: 2px;" data-ng-show="!showAddressEditor">
                     <a class="btn btn-default mybtn" name="add-address" data-ng-click="vm.enableAddressEditor()">
                         Add New Address</a>
                 </div>

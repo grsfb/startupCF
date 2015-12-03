@@ -3,7 +3,9 @@
     "id":"1",
     "name":"Achar",
     "category":"Pickle",
+    "chef":"Bajrang",
     "price":50,
+    "weight":1,
     "quantity":2,
     "imageURL":"img/pickle.jpeg"
   },
@@ -12,6 +14,18 @@
     "name":"Chakli",
     "category":"Snacks",
     "price":20,
+    "chef":"Bajrang",
+    "weight":1,
+    "quantity":1,
+    "imageURL":"img/chakli.jpg"
+  },
+  {
+    "id":"3",
+    "name":"Chakli",
+    "category":"Snacks",
+    "chef":"Bajrang",
+    "price":20,
+    "weight":1,
     "quantity":1,
     "imageURL":"img/chakli.jpg"
   }

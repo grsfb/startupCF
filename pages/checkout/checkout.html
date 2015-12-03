@@ -1,35 +1,12 @@
-<div class="checkout" style="text-align: left">
+<div class="checkout" style="text-align: left" data-ng-click="vm.removeErrorMsg()">
     <div class="container" style="padding-bottom: 20px;">
 
         <!--Expandable Panels-->
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="hstyle" style="padding: 10px;">Checkout</h2>
-                <a class="panel-toggle mylink" data-ng-click="vm.enableCouponEditor()"
-                   style="cursor:pointer; color: #000;border-bottom: 1px dotted #333;margin-left: 10px;">
-                    Have a coupon? Click
-                    here to enter code</a>
+                <!--<h1 class="page-title">Checkout</h1>-->
+                <h1 class="page-title" style="padding: 10px;">Checkout</h1>
 
-                <div class="row" style="padding: 10px;" data-ng-show="vm.showCouponEditor">
-                    <div class="col-lg-5">
-                        <div class="hidden-panel" id="coupon">
-                            <form name="form" role="form" method="post">
-                                <div class="form-group"
-                                     ng-class="{'has-error': form.code.$dirty && form.code.$error.required}">
-                                    <label class="sr-only" for="code">Enter coupon code</label>
-                                    <input type="text" class="form-control" id="code" name="code"
-                                           placeholder="Enter coupon code" required="">
-                                    <span ng-show="form.code.$dirty && form.code.$error.required" class="help-block">Coupon code is required</span>
-                                </div>
-                                <input class="btn btn-default mybtn" type="submit" name="apply-coupon"
-                                       value="Apply Coupon" data-ng-click="vm.applyCoupon();form.$setPristine()"
-                                       data-ng-disabled="form.$invalid">
-                                <input class="btn btn-default" type="submit" name="apply-coupon"
-                                       value="Cancel" data-ng-click="vm.cancelCoupon()">
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 

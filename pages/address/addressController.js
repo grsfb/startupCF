@@ -14,26 +14,23 @@
         vm.saveAndClose = saveAndClose;
         vm.cancel = cancel;
         vm.setSelectedAddress = setSelectedAddress;
-        vm.setShippingAddress = setShippingAddress;
         vm.deleteAddress = deleteAddress;
         vm.showAddressEditor = false;
-        $rootScope.selectedAddress = undefined;
 
         AddressService.getAllAddress("userId", function (response) {
             if (response.success) {
                 vm.allAddress = response.data;
+                if(vm.allAddress.length==0){
+                    vm.showAddressEditor =true;
+                }
             } else {
                 FlashService.Error("Error occurred while retrieving address");
             }
 
         });
 
-        function setShippingAddress(address) {
-            $rootScope.selectedAddress = address;
-        }
-
-
-        function setSelectedAddress(address, index, selectedIndex) {
+        function setSelectedAddress(address, index) {
+            $rootScope.deliverAddress=address;
             vm.selectedIndex = index;
         }
 
@@ -73,7 +70,6 @@
             vm.address = {};
             vm.showAddressEditor = false;
         }
-
 
         function Address(userId, fullName, lineOne, lineTwo, city, state, zip, mobile) {
             this.userId = userId;

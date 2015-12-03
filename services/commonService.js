@@ -7,7 +7,8 @@
 
     function CommonService($http) {
         var service = {};
-        var baseURL = "http://localhost:8080";
+       // var baseURL = "http://localhost:8080";
+        var baseURL = "http://localhost:63342/client/";
         service.get = getCall;
         service.post = postCall;
         service.delete = deleteCall;
