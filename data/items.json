@@ -1,32 +1,83 @@
 [
-    {
-      "id":"1",
-      "name":"Achar",
-      "category":"Pickle",
-      "price":"50",
-      "quantity":"1",
-      "chef":"Bajrang",
-      "recipe":"turmeric powder, red chilli powder with lemon",
-      "imageURL":"img/pickle.jpeg"
-    },
-    {
-      "id":"2",
-      "name":"Chakli",
-      "category":"Snacks",
-      "price":"20",
-      "quantity":"1",
-      "chef":"Bajrang",
-      "recipe":"turmeric powder, red chilli powder with lemon",
-      "imageURL":"img/chakli.jpg"
-    },
-    {
-      "id":"3",
-      "name":"Mirch Powder",
-      "category":"Spices",
-      "price":"30",
-      "quantity":"1",
-      "chef":"Bajrang",
-      "recipe":"turmeric powder, red chilli powder with lemon",
-      "imageURL":"img/redchilly.jpg"
-    }
-  ]
+  {
+    "id": "1",
+    "name": "Achar",
+    "category": "Pickle",
+    "price": "50",
+    "quantity": "1",
+    "chef": "Bajrang",
+    "recipe": "turmeric powder, red chilli powder with lemon",
+    "imageURL": "img/pickle.jpeg"
+  },
+  {
+    "id": "2",
+    "name": "Chakli",
+    "category": "Snacks",
+    "price": "20",
+    "quantity": "1",
+    "chef": "Bajrang",
+    "recipe": "turmeric powder, red chilli powder with lemon",
+    "imageURL": "img/chakli.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Mirch Powder",
+    "category": "Spices",
+    "price": "30",
+    "quantity": "1",
+    "chef": "Bajrang",
+    "recipe": "turmeric powder, red chilli powder with lemon",
+    "imageURL": "img/redchilly.jpg"
+  },
+  {
+    "id": "1",
+    "name": "Achar",
+    "category": "Pickle",
+    "price": "50",
+    "quantity": "1",
+    "chef": "Bajrang",
+    "recipe": "turmeric powder, red chilli powder with lemon",
+    "imageURL": "img/pickle.jpeg"
+  },
+  {
+    "id": "1",
+    "name": "Achar",
+    "category": "Pickle",
+    "price": "50",
+    "quantity": "1",
+    "chef": "Bajrang",
+    "recipe": "turmeric powder, red chilli powder with lemon",
+    "imageURL": "img/pickle.jpeg"
+  },
+  {
+    "id": "2",
+    "name": "Chakli",
+    "category": "Snacks",
+    "price": "20",
+    "quantity": "1",
+    "chef": "Bajrang",
+    "recipe": "turmeric powder, red chilli powder with lemon",
+    "imageURL": "img/chakli.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Mirch Powder",
+    "category": "Spices",
+    "price": "30",
+    "quantity": "1",
+    "chef": "Bajrang",
+    "recipe": "turmeric powder, red chilli powder with lemon",
+    "imageURL": "img/redchilly.jpg"
+  },
+  {
+    "id": "1",
+    "name": "Achar",
+    "category": "Pickle",
+    "price": "50",
+    "quantity": "1",
+    "chef": "Bajrang",
+    "recipe": "turmeric powder, red chilli powder with lemon",
+    "imageURL": "img/pickle.jpeg"
+  }
+
+]

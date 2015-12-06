@@ -172,10 +172,10 @@ padding: 40px 0px 120px 0px;
 ul li:hover, ul li:focus {
     background-color:lightsteelblue;
 }
-.thumbnail{
+/*.thumbnail{
     height: 250px !important;
     width: 200px!important;
-}
+}*/
 .carousel-inner .active.left  { left: -25%;             }
 .carousel-inner .active.right { left: 25%;              }
 .carousel-inner .next         { left: 25%               }

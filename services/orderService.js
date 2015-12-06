@@ -15,7 +15,6 @@
             CommonService.post('/order/add', order, callback);
         }
 
-
         function getAllOrder(userId, callback) {
             CommonService.get('/order/' + userId + '/all', callback);
         }

@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('CheckoutController', CheckoutController);
-    CheckoutController.$inject = ['$rootScope', '$cookieStore', '$location', 'FlashService'];
+    CheckoutController.$inject = ['$rootScope', '$cookieStore', '$location', 'FlashService', 'OrderService'];
 
-    function CheckoutController($rootScope, $cookieStore, $location, FlashService) {
+    function CheckoutController($rootScope, $cookieStore, $location, FlashService, OrderService) {
         var vm = this;
         vm.shippingCost = $cookieStore.get('shippingCost');
         vm.cartTotal = $cookieStore.get('cartTotal');
@@ -23,14 +23,32 @@
                 FlashService.Error("Payment method is not selected");
             }
             if (vm.order.address != undefined && vm.order.paymentMethod != null) {
-                $cookieStore.remove('shippingCost');
-                $cookieStore.remove('cartTotal');
-                $location.path('success');
+                var order = new Order($cookieStore.get('currentUser').userId,
+                    vm.order.address.deliverAddress, $cookieStore.get('itemIds'), vm.order.paymentMethod
+                );
+                OrderService.create(order, function (response) {
+                    if (response.success) {
+                        $cookieStore.remove('shippingCost');
+                        $cookieStore.remove('cartTotal');
+                        $cookieStore.remove('itemIds');
+                        $location.path('success');
+                    } else {
+                        FlashService.Error("Something not working. Please try later");
+                    }
+                });
+
             }
         }
 
         function removeErrorMsg() {
             FlashService.clear();
+        }
+
+        function Order(userId, addressId, items, paymentType) {
+            this.userId = userId;
+            this.deliveryAddress = {"addressId": addressId};
+            this.items = items;
+            this.paymentType = paymentType;
         }
     }
 })();

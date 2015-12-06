@@ -1,35 +1,50 @@
 <div class="container">
     <h1 class="page-title">Shopping Bag</h1>
-    <a class="btn btn-default mybtn hidden-lg hidden-sm hidden-md" data-ng-click="vm.checkout()" style="width: 100%;"> Start Checkout</a>
+    <a class="btn btn-default mybtn hidden-lg hidden-sm hidden-md" data-ng-click="vm.checkout()" style="width: 100%;">
+        Start Checkout</a>
+
     <div class="col-sm-8" style="padding: 0px;">
         <h3 class="tstyle" style="padding: 10px;">Your items</h3>
         <!--show all items in cart-->
         <div data-ng-repeat="item in vm.cartItems">
-            <div class="col-sm-12 col-xs-12" style="border-bottom: 1px #B3AFA8 solid">
+            <div class="col-sm-12 col-xs-12" style="border-bottom: 1px #B3AFA8 dotted">
+
                 <div class="col-sm-8" style="padding-left: 0px!important; padding-top: 10px;">
+                    <span class="hidden-md hidden-lg hidden-sm"><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>
                     <div class="col-sm-4 col-xs-12" style="padding-left: 0px!important;padding-bottom: 10px;">
-                        <img src="img/choco.jpg" class="img-responsive" style="height: 80px;width: 120px;">
+                        <img ng-src="{{vm.getImageUri('achar')}}" class="img-responsive" style="height: 80px;width: 120px;">
                     </div>
                     <div class="col-sm-8 col-xs-12" style="padding: 0px;">
                         <div>
-                            <div class="col-sm-4 col-xs-4">Item:</div>
-                            <div class="col-sm-8 col-xs-8 "><label>{{item.name}}</label></div>
+                            <div class="col-sm-4 col-xs-4" style="padding: 0px;">Item:</div>
+                            <div class="col-sm-8 col-xs-8 " style="padding: 0px;"><label>{{item.name}}</label></div>
                         </div>
                         <div>
-                            <div class="col-sm-4 col-xs-4">Chef:</div>
-                            <div class="col-sm-8 col-xs-8"><label>{{item.chef}}</label></div>
+                            <div class="col-sm-4 col-xs-4" style="padding: 0px;">Chef:</div>
+                            <div class="col-sm-8 col-xs-8" style="padding: 0px;"><label>{{item.chef}}</label></div>
                         </div>
-                        <div>
-                            <div class="col-sm-4 col-xs-4">Quantity:</div>
-                            <div class="col-sm-8 col-xs-8"><label>{{item.quantity}}</label></div>
+                        <div class="col-sm-12 col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-4 col-xs-4" style="padding: 0px;">Quantity:</div>
+                            <div class="quantity-btn" >
+                                <button data-ng-click="vm.minusItemCount(item)" data-ng-disabled="item.quantity<=1">-
+                                </button>
+                                <input type="text" class="text-change-qty-search-popup" autocomplete="off" value="1"
+                                       data-ng-model="item.quantity" readonly>
+                                <button data-ng-click="vm.plusItemCount(item)" data-ng-disabled="item.quantity>=5">+
+                                </button>
+                            </div>
                         </div>
                         <div class="hidden-md hidden-lg hidden-sm">
-                            <div class=" col-xs-4">Price:</div>
-                            <div class=" col-xs-8"><label><i class="fa fa-inr"></i> {{item.price * item.quantity}}</label></div>
+                            <div class=" col-xs-4" style="padding-left: 0px;padding-top: 5px;">Price:</div>
+                            <div class=" col-xs-8" style="padding-left: 0px;padding-top: 5px;">
+                                <label><i class="fa fa-inr"></i> {{item.price *
+                                item.quantity}}</label>
+
+                            </div>
                         </div>
                         <div class="hidden-md hidden-lg hidden-sm">
-                            <div class=" col-xs-4" style="padding-bottom: 10px;">Weight:</div>
-                            <div class=" col-xs-8"><label>{{item.weight}} Kg</label></div>
+                            <div class=" col-xs-4" style="padding-left:0px; padding-bottom: 10px;">Weight:</div>
+                            <div class=" col-xs-8" style="padding-left: 0px;"><label>{{item.weight *item.quantity}} Kg</label></div>
                         </div>
                     </div>
                 </div>
@@ -37,12 +52,15 @@
                     <div class="pull-right">
                         <div class="col-sm-12 pull-right">
                             <div class="col-sm-4">Price:</div>
-                            <div class="col-sm-8"><label><i class="fa fa-inr"></i> {{item.price * item.quantity}}</label></div>
+                            <div class="col-sm-8"><label><i class="fa fa-inr"></i> {{item.price *
+                                item.quantity}} </label>
+                                <span><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>
+                            </div>
                         </div>
                         <div class="col-sm-12 pull-right">
                             <div class="col-sm-4">Weight:</div>
                             <div class="col-sm-8">
-                                <label>{{item.weight}} Kg</label>
+                                <label>{{item.weight*item.quantity}} Kg</label>
                             </div>
                         </div>
                     </div>
@@ -55,15 +73,18 @@
 
         <div class="col-sm-12 tstyle" style="font-size: 14px !important; padding: 20px;">
             <div class="col-sm-12" style="padding-left: 0px; padding-top: 10px;">
-                <div class="col-sm-12" style="padding: 0px !important;">Merchandise <label class="pull-right"><i class="fa fa-inr"></i> {{vm.cartTotal}}</label></div>
+                <div class="col-sm-12" style="padding: 0px !important;">Merchandise <label class="pull-right"><i
+                        class="fa fa-inr"></i> {{vm.cartTotal}}</label></div>
             </div>
             <div class="col-sm-12"
                  style="padding-left: 0px; padding-top:10px;
                  padding-bottom:10px;border-bottom: 1px #B3AFA8 solid">
-                <div class="col-sm-12" style="padding: 0px !important;">Shipping <label class="pull-right"><i class="fa fa-inr"></i> {{vm.shippingCost}}</label></div>
+                <div class="col-sm-12" style="padding: 0px !important;">Shipping <label class="pull-right"><i
+                        class="fa fa-inr"></i> {{vm.shippingCost}}</label></div>
             </div>
             <div class="col-sm-12" style="padding-left: 0px; padding-top: 10px;;">
-                <div class="col-sm-12" style="padding: 0px !important;">Total <label class="pull-right"><i class="fa fa-inr"></i> {{vm.cartTotal+vm.shippingCost}}</label></div>
+                <div class="col-sm-12" style="padding: 0px !important;">Total <label class="pull-right"><i
+                        class="fa fa-inr"></i> {{vm.cartTotal+vm.shippingCost}}</label></div>
             </div>
             <div class="col-sm-12" style="padding-left:0px;padding-top: 20px;">
                 <a class="btn btn-default mybtn" data-ng-click="vm.checkout()" style="width: 100%;"> Start Checkout</a>
@@ -99,4 +120,5 @@
         </div>
 
     </div>
+    <div data-ng-include="'pages/items/items.html"></div>
 </div>

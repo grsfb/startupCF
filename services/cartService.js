@@ -9,6 +9,7 @@
         var service = {};
         service.getCartItems = getCartItems;
         service.add = add;
+        service.update = update;
 
         return service;
 
@@ -20,6 +21,14 @@
 
         function add(cartItem, callback) {
             CommonService.post('/cart/add', cartItem, callback);
+        }
+
+        function update(cartItem, callback) {
+            CommonService.update('/cart/update', cartItem, callback);
+        }
+
+        function remove(cartItemId, callback) {
+            CommonService.delete("/cart/delete" + cartItemId, callback);
         }
     }
 

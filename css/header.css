@@ -1,0 +1,34 @@
+.box {
+    margin-bottom: 17px;
+}
+
+.iconbox {
+    color: #ffffff;
+    display: block;
+    float: left;
+    height: 26px;
+    width: 26px;
+    line-height: 26px;
+    text-align: center;
+    margin-right: 8px;
+    font-size: 15px;
+}
+.button, input.button {
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #7db641;
+}
+ul, ol {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+#footer .column ul li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    padding-top: 0;
+    overflow: hidden;
+}
+ul li, ol li {
+    line-height: 20px;
+}

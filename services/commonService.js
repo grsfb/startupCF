@@ -12,6 +12,7 @@
         service.get = getCall;
         service.post = postCall;
         service.delete = deleteCall;
+        service.update=update;
         return service;
 
         function getCall(relativeUrl, callback) {
@@ -43,6 +44,19 @@
         function deleteCall(relativeUrl, callback) {
             var response;
             $http.delete(baseURL + relativeUrl)
+                .success(function (res) {
+                    response = {success: true, data: res};
+                    callback(response);
+                })
+                .error(function (res) {
+                    response = {success: false, data: res};
+                    callback(response);
+                });
+        }
+
+        function update(relativeUrl,data,callback){
+            var response;
+            $http.put(baseURL + relativeUrl, data)
                 .success(function (res) {
                     response = {success: true, data: res};
                     callback(response);

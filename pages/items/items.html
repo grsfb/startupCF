@@ -1,34 +1,45 @@
-<div id="items" class="col-sm-10 text-center col-sm-offset-1 product text-center">
-    <h2 class="title">Feature items</h2>
-
-    <div ng-repeat="item in vm.items">
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <img data-ng-src="{{item.imageURL}}" alt="product" class="img-responsive">
-
-                <h2 style="color: #FE980F"><i class="fa fa-inr"></i> {{item.price}}</h2>
-
-                <p>{{item.name}} - {{item.quantity}} Kg</p>
-
-                <div class="caption caption-half-down">
-                    <p>{{item.name}} - {{item.quantity}} Kg</p>
-
-                    <h2><i class="fa fa-inr"></i> {{item.price}}</h2>
-                </div>
-                <div class="caption caption-half-up">
-                    <a class="btn btn-default add-to-cart" data-ng-click="vm.addItemInCart(item)"><i
-                            class="fa fa-shopping-cart"></i>Add to cart</a>
-                </div>
+<div id="items" class="product">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <h1 class="page-title" style="padding: 10px;">Popular Item</h1>
             </div>
-            <div class="choose">
-                <ul class="nav nav-pills nav-justified">
-                    <li><a class="wishlist" data-ng-click="vm.addItemInWishList(item)" style="cursor: pointer;"><i
-                            class="fa fa fa-heart test"></i>SAVE FOR LETTER</a></li>
-                    <li><a data-ng-click="vm.addItemInCart(item)" style="cursor: pointer;"><i class="fa fa-shopping-cart"></i>ADD TO
-                        CART</a></li>
-                </ul>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <div ng-repeat="item in vm.items">
+                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding: 0px;">
+                        <div style="padding: 20px;">
+                            <div class="thumbnail">
+                                <img data-ng-src="{{item.imageURL}}" alt="product"
+                                     class="img-responsive"
+                                     style="padding-bottom: 5px; border-bottom: 1px chocolate solid">
+
+                                <h3 class="name">
+                                    <span class="pull-left">{{item.name}} - {{item.quantity}} Kg</span>
+                                    <span class="pull-right"><i class="fa fa-inr"></i> {{item.price}}</span>
+                                </h3>
+
+                                <div class="caption caption-half-down">
+                                    <p>{{item.name}} - {{item.quantity}} Kg</p>
+
+                                    <h2><i class="fa fa-inr"></i> {{item.price}}</h2>
+                                </div>
+                                <div class="caption caption-half-up">
+                                    <a class="btn btn-default add-to-cart" data-ng-click="vm.addItemInCart(item)"><i
+                                            class="fa fa-search-minus"></i> Quick view</a>
+                                </div>
+                            </div>
+                            <div class="choose text-center">
+                                <a class="btn btn-default mybtn" data-ng-click="vm.addItemInCart(item)"
+                                   style="cursor: pointer;"><i
+                                        class="fa fa-shopping-cart"></i> ADD TO
+                                    CART</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
