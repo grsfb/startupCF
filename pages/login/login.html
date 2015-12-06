@@ -1,52 +1,88 @@
-<div class="container" style="background-color: #373746;color: #ffffff;border-radius: 20px;">
+<div  class="modal fade" id="myModal" role="dialog"  style="background-color: #122b40" data-ng-controller="LoginController as vm">
+    <div  class="modal-dialog" style=" align-items: center;">
 
-    <div class="col-md-5 col-xs-12 pull-left" style="text-align: left ;padding-bottom: 20px;">
-        <h2>Login</h2>
-        <div ng-show="cm.error" class="alert alert-danger">{{vm.error}}</div>
-        <form name="form"  role="form">
-            <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-                <label for="username">Username</label>
-                <input type="text" name="username" class="form-control" ng-model="vm.username" required />
-                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0px;border: none;">
+                <div class="row">
+                    <a href="#" style="float: right;padding: 5px 5px 5px 5px!important;" class="btn btn-danger btn-circle" data-dismiss="modal"><i class="fontawesome fa fa-close"></i></a>
+                </div>
+                <!--<div class="row">-->
+                    <!--<div class="col-md-6 col-sm-6  text-center">-->
+                        <!--<h4 class="loginHeader" style="color: green"> Sign in With Your Chefonia Account! </h4>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-md-6 col-sm-6 text-center">-->
+                        <!--<h4 class="loginHeader" style="color: darkred"> Register With Chefonia!</h4>-->
+                    <!--</div>-->
+                <!--</div>-->
+
             </div>
-            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-                <label for="password">Password</label>
-                <input type="password" name="password"  class="form-control" ng-model="vm.password" required />
-                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+            <div class="modal-body row" style="padding:10px 40px 50px;">
+                    <form role="form" name="loginform" class="col-md-5 col-sm-5 col-xs-12">
+                        <h4 class="loginHeader" style="color: green;margin-bottom: 30px"> Sign in With Your Chefonia Account! </h4>
+                        <div class="form-group">
+                            <label for="usrname"><span class="fontawesome fa fa-user"></span> Username</label>
+                            <!--<input name="username" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength" type="text"-->
+                                   <!--placeholder="Your full name" required="" data-ng-model="chef.name" maxlength="30" data-ng-pattern="/^[a-zA-Z ]*$/">-->
+                            <input type="text" class="form-control loginInput" id="usrname" name="userName" data-ng-model="vm.user.email" placeholder="Enter email or phone number" required="">
+                            <div class="has-error ng-hide" ng-messages="loginform.userName.$error" maxlength="30" ng-show="loginform.userName.$touched && !loginForm.username.$pristine">
+                                <p class="help-block" ng-show="loginform.userName.$error.required" ng-message="required">Your user name is required.</p>
+                            </div>
+                            <!--<div class="help-block has-error pull-left ng-hide" ng-show="loginform.userName.$error.required && ! loginform.userName.$pristine">-->
+                                <!--Full name is required-->
+                            <!--</div>-->
+                        </div>
+                        <div class="form-group">
+                            <label for="psw"><span class="fontawesome fa fa-key"></span> Password</label>
+                            <input type="password" class="form-control loginInput" id="psw" name="userPassword" data-ng-model="vm.user.password" placeholder="Enter password" required="">
+                            <div class="help-block has-error ng-hide" ng-messages="loginform.userPassword.$error" ng-show="loginform.userPassword.$touched">
+                                <p class="help-block" ng-show="loginform.userPassword.$error.required" ng-message="required">Your password is required.</p>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6" style="margin-left: -15px">
+                            <button type="submit" class="btn btn-success btn-block loginBtn" data-ng-click="vm.login();loginform.$setPristine()" ng-disabled="loginform.$invalid" disabled="disabled"><span class="fontawesome fa fa-lock" ></span> Login</button>
+                        </div>
+                        <div class="form-group col-md-6 text-left" style="margin-top: 5px;margin-left: -15px!important;">
+                            <a href="#" ng-click="vm.passwordReset()"> Forgot Password ?</a>
+                        </div>
+                        <!--<div class="col-md-12 text-center">-->
+                            <!--<img src="img/OR.png">-->
+                        <!--</div>-->
+                        <div class="clearfix"></div>
+                        <label for="psw"  class="help-block has-error">{{vm.message}}</label>
+                        <div class='col-sm-12' ng-if="vm.resetSectionVisible">
+                            <div ng-class="{'has-error': loginform.userEmail.$invalid && loginform.userEmail.$dirty}">
+                                <label ><span class="fontawesome fa fa-mail-reply"></span> Email Address</label>
+                                <input type="email" class="form-control loginInput" name="userEmail" id="email" data-ng-model="vm.user.email" placeholder="Email Address" required="">
+                                <div class="has-error ng-hide" ng-messages="loginform.userEmail.$error"  ng-show="loginform.userEmail.$touched">
+                                    <p class="help-block errorMsg" ng-show="loginform.userEmail.$error.required" ng-message="required">Your email is required.</p>
+                                    <p class="help-block errorMsg" ng-show="loginform.userEmail.$error.email">
+                                        Your email is not valid.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="margin-left: -15px;margin-top: 5px">
+                                <button type="submit" class="btn btn-success btn-block resetBtn" data-ng-click="vm.reset();userEmail.$setPristine()" ng-disabled="userEmail.$invalid" disabled="disabled"><span class="fontawesome fa fa-lock" ></span> Send Password</button>
+                            </div>
+                        </div>
+
+                        <!--<div class="col-md-12" style="margin-left: -15px;margin-top: 20px">-->
+                            <!--<label style="font-family:Roboto Condensed, sans-serif;font-size: 24px;font-weight: 300"> Sign in using</label>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-12" style="margin-left: -15px;margin-top: 5px">-->
+                            <!--<button class="btn-default fbLogin"> LOGIN WITH FACEBOOK</button>-->
+                        <!--</div>-->
+                    </form>
+                    <div class="col-md-2 col-sm-2">&nbsp;</div>
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div ng-include="'pages/register/register.html'"></div>
+                    </div>
+
+                </div>
             </div>
-            <div class="form-actions">
-                <button type="submit" data-ng-click="vm.login()" class="btn btn-lg btn-primary">Login</button>
-                <img ng-if="cm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                <a href="#/register" class="btn btn-link">Forgot password?</a>
-            </div>
-        </form>
-    </div>
-    <div class="col-md-2 col-xs-12">
-        <div class="horizontal-divider"></div>
-    </div>
-    <div class="col-md-5 col-xs-12 pull-right" style="text-align: left;padding-bottom: 20px;">
-        <h2>Register with Chefonia</h2>
-        <div ng-show="cm.error" class="alert alert-danger">{{cm.error}}</div>
-        <form name="form" ng-submit="cm.register()" role="form">
-            <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
-                <label for="username">Email ID</label>
-                <input type="text" name="username" id="firstName" class="form-control" ng-model="cm.user.firstName" required />
-                <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
-                <label for="mobile">Mobile No.</label>
-                <input type="text" name="username" id="mobile" class="form-control" ng-model="cm.user.firstName" required />
-                <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" ng-model="vm.user.password" required />
-                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
-            </div>
-            <div class="form-actions">
-                <button type="submit" ng-disabled="form.$invalid || cm.dataLoading" class="btn btn-primary">Register</button>
-                <img ng-if="cm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            </div>
-        </form>
+
+        </div>
+
     </div>
 </div>

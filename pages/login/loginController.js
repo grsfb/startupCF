@@ -7,23 +7,24 @@
     function LoginController($location, AuthenticationService, FlashService) {
         var vm = this;
         vm.login = login;
-        (function initController() {
-            // reset login status
-            AuthenticationService.ClearCredentials();
-        })();
+        vm.passwordReset=passwordReset;
+        vm.user=undefined;
+        vm.resetSectionVisible=false;
         function login() {
             vm.dataLoading = true;
-            AuthenticationService.SetCredentials(vm.username, vm.password);
-            $location.path('/item');
-           /* AuthenticationService.Login(cm.username, cm.password, function (response) {
-                if (response.success) {
-                    AuthenticationService.SetCredentials(cm.username, cm.password);
-                    $location.path('/');
-                } else {
-                    FlashService.Error(response.message);
-                    cm.dataLoading = false;
+            AuthenticationService.Login(vm.user, function (response){
+                if(response.success){
+                    AuthenticationService.SetCredentials(vm.user.email, vm.user.password,response.data.userId,response.data.userName);
+                }else{
+                   vm.message=response.errorMessage;
                 }
-            });*/
+
+            });
+
+        };
+        function passwordReset() {
+   vm.resetSectionVisible=true;
+
         };
     }
 

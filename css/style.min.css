@@ -9,6 +9,9 @@
     color: #ffffff;
     border: 1px #C03D14 bold;
 }
+.navbar-toggle{
+    background-color: whitesmoke!important;
+}
 
 .navbar-nav a:hover {
     background-color: #C03D14 !important;
@@ -19,5 +22,21 @@
     height: auto !important;
     height: 100%;
     /*margin: 0 auto -120px;*/
-    padding-top: 70px
+    padding-top: 50px
 }
+.errorMsg{
+    margin-bottom: -10px!important;
+}
+.modal-footer {  background-color: #f9f9f9;  }
+.modal-dialog {  margin: 20 !important;  margin-right: auto;  margin-left: auto;  width: 80% !important; height: 90%!important; }
+.modal-content{height: 100%;width: 100%; align-content: center;height: 100%;background-image: url(../img/loginModal.png)}
+.loginInput{ width: 90% !important;}
+.loginBtn{width: 150px !important;}
+.loginHeader{ font-size: 22px; font-weight: 300;  font-family: "Roboto Condensed",sans-serif;  }
+.fbLogin{color: white!important;border:none;background-color: darkblue!important;width: 100%;height: 40px;font-size:18px;font-family:"Courier New"}
+#myModal{background-image: url("../img/modalback_pattern.jpg")}
+.btn-circle {  width: 30px;  height: 30px;  text-align: center;  padding: 6px 0;  font-size: 12px;  line-height: 1.42;  border-radius: 15px;  }
+.cartNav{padding-top: 0px!important; padding-bottom: 0px !important;}
+.cartLabel{font-weight: 400!important;font-size: 18px!important;margin-left: -10px!important;}
+#profileNav{background-color: transparent!important;border: none!important;}
+.dropdown:hover .dropdown-menu {  display: block;  margin-top: 0;   }

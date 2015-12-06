@@ -28,7 +28,7 @@
         }
 
         function Create(user) {
-            return $http.post('/api/users', user).then(handleSuccess, handleError('Error creating user'));
+            return $http.post('http://localhost:8080/user/register', user).then(handleSuccess, handleError('Error creating user'));
         }
 
         function Update(user) {

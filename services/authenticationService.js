@@ -15,24 +15,28 @@
 
         return service;
 
-        function Login(username, password, callback) {
+        function Login(user, callback) {
             var response;
-            $http.post('/endpoint/authenticate', {username: username, password: password})
+            var result;
+            var headers = { 'Content-Type': "application/json" };
+            $http.post('http://localhost:8080/authenticate/user', user)
                 .success(function (response) {
-                    callback(response);
+                    result={success:true,data:response}
+                    callback(result);
                 })
                 .error(function () {
-                    response = {success: false, message: 'Username or password is incorrect'};
-                    callback(response);
+                    result={success:false,errorMessage:'UserName or Password not matched'}
+                    callback(result);
                 });
         }
 
-        function SetCredentials(username, password, userId) {
+        function SetCredentials(useremail, password, userId,userName) {
             //add userID in global
-            var authdata = Base64.encode(username + ':' + password);
+            var authdata = Base64.encode(useremail + ':' + password);
             $rootScope.currentUser = {
                 userId: userId,
-                username: username,
+                userName:userName,
+                useremail: useremail,
                 authdata: authdata
             };
 
@@ -40,11 +44,16 @@
             $rootScope.isLoggedIn = true;
             //$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
             $http.defaults.headers.common['Content-Type'] = 'application/json';
+            $rootScope.loginName = userName;
+            $('#myModal').modal('hide');
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
             $cookieStore.put('currentUser', $rootScope.currentUser);
         }
 
         function ClearCredentials() {
             $rootScope.currentUser = {};
+            $rootScope.isLoggedIn = false;
+            $rootScope.loginName = undefined;
             $cookieStore.remove('currentUser');
             $http.defaults.headers.common.Authorization = 'Basic ';
         }
