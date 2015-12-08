@@ -3,22 +3,33 @@
     angular
         .module('Chefonia')
         .factory('InventoryService', InventoryService);
-    InventoryService.$inject = ['$http'];
-    function InventoryService($http) {
+    InventoryService.$inject = ['CommonService'];
+    function InventoryService(CommonService) {
         var service = {};
         service.getAllItems = getAllItems;
 
         return service;
-        function getAllItems(callback) {
+        function getAllItems(pageNumber, callback) {
             var response;
-            $http.get('/client/data/items.json')
-                .success(function (response) {
+            CommonService.get('/items/all/' + pageNumber, function (res) {
+                if (res.success) {
+                    var items = res.data.page.content;
+                    var lastPage = res.data.page.last;
+                    var firstPage = res.data.page.first;
+                    var totalPages = res.data.totalPageCount;
+                    response = {
+                        "success": true,
+                        "data": {
+                            "items": items, "lastPage": lastPage, "firstPage": firstPage,
+                            "totalPages": totalPages
+                        }
+                    };
                     callback(response);
-                })
-                .error(function () {
-                    response = {success: false, message: 'Username or password is incorrect'};
+                } else {
                     callback(response);
-                });
+                }
+
+            });
         }
 
     }

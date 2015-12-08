@@ -43,12 +43,16 @@
                 <img src="brand.png" style="height: 30px;width: 120px;">
             </a>
         </div>
-        <div class="collapse navbar-collapse"  data-ng-controller="NavbarController">
+        <div class="collapse navbar-collapse" data-ng-controller="NavbarController">
             <ul class="nav navbar-nav pull-right" data-ng-cloak style="padding-top:8px">
-                <li ng-if="!isLoggedIn" class="hidden-xs "><button type="button" data-toggle="collapse" data-target=".navbar-collapse.in" style="width: 100px" class="btn btn-success" data-ng-click="login()">Login</button>
+                <li ng-if="!isLoggedIn" class="hidden-xs ">
+                    <button type="button" data-toggle="collapse" data-target=".navbar-collapse.in" style="width: 100px"
+                            class="btn btn-success" data-ng-click="login()">Login
+                    </button>
                 </li>
                 <li ng-if="!isLoggedIn" class="hidden-lg hidden-md hidden-sm"><a data-toggle="collapse"
-                                                                                 data-target=".navbar-collapse.in" href="#login_mble"
+                                                                                 data-target=".navbar-collapse.in"
+                                                                                 href="#login_mble"
                                                                                  style="cursor: pointer">Login</a>
                 </li>
 
@@ -62,14 +66,16 @@
                 <!--style="cursor: pointer"><i class="fa fa-bitbucket"></i></a></li>-->
                 <li ng-if="isLoggedIn" style="align-content: center">
                     <div class="dropdown" style="padding-top: 0px;padding-bottom: 0px;margin-top: 8px">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="profileNav" data-toggle="dropdown" style="font-size: 20px;font-weight: 500">Welcome, {{loginName}}
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="profileNav"
+                                data-toggle="dropdown" style="font-size: 20px;font-weight: 500">Welcome, {{loginName}}
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu">
                             <li><a href="#">Your Orders</a></li>
                             <li class="divider"></li>
                             <li><a href="#" data-ng-click="logout()">Sign Out?</a></li>
                         </ul>
-                    </div></li>
+                    </div>
+                </li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -80,8 +86,9 @@
 </div>
 <div class="t-content" data-ng-cloak style="background-color: #fff">
     <div class="container">
-        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }"
-             ng-if="flash" ng-bind="flash.message" style="margin-bottom: 0px;"></div>
+        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success',
+        'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"
+             style="margin-bottom: 0px;"></div>
     </div>
     <div data-ng-view></div>
 
@@ -89,9 +96,35 @@
 <div data-ng-include="'pages/common/footer.html'"></div>
 
 
+<script src="lib/jquery/jquery-2.1.1.min.js"></script>
+<script src="lib/owlCarousel/owl.carousel.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<!-- Scrolling Nav JavaScript --> 
+<script src="js/jquery.easing.min.js"></script>
+<!--<script src="foodkart/js/scrolling-nav.js"></script>-->
+<script src="lib/angular/angular.min.js"></script>
+<script src="lib/angular/angular-route.min.js"></script>
+<script src="lib/angular/angular-cookies.min.js"></script>
+<script src="js/script.min.js"></script>
+<script src="js/jquery.lettering-0.6.min.js"></script>
+<script src="js/jquery.textillate.min.js"></script>
+<script src="pages/login/loginController.js"></script>
+<script src="pages/register/registerController.js"></script>
+<script src="pages/items/itemController.js"></script>
+<script src="services/wishListService.js"></script>
+<script src="services/authenticationService.js"></script>
+<script src="services/inventoryService.js"></script>
+<script src="services/flashService.js"></script>
+<script src="services/userService.js"></script>
+<script src="pages/address/addressController.js"></script>
+<script src="services/addressService.js"></script>
+<script src="pages/checkout/checkoutController.js"></script>
+<script src="pages/cart/cartController.js"></script>
+<script src="services/cartService.js"></script>
+<script src="services/commonService.js"></script>
+<script src="services/orderService.js"></script>
+<script src="services/imageService.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
-<script src="lib/jquery/jquery-2.1.1.min.js"></script> <script src="lib/owlCarousel/owl.carousel.min.js"></script> <!-- Bootstrap Core JavaScript --> <script src="lib/bootstrap/js/bootstrap.min.js"></script> <!-- Scrolling Nav JavaScript --> <script src="js/jquery.easing.min.js"></script> <!--<script src="foodkart/js/scrolling-nav.js"></script>--> <script src="lib/angular/angular.min.js"></script> <script src="lib/angular/angular-route.min.js"></script> <script src="lib/angular/angular-cookies.min.js"></script> <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script> <script src="js/script.min.js"></script> <script src="js/jquery.lettering-0.6.min.js"></script> <script src="js/jquery.textillate.min.js"></script> <script src="pages/login/loginController.js"></script> <script src="pages/register/registerController.js"></script> <script src="pages/items/itemController.js"></script> <script src="services/wishListService.js"></script> <script src="services/authenticationService.js"></script> <script src="services/inventoryService.js"></script> <script src="services/flashService.js"></script> <script src="services/userService.js"></script> <script src="pages/address/addressController.js"></script> <script src="services/addressService.js"></script> <script src="pages/checkout/checkoutController.js"></script> <script src="pages/cart/cartController.js"></script> <script src="services/cartService.js"></script> <script src="services/commonService.js"></script> <script src="services/orderService.js"></script> <script src="services/imageService.js"></script>
-
 </body>
 
 </html>

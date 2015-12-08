@@ -3,59 +3,42 @@
     angular
         .module('Chefonia')
         .controller('ItemController', ItemController);
-    ItemController.$inject = ['$rootScope', '$location', '$cookieStore', 'InventoryService', 'WishListService', 'CartService'];
+    ItemController.$inject = ['$rootScope', '$location', '$cookieStore', 'InventoryService', 'WishListService', 'CartService', 'FlashService'];
 
-    function ItemController($rootScope, $location, $cookieStore, InventoryService, WishListService, CartService) {
+    function ItemController($rootScope, $location, $cookieStore, InventoryService, CartService, FlashService) {
         var vm = this;
-        vm.addItemInWishList = addItemInWishList;
-        vm.removeItemFromWishList = removeItemFromWishList;
         vm.addItemInCart = addItemInCart;
         vm.removeItemFromCart = removeItemFromCart;
-        vm.wishList = [];
         vm.cart = [];
+        vm.currentPage = 1;
+        vm.totalPageAsArray = new Array(1);
+        vm.loadNextPage = loadNextPage;
+        vm.selectedIndex = 0;
 
-        //initialize all
-        if ($cookieStore.get('wishList')) {
-            vm.wishList = $cookieStore.get('wishList');
-        }
         if ($cookieStore.get('cart')) {
             vm.cart = $cookieStore.get('cart');
         }
 
         //load initial items
-        InventoryService.getAllItems(function (response) {
-            if (response) {
-                vm.items = response;
+        InventoryService.getAllItems(1, function (response) {
+            if (response.success) {
+                vm.items = response.data.items;
+                vm.totalPageAsArray = new Array(response.data.totalPages);
             } else {
-                //display error
+                FlashService.Error("Something not working. Please try later");
             }
         });
 
-        //wishlist
-        function addItemInWishList(item) {
-            if ($cookieStore.get('globals')) {
-                vm.wishList = addItem(vm.wishList, item);
-                $cookieStore.put('wishList', vm.wishList);
-                WishListService.create("userId", item.id, function (response) {
-                    //TODO:create wishlist in server
-                });
-                //update count
-                $rootScope.wishListCount = vm.wishList.length;
-            } else {
-                $location.path('/login');
-            }
-            console.log(vm.wishList.toString());
-        }
-
-        function removeItemFromWishList(item) {
-            vm.wishList = removeItem(vm.wishList, item);
-            $cookieStore.put('wishList', vm.wishList);
-            WishListService.remove("userId", item.id, function (response) {
-                //remove item from wish list
+        function loadNextPage(pageNumber) {
+            InventoryService.getAllItems(pageNumber+1, function (response) {
+                if (response) {
+                    vm.items = response.data.items;
+                    vm.totalPageAsArray = new Array(response.data.totalPages);
+                    vm.selectedIndex = pageNumber;
+                } else {
+                    FlashService.Error("Something not working. Please try later");
+                }
             });
-
-            //update count
-            $rootScope.wishListCount = vm.wishList.length;
         }
 
         //cart
@@ -64,7 +47,7 @@
                 var cartItem = new CartItem($cookieStore.get('currentUser').userId,
                     item.id, item.name, item.category, 1, item.price);
 
-                if(!isItemExistsInCart(item.id)){
+                if (!isItemExistsInCart(item.id)) {
                     CartService.create(cartItem, function (response) {
                         //TODO: Should wait for response?
                         vm.cart = addItem(vm.cart, cartItem);
@@ -81,8 +64,7 @@
         function removeItemFromCart(item) {
             vm.cart = removeItem(vm.cart, item);
             $cookieStore.put('cart', vm.cart);
-            WishListService.remove("username", item.id, function (response) {
-            });
+
 
             $rootScope.cartItemCount = vm.cart.length;
         }
