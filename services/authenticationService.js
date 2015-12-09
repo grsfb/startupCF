@@ -5,8 +5,8 @@
         .module('Chefonia')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
-    function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
+    AuthenticationService.$inject = ['$cookieStore', '$rootScope', 'CommonService'];
+    function AuthenticationService($cookieStore, $rootScope, CommonService) {
         var service = {};
 
         service.Login = Login;
@@ -15,45 +15,26 @@
 
         return service;
 
-        function Login(user, callback) {
-            var response;
-            var result;
-            var headers = { 'Content-Type': "application/json" };
-            $http.post('http://localhost:8080/authenticate/user', user)
-                .success(function (response) {
-                    result={success:true,data:response}
-                    callback(result);
-                })
-                .error(function () {
-                    result={success:false,errorMessage:'UserName or Password not matched'}
-                    callback(result);
-                });
+        function Login(email, pasword, callback) {
+            var user = {"email": email, "password": pasword};
+            CommonService.post('/authenticate/user', user, callback);
         }
 
-        function SetCredentials(useremail, password, userId,userName) {
+        function SetCredentials(user, password) {
             //add userID in global
-            var authdata = Base64.encode(useremail + ':' + password);
+            var authdata = Base64.encode(user.email + ':' + password);
             $rootScope.currentUser = {
-                userId: userId,
-                userName:userName,
-                useremail: useremail,
-                authdata: authdata
+                'userId'  : user.userId,
+                'userName': user.name,
+                'authdata': authdata
             };
 
-            //enable user profile
-            $rootScope.isLoggedIn = true;
-            //$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-            $http.defaults.headers.common['Content-Type'] = 'application/json';
-            $rootScope.loginName = userName;
-            $('#myModal').modal('hide');
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+
             $cookieStore.put('currentUser', $rootScope.currentUser);
         }
 
         function ClearCredentials() {
             $rootScope.currentUser = {};
-            $rootScope.isLoggedIn = false;
-            $rootScope.loginName = undefined;
             $cookieStore.remove('currentUser');
             $http.defaults.headers.common.Authorization = 'Basic ';
         }

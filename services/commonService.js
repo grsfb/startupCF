@@ -7,12 +7,14 @@
 
     function CommonService($http) {
         var service = {};
-       var baseURL = "http://localhost:8080";
+        $http.defaults.headers.common['Content-Type'] = 'application/json';
+        //$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+        var baseURL = "http://localhost:8080";
         //var baseURL = "http://localhost:63342/client/";
         service.get = getCall;
         service.post = postCall;
         service.delete = deleteCall;
-        service.update=update;
+        service.update = update;
         return service;
 
         function getCall(relativeUrl, callback) {
@@ -54,7 +56,7 @@
                 });
         }
 
-        function update(relativeUrl,data,callback){
+        function update(relativeUrl, data, callback) {
             var response;
             $http.put(baseURL + relativeUrl, data)
                 .success(function (res) {

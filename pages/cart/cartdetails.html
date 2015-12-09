@@ -10,18 +10,18 @@
             <div class="col-sm-12 col-xs-12" style="border-bottom: 1px #B3AFA8 dotted">
 
                 <div class="col-sm-8" style="padding-left: 0px!important; padding-top: 10px;">
-                    <span class="hidden-md hidden-lg hidden-sm"><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>
+                    <span class="hidden-md hidden-lg hidden-sm" data-ng-click="vm.removeItemFromCart(item)"><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>
                     <div class="col-sm-4 col-xs-12" style="padding-left: 0px!important;padding-bottom: 10px;">
                         <img ng-src="{{vm.getImageUri('achar')}}" class="img-responsive" style="height: 80px;width: 120px;">
                     </div>
                     <div class="col-sm-8 col-xs-12" style="padding: 0px;">
                         <div>
                             <div class="col-sm-4 col-xs-4" style="padding: 0px;">Item:</div>
-                            <div class="col-sm-8 col-xs-8 " style="padding: 0px;"><label>{{item.name}}</label></div>
+                            <div class="col-sm-8 col-xs-8 " style="padding: 0px;"><label>{{item.itemName}}</label></div>
                         </div>
                         <div>
                             <div class="col-sm-4 col-xs-4" style="padding: 0px;">Chef:</div>
-                            <div class="col-sm-8 col-xs-8" style="padding: 0px;"><label>{{item.chef}}</label></div>
+                            <div class="col-sm-8 col-xs-8" style="padding: 0px;"><label>{{item.chefName}}</label></div>
                         </div>
                         <div class="col-sm-12 col-xs-12" style="padding: 0px;">
                             <div class="col-sm-4 col-xs-4" style="padding: 0px;">Quantity:</div>
@@ -54,7 +54,7 @@
                             <div class="col-sm-4">Price:</div>
                             <div class="col-sm-8"><label><i class="fa fa-inr"></i> {{item.price *
                                 item.quantity}} </label>
-                                <span><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>
+                                <span data-ng-click="vm.removeItemFromCart(item)"><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>
                             </div>
                         </div>
                         <div class="col-sm-12 pull-right">
@@ -120,5 +120,4 @@
         </div>
 
     </div>
-    <div data-ng-include="'pages/items/items.html"></div>
 </div>

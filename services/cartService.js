@@ -10,12 +10,11 @@
         service.getCartItems = getCartItems;
         service.add = add;
         service.update = update;
-
+        service.remove=remove;
         return service;
 
         function getCartItems(userId, callback) {
-            //'/cart/'+userId+'all'
-            CommonService.get('/data/cart.json', callback);
+            CommonService.get('/cart/'+userId+'/all', callback);
         }
 
 
@@ -27,8 +26,8 @@
             CommonService.update('/cart/update', cartItem, callback);
         }
 
-        function remove(cartItemId, callback) {
-            CommonService.delete("/cart/delete" + cartItemId, callback);
+        function remove(userId,itemId, callback) {
+            CommonService.delete("/cart/"+userId +'/delete/'+ itemId, callback);
         }
     }
 

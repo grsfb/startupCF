@@ -1,0 +1,13 @@
+$cookieStore
+1. userCart
+2. currentUser
+
+rootScope
+1. currentUser={
+        userId:""
+        userName:""
+        authdata:""
+        }
+
+2. cartItemCount
+3. isLoggedIn

@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('CartController', CartController);
-    CartController.$inject = ['$cookieStore', '$location', 'CartService', 'ImageService', 'FlashService'];
+    CartController.$inject = ['$rootScope', '$cookieStore', '$location', 'CartService', 'ImageService', 'FlashService'];
 
-    function CartController($cookieStore, $location, CartService, ImageService, FlashService) {
+    function CartController($rootScope, $cookieStore, $location, CartService, ImageService, FlashService) {
         var vm = this;
         vm.cartItems = [];
         vm.minusItemCount = minusItemCount;
@@ -15,12 +15,19 @@
         vm.applyCoupon = applyCoupon;
         vm.cancelCoupon = cancelCoupon;
         vm.getImageUri = getImageUri;
-        vm.remove = remove;
+        vm.removeItemFromCart = removeItemFromCart;
         vm.showCouponEditor = false;
+        //TODO : sample user id for test remove it
+        vm.currentUserId = '8ee6d9a2-a017-4099-bb59-8dd40a2e218e';
 
-        CartService.getCartItems("userId", function (response) {
-            vm.cartItems = response.data;
-            updateCartCost();
+        CartService.getCartItems(vm.currentUserId, function (response) {
+            if (response.success) {
+                vm.cartItems = response.data;
+                $rootScope.cartItemCount = vm.cartItems.length;
+                updateCartCost();
+            } else {
+                FlashService.error("Something not working. Please try later");
+            }
         });
 
         function enableCouponEditor() {
@@ -52,7 +59,8 @@
                 if (vm.cartItems[i].id === cartItem.id) {
                     if (vm.cartItems[i].quantity > 1) {
                         vm.cartItems[i].quantity = vm.cartItems[i].quantity - 1;
-                        updateQuantity({"itemId": vm.cartItems[i].itemId, "quantity": vm.cartItems[i].quantity});
+                        var cartItem = new CartItem(vm.currentUserId, vm.cartItems[i].itemId, vm.cartItems[i].quantity);
+                        updateQuantity(cartItem);
                         break;
                     }
                 }
@@ -62,7 +70,7 @@
         }
 
         function updateQuantity(cartItem) {
-            CartService.updateItems(cartItem, function (response) {
+            CartService.update(cartItem, function (response) {
                 if (!response.success) {
                     FlashService.Error("Unable to update quantity");
                 }
@@ -74,7 +82,8 @@
                 if (vm.cartItems[i].id === item.id) {
                     if (vm.cartItems[i].quantity < 5) {
                         vm.cartItems[i].quantity = vm.cartItems[i].quantity + 1;
-                        updateQuantity({"itemId": vm.cartItems[i].itemId, "quantity": vm.cartItems[i].quantity});
+                        var cartItem = new CartItem(vm.currentUserId, vm.cartItems[i].itemId, vm.cartItems[i].quantity);
+                        updateQuantity(cartItem);
                         break;
                     }
                 }
@@ -84,15 +93,6 @@
 
         function getImageUri(name) {
             return ImageService.getUri(name, ImageService.Size.SMALL);
-        }
-
-        function remove(cartItemId) {
-            CartService.remove(cartItemId, function (response) {
-                if (!response.success) {
-                    FlashService.Error("Unable to remove cart item");
-                }
-            })
-
         }
 
         function checkout() {
@@ -112,6 +112,37 @@
                 }
             }
             return itemIds;
+        }
+
+        function removeItemFromCart(item) {
+            CartService.remove(vm.currentUserId, item.itemId, function (response) {
+                if (response.success) {
+                    vm.cart = removeItem(vm.cart, item);
+                    $rootScope.cartItemCount = vm.cart.length;
+                    if (vm.cart.length == 0) {
+                        $location.path('/item');
+                    }
+                }
+                else {
+                    FlashService.Error("Unable to remove cart item");
+                }
+            });
+        }
+
+        function removeItem(arr, item) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].id === item.id) {
+                    arr.splice(i, 1);
+                    break;
+                }
+            }
+            return arr;
+        }
+
+        function CartItem(userId, itemId, quantity) {
+            this.userId = userId;
+            this.itemId = itemId;
+            this.quantity = quantity;
         }
     }
 
