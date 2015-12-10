@@ -2,7 +2,6 @@
     background-image: url(../img/MiniFoodFront.png) !important;
     background-repeat: repeat-x;
     background-size: 100%;
-    background-attachment: fixed;
     width: 100%;
     max-width: 100%;
     margin: 0px;
@@ -12,15 +11,22 @@
 
 .frontcontainer {
 padding: 20px 0px 140px 0px;
-    position: fixed !important;
-    z-index: 2;
+    /*position: fixed !important;*/
+    /*z-index: 2;*/
 }
-#test{
-    position: absolute!important;
+#dishes{
+    margin-top: 5px!important;
+}
+.home_page_button {
+    margin-top: 5px!important;
+    border-color: darkgrey !important;
     width: 100%;
-    top: 220px!important;
-    overflow: auto!important;
-    z-index: 1;
+    background-color: #fff!important;
+    color: teal!important;
+    text-transform: uppercase!important;
+    text-align: center!important;
+    overflow: hidden;
+    text-overflow: ellipsis!important;
 }
 .fooddiv .locationdiv .searchdiv{
 
@@ -145,10 +151,20 @@ padding: 20px 0px 140px 0px;
     padding-right: 30px;
 }
 .popularimg{
-    height: 60% !important;
-    width: 100%!important;
-    margin: 0px!important;
+    height: 115px !important;
+    width: 300px!important;
     padding: 0px!important;
+}
+.popularimgmble{
+    height: 115px !important;
+    width: 100%!important;
+    margin: 5px!important;
+    padding: 0px!important;
+}
+.slideItem{
+    text-align: center;
+    font-weight: bold;
+
 }
 .leftcarousel-control{
     width: 50px!important;

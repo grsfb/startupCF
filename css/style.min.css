@@ -9,14 +9,16 @@
     color: #ffffff;
     border: 1px #C03D14 bold;
 }
-.navbar-toggle{
-    background-color: whitesmoke!important;
-}
+/*.navbar-toggle{*/
+    /*background-color: whitesmoke!important;*/
+/*}*/
 
-.navbar-nav a:hover {
-    background-color: #C03D14 !important;
+/*.navbar-nav a:hover {*/
+    /*background-color: #C03D14 !important;*/
+/*}*/
+.icon-bar{
+    background-color: white!important;
 }
-
 .t-content {
     min-height: 100%;
     height: auto !important;
@@ -40,3 +42,4 @@
 .cartLabel{font-weight: 400!important;font-size: 18px!important;margin-left: -10px!important;}
 #profileNav{background-color: transparent!important;border: none!important;}
 .dropdown:hover .dropdown-menu {  display: block;  margin-top: 0;   }
+#footer{position: fixed;bottom: 30px;}
