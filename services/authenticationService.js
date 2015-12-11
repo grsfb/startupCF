@@ -5,37 +5,30 @@
         .module('Chefonia')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$cookieStore', '$rootScope', 'CommonService'];
-    function AuthenticationService($cookieStore, $rootScope, CommonService) {
+    AuthenticationService.$inject = ['SessionService', 'CommonService'];
+    function AuthenticationService(SessionService, CommonService) {
         var service = {};
-
         service.Login = Login;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
-
         return service;
-
         function Login(email, pasword, callback) {
             var user = {"email": email, "password": pasword};
             CommonService.post('/authenticate/user', user, callback);
         }
-
         function SetCredentials(user, password) {
             //add userID in global
             var authdata = Base64.encode(user.email + ':' + password);
-            $rootScope.currentUser = {
+            var currentUser = {
                 'userId'  : user.userId,
                 'userName': user.name,
                 'authdata': authdata
             };
-
-
-            $cookieStore.put('currentUser', $rootScope.currentUser);
+            SessionService.create(currentUser);
         }
 
         function ClearCredentials() {
-            $rootScope.currentUser = {};
-            $cookieStore.remove('currentUser');
+            SessionService.destroy();
             $http.defaults.headers.common.Authorization = 'Basic ';
         }
     }
