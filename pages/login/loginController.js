@@ -15,7 +15,7 @@
                 if (response.success) {
                     $('#myModal').modal('hide');
                     AuthenticationService.SetCredentials(response.data, vm.user.password);
-                    updateUserCart();
+                    updateUserCart(response.data);
                 } else {
                     vm.message = "User email or password is incorrect";
                 }
@@ -23,7 +23,7 @@
             });
         }
 
-        function updateUserCart() {
+        function updateUserCart(currentUser) {
                 CartService.getCartItems(currentUser.userId, function (response) {
                     if (response.success) {
                         var cart = response.data;

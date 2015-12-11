@@ -29,7 +29,7 @@
 
         function ClearCredentials() {
             SessionService.destroy();
-            $http.defaults.headers.common.Authorization = 'Basic ';
+            CommonService.removeAuth();
         }
     }
 
