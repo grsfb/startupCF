@@ -42,4 +42,15 @@
 .cartLabel{font-weight: 400!important;font-size: 18px!important;margin-left: -10px!important;}
 #profileNav{background-color: transparent!important;border: none!important;}
 .dropdown:hover .dropdown-menu {  display: block;  margin-top: 0;   }
-#footer{position: fixed;bottom: 30px;}
+#footer{position: absolute;bottom: 0px;}
+.orderSummary{
+    position:relative;
+    top:20px;
+}
+.orderDivider{
+    margin-top: 10px!important;
+    margin-bottom: 10px!important;
+}
+.summaryText{
+    color: darkgrey;
+}
