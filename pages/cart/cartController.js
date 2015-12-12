@@ -22,7 +22,7 @@
         CartService.getCartItems(currentUserId, function (response) {
             if (response.success) {
                 vm.cartItems = response.data;
-                $rootScope.cartItemCount = vm.cartItems.length;
+                SessionService.put('cartItemCount',vm.cartItems.length);
                 updateCartCost();
             } else {
                 FlashService.Error("Something not working. Please try later");
@@ -96,9 +96,9 @@
 
         function checkout() {
             //post checkout request and redirect to payment page
-            $cookieStore.put('itemIds', getItemsIdArray(vm.cartItems));
-            $cookieStore.put('cartTotal', vm.cartTotal);
-            $cookieStore.put('shippingCost', vm.shippingCost);
+            SessionService.put('itemIds', getItemsIdArray(vm.cartItems));
+            SessionService.put('cartTotal', vm.cartTotal);
+            SessionService.put('shippingCost', vm.shippingCost);
             $location.path('checkout');
         }
 
