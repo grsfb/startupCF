@@ -7,35 +7,50 @@
         service.create = create;
         service.destroy = destroy;
         service.get = get;
-        service.put=put;
-        service.putInRootScope=putInRootScope;
-        service.Session = {'UserCart': 'userCart', 'CurrentUser': 'currentUser'};
-        var cookieStore=new CookieStore();
+        service.put = put;
+        service.remove = remove;
+        service.putInRootScope = putInRootScope;
+        service.Session = {'CartCount': 'cartItemCount', 'CurrentUser': 'currentUser'};
+        var cookieStore = new CookieStore();
         var rootScope = new RootScope();
-        if(cookieStore.get(service.Session.CurrentUser)){
+        if (cookieStore.get(service.Session.CurrentUser)) {
             create(cookieStore.get(service.Session.CurrentUser));
         }
         return service;
         function create(currentUser) {
             rootScope.put('isLoggedIn', true);
-            rootScope.put('currentUser',currentUser);
+            rootScope.put('currentUser', currentUser);
+            var cartCount = cookieStore.get(service.Session.CartCount);
+            rootScope.put('cartItemCount', cartCount != undefined ? cartCount : 0);
             cookieStore.put(service.Session.CurrentUser, currentUser);
         }
+
         function destroy() {
             rootScope.put('isLoggedIn', false);
             rootScope.put('cartItemCount', 0);
             cookieStore.remove(service.Session.CurrentUser);
-            cookieStore.remove(service.Session.UserCart);
+            cookieStore.remove(service.Session.CartCount);
         }
+
         function get(key) {
-            cookieStore.get(key);
+            if (rootScope.get(key)) {
+                return rootScope.get(key);
+            }
+            return cookieStore.get(key);
         }
-        function put(key,value) {
-            cookieStore.put(key,value);
+
+        function put(key, value) {
+            cookieStore.put(key, value);
         }
-        function putInRootScope(key,value){
-            rootScope.put(key,value);
+
+        function putInRootScope(key, value) {
+            rootScope.put(key, value);
         }
+
+        function remove(key) {
+            cookieStore.remove(key);
+        }
+
         function RootScope() {
             var root = {'put': put, 'get': get, 'remove': remove};
             return root;
@@ -51,15 +66,18 @@
                 return $rootScope[key] = undefined;
             }
         }
+
         function CookieStore() {
             var cookie = {'put': put, 'get': get, 'remove': remove};
             return cookie;
             function put(key, value) {
                 $cookieStore.put(key, value);
             }
+
             function get(key) {
                 return $cookieStore.get(key);
             }
+
             function remove(key) {
                 return $cookieStore.remove(key);
             }

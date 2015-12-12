@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('CartController', CartController);
-    CartController.$inject = ['$rootScope', '$cookieStore', '$location', 'CartService', 'ImageService', 'FlashService'];
+    CartController.$inject = ['SessionService', '$location', 'CartService', 'ImageService', 'FlashService'];
 
-    function CartController($rootScope, $cookieStore, $location, CartService, ImageService, FlashService) {
+    function CartController(SessionService, $location, CartService, ImageService, FlashService) {
         var vm = this;
         vm.cartItems = [];
         vm.minusItemCount = minusItemCount;
@@ -17,16 +17,15 @@
         vm.getImageUri = getImageUri;
         vm.removeItemFromCart = removeItemFromCart;
         vm.showCouponEditor = false;
-        //TODO : sample user id for test remove it
-        vm.currentUserId = '8ee6d9a2-a017-4099-bb59-8dd40a2e218e';
+        var currentUserId = SessionService.get(SessionService.Session.CurrentUser).userId;
 
-        CartService.getCartItems(vm.currentUserId, function (response) {
+        CartService.getCartItems(currentUserId, function (response) {
             if (response.success) {
                 vm.cartItems = response.data;
                 $rootScope.cartItemCount = vm.cartItems.length;
                 updateCartCost();
             } else {
-                FlashService.error("Something not working. Please try later");
+                FlashService.Error("Something not working. Please try later");
             }
         });
 
@@ -59,7 +58,7 @@
                 if (vm.cartItems[i].id === cartItem.id) {
                     if (vm.cartItems[i].quantity > 1) {
                         vm.cartItems[i].quantity = vm.cartItems[i].quantity - 1;
-                        var cartItem = new CartItem(vm.currentUserId, vm.cartItems[i].itemId, vm.cartItems[i].quantity);
+                        var cartItem = new CartItem(currentUserId, vm.cartItems[i].itemId, vm.cartItems[i].quantity);
                         updateQuantity(cartItem);
                         break;
                     }
@@ -82,7 +81,7 @@
                 if (vm.cartItems[i].id === item.id) {
                     if (vm.cartItems[i].quantity < 5) {
                         vm.cartItems[i].quantity = vm.cartItems[i].quantity + 1;
-                        var cartItem = new CartItem(vm.currentUserId, vm.cartItems[i].itemId, vm.cartItems[i].quantity);
+                        var cartItem = new CartItem(currentUserId, vm.cartItems[i].itemId, vm.cartItems[i].quantity);
                         updateQuantity(cartItem);
                         break;
                     }
@@ -107,15 +106,14 @@
             var itemIds = [];
             for (var item in cartItems) {
                 if (cartItems.hasOwnProperty(item)) {
-                    var lineItem = {"itemId": item.itemId};
-                    itemIds.push(lineItem);
+                    itemIds.push(cartItems[item].itemId);
                 }
             }
             return itemIds;
         }
 
         function removeItemFromCart(item) {
-            CartService.remove(vm.currentUserId, item.itemId, function (response) {
+            CartService.removeCartItem(currentUserId, function (response) {
                 if (response.success) {
                     vm.cart = removeItem(vm.cart, item);
                     $rootScope.cartItemCount = vm.cart.length;

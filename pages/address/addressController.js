@@ -3,9 +3,8 @@
     angular
         .module('Chefonia')
         .controller('AddressController', AddressController);
-    AddressController.$inject = ['$rootScope', '$window', 'AddressService', 'FlashService'];
-
-    function AddressController($rootScope, $window, AddressService, FlashService) {
+    AddressController.$inject = ['SessionService', '$window', 'AddressService', 'FlashService'];
+    function AddressController(SessionService, $window, AddressService, FlashService) {
         var vm = this;
         vm.showAddressEditor = true;
         vm.allAddress = [];
@@ -20,28 +19,26 @@
         AddressService.getAllAddress("userId", function (response) {
             if (response.success) {
                 vm.allAddress = response.data;
-                if(vm.allAddress.length==0){
-                    vm.showAddressEditor =true;
-                }
             } else {
                 FlashService.Error("Error occurred while retrieving address");
             }
-
+            enableAddressEditor();
         });
 
         function setSelectedAddress(address, index) {
-            $rootScope.deliverAddress=address;
+            SessionService.put('deliverAddress',address);
             vm.selectedIndex = index;
         }
 
         function enableAddressEditor() {
-            vm.showAddressEditor = true;
+            vm.showAddressEditor = vm.allAddress.length == 0;
         }
 
         function deleteAddress(index) {
             if ($window.confirm("Do you want to continue?")) {
                 AddressService.remove(vm.allAddress[index].addressId, function (response) {
                     if (response.success) {
+                        SessionService.remove('deliverAddress');
                         vm.allAddress.splice(index, 1);
                     } else {
                         FlashService.Error("Error occurred while deleting address");

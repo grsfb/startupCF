@@ -20,7 +20,7 @@
             </div>
 
             <div class="row" style="padding-left: 15px;">
-                <div class="col-sm-12" style="margin-top: 20px;padding-left: 2px;" data-ng-show="!showAddressEditor">
+                <div class="col-sm-12" style="margin-top: 20px;padding-left: 2px;" data-ng-show="!vm.showAddressEditor">
                     <a class="btn btn-default mybtn" name="add-address" data-ng-click="vm.enableAddressEditor()">
                         Add New Address</a>
                 </div>
@@ -92,7 +92,7 @@
                     <a class="btn btn-default pull-right"
                        data-ng-click="vm.cancel();form.$setPristine()">Cancel</a>
                     <a class="btn btn-default mybtn pull-right mybtn"
-                       data-ng-click="vm.saveAndClose(vm.address)" data-ng-disabled="form.$invalid">Save</a>
+                       data-ng-click="vm.saveAndClose(vm.address)" data-ng-disabled="form.$invalid" style="margin-right: 5px;">Save</a>
                 </div>
             </form>
         </div>

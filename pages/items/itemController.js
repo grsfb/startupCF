@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('ItemController', ItemController);
-    ItemController.$inject = ['$rootScope', '$location', '$cookieStore', 'InventoryService', 'CartService', 'FlashService'];
+    ItemController.$inject = ['SessionService', '$location', 'InventoryService', 'CartService', 'FlashService'];
 
-    function ItemController($rootScope, $location, $cookieStore, InventoryService, CartService, FlashService) {
+    function ItemController(SessionService, $location, InventoryService, CartService, FlashService) {
         var vm = this;
         vm.addItemInCart = addItemInCart;
         vm.cart = [];
@@ -13,29 +13,28 @@
         vm.totalPageAsArray = new Array(1);
         vm.loadNextPage = loadNextPage;
         vm.selectedIndex = 0;
-        vm.currentUserId = undefined;
-        vm.isUserLoggedIn = undefined;
+        vm.isCartLoaded = false;
 
         //load initial items
         InventoryService.getAllItems(1, function (response) {
             if (response.success) {
                 vm.items = response.data.items;
                 vm.totalPageAsArray = new Array(response.data.totalPages);
-                updateUserDetails();
             } else {
                 FlashService.Error("Something not working. Please try later");
             }
         });
-
-        function updateUserDetails() {
-            var currentUser = $cookieStore.get('currentUser');
-            if (currentUser != undefined) {
-                vm.isUserLoggedIn = true;
-                vm.currentUserId = currentUser.userId;
-                vm.cart = $cookieStore.get('userCart');
-                $rootScope.cartItemCount = vm.cart.length;
-            }
-        }
+        //get all cart items
+        var userId=SessionService.get(SessionService.Session.CurrentUser).userId;
+        CartService.getCartItems(userId,
+            function (response) {
+                if (response.success) {
+                    vm.cart = response.data;
+                    vm.isCartLoaded = true;
+                } else {
+                    FlashService.Error("Something not working. Please try later");
+                }
+            });
 
         function loadNextPage(pageNumber) {
             InventoryService.getAllItems(pageNumber + 1, function (response) {
@@ -51,22 +50,21 @@
 
         //cart
         function addItemInCart(item) {
-            updateUserDetails();
-            if (vm.isUserLoggedIn) {
-                var cartItem = new CartItem(vm.currentUserId, item.itemId);
-
-                if (!isItemExistsInCart(vm.cart, item.id)) {
+            if (vm.isCartLoaded) {
+                var cartItem = new CartItem(userId, item.itemId);
+                if (!isItemExistsInCart(vm.cart, item.itemId)) {
                     CartService.add(cartItem, function (response) {
                         if (response.success) {
                             vm.cart = addItem(vm.cart, cartItem);
-                            $cookieStore.put('userCart', vm.cart);
-                            $rootScope.cartItemCount = vm.cart.length;
+                            SessionService.putInRootScope("cartItemCount", vm.cart.length);
+                            SessionService.put("cartItemCount", vm.cart.length);
+                        } else {
+                            FlashService.Error("Something not working. Please try later");
                         }
                     });
                 } else {
                     FlashService.Success("Item already added in your cart");
                 }
-
             } else {
                 $location.path('/login');
             }
@@ -80,11 +78,10 @@
 
         function isItemExistsInCart(arr, itemId) {
             for (var i = 0; i < arr.length; i++) {
-                if (arr[i].id === itemId) {
+                if (arr[i].itemId === itemId) {
                     return true;
                 }
             }
-
             return false;
         }
 

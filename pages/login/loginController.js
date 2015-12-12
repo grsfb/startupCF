@@ -24,11 +24,10 @@
         }
 
         function updateUserCart(currentUser) {
-                CartService.getCartItems(currentUser.userId, function (response) {
+                CartService.count(currentUser.userId, function (response) {
                     if (response.success) {
-                        var cart = response.data;
-                        SessionService.putInRootScope('cartItemCount', cart.length);
-                        SessionService.put('userCart', cart);
+                        SessionService.putInRootScope('cartItemCount', response.data.count);
+                        SessionService.put('userCart', response.data.count);
                     } else {
                         FlashService.Error("Something not working, Please try later");
                     }
