@@ -1,25 +1,23 @@
 <div class="navbar navbar-fixed-top" style="margin-bottom: 0px">
     <div class="container">
-        <div class="navbar-header">
+        <div id="header" class="navbar-header">
+            <a class="header-link navbar-brand" href="http://chefonia.com">
+                <img src="brand.png" class="img-responsive"> </a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a id="blogo" class="navbar-brand" href="http://chefonia.com" style="text-decoration: none;">
-                <img src="brand.png" style="height: 30px;width: 120px;">
-            </a>
         </div>
         <div class="collapse navbar-collapse" data-ng-controller="NavbarController as vm">
-            <ul class="nav navbar-nav pull-right" data-ng-cloak style="padding-top:8px">
-                <li ng-if="!isLoggedIn" class="hidden-xs ">
-                    <button type="button" data-toggle="collapse" data-target=".navbar-collapse.in"
-                            style="width: 100px" class="btn btn-success" data-ng-click="vm.login()">Login
-                    </button>
+            <ul class="nav navbar-nav pull-right">
+                <li ng-if="!isLoggedIn" class="hidden-xs">
+                    <a class="btn btn-lg btn-default mybtn text-center" data-ng-click="vm.login()"
+                       style="padding-left: 26px;padding-right: 26px;">Login or Signup </a>
                 </li>
                 <li ng-if="!isLoggedIn" class="hidden-lg hidden-md hidden-sm">
                     <a data-toggle="collapse" data-target=".navbar-collapse.in" href="#login_mble"
-                       style="cursor: pointer">Login</a>
+                       style="padding: 0">Login</a>
                 </li>
 
                 <li ng-if="isLoggedIn">
