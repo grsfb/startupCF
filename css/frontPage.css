@@ -1,12 +1,13 @@
 .frontbackground {
-    background-image: url(../img/MiniFoodFront.png) !important;
+    background-image: url(../img/1.jpg) !important;
     background-repeat: repeat-x;
     background-size: 100%;
     width: 100%;
     max-width: 100%;
+    max-height: 100%;
     margin: 0px;
 
-    background-color: rgba(49, 190, 177, 0.1) !important;
+    background-color: rgba(0, 0, 12, 0.5) !important;
 }
 
 .frontcontainer {
@@ -50,6 +51,10 @@ padding: 80px 0px 80px 0px;
     }
     .searchdiv{
         padding-top: 22px !important;
+    }
+    .frontcontainer {
+        padding: 40px 0px 80px 0px;
+
     }
     /*.divElement{*/
         /*top:15% !important;*/
