@@ -29,7 +29,7 @@
                     if (response.success) {
                         cleanUpOnOrderSuccess();
                         SessionService.put('orderId', response.data.orderId);
-                        $location.path('success');
+                        $location.path('orderDetail/response.data.orderId');
                     } else {
                         FlashService.Error("Something not working. Please try later");
                     }

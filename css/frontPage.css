@@ -11,7 +11,7 @@
 }
 
 .frontcontainer {
-padding: 80px 0px 80px 0px;
+    padding: 80px 0px 80px 0px;
     /*position: fixed !important;*/
     /*z-index: 2;*/
 }
@@ -34,7 +34,7 @@ padding: 80px 0px 80px 0px;
     padding-top: 0px;
 }
 .searchdiv{
- padding-left: 0px;   margin-left: 0px;height: 45px;
+    padding-left: 0px;   margin-left: 0px;height: 45px;
 }
 .locationdiv{
     border-bottom-right-radius: 0px;
@@ -43,7 +43,7 @@ padding: 80px 0px 80px 0px;
 }
 
 @media(max-width: 767px) {
-     .fooddiv{
+    .fooddiv{
         padding-top: 12px !important;
     }
     .locationdiv{
@@ -57,7 +57,7 @@ padding: 80px 0px 80px 0px;
 
     }
     /*.divElement{*/
-        /*top:15% !important;*/
+    /*top:15% !important;*/
     /*}*/
 }
 @media(max-width: 350px) {
@@ -120,7 +120,7 @@ padding: 80px 0px 80px 0px;
 
 }
 /*.form-control {*/
-    /*height: 40px;*/
+/*height: 40px;*/
 /*}*/
 
 .inner-addon {

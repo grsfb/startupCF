@@ -35,10 +35,6 @@
 #profileNav{background-color: transparent!important;border: none!important;}
 .dropdown:hover .dropdown-menu {  display: block;  margin-top: 0;   }
 #footer{position: absolute;bottom: 0px;}
-.orderSummary{
-    position:relative;
-    top:20px;
-}
 .orderDivider{
     margin-top: 10px!important;
     margin-bottom: 10px!important;
@@ -46,4 +42,7 @@
 .summaryText{
     color: darkgrey;
 }
-/*Imp CSS*/
+
+.frmEMail{
+    text-align: left!important;
+}

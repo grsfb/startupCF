@@ -36,16 +36,13 @@
     <div ng-include="'pages/login/login.html'"></div>
 </div>
 <div class="t-content" data-ng-cloak style="background-color: #fff">
-    <div class="container">
-        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success',
+    <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success',
         'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"
-             style="margin-bottom: 0px;"></div>
-    </div>
+         style="margin-bottom: 0px;"></div>
     <div data-ng-view></div>
 </div>
 <div style="background: #333; margin-top:15px;">
     <div data-ng-include="'pages/common/footer.html'"></div>
-
     <script src="lib/jquery/jquery-2.1.1.min.js"></script>
     <script src="lib/owlCarousel/owl.carousel.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
@@ -60,6 +57,9 @@
     <script src="js/jquery.textillate.min.js"></script>
     <script src="pages/common/headerController.js"></script>
     <script src="pages/login/loginController.js"></script>
+    <script src="pages/orderSummary/OrderSummaryController.js"></script>
+    <script src="pages/orders/OrdersController.js"></script>
+    <script src="pages/front/FrontController.js"></script>
     <script src="pages/register/registerController.js"></script>
     <script src="pages/items/itemController.js"></script>
     <script src="services/wishListService.js"></script>

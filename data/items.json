@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": "370b57c8-ae74-4d7e-bf14-e5f153d03f35",
     "name": "Achar",
     "category": "Pickle",
     "price": "50",
@@ -10,7 +10,7 @@
     "imageURL": "img/pickle.jpeg"
   },
   {
-    "id": "2",
+    "id": "370b57c8-ae74-4d7e-bf14-e5f153d03f35",
     "name": "Chakli",
     "category": "Snacks",
     "price": "20",
@@ -20,7 +20,7 @@
     "imageURL": "img/chakli.jpg"
   },
   {
-    "id": "3",
+    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
     "name": "Mirch Powder",
     "category": "Spices",
     "price": "30",
@@ -30,7 +30,7 @@
     "imageURL": "img/redchilly.jpg"
   },
   {
-    "id": "1",
+    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
     "name": "Achar",
     "category": "Pickle",
     "price": "50",
@@ -40,7 +40,7 @@
     "imageURL": "img/pickle.jpeg"
   },
   {
-    "id": "1",
+    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
     "name": "Achar",
     "category": "Pickle",
     "price": "50",
@@ -50,7 +50,7 @@
     "imageURL": "img/pickle.jpeg"
   },
   {
-    "id": "2",
+    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
     "name": "Chakli",
     "category": "Snacks",
     "price": "20",
@@ -60,7 +60,7 @@
     "imageURL": "img/chakli.jpg"
   },
   {
-    "id": "3",
+    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
     "name": "Mirch Powder",
     "category": "Spices",
     "price": "30",
@@ -70,7 +70,7 @@
     "imageURL": "img/redchilly.jpg"
   },
   {
-    "id": "1",
+    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
     "name": "Achar",
     "category": "Pickle",
     "price": "50",
