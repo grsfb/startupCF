@@ -55,7 +55,7 @@
 
         function minusItemCount(cartItem) {
             for (var i = 0; i < vm.cartItems.length; i++) {
-                if (vm.cartItems[i].id === cartItem.id) {
+                if (vm.cartItems[i].itemId === cartItem.itemId) {
                     if (vm.cartItems[i].quantity > 1) {
                         vm.cartItems[i].quantity = vm.cartItems[i].quantity - 1;
                         var cartItem = new CartItem(currentUserId, vm.cartItems[i].itemId, vm.cartItems[i].quantity);
@@ -76,9 +76,9 @@
             });
         }
 
-        function plusItemCount(item) {
+        function plusItemCount(cartItem) {
             for (var i = 0; i < vm.cartItems.length; i++) {
-                if (vm.cartItems[i].id === item.id) {
+                if (vm.cartItems[i].itemId === cartItem.itemId) {
                     if (vm.cartItems[i].quantity < 5) {
                         vm.cartItems[i].quantity = vm.cartItems[i].quantity + 1;
                         var cartItem = new CartItem(currentUserId, vm.cartItems[i].itemId, vm.cartItems[i].quantity);

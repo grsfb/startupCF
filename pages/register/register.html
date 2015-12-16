@@ -3,19 +3,19 @@
     <h4 class="loginHeader" style="color: darkred;margin-bottom: 30px"> Register With Chefonia!</h4>
     <div class="form-group">
         <label ><span class="fontawesome fa fa-user"></span> Name</label>
-        <input type="text" class="form-control loginInput" id="usrname1" name="userName" data-ng-model="vm.user.name" ng-minlength="3" data-ng-pattern="/^[A-z ]+$/"  placeholder="Enter your name" required="">
-        <div class="has-error ng-hide" ng-messages="registerForm.userName.$error" maxlength="30" ng-show="registerForm.userName.$touched">
-            <p class="help-block errorMsg" ng-show="registerForm.userName.$error.required" ng-message="required">Your name is required.</p>
-            <p class="help-block errorMsg" ng-show="(registerForm.userName.$error.minlength||registerForm.userName.$error.pattern)">
+        <input type="text" class="form-control loginInput" id="newUserName" name="newUserName" data-ng-model="vm.user.name" ng-minlength="3" data-ng-pattern="/^[A-z ]+$/"  placeholder="Enter your name" required="">
+        <div class="has-error ng-hide" ng-messages="registerForm.newUserName.$error" maxlength="30" ng-show="registerForm.newUserName.$touched">
+            <p class="help-block errorMsg" ng-show="registerForm.newUserName.$error.required" ng-message="required">Your name is required.</p>
+            <p class="help-block errorMsg" ng-show="(registerForm.newUserName.$error.minlength||registerForm.newUserName.$error.pattern)">
                 Your name is invalid.
             </p>
         </div>
     </div>
     <div class="form-group">
         <label ><span class="fontawesome fa fa-key"></span> Password</label>
-        <input type="password" class="form-control loginInput" id="psw1" data-ng-model="vm.user.password" name="userPassword" placeholder="Enter password" required="">
-        <div class="has-error ng-hide" ng-messages="registerForm.userPassword.$error" maxlength="30" ng-show="registerForm.userPassword.$touched">
-            <p class="help-block errorMsg" ng-show="registerForm.userPassword.$error.required" ng-message="required">Your password is required.</p>
+        <input type="password" class="form-control loginInput" id="psw1" data-ng-model="vm.user.password" name="newUserPassword" placeholder="Enter password" required="">
+        <div class="has-error ng-hide" ng-messages="registerForm.newUserPassword.$error" maxlength="30" ng-show="registerForm.newUserPassword.$touched">
+            <p class="help-block errorMsg" ng-show="registerForm.newUserPassword.$error.required" ng-message="required">Your password is required.</p>
         </div>
     </div>
     <div class="form-group">

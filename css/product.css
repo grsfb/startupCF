@@ -176,7 +176,9 @@ ul li {
 .mybtn {
     background-color: teal !important;
     color: #fff !important;
-
+}
+.mybtn:hover{
+   background-color: #004c4d !important;
 }
 
 .page-title {

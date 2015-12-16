@@ -30,12 +30,12 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.navbar-nav > li:hover{
+.navbar-nav>li:hover{
     text-decoration: none;
     background-color: transparent !important;
 }
-.navbar-nav > li > a:hover {
-    background-color: #3e8e3e !important;
+.navbar-nav>li>.mylink:hover {
+    background-color: transparent !important;
 }
 
 /*
