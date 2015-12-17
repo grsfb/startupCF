@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('OrderSummaryController', OrderSummaryController);
-    OrderSummaryController.$inject = ['SessionService','$location', 'OrderService', 'ImageService', 'FlashService'];
+    OrderSummaryController.$inject = ['SessionService','$location', 'OrderService', 'ImageService', 'FlashService','$routeParams'];
 
-    function OrderSummaryController(SessionService,$location, OrderService, ImageService, FlashService) {
+    function OrderSummaryController(SessionService,$location, OrderService, ImageService, FlashService,$routeParams) {
         var vm = this;
         vm.getImageUri=getImageUri;
         vm.orderItem = undefined;
@@ -14,7 +14,7 @@
         vm.sendEmail=false;
         vm.showContact=showContact;
         vm.contactDetail=false;
-        OrderService.getAllItemForOrder(SessionService.get('orderId'), function (response) {
+        OrderService.getAllItemForOrder($routeParams.orderId, function (response) {
             if (response.success) {
                 vm.orderItem = response.data;
             } else {

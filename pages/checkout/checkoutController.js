@@ -28,8 +28,8 @@
                 OrderService.create(order, function (response) {
                     if (response.success) {
                         cleanUpOnOrderSuccess();
-                        SessionService.put('orderId', response.data.orderId);
-                        $location.path('orderDetail/response.data.orderId');
+                        //SessionService.put('orderId', response.data.orderId);
+                        $location.path('orderDetail/'+response.data.orderId);
                     } else {
                         FlashService.Error("Something not working. Please try later");
                     }

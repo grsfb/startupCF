@@ -2,18 +2,17 @@
     <div class="frontcontainer frontbackground col-md-12" style="margin-top: -25px">
         <div class="divElement">
             <div class="container">
-                <div class="locationdiv inner-addon left-addon col-md-3 col-sm-3 col-xs-12"
-                     ng-controller="citylistctrl">
+                <div class="locationdiv inner-addon left-addon col-md-3 col-sm-3 col-xs-12">
                     <span>  <i class="fontawesome fa fa-location-arrow"></i></span>
                     <input data-toggle="dropdown"
 
                            class="location form-control dropdown-toggle " type="text" placeholder="Current Location"
-                           ng-model="city"
-                           data-ng-keydown="getLocation();">
+                           ng-model="vm.city"
+                           data-ng-keydown="vm.getLocation();">
 
                     <ul class="dropdown-menu list-group-item-heading"
                         style="width: 100%;padding: 0px;margin-top: 5px">
-                        <li class="list-group-item" ng-repeat="city in cityList" data-ng-click="cityChange(city)">
+                        <li class="list-group-item" ng-repeat="city in vm.cityList" data-ng-click="vm.cityChange(city)">
                             {{city}}
                         </li>
                     </ul>
@@ -21,8 +20,7 @@
                     <!--<li class="list-group-item" ng-repeat="city in ['Pune','Nagpur','Mumbai']" data-ng-click="cityChange(city)">{{city}}</li>-->
                     <!--</ul>-->
                 </div>
-                <div class="fooddiv inner-addon left-addon col-md-7 col-sm-6 col-xs-12"
-                     ng-controller="foodlistctrl">
+                <div class="fooddiv inner-addon left-addon col-md-7 col-sm-6 col-xs-12">
                     <span>  <i class="fontawesome fa fa-cutlery"></i></span>
                     <input data-toggle="dropdown" class="form-control dropdown-toggle delicacy" type="text"
                            placeholder="Search Homemade Delicacies" ng-model="snack">
@@ -31,25 +29,25 @@
                     <ul class="dropdown-menu list-group"
                         style="width: 100%;z-index: 9999;overflow: visible;padding: 0px;margin-top: 5px">
 
-                        <li class="list-group-item itemlist" ng-repeat="snack in foodList"
-                            data-ng-click="foodChange(snack)">
+                        <li class="list-group-item itemlist" ng-repeat="snack in vm.foodList"
+                            data-ng-click="vm.foodChange(snack)">
                             <span class="badge">Popularity ***</span>{{snack}}
                         </li>
                         <li class="list-group-item disabled">Popular Delicacies</li>
-                        <li class="list-group-item" ng-repeat="snack in popularFoodList"
-                            data-ng-click="foodChange(snack)">
+                        <li class="list-group-item" ng-repeat="snack in vm.popularFoodList"
+                            data-ng-click="vm.foodChange(snack)">
                             <span class="badge">Popularity *****</span>{{snack}}
                         </li>
                         <li class="list-group-item disabled">Newly Launched Delicacies</li>
-                        <li class="list-group-item" ng-repeat="snack in newFoodList"
-                            data-ng-click="foodChange(snack)">
+                        <li class="list-group-item" ng-repeat="snack in vm.newFoodList"
+                            data-ng-click="vm.foodChange(snack)">
                             <span class="badge">New</span>{{snack}}
                         </li>
                     </ul>
                 </div>
                 <div class="searchdiv col-md-2 col-sm-2 col-xs-12"
                      style="padding-left: 0px;padding-right:0px;height: 45px;">
-                    <a href="#" class="btn btn-info btn-lg" id="searchbtn">
+                    <a href=""  data-ng-click="vm.loadItems()" class="btn btn-info btn-lg" id="searchbtn">
                         <span class="fontawesome fa fa-search" style="align-content: center"></span> Search</a>
                 </div>
             </div>
@@ -63,7 +61,7 @@
                     <div class="container">Popular Dishes</div>
                 </div>
                 <div>
-                    <div class="col-md-12" style="margin-top: 20px;" ng-controller="popularListCtrl">
+                    <div class="col-md-12" style="margin-top: 20px;">
                         <div style="float: left;position: absolute;top: 50%;margin-left: 30px;">
                             <a class="prev" id="popularowlPrev">
                                 <span class="fa-stack fa-lg">
@@ -75,25 +73,25 @@
                         <div class="container">
                             <data-owl-carousel style="height: 250px;width: auto"
                                                id="owl-demo" class="owl-carousel" data-options="{rewindNav : true}">
-                                <div owl-carousel-item="" ng-repeat="item in ::slides" class="item"
+                                <div owl-carousel-item="" ng-repeat="item in vm.slides" class="item"
                                      style="width: 220px;margin-right: 20px;border: none">
                                     <div class="thumbnail">
-                                        <img data-ng-src="{{slides[$index].imageURL}}" alt="product"
+                                        <img data-ng-src="{{vm.slides[$index].imageURL}}" alt="product"
                                              class="popularimg img-responsive">
 
                                         <h2 style="color: #FE980F" class="slideItem"><i class="fa fa-inr"></i>
-                                            {{slides[$index].price}}</h2>
+                                            {{vm.slides[$index].price}}</h2>
 
-                                        <p class="slideItem">{{slides[$index].name}} - {{slides[$index].quantity}}
+                                        <p class="slideItem">{{vm.slides[$index].name}} - {{vm.slides[$index].quantity}}
                                             Kg</p>
 
                                         <div class="caption caption-half-down">
-                                            <p>{{slides[$index].name}} - {{slides[$index].quantity}} Kg</p>
+                                            <p>{{vm.slides[$index].name}} - {{vm.slides[$index].quantity}} Kg</p>
 
-                                            <h2><i class="fa fa-inr"></i> {{slides[$index].price}}</h2>
+                                            <h2><i class="fa fa-inr"></i> {{vm.slides[$index].price}}</h2>
                                         </div>
                                         <div class="caption caption-half-up">
-                                            <a href="#" class="btn btn-default add-to-cart"><i
+                                            <a href="" data-ng-click="vm.addItemInCart(item)" class="btn btn-default add-to-cart"><i
                                                     class="fa fa-shopping-cart"></i>Add
                                                 to cart</a>
                                         </div>
@@ -116,7 +114,7 @@
                 <div class="col-md-12 page-title dishesCarousel" style="margin-top: 0px;margin-bottom:10px; ">
                     <div class="container">New Dishes</div>
                 </div>
-                <div class="col-md-12" ng-controller="newListCtrl">
+                <div class="col-md-12">
                     <div style="float: left;position: absolute;top: 50%; margin-left: 30px;">
                         <a class="prev" id="newowlNext">
                            <span class="fa-stack fa-lg">
@@ -128,25 +126,25 @@
                     <div class="container">
                         <data-owl-carousel style="height: 250px; width: auto" ;
                                            id="owl-demo1" class="owl-carousel" data-options="{rewindNav : true}">
-                            <div owl-carousel-item="" ng-repeat="item in ::newSlides" class="item"
+                            <div owl-carousel-item="" ng-repeat="item in vm.newSlides" class="item"
                                  style="width: 220px;margin-right: 20px;border: none">
                                 <div class="thumbnail">
-                                    <img data-ng-src="{{newSlides[$index].imageURL}}" alt="product"
+                                    <img data-ng-src="{{vm.newSlides[$index].imageURL}}" alt="product"
                                          class="popularimg img-responsive">
 
                                     <h2 style="color: #FE980F" class="slideItem"><i class="fa fa-inr"></i>
-                                        {{newSlides[$index].price}}</h2>
+                                        {{vm.newSlides[$index].price}}</h2>
 
-                                    <p class="slideItem">{{newSlides[$index].name}} - {{newSlides[$index].quantity}}
+                                    <p class="slideItem">{{vm.newSlides[$index].name}} - {{vm.newSlides[$index].quantity}}
                                         Kg</p>
 
                                     <div class="caption caption-half-down">
-                                        <p>{{newSlides[$index].name}} - {{newSlides[$index].quantity}} Kg</p>
+                                        <p>{{vm.newSlides[$index].name}} - {{vm.newSlides[$index].quantity}} Kg</p>
 
-                                        <h2><i class="fa fa-inr"></i> {{newSlides[$index].price}}</h2>
+                                        <h2><i class="fa fa-inr"></i> {{vm.newSlides[$index].price}}</h2>
                                     </div>
                                     <div class="caption caption-half-up">
-                                        <a href="#" class="btn btn-default add-to-cart"><i
+                                        <a href="" data-ng-click="vm.addItemInCart(item)" class="btn btn-default add-to-cart"><i
                                                 class="fa fa-shopping-cart"></i>Add
                                             to cart</a>
                                     </div>
@@ -173,24 +171,24 @@
                 Popular Dishes
             </div>
 
-            <div ng-controller="newListCtrl">
-                <div ng-repeat="item in ::newSlides" class="item">
+            <div>
+                <div ng-repeat="item in vm.newSlides" class="item">
                     <div class="thumbnail col-xs-12" style="width: 100%; height: 200px">
-                        <img data-ng-src="{{newSlides[$index].imageURL}}" alt="product"
+                        <img data-ng-src="{{vm.newSlides[$index].imageURL}}" alt="product"
                              class="popularimgmble img-responsive">
 
                         <h2 class="slideItem" style="color: #FE980F;margin-top: -5px"><i class="fa fa-inr"></i>
-                            {{newSlides[$index].price}}</h2>
+                            {{vm.newSlides[$index].price}}</h2>
 
-                        <p class="slideItem">{{newSlides[$index].name}} - {{newSlides[$index].quantity}} Kg</p>
+                        <p class="slideItem">{{vm.newSlides[$index].name}} - {{vm.newSlides[$index].quantity}} Kg</p>
 
                         <div class="caption caption-half-down" style="align-content: center;text-align: center">
-                            <p>{{newSlides[$index].name}} - {{newSlides[$index].quantity}} Kg</p>
+                            <p>{{vm.newSlides[$index].name}} - {{vm.newSlides[$index].quantity}} Kg</p>
 
-                            <h2><i class="fa fa-inr"></i> {{newSlides[$index].price}}</h2>
+                            <h2><i class="fa fa-inr"></i> {{vm.newSlides[$index].price}}</h2>
                         </div>
                         <div class="caption caption-half-up">
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
+                            <a href=""data-ng-click="vm.addItemInCart(item)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
                                 cart</a>
                         </div>
                     </div>
