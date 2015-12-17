@@ -22,7 +22,7 @@
         CartService.getCartItems(currentUserId, function (response) {
             if (response.success) {
                 vm.cartItems = response.data;
-                SessionService.put('cartItemCount',vm.cartItems.length);
+                SessionService.put('cartItemCount', vm.cartItems.length);
                 updateCartCost();
             } else {
                 FlashService.Error("Something not working. Please try later");
@@ -113,11 +113,12 @@
         }
 
         function removeItemFromCart(item) {
-            CartService.removeCartItem(currentUserId, function (response) {
+            CartService.removeCartItem(currentUserId, item.itemId, function (response) {
                 if (response.success) {
-                    vm.cart = removeItem(vm.cart, item);
-                    $rootScope.cartItemCount = vm.cart.length;
-                    if (vm.cart.length == 0) {
+                    vm.cartItems = removeItem(vm.cartItems, item);
+                    SessionService.put(SessionService.Session.CartCount, vm.cartItems.length);
+                    SessionService.putInRootScope("cartItemCount", vm.cartItems.length);
+                    if (vm.cartItems.length == 0) {
                         $location.path('/item');
                     }
                 }
@@ -129,7 +130,7 @@
 
         function removeItem(arr, item) {
             for (var i = 0; i < arr.length; i++) {
-                if (arr[i].id === item.id) {
+                if (arr[i].itemId === item.itemId) {
                     arr.splice(i, 1);
                     break;
                 }

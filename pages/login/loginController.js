@@ -27,7 +27,7 @@
                 CartService.count(currentUser.userId, function (response) {
                     if (response.success) {
                         SessionService.putInRootScope('cartItemCount', response.data.count);
-                        SessionService.put('userCart', response.data.count);
+                        SessionService.put(SessionService.Session.CartCount, response.data.count);
                     } else {
                         FlashService.Error("Something not working, Please try later");
                     }

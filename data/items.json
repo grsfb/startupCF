@@ -1,83 +1,68 @@
 [
   {
-    "id": "370b57c8-ae74-4d7e-bf14-e5f153d03f35",
+    "itemId": "af710330-1f34-4c4a-af66-f40b63e77374",
     "name": "Achar",
-    "category": "Pickle",
-    "price": "50",
-    "quantity": "1",
-    "chef": "Bajrang",
-    "recipe": "turmeric powder, red chilli powder with lemon",
-    "imageURL": "img/pickle.jpeg"
+    "weight": 1,
+    "price": 100,
+    "category": "PICKLE",
+    "chefId": "chef123",
+    "chefName": "Bajrang",
+    "recipe": "Aam and oil",
+    "popularity": 0
   },
   {
-    "id": "370b57c8-ae74-4d7e-bf14-e5f153d03f35",
+    "itemId": "495dad37-e707-47e8-b9f8-9e6904b76180",
     "name": "Chakli",
-    "category": "Snacks",
-    "price": "20",
-    "quantity": "1",
-    "chef": "Bajrang",
-    "recipe": "turmeric powder, red chilli powder with lemon",
-    "imageURL": "img/chakli.jpg"
+    "weight": 1,
+    "price": 70,
+    "category": "OTHERS",
+    "chefId": "chef123",
+    "chefName": "Bajrang",
+    "recipe": "Besan and oil",
+    "popularity": 0
   },
   {
-    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
-    "name": "Mirch Powder",
-    "category": "Spices",
-    "price": "30",
-    "quantity": "1",
-    "chef": "Bajrang",
-    "recipe": "turmeric powder, red chilli powder with lemon",
-    "imageURL": "img/redchilly.jpg"
+    "itemId": "0068f84f-92e3-4d46-ad96-fea63a19d6a5",
+    "name": "Choclate",
+    "weight": 1,
+    "price": 150,
+    "category": "OTHERS",
+    "chefId": "chef123",
+    "chefName": "Bajrang",
+    "recipe": "Milk and oil",
+    "popularity": 0
   },
   {
-    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
-    "name": "Achar",
-    "category": "Pickle",
-    "price": "50",
-    "quantity": "1",
-    "chef": "Bajrang",
-    "recipe": "turmeric powder, red chilli powder with lemon",
-    "imageURL": "img/pickle.jpeg"
+    "itemId": "370b57c8-ae74-4d7e-bf14-e5f153d03f35",
+    "name": "Banana Achar",
+    "weight": 1,
+    "price": 100,
+    "category": "PICKLE",
+    "chefId": "chef123",
+    "chefName": "Bajrang",
+    "recipe": "Milk and oil",
+    "popularity": 0
   },
   {
-    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
-    "name": "Achar",
-    "category": "Pickle",
-    "price": "50",
-    "quantity": "1",
-    "chef": "Bajrang",
-    "recipe": "turmeric powder, red chilli powder with lemon",
-    "imageURL": "img/pickle.jpeg"
+    "itemId": "f65d53a8-8119-4632-8dd3-92bf0c428e84",
+    "name": "Tasty nuts",
+    "weight": 1,
+    "price": 300,
+    "category": "OTHERS",
+    "chefId": "chef123",
+    "chefName": "Bajrang",
+    "recipe": "Nuts and oil",
+    "popularity": 0
   },
   {
-    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
-    "name": "Chakli",
-    "category": "Snacks",
-    "price": "20",
-    "quantity": "1",
-    "chef": "Bajrang",
-    "recipe": "turmeric powder, red chilli powder with lemon",
-    "imageURL": "img/chakli.jpg"
-  },
-  {
-    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
-    "name": "Mirch Powder",
-    "category": "Spices",
-    "price": "30",
-    "quantity": "1",
-    "chef": "Bajrang",
-    "recipe": "turmeric powder, red chilli powder with lemon",
-    "imageURL": "img/redchilly.jpg"
-  },
-  {
-    "id": "af710330-1f34-4c4a-af66-f40b63e77374",
-    "name": "Achar",
-    "category": "Pickle",
-    "price": "50",
-    "quantity": "1",
-    "chef": "Bajrang",
-    "recipe": "turmeric powder, red chilli powder with lemon",
-    "imageURL": "img/pickle.jpeg"
+    "itemId": "27fbed99-6f7b-43a2-b208-3524c9d8f57e",
+    "name": "Biryani",
+    "weight": 1,
+    "price": 300,
+    "category": "OTHERS",
+    "chefId": "chef123",
+    "chefName": "Bajrang",
+    "recipe": "Rice and oil",
+    "popularity": 0
   }
-
 ]
