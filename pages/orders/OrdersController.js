@@ -8,6 +8,7 @@
     function OrdersController(SessionService,$location, OrderService, ImageService, FlashService) {
         var vm = this;
         vm.orders = undefined;
+        vm.getImageUri=getImageUri;
         OrderService.getAllOrder(SessionService.get('currentUser').userId, function (response) {
             if (response.success) {
                 vm.orders = response.data;
@@ -15,6 +16,10 @@
                 FlashService.error("Something not working. Please try later");
             }
         });
+        function getImageUri(name) {
+            return ImageService.getUri(name, ImageService.Size.SMALL);
+        }
+
 
     }
 

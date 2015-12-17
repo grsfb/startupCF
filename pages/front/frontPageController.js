@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('Chefonia')
-        .controller('FrontController', FrontController)
+        .controller('FrontPageController', FrontPageController)
         .directive("owlCarousel", function () {
             return {
                 restrict: 'E',
@@ -47,9 +47,9 @@
             };
         }]);
     ;
-    FrontController.$inject = ['SessionService', 'CartService', '$http', '$location', '$rootScope', '$document', 'FlashService'];
+    FrontPageController.$inject = ['SessionService', 'CartService', '$http', '$location', '$rootScope', '$document', 'FlashService'];
 
-    function FrontController(SessionService, CartService, $http, $location, $rootScope, $document, FlashService) {
+    function FrontPageController(SessionService, CartService, $http, $location, $rootScope, $document, FlashService) {
         var vm = this;
         vm.cityChange = cityChange;
         vm.foodChange = foodChange;
