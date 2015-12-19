@@ -1,68 +1,92 @@
-[
-  {
-    "itemId": "af710330-1f34-4c4a-af66-f40b63e77374",
-    "name": "Achar",
-    "weight": 1,
-    "price": 100,
-    "category": "PICKLE",
-    "chefId": "chef123",
-    "chefName": "Bajrang",
-    "recipe": "Aam and oil",
-    "popularity": 0
-  },
-  {
-    "itemId": "495dad37-e707-47e8-b9f8-9e6904b76180",
-    "name": "Chakli",
-    "weight": 1,
-    "price": 70,
-    "category": "OTHERS",
-    "chefId": "chef123",
-    "chefName": "Bajrang",
-    "recipe": "Besan and oil",
-    "popularity": 0
-  },
-  {
-    "itemId": "0068f84f-92e3-4d46-ad96-fea63a19d6a5",
-    "name": "Choclate",
-    "weight": 1,
-    "price": 150,
-    "category": "OTHERS",
-    "chefId": "chef123",
-    "chefName": "Bajrang",
-    "recipe": "Milk and oil",
-    "popularity": 0
-  },
+[  {
+  "itemId": "0068f84f-92e3-4d46-ad96-fea63a19d6a5",
+  "name": "Chocolate",
+  "weight": 1,
+  "price": 150,
+  "category": "Chocolate",
+  "chefId": "chef123",
+  "chefName": "Pinky",
+  "recipe": "Milk and oil",
+  "popularity": 0,
+  "quantity":1,
+  "chefLocation":"Pune"
+},
   {
     "itemId": "370b57c8-ae74-4d7e-bf14-e5f153d03f35",
-    "name": "Banana Achar",
+    "name": "Strawberry Cake",
     "weight": 1,
     "price": 100,
-    "category": "PICKLE",
+    "category": "Cake",
     "chefId": "chef123",
-    "chefName": "Bajrang",
+    "chefName": "Prajakta Malkar",
     "recipe": "Milk and oil",
-    "popularity": 0
+    "popularity": 0,
+    "quantity":1,
+    "chefLocation":"Pune"
   },
   {
     "itemId": "f65d53a8-8119-4632-8dd3-92bf0c428e84",
-    "name": "Tasty nuts",
+    "name": "Black Forest Cake",
     "weight": 1,
     "price": 300,
-    "category": "OTHERS",
+    "category": "Cake",
     "chefId": "chef123",
-    "chefName": "Bajrang",
+    "chefName": "Prajakta Malkar",
     "recipe": "Nuts and oil",
-    "popularity": 0
+    "popularity": 0,
+    "quantity":1,
+    "chefLocation":"Pune"
   },
   {
     "itemId": "27fbed99-6f7b-43a2-b208-3524c9d8f57e",
-    "name": "Biryani",
+    "name": "Chocolate Cake",
     "weight": 1,
     "price": 300,
-    "category": "OTHERS",
+    "category": "Cake",
     "chefId": "chef123",
-    "chefName": "Bajrang",
+    "chefName": "Prajakta Malkar",
     "recipe": "Rice and oil",
-    "popularity": 0
+    "popularity": 0,
+    "quantity":1,
+    "chefLocation":"Pune"
+  }
+  ,{
+    "itemId": "b9b41e18-c62d-4ef6-9367-9cd26107141b",
+    "name": "Handwa",
+    "weight": 1,
+    "price": 100,
+    "category": "Snacks",
+    "chefId": "chef123",
+    "chefName": "Pinky",
+    "recipe": "Milk and oil",
+    "popularity": 0,
+    "quantity":1,
+    "chefLocation":"Pune"
+  },
+  {
+    "itemId": "3366ce37-3449-4a3c-9348-b80a351ead93",
+    "name": "Thepla",
+    "weight": 1,
+    "price": 100,
+    "category": "Snacks",
+    "chefId": "chef123",
+    "chefName": "Pinky",
+    "recipe": "Milk and oil",
+    "popularity": 0,
+    "quantity":1,
+    "chefLocation":"Pune"
+  },
+  {
+    "itemId": "2edc6d81-e669-44f6-b8f1-d28d687d8f3a",
+    "name": "White Dhokla",
+    "weight": 1,
+    "price": 100,
+    "category": "Snacks",
+    "chefId": "chef123",
+    "chefName": "Pinky",
+    "recipe": "Milk and oil",
+    "popularity": 0,
+    "quantity":1,
+    "chefLocation":"Pune"
   }
 ]

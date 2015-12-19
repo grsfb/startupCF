@@ -9,9 +9,9 @@
         service.getAllItems = getAllItems;
 
         return service;
-        function getAllItems(pageNumber, callback) {
+        function getAllItems(pageNumber,categoryName, callback) {
             var response;
-            CommonService.get('/items/all/' + pageNumber, function (res) {
+            CommonService.get('/items/'+categoryName+'/' + pageNumber, function (res) {
                 if (res.success) {
                     var items = res.data.page.content;
                     var lastPage = res.data.page.last;

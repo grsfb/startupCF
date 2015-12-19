@@ -19,25 +19,13 @@
         };
         return service;
 
-        function getUri(name, type) {
-            if (type == service.Size.SMALL) {
-                return getSmallImgUri(name);
+        function getUri(chefName,category,itemName,size) {
+            if (size=="md") {
+                return getMediumImgUri(chefName,category,itemName);
             }
         }
-
-
-        function getSmallImgUri(name) {
-            var defaultImg = "";
-            var smallSizeMap = {
-                "achar": "img/choco.jpg",
-                "chakli": "img/choco.jpg"
-            };
-
-            for (var img in smallSizeMap) {
-                if (img == name && smallSizeMap.hasOwnProperty(img)) {
-                    return smallSizeMap[img];
-                }
-            }
+        function getMediumImgUri(chefName,category,itemName) {
+            var defaultImg = "img/"+chefName+"/"+category+"/"+itemName+"/"+"md/"+itemName+".png";
             return defaultImg;
         }
 

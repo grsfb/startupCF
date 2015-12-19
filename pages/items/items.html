@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-xs-12">
-                <h1 class="page-title" style="padding: 10px;">Popular Item</h1>
+                <h1 class="page-title" style="padding: 10px;">{{vm.itemType}}</h1>
             </div>
         </div>
         <div class="row">
@@ -11,23 +11,33 @@
                     <div class="col-md-3 col-sm-4 col-xs-12" style="padding: 0px;">
                         <div style="padding: 20px;">
                             <div class="thumbnail">
-                                <img src="img/choco.jpg" alt="product"
+                                <img src="{{vm.getImageUri(item.chefName,item.category,item.name,'md')}}" alt="product"
                                      class="img-responsive"
                                      style="padding-bottom: 5px; border-bottom: 1px chocolate solid">
 
-                                <h3 class="name">
-                                    <span class="pull-left">{{item.name}} - {{item.weight}} Kg</span>
-                                    <span class="pull-right"><i class="fa fa-inr"></i> {{item.price}}</span>
+                                <h3 class="name" style="text-align: center">
+                                    <span >{{item.name}}</span>
+                                    <h3 class="name">
+                                        <span class="pull-left shutterPrice">{{item.weight}} Kg</span>
+                                        <span class="pull-right shutterPrice"><i class="fa fa-inr"></i> {{item.price}}</span>
+                                    </h3>
+
                                 </h3>
 
-                                <div class="caption caption-half-down">
-                                    <p>{{item.name}} - {{item.weight}} Kg</p>
 
-                                    <h2><i class="fa fa-inr"></i> {{item.price}}</h2>
-                                </div>
-                                <div class="caption caption-half-up">
-                                    <a class="btn btn-default add-to-cart" data-ng-click="vm.addItemInCart(item)"><i
-                                            class="fa fa-search-minus"></i> Quick view</a>
+                                <div class="caption caption-half-down" style="background-color: white;">
+                                    <p class="shutterFont">{{item.name}} - {{item.weight}} Kg</p>
+                                    <h2 class="shutterItemPrice"><i class="fa fa-inr"></i> {{item.price}}</h2>
+                                    <a class="btn btn-default add-to-cart" style="background-color: teal;color: white" data-ng-click="vm.buy(item)"><i
+                                            class="fa fa-search-minus"></i> Buy Now</a>
+
+                                                                   </div>
+                                <div class="caption caption-half-up" style="background-color: white;">
+
+                                    <p class="shutterFontChef" style="color: #262626;">Chef Detail</p>
+                                    <h5 class="shutterFont">{{item.chefName}} , {{item.chefLocation}}</h5>
+
+
                                 </div>
                             </div>
                             <div class="choose text-center">

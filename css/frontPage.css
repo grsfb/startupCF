@@ -159,7 +159,7 @@
     padding-right: 30px;
 }
 .popularimg{
-    height: 115px !important;
+    height: 180px !important;
     width: 300px!important;
     padding: 0px!important;
 }
@@ -172,7 +172,8 @@
 .slideItem{
     text-align: center;
     font-weight: bold;
-
+margin-top: 0px;
+    margin-bottom: 0px;
 }
 .leftcarousel-control{
     width: 50px!important;

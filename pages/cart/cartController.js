@@ -90,8 +90,8 @@
             updateCartCost();
         }
 
-        function getImageUri(name) {
-            return ImageService.getUri(name, ImageService.Size.SMALL);
+        function getImageUri(chefName, category, itemName, size) {
+            return ImageService.getUri(chefName, category, itemName, size);
         }
 
         function checkout() {
@@ -119,7 +119,7 @@
                     SessionService.put(SessionService.Session.CartCount, vm.cartItems.length);
                     SessionService.putInRootScope("cartItemCount", vm.cartItems.length);
                     if (vm.cartItems.length == 0) {
-                        $location.path('/item');
+                        $location.path('/item/All');
                     }
                 }
                 else {

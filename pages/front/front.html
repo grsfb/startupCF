@@ -29,17 +29,17 @@
                     <ul class="dropdown-menu list-group"
                         style="width: 100%;z-index: 9999;overflow: visible;padding: 0px;margin-top: 5px">
 
-                        <li class="list-group-item itemlist" ng-repeat="snack in vm.foodList"
+                        <li class="list-group-item itemlist" ng-repeat="snack in vm.foodList" style="cursor: pointer;"
                             data-ng-click="vm.foodChange(snack)">
                             <span class="badge">Popularity ***</span>{{snack}}
                         </li>
                         <li class="list-group-item disabled">Popular Delicacies</li>
-                        <li class="list-group-item" ng-repeat="snack in vm.popularFoodList"
+                        <li class="list-group-item" style="cursor: pointer;" ng-repeat="snack in vm.popularFoodList"
                             data-ng-click="vm.foodChange(snack)">
                             <span class="badge">Popularity *****</span>{{snack}}
                         </li>
                         <li class="list-group-item disabled">Newly Launched Delicacies</li>
-                        <li class="list-group-item" ng-repeat="snack in vm.newFoodList"
+                        <li class="list-group-item" style="cursor: pointer;" ng-repeat="snack in vm.newFoodList"
                             data-ng-click="vm.foodChange(snack)">
                             <span class="badge">New</span>{{snack}}
                         </li>
@@ -76,7 +76,7 @@
                                 <div owl-carousel-item="" ng-repeat="item in vm.slides" class="item"
                                      style="width: 220px;margin-right: 20px;border: none">
                                     <div class="thumbnail">
-                                        <img src="img/chocolates.png" alt="product"
+                                        <img data-ng-src="{{vm.getImageUri(item.chefName,item.category,item.name,'md')}}" alt="product"
                                              class="popularimg img-responsive">
 
                                         <h2 style="color: #FE980F" class="slideItem"><i class="fa fa-inr"></i>
@@ -85,15 +85,17 @@
                                         <p class="slideItem">{{vm.slides[$index].name}} - {{vm.slides[$index].quantity}}
                                             Kg</p>
 
-                                        <div class="caption caption-half-down">
-                                            <p>{{vm.slides[$index].name}} - {{vm.slides[$index].quantity}} Kg</p>
+                                        <div class="caption caption-half-down"style="background-color: white;">
+                                            <p class="shutterFont">{{vm.slides[$index].name}} - {{vm.slides[$index].quantity}} Kg</p>
 
-                                            <h2><i class="fa fa-inr"></i> {{vm.slides[$index].price}}</h2>
+                                            <h2 class="shutterItemPrice"><i class="fa fa-inr"></i> {{vm.slides[$index].price}}</h2>
+                                            <a href="" data-ng-click="vm.buy(item)"  style="background-color: teal;color: white;padding-top: 0px;text-align: center" class="btn btn-default add-to-cart"><i
+                                                    class="fa fa-shopping-cart"></i>Buy</a>
                                         </div>
-                                        <div class="caption caption-half-up">
-                                            <a href="" data-ng-click="vm.addItemInCart(item)" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                        <div class="caption caption-half-up"style="background-color: white;">
+
+                                            <p class="shutterFontChef" style="color: #262626;">Chef Detail</p>
+                                            <h5 class="shutterFont">{{item.chefName}} , {{item.chefLocation}}</h5>
                                         </div>
                                     </div>
                                 </div>

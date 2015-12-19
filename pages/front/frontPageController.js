@@ -47,9 +47,9 @@
             };
         }]);
     ;
-    FrontPageController.$inject = ['SessionService', 'CartService', '$http', '$location', '$rootScope', '$document', 'FlashService'];
+    FrontPageController.$inject = ['SessionService', 'CartService', '$http', '$location', '$rootScope', '$document', 'FlashService','ImageService'];
 
-    function FrontPageController(SessionService, CartService, $http, $location, $rootScope, $document, FlashService) {
+    function FrontPageController(SessionService, CartService, $http, $location, $rootScope, $document, FlashService,ImageService) {
         var vm = this;
         vm.cityChange = cityChange;
         vm.foodChange = foodChange;
@@ -62,6 +62,9 @@
         vm.newSlides = undefined;
         vm.cityList = ['Pune', 'Nasik', 'Mumbai'];
         vm.userId = undefined;
+        vm.snack=undefined;
+        vm.getImageUri=getImageUri;
+        vm.buy=buy;
         $http.get('/client/data/items.json').success(function (data) {
             vm.slides = data;
 
@@ -72,14 +75,14 @@
         function cityChange() {
             vm.cityList = ['Pune', 'Nasik', 'Mumbai'];
         };
-        function foodChange() {
-            vm.snack = snack;
+        function foodChange(snack) {
+            $location.path('item/'+snack);
         };
-        vm.foodList = ['Achar', 'Papad', 'Snacks'];
-        vm.popularFoodList = ['Ice Cream', 'Biryani'];
-        vm.newFoodList = ['Khakhra', 'Chakli'];
+        vm.foodList = ['Namkeen', 'Sweets', 'Snacks'];
+        vm.popularFoodList = ['Chocolate', 'Chatani'];
+        vm.newFoodList = ['Cake', 'MouthFreshners'];
         function loadItems() {
-            $location.path('item');
+            $location.path('item/'+'All');
         };
         $document.find("#popularowlNext").click(function () {
             $("#owl-demo").trigger('owl.next');
@@ -103,7 +106,10 @@
                     }
                 });
         }
-
+        function buy(item) {
+            vm.addItemInCart(item);
+            $location.path("/cart");
+        }
         function addItemInCart(item) {
             if (SessionService.get(SessionService.Session.CurrentUser) != null) {
                 vm.userId = SessionService.get(SessionService.Session.CurrentUser).userId;
@@ -135,6 +141,9 @@
             return arr;
         }
 
+        function getImageUri(chefName,category,itemName,size) {
+            return ImageService.getUri(chefName,category,itemName,size);
+        }
         function isItemExistsInCart(arr, itemId) {
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i].itemId === itemId) {
