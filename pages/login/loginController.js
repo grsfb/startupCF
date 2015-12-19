@@ -14,7 +14,7 @@
             AuthenticationService.Login(vm.user.email, vm.user.password, function (response) {
                 if (response.success) {
                     $('#myModal').modal('hide');
-                    AuthenticationService.SetCredentials(response.data, vm.user.password);
+                    AuthenticationService.SetCredentials(response.data);
                     updateUserCart(response.data);
                 } else {
                     vm.message = "User email or password is incorrect";
