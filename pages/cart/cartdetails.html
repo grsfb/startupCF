@@ -3,7 +3,11 @@
     <a class="btn btn-default mybtn hidden-lg hidden-sm hidden-md" data-ng-click="vm.checkout()" style="width: 100%;">
         Start Checkout</a>
 
-    <div class="col-sm-8" style="padding: 0px;">
+    <div class="col-sm-12 text-center">
+        <h1>Your shopping cart is empty</h1>
+        <a class="btn btn-default mybtn" href="#home">Continue Shopping</a>
+    </div>
+    <div class="col-sm-8" style="padding: 0px;" data-ng-hide="cartItemCount==0">
         <h3 class="tstyle" style="padding: 10px;">Your items</h3>
         <!--show all items in cart-->
         <div data-ng-repeat="item in vm.cartItems">
@@ -68,7 +72,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-4 col-xs-12 order-outer">
+    <div class="col-sm-4 col-xs-12 order-outer" data-ng-hide="cartItemCount==0">
         <h3 class="tstyle col-sm-12 col-xs-12" style="padding: 10px;">Order totals</h3>
 
         <div class="col-sm-12 tstyle" style="font-size: 14px !important; padding: 20px;">
@@ -90,7 +94,7 @@
                 <a class="btn btn-default mybtn" data-ng-click="vm.checkout()" style="width: 100%;"> Start Checkout</a>
             </div>
         </div>
-        <div class="col-sm-12 tstyle" style="font-size: 14px !important; padding: 20px; margin-top: 10px;">
+        <div class="col-sm-12 tstyle" style="font-size: 14px !important; padding: 20px; margin-top: 10px; margin-bottom: 10px;">
             <div class="col-sm-12" style="padding-left: 0px; padding-top: 10px; ">
                 <a data-ng-click="vm.enableCouponEditor()"
                    style="cursor:pointer; text-decoration: none; color: #101010"><i
