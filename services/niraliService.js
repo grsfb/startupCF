@@ -149,6 +149,7 @@
                 }
                 function renderSource() {
                     element[0].src = source;
+                    angular.element(element[0]).removeClass('bn-lazy-img');
                 }
 
                 return ({
