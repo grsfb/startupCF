@@ -47,7 +47,7 @@
                 </div>
                 <div class="searchdiv col-md-2 col-sm-2 col-xs-12"
                      style="padding-left: 0px;padding-right:0px;height: 45px;">
-                    <a href=""  data-ng-click="vm.loadItems()" class="btn btn-info btn-lg" id="searchbtn">
+                    <a href="" data-ng-click="vm.loadItems()" class="btn btn-info btn-lg" id="searchbtn">
                         <span class="fontawesome fa fa-search" style="align-content: center"></span> Search All</a>
                 </div>
             </div>
@@ -85,14 +85,18 @@
                                         <p class="slideItem">{{vm.slides[$index].name}} - {{vm.slides[$index].quantity}}
                                             Kg</p>
 
-                                        <div class="caption caption-half-down"style="background-color: white;">
-                                            <p class="shutterFont">{{vm.slides[$index].name}} - {{vm.slides[$index].quantity}} Kg</p>
+                                        <div class="caption caption-half-down" style="background-color: white;">
+                                            <p class="shutterFont">{{vm.slides[$index].name}} -
+                                                {{vm.slides[$index].quantity}} Kg</p>
 
-                                            <h2 class="shutterItemPrice"><i class="fa fa-inr"></i> {{vm.slides[$index].price}}</h2>
-                                            <a href="" data-ng-click="vm.buy(item)"  style="background-color: teal;color: white;padding-top: 0px;text-align: center" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Buy</a>
+                                            <h2 class="shutterItemPrice"><i class="fa fa-inr"></i>
+                                                {{vm.slides[$index].price}}</h2>
+                                            <a href="" data-ng-click="vm.buy(item)"
+                                               style="background-color: teal;color: white;padding-top: 0px;text-align: center"
+                                               class="btn btn-default add-to-cart"><i
+                                                    class="fa fa-shopping-cart"></i> Buy</a>
                                         </div>
-                                        <div class="caption caption-half-up"style="background-color: white;">
+                                        <div class="caption caption-half-up" style="background-color: white;">
 
                                             <p class="shutterFontChef" style="color: #262626;">Chef Detail</p>
                                             <h5 class="shutterFont">{{item.chefName}} , {{item.chefLocation}}</h5>
@@ -137,7 +141,8 @@
                                     <h2 style="color: #FE980F" class="slideItem"><i class="fa fa-inr"></i>
                                         {{vm.newSlides[$index].price}}</h2>
 
-                                    <p class="slideItem">{{vm.newSlides[$index].name}} - {{vm.newSlides[$index].quantity}}
+                                    <p class="slideItem">{{vm.newSlides[$index].name}} -
+                                        {{vm.newSlides[$index].quantity}}
                                         Kg</p>
 
                                     <div class="caption caption-half-down">
@@ -146,7 +151,8 @@
                                         <h2><i class="fa fa-inr"></i> {{vm.newSlides[$index].price}}</h2>
                                     </div>
                                     <div class="caption caption-half-up">
-                                        <a href="" data-ng-click="vm.addItemInCart(item)" class="btn btn-default add-to-cart"><i
+                                        <a href="" data-ng-click="vm.addItemInCart(item)"
+                                           class="btn btn-default add-to-cart"><i
                                                 class="fa fa-shopping-cart"></i>Add
                                             to cart</a>
                                     </div>
@@ -190,7 +196,8 @@
                             <h2><i class="fa fa-inr"></i> {{vm.newSlides[$index].price}}</h2>
                         </div>
                         <div class="caption caption-half-up">
-                            <a href=""data-ng-click="vm.addItemInCart(item)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
+                            <a href="" data-ng-click="vm.addItemInCart(item)" class="btn btn-default add-to-cart"><i
+                                    class="fa fa-shopping-cart"></i>Add to
                                 cart</a>
                         </div>
                     </div>
@@ -200,4 +207,5 @@
         <a class="btn home_page_button">BROWSE ALL COLLECTIONS</a>
     </div>
     <div style="clear: both"></div>
+    <div class="push"></div>
 </div>

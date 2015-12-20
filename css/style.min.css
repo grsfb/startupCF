@@ -1,11 +1,26 @@
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
 .icon-bar {
     background-color: white !important;
 }
+
 .t-content {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    padding-top: 70px
+    padding-top: 70px;
+    margin: 0 auto -155px;
+}
+
+.footer, .push {
+    height: 155px;
+    clear: both;
 }
 
 .errorMsg {

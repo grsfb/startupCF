@@ -1,108 +1,124 @@
 <div class="container orderSummary" style="padding: 0px">
-            <div class="row">
-                <h1 class="page-title" style="padding: 10px;margin-top: 5px">Order Details</h1>
+    <div class="row">
+        <h1 class="page-title" style="padding: 10px;margin-top: 5px">Order Details</h1>
+    </div>
+    <div style="background-color: white" class="row">
+        <div class="col-md-12"
+             style="font-size:large;font-weight: 600;margin-bottom: 20px;line-height: 50px ;background-color: #f2f2f2">
+            Order Summary
+        </div>
+        <div class="col-md-6">
+
+            <div class="col-md-12">
+                <div class="col-md-4 summaryText">
+                    Order Number:
+                </div>
+
+                <div class="col-md-8">
+                    {{vm.orderItem.orderId}}
+                </div>
+                <hr class="divider col-md-12 orderDivider">
+                <div class="col-md-4 summaryText">
+                    Seller:
+                </div>
+
+                <div class="col-md-8">
+                    Chefonia
+                </div>
+                <hr class="divider col-md-12 orderDivider">
+                <div class="col-md-4 summaryText">
+                    Order Date:
+                </div>
+
+                <div class="col-md-8">
+                    {{vm.orderItem.creationTime | date}}
+                </div>
+                <hr class="divider col-md-12 orderDivider">
+                <div class="col-md-4 summaryText">
+                    Amount Paid:
+                </div>
+
+                <div class="col-md-8">
+                    {{vm.orderItem.paymentType}}
+                </div>
+                <hr class="divider col-md-12 orderDivider">
             </div>
-  <div style="background-color: white" class="row">
-      <div class="col-md-12" style="font-size:large;font-weight: 600;margin-bottom: 20px;line-height: 50px ;background-color: #f2f2f2">
-          Order Summary
-      </div>
-          <div class="col-md-6">
-
-                  <div class="col-md-12">
-                      <div class="col-md-4 summaryText">
-                          Order Number:
-                      </div>
-
-                      <div class="col-md-8">
-                          {{vm.orderItem.orderId}}
-                      </div>
-                      <hr class="divider col-md-12 orderDivider">
-                      <div class="col-md-4 summaryText">
-                          Seller:
-                      </div>
-
-                      <div class="col-md-8">
-                          Chefonia
-                      </div>
-                      <hr class="divider col-md-12 orderDivider">
-                      <div class="col-md-4 summaryText">
-                          Order Date:
-                      </div>
-
-                      <div class="col-md-8">
-                          {{vm.orderItem.creationTime | date}}
-                      </div>
-                      <hr class="divider col-md-12 orderDivider">
-                      <div class="col-md-4 summaryText">
-                          Amount Paid:
-                      </div>
-
-                      <div class="col-md-8">
-                          {{vm.orderItem.paymentType}}
-                      </div>
-                      <hr class="divider col-md-12 orderDivider">
-                  </div>
-              </div>
-          <div class="col-md-6" style="text-align: left">
-              <div class="col-md-12" style="font-size: large;font-weight: 500;color: darkgray"> {{currentUser.userName | uppercase}}, {{vm.orderItem.deliveryAddress.mobile}}</div>
-              <div class="col-md-12">
-                  {{vm.orderItem.deliveryAddress.lineOne}}   {{vm.orderItem.deliveryAddress.lineTwo}} {{vm.orderItem.deliveryAddress.city}} {{vm.orderItem.deliveryAddress.state}}
-                  {{vm.orderItem.deliveryAddress.zip}}
-              </div>
-          </div>
-  </div>
+        </div>
+        <div class="col-md-6" style="text-align: left">
+            <div class="col-md-12" style="font-size: large;font-weight: 500;color: darkgray"> {{currentUser.userName |
+                uppercase}}, {{vm.orderItem.deliveryAddress.mobile}}
+            </div>
+            <div class="col-md-12">
+                {{vm.orderItem.deliveryAddress.lineOne}} {{vm.orderItem.deliveryAddress.lineTwo}}
+                {{vm.orderItem.deliveryAddress.city}} {{vm.orderItem.deliveryAddress.state}}
+                {{vm.orderItem.deliveryAddress.zip}}
+            </div>
+        </div>
+    </div>
     <div style="background-color: white;margin-top: 30px" class="row">
-        <div class="col-md-12" style="font-size:large;font-weight: 600;margin-bottom: 20px;line-height: 50px ;background-color: #f2f2f2">
+        <div class="col-md-12"
+             style="font-size:large;font-weight: 600;margin-bottom: 20px;line-height: 50px ;background-color: #f2f2f2">
             Manage Order
         </div>
         <div class="col-md-12" style="text-align: center">
             <ul class="list-inline">
-<li class="col-md-4">
-        <a  href="" class="col-md-12" data-ng-click="vm.printOrder()"><i class="fontawesome fa fa-print fa-4x"></i>&nbsp;</a>
-
-             <span>PRINT ORDER</span>
-            </li>
                 <li class="col-md-4">
-                    <a data-toggle="dropdown" data-ng-click="vm.showEmail()" href="" class="col-md-12 dropdown-toggle"><i class="fontawesome fa fa-mail-forward fa-4x"></i>&nbsp;</a> EMAIL INVOICE
+                    <a href="" class="col-md-12" data-ng-click="vm.printOrder()"><i
+                            class="fontawesome fa fa-print fa-4x"></i>&nbsp;</a>
+
+                    <span>PRINT ORDER</span>
+                </li>
+                <li class="col-md-4">
+                    <a data-toggle="dropdown" data-ng-click="vm.showEmail()" href=""
+                       class="col-md-12 dropdown-toggle"><i class="fontawesome fa fa-mail-forward fa-4x"></i>&nbsp;</a>
+                    EMAIL INVOICE
 
                     <ul ng-show="vm.sendEmail" class="ng-cloak frmEMail">
 
-                        <div style="margin-top: 5px" >
+                        <div style="margin-top: 5px">
                             <form class="col-md-12" name="emailForm">
-                                <div ng-class="{'has-error': emailForm.email.$invalid && emailForm.email.$dirty}" class="form-group">
-                                <span style="font-size: medium;color: green;text-align: left;padding: 0" class="col-md-12" >Invoice will be sent to : </span>
-                                <input type="email" style="height: 30px" id="emailUser" name="userEmail"
-                                       placeholder="Enter email" required="" class="col-md-9">
-                                <div class="has-error ng-hide" ng-messages="emailForm.userEmail.$error"
-                                     ng-show="emailForm.userEmail.$touched">
-                                    <p class="help-block errorMsg" ng-show="emailForm.userEmail.$error.required"
-                                       ng-message="required">Your email is required.</p>
+                                <div ng-class="{'has-error': emailForm.email.$invalid && emailForm.email.$dirty}"
+                                     class="form-group">
+                                    <span style="font-size: medium;color: green;text-align: left;padding: 0"
+                                          class="col-md-12">Invoice will be sent to : </span>
+                                    <input type="email" style="height: 30px" id="emailUser" name="userEmail"
+                                           placeholder="Enter email" required="" class="col-md-9">
 
-                                    <p class="help-block errorMsg" ng-show="emailForm.userEmail.$error.email">
-                                        Your email is not valid.
-                                    </p>
+                                    <div class="has-error ng-hide" ng-messages="emailForm.userEmail.$error"
+                                         ng-show="emailForm.userEmail.$touched">
+                                        <p class="help-block errorMsg" ng-show="emailForm.userEmail.$error.required"
+                                           ng-message="required">Your email is required.</p>
+
+                                        <p class="help-block errorMsg" ng-show="emailForm.userEmail.$error.email">
+                                            Your email is not valid.
+                                        </p>
+                                    </div>
+                                    <input type="submit" style="background-color: green;color: white;height: 30px"
+                                           value="Send" class="btn btn-small btn-blue col-md-3">
                                 </div>
-                                <input type="submit" style="background-color: green;color: white;height: 30px" value="Send" class="btn btn-small btn-blue col-md-3"> </form>
+                            </form>
                         </div>
                     </ul>
                 </li>
 
-                    <li class="col-md-4">
-                    <a  href="" class="col-md-12" data-ng-click="vm.showContact()"><i class="fontawesome fa fa-phone fa-4x"></i>&nbsp;</a>
+                <li class="col-md-4">
+                    <a href="" class="col-md-12" data-ng-click="vm.showContact()"><i
+                            class="fontawesome fa fa-phone fa-4x"></i>&nbsp;</a>
                     CONTACT US
-                        <ul ng-show="vm.contactDetail" class="ng-cloak frmCntct">
+                    <ul ng-show="vm.contactDetail" class="ng-cloak frmCntct">
 
-                            <div style="margin-top: 5px;font-size: medium;font-style: italic;color:#16b594">
-                                <div class="col-md-12"> We have 24 by 7 working support.</div>
-                                <div class="col-md-12"> Kindly Contact us via Email admin@chefonia.com</div>
-                                </div>
-                        </ul>
+                        <div style="margin-top: 5px;font-size: medium;font-style: italic;color:#16b594">
+                            <div class="col-md-12"> We have 24 by 7 working support.</div>
+                            <div class="col-md-12"> Kindly Contact us via Email admin@chefonia.com</div>
+                        </div>
+                    </ul>
                 </li>
-        </ul>
+            </ul>
         </div>
     </div>
     <div style="background-color: white;margin-top: 30px" class="row">
-        <div class="col-md-12" style="font-size:large;font-weight: 600;margin-bottom: 20px;line-height: 50px ;background-color: #f2f2f2">
+        <div class="col-md-12"
+             style="font-size:large;font-weight: 600;margin-bottom: 20px;line-height: 50px ;background-color: #f2f2f2">
             Item Details
         </div>
         <div data-ng-repeat="item in vm.orderItem.items">
@@ -111,7 +127,8 @@
                 <div class="col-sm-8" style="padding-left: 0px!important; padding-top: 10px;">
                     <!--<span class="hidden-md hidden-lg hidden-sm" data-ng-click="vm.removeItemFromCart(item)"><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>-->
                     <div class="col-sm-4 col-xs-12" style="padding-left: 0px!important;padding-bottom: 10px;">
-                        <img src="{{vm.getImageUri(item.chefName,item.category,item.name,'md')}}" class="img-responsive" style="height: 80px;width: 120px;">
+                        <img src="{{vm.getImageUri(item.chefName,item.category,item.name,'md')}}" class="img-responsive"
+                             style="height: 80px;width: 120px;">
                     </div>
                     <div class="col-sm-8 col-xs-12" style="padding: 0px;">
                         <div>
@@ -119,13 +136,13 @@
                             <div class="col-sm-8 col-xs-8" style="padding: 0px;"><label>{{item.itemName}}</label></div>
                         </div>
                         <!--<div>-->
-                            <!--<div class="col-sm-4 col-xs-4" style="padding: 0px;">Chef:</div>-->
-                            <!--<div class="col-sm-8 col-xs-8" style="padding: 0px;"><label>{{item.chefName}}</label></div>-->
+                        <!--<div class="col-sm-4 col-xs-4" style="padding: 0px;">Chef:</div>-->
+                        <!--<div class="col-sm-8 col-xs-8" style="padding: 0px;"><label>{{item.chefName}}</label></div>-->
                         <!--</div>-->
                         <div class="col-sm-12 col-xs-12" style="padding: 0px;">
                             <div class="col-sm-4 col-xs-4" style="padding: 0px;">Quantity:</div>
-                            <div  >
-                             {{item.quantity}}
+                            <div>
+                                {{item.quantity}}
                             </div>
                         </div>
                         <div class="hidden-md hidden-lg hidden-sm">
@@ -161,5 +178,5 @@
             </div>
         </div>
     </div>
-
+    <div class="push"></div>
 </div>
