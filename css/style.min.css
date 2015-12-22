@@ -119,6 +119,10 @@ html, body {
 
 .summaryText {
     color: darkgrey;
+    padding-left: 0px!important;
+}
+.summaryInfo{
+    padding-left: 0px!important;
 }
 
 .frmEMail {
@@ -169,3 +173,18 @@ ul li a:hover, ul li a:focus {
     background-color: #ff9613!important;
     color: white!important;
 }
+@media(max-width: 700px) {
+    .categoryContainer{
+        padding-left: 0px!important;
+        padding-right: 0px!important;
+    }
+    .itemImage {
+        width: 100% !important;
+    }
+}
+    .itemImage {
+        height: 250px !important;
+        width: 250px ;
+        padding-bottom: 5px !important;
+        border-bottom: 1px chocolate solid !important;
+    }

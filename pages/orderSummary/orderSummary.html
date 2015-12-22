@@ -1,4 +1,4 @@
-<div class="container orderSummary" style="padding: 0px">
+<div class="container orderSummary">
     <div class="row">
         <h1 class="page-title" style="padding: 10px;margin-top: 5px">Order Details</h1>
     </div>
@@ -9,36 +9,36 @@
         </div>
         <div class="col-md-6">
 
-            <div class="col-md-12">
-                <div class="col-md-4 summaryText">
-                    Order Number:
+            <div class="col-md-12 col-xs-12">
+                <div class="col-md-4 col-xs-5 summaryText">
+                    Order No:
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-8 col-xs-7">
                     {{vm.orderItem.orderId}}
                 </div>
                 <hr class="divider col-md-12 orderDivider">
-                <div class="col-md-4 summaryText">
+                <div class="col-md-4 col-xs-5 summaryText">
                     Seller:
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-8 col-xs-7">
                     Chefonia
                 </div>
                 <hr class="divider col-md-12 orderDivider">
-                <div class="col-md-4 summaryText">
+                <div class="col-md-4 col-xs-5 summaryText">
                     Order Date:
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-8 col-xs-7">
                     {{vm.orderItem.creationTime | date}}
                 </div>
                 <hr class="divider col-md-12 orderDivider">
-                <div class="col-md-4 summaryText">
+                <div class="col-md-4 col-xs-5 summaryText">
                     Amount Paid:
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-8 col-xs-7">
                     {{vm.orderItem.paymentType}}
                 </div>
                 <hr class="divider col-md-12 orderDivider">
@@ -60,15 +60,15 @@
              style="font-size:large;font-weight: 600;margin-bottom: 20px;line-height: 50px ;background-color: #f2f2f2">
             Manage Order
         </div>
-        <div class="col-md-12" style="text-align: center">
+        <div class="col-md-12 col-xs-12" style="text-align: center">
             <ul class="list-inline">
-                <li class="col-md-4">
+                <li class="col-md-4 col-xs-4">
                     <a href="" class="col-md-12" data-ng-click="vm.printOrder()"><i
                             class="fontawesome fa fa-print fa-4x"></i>&nbsp;</a>
 
                     <span>PRINT ORDER</span>
                 </li>
-                <li class="col-md-4">
+                <li class="col-md-4 col-xs-4">
                     <a data-toggle="dropdown" data-ng-click="vm.showEmail()" href=""
                        class="col-md-12 dropdown-toggle"><i class="fontawesome fa fa-mail-forward fa-4x"></i>&nbsp;</a>
                     EMAIL INVOICE
@@ -101,7 +101,7 @@
                     </ul>
                 </li>
 
-                <li class="col-md-4">
+                <li class="col-md-4 col-xs-4">
                     <a href="" class="col-md-12" data-ng-click="vm.showContact()"><i
                             class="fontawesome fa fa-phone fa-4x"></i>&nbsp;</a>
                     CONTACT US
@@ -126,10 +126,10 @@
 
                 <div class="col-sm-8" style="padding-left: 0px!important; padding-top: 10px;">
                     <!--<span class="hidden-md hidden-lg hidden-sm" data-ng-click="vm.removeItemFromCart(item)"><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>-->
-                    <div class="col-sm-4 col-xs-12" style="padding-left: 0px!important;padding-bottom: 10px;">
+                    <div class="col-sm-4 col-xs-4" style="padding-left: 0px!important;padding-bottom: 10px;">
                         <img src="{{vm.getImageUri(item.chefName,item.category,item.itemName,'md')}}" class="img-responsive" style="height: 80px;width: 120px;">
                     </div>
-                    <div class="col-sm-8 col-xs-12" style="padding: 0px;">
+                    <div class="col-sm-8 col-xs-8" style="padding: 0px;">
                         <div>
                             <div class="col-sm-4 col-xs-4" style="padding: 0px;">Item:</div>
                             <div class="col-sm-8 col-xs-8" style="padding: 0px;"><label>{{item.itemName}}</label></div>

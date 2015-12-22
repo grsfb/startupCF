@@ -1,13 +1,13 @@
 <div id="items" class="product">
-    <div class="container">
+    <div class="container categoryContainer">
         <div class="row"> <div class="col-md-12 page-title dishesCarousel" style="margin-top: 0px;margin-bottom:10px; ">
             <div class="container">Popular Categories</div>
         </div></div>
 
-        <div class="row"> <div class="col-md-12">
-            <div class="container">
+        <div class="row"> <div class="col-md-12 col-sm-12">
+            <div class="container categoryContainer">
                 <div ng-repeat="item in vm.categories">
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6">
                         <div class="panel panel-default">
                             <div class="panel-heading" ng-class-odd="'oddPanel'" ng-class-even="'evenPanel'">
                                 <span class="fontawesome fa fa-heart">  </span>&nbsp;<label>{{item.category}}</label>

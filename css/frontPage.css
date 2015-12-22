@@ -19,7 +19,8 @@
     margin-top: 5px!important;
 }
 .home_page_button {
-    margin-top: 5px!important;
+    margin-top: 10px!important;
+    margin-bottom: 10px!important;
     border-color: darkgrey !important;
     width: 100%;
     background-color: #fff!important;
@@ -74,13 +75,14 @@
         top:0% !important;
     }*/
     .frontcontainer {
-        padding: 20px 0px 145px 0px;
+        padding: 50px 0px 75px 0px;
 
     }
     .divElement{
         margin-top: -40px !important;
     }
 }
+
 .divElement {
     /*position: absolute;*/
     top: 40%;
