@@ -151,5 +151,21 @@ html, body {
 }
 
 .bn-lazy-img {
-    background-image: url("../img/cover.png") !important;;
+            background-image: url("../img/cover.png") !important;
+        }
+.shutterItemPrice{
+    color: #EB5C31!important;
+    font-size: x-large!important;
+    font-weight: 800!important;
+}
+ul li a:hover, ul li a:focus {
+    color:#16b594!important;
+}
+.oddPanel{
+    background-color: #ff5127!important;
+    color: white!important;
+}
+.evenPanel{
+    background-color: #ff9613!important;
+    color: white!important;
 }

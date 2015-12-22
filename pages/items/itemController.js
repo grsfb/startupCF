@@ -17,8 +17,9 @@
         vm.buy = buy;
         vm.getImageUri = getImageUri;
         vm.itemType = $routeParams.categoryName;
+        vm.location =SessionService.get('location');
         //load initial items
-        InventoryService.getAllItems(1, $routeParams.categoryName, function (response) {
+        InventoryService.getAllItems(1, $routeParams.categoryName,$routeParams.chefLocation, function (response) {
             if (response.success) {
                 vm.items = response.data.items;
                 vm.totalPageAsArray = new Array(response.data.totalPages);
@@ -43,7 +44,7 @@
             });
 
         function loadNextPage(pageNumber) {
-            InventoryService.getAllItems(pageNumber + 1, $routeParams.categoryName, function (response) {
+            InventoryService.getAllItems(pageNumber + 1, $routeParams.categoryName,$routeParams.chefLocation, function (response) {
                 if (response) {
                     vm.items = response.data.items;
                     vm.totalPageAsArray = new Array(response.data.totalPages);

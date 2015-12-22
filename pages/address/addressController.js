@@ -22,7 +22,9 @@
             } else {
                 FlashService.Error("Error occurred while retrieving address");
             }
-            enableAddressEditor();
+            if(vm.allAddress.length == 0) {
+                enableAddressEditor();
+            }
         });
 
         function setSelectedAddress(address, index) {
@@ -31,7 +33,7 @@
         }
 
         function enableAddressEditor() {
-            vm.showAddressEditor = vm.allAddress.length == 0;
+            vm.showAddressEditor = true;
         }
 
         function deleteAddress(index) {

@@ -118,8 +118,9 @@
                     vm.cartItems = removeItem(vm.cartItems, item);
                     SessionService.put(SessionService.Session.CartCount, vm.cartItems.length);
                     SessionService.putInRootScope("cartItemCount", vm.cartItems.length);
+                    var location= SessionService.get("location");
                     if (vm.cartItems.length == 0) {
-                        $location.path('/item/All');
+                        $location.path('/item/All/'+location);
                     }
                 }
                 else {

@@ -56,33 +56,58 @@
         vm.addItemInCart = addItemInCart;
         vm.cart = [];
         vm.isCartLoaded = false;
-        vm.city = 'Pune';
+        vm.city = 'All';
         vm.loadItems = loadItems;
         vm.slides = undefined;
         vm.newSlides = undefined;
-        vm.cityList = ['Pune', 'Nasik', 'Mumbai'];
+        vm.cityList = ['Pune', 'Nasik', 'Mumbai','Jaipur'];
         vm.userId = undefined;
         vm.snack=undefined;
         vm.getImageUri=getImageUri;
+        vm.getCategoryImageUri=getCategoryImageUri;
+        vm.categories=undefined;
         vm.buy=buy;
+        vm.allCategories=allCategories;
+        if(SessionService.get('location')!=null){
+            cityChange(SessionService.get('location'));
+        }
+        else {
+            SessionService.put('location', vm.city);
+        }
         $http.get('/client/data/items.json').success(function (data) {
             vm.slides = data;
+
+        });
+        $http.get('/client/data/categories.json').success(function (data) {
+            vm.categories = data;
 
         });
         $http.get('/client/data/popularItems.json').success(function (data) {
             vm.newSlides = data;
         });
-        function cityChange() {
-            vm.cityList = ['Pune', 'Nasik', 'Mumbai'];
+        function cityChange(city) {
+            if(vm.city=='All') {
+                vm.cityList.unshift(vm.city);
+            }
+            else{
+                vm.cityList.push(vm.city);
+            }
+            vm.city = city;
+          var index=  vm.cityList.indexOf(city);
+            vm.cityList.splice(index,1);
+            SessionService.put('location',vm.city);
         };
         function foodChange(snack) {
-            $location.path('item/'+snack);
+            $location.path('item/'+snack+'/'+vm.city);
         };
+        function allCategories(city){
+            $location.path('categories');
+        }
         vm.foodList = ['Namkeen', 'Sweets', 'Snacks'];
         vm.popularFoodList = ['Chocolate', 'Chatani'];
         vm.newFoodList = ['Cake', 'MouthFreshners'];
         function loadItems() {
-            $location.path('item/'+'All');
+            $location.path('item/'+'All/'+vm.city);
         };
         $document.find("#popularowlNext").click(function () {
             $("#owl-demo").trigger('owl.next');
@@ -143,6 +168,9 @@
 
         function getImageUri(chefName,category,itemName,size) {
             return ImageService.getUri(chefName,category,itemName,size);
+        }
+        function getCategoryImageUri(category,size) {
+            return ImageService.getCategoryUri(category,size);
         }
         function isItemExistsInCart(arr, itemId) {
             for (var i = 0; i < arr.length; i++) {

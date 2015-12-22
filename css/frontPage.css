@@ -89,17 +89,26 @@
 }
 .location {
     width: 50px;
+    color:teal!important;
     padding: 2px;
     height: 45px !important;
     cursor: pointer;
     border-style: none !important;
     border-right: 0px;
     outline: none;
+    font-size: medium!important;
+    font-family: "Arial Black", Gadget, sans-serif;
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
 
+}
+.slideDescription{
+    font-family: "Nunito",sans-serif!important;
+    font-weight: 500!important;
+    font-size: 17px!important;
+    margin-top: 20px!important;
 }
 /*.dishesCarousel{
     height: 35px;
@@ -118,6 +127,13 @@
     border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
 
+}
+.jbtn{
+    cursor: pointer!important;
+    padding: 10px 25px!important;
+    border: solid #4B5B5E 1px!important;
+    text-decoration: none!important;
+    background-color: transparent!important;
 }
 /*.form-control {*/
 /*height: 40px;*/
@@ -163,6 +179,11 @@
     width: 300px!important;
     padding: 0px!important;
 }
+.popularCategoryimg{
+    height: 200px !important;
+    width: 100%!important;
+    padding: 0px!important;
+}
 .popularimgmble{
     height: 115px !important;
     width: 100%!important;
@@ -187,13 +208,18 @@ margin-top: 0px;
     width: 100%;
     height: 45px;
     background-color: teal;
+    border-radius: 1px;
+    border-color: transparent;
+}
+#searchbtn1{
+    background-color: whitesmoke;
+    color: teal;
     border-top-left-radius: 0px;
     border-top-right-radius: 0.35em;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0.35em;
     border-color: transparent;
 }
-
 ul li:hover, ul li:focus {
     background-color:lightsteelblue;
 }

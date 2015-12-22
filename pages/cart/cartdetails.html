@@ -3,7 +3,7 @@
     <a class="btn btn-default mybtn hidden-lg hidden-sm hidden-md" data-ng-click="vm.checkout()" style="width: 100%;">
         Start Checkout</a>
 
-    <div class="col-sm-12 text-center">
+    <div class="col-sm-12 text-center" data-ng-show="cartItemCount==0">
         <h1>Your shopping cart is empty</h1>
         <a class="btn btn-default mybtn" href="#home">Continue Shopping</a>
     </div>

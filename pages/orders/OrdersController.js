@@ -16,9 +16,10 @@
                 FlashService.error("Something not working. Please try later");
             }
         });
-        function getImageUri(name) {
-            return ImageService.getUri(name, ImageService.Size.SMALL);
+        function getImageUri(chefName, category, itemName, size) {
+            return ImageService.getUri(chefName, category, itemName, size);
         }
+
 
 
     }

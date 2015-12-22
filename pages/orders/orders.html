@@ -18,12 +18,11 @@
                 <div data-ng-repeat="item in order.items">
                     <div class="col-sm-12 col-xs-12 col-md-12"
                          style="border-bottom: 1px #B3AFA8 dotted;padding-left: 15px;padding-right: 15px">
-
                         <div class="col-sm-8" style="padding-top: 10px;">
                             <!--<span class="hidden-md hidden-lg hidden-sm" data-ng-click="vm.removeItemFromCart(item)"><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>-->
                             <div class="col-sm-4 col-xs-12" style="padding-left: 0px!important;padding-bottom: 10px;">
-                                <img src="{{vm.getImageUri('achar')}}" class="img-responsive"
-                                     style="height: 80px;width: 120px;">
+                                <img src="{{vm.getImageUri(item.chefName,item.category,item.itemName,'md')}}"
+                                     class="img-responsive" style="height: 80px;width: 120px;">
                             </div>
                             <div class="col-sm-8 col-xs-12" style="padding: 0px;">
                                 <div>
@@ -47,32 +46,29 @@
                                         <label><i class="fa fa-inr"></i> {{item.price *
                                             item.quantity}}</label>
 
-                                    </div>
-                                </div>
-                                <div class="hidden-md hidden-lg hidden-sm">
-                                    <div class=" col-xs-4" style="padding-left:0px; padding-bottom: 10px;">Quantity:
-                                    </div>
-                                    <div class=" col-xs-8" style="padding-left: 0px;"><label>{{item.quantity}}
-                                        Kg</label></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 hidden-xs" style="padding-top: 10px;padding-right: 15px;">
-                            <div class="pull-right">
-                                <div class="col-sm-12 pull-right">
-                                    <div class="col-sm-4">Price:</div>
-                                    <div class="col-sm-8"><label><i class="fa fa-inr"></i> {{item.price *
-                                        item.quantity}} </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 pull-right">
-                                    <div class="col-sm-4">Quantity:</div>
-                                    <div class="col-sm-8">
-                                        <label>{{item.quantity}} Kg</label>
+                                        <div class="col-sm-4 hidden-xs" style="padding-top: 10px;padding-right: 15px;">
+                                            <div class="pull-right">
+                                                <div class="col-sm-12 pull-right">
+                                                    <div class="col-sm-4">Price:</div>
+                                                    <div class="col-sm-8"><label><i class="fa fa-inr"></i> {{item.price
+                                                        *
+                                                        item.quantity}} </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 pull-right">
+                                                    <div class="col-sm-4">Quantity:</div>
+                                                    <div class="col-sm-8">
+                                                        <label>{{item.quantity}} Kg</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
                 </div>
                 <div class="col-md-12" style="margin: 10px">
@@ -104,6 +100,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
