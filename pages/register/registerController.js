@@ -24,8 +24,8 @@
                         if (response.success) {
                             AuthenticationService.SetCredentials(vm.user);
                             $('#myModal').modal('hide');
-                            vm.isRegistering = false;
                         }
+                        vm.isRegistering = false;
                     });
                 } else {
                     vm.pageMsg = "Your are already registered.";
