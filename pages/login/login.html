@@ -15,70 +15,79 @@
                 </div>
             </div>
             <div class="modal-body row" style="padding:10px 40px 50px;">
-                <form role="form" name="loginform" class="col-md-5 col-sm-5 col-xs-12">
-                    <h4 class="loginHeader" style="color: green;margin-bottom: 30px"> Sign in With Your Chefonia
-                        Account! </h4>
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                    <form role="form" name="loginform">
+                        <h4 class="loginHeader" style="color: green;margin-bottom: 30px"> Sign in With Your Chefonia
+                            Account! </h4>
+                        <label ng-if="vm.pageMsg.length!=0" style="color: red">{{vm.pageMsg}}</label>
+                        <div class="form-group">
+                            <label for="usrname"><span class="fa fa-envelope-o fa-fw"></span> Email </label>
+                            <input type="text" class="form-control loginInput" id="usrname" name="userName"
+                                   data-ng-model="vm.user.email" placeholder="Enter email or phone number" required="">
 
-                    <div class="form-group">
-                        <label for="usrname"><span class="fa fa-user"></span> Email </label>
-                        <input type="text" class="form-control loginInput" id="usrname" name="userName"
-                               data-ng-model="vm.user.email" placeholder="Enter email or phone number" required="">
+                            <div class="has-error ng-hide" ng-messages="loginform.userName.$error" maxlength="30"
+                                 ng-show="loginform.userName.$touched && !loginForm.username.$pristine">
+                                <p class="help-block" ng-show="loginform.userName.$error.required"
+                                   ng-message="required">
+                                    Your user name is required.</p>
+                            </div>
 
-                        <div class="has-error ng-hide" ng-messages="loginform.userName.$error" maxlength="30"
-                             ng-show="loginform.userName.$touched && !loginForm.username.$pristine">
-                            <p class="help-block" ng-show="loginform.userName.$error.required" ng-message="required">
-                                Your user name is required.</p>
                         </div>
+                        <div class="form-group">
+                            <label for="psw"><span class="fa fa-key"></span> Password</label>
+                            <input type="password" class="form-control loginInput" id="psw" name="userPassword"
+                                   data-ng-model="vm.user.password" placeholder="Enter password" required="">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="psw"><span class="fa fa-key"></span> Password</label>
-                        <input type="password" class="form-control loginInput" id="psw" name="userPassword"
-                               data-ng-model="vm.user.password" placeholder="Enter password" required="">
-
-                        <div class="help-block has-error ng-hide" ng-messages="loginform.userPassword.$error"
-                             ng-show="loginform.userPassword.$touched">
-                            <p class="help-block" ng-show="loginform.userPassword.$error.required"
-                               ng-message="required">Your password is required.</p>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6" style="margin-left: -15px">
-                        <button type="submit" class="btn btn-success btn-block loginBtn"
-                                data-ng-click="vm.login();loginform.$setPristine()" ng-disabled="loginform.$invalid"
-                                disabled="disabled"><span class="fontawesome fa fa-lock"></span> Login
-                        </button>
-                    </div>
-                    <div class="form-group col-md-6 text-left" style="margin-top: 5px;margin-left: -15px!important;">
-                        <a ng-click="vm.passwordReset()"> Forgot Password ?</a>
-                    </div>
-                    <div class="clearfix"></div>
-                    <label for="psw" class="help-block has-error">{{vm.message}}</label>
-
-                    <div class='col-sm-12' ng-if="vm.resetSectionVisible">
-                        <div ng-class="{'has-error': loginform.userEmail.$invalid && loginform.userEmail.$dirty}">
-                            <label><span class="fa fa-mail-reply"></span> Email Address</label>
-                            <input type="email" class="form-control loginInput" name="userEmail" id="email"
-                                   data-ng-model="vm.user.email" placeholder="Email Address" required="">
-
-                            <div class="has-error ng-hide" ng-messages="loginform.userEmail.$error"
-                                 ng-show="loginform.userEmail.$touched">
-                                <p class="help-block errorMsg" ng-show="loginform.userEmail.$error.required"
-                                   ng-message="required">Your email is required.</p>
-
-                                <p class="help-block errorMsg" ng-show="loginform.userEmail.$error.email">
-                                    Your email is not valid.
-                                </p>
+                            <div class="help-block has-error ng-hide" ng-messages="loginform.userPassword.$error"
+                                 ng-show="loginform.userPassword.$touched">
+                                <p class="help-block" ng-show="loginform.userPassword.$error.required"
+                                   ng-message="required">Your password is required.</p>
                             </div>
                         </div>
-                        <div class="col-md-6" style="margin-left: -15px;margin-top: 5px">
-                            <button type="submit" class="btn btn-success btn-block resetBtn"
-                                    data-ng-click="vm.reset();userEmail.$setPristine()" ng-disabled="userEmail.$invalid"
-                                    disabled="disabled"><span class="fa fa-lock"></span> Send Password
-                            </button>
+                        <div class="form-group col-md-6" style="margin-left: -15px">
+                            <a type="submit" class="btn btn-success btn-block loginBtn" data-ng-hide="vm.isLogging"
+                               data-ng-click="vm.login();loginform.$setPristine()" ng-disabled="loginform.$invalid"
+                               disabled="disabled"><span class="fontawesome fa fa-lock"></span> Login
+                            </a>
+                            <a type="submit" class="btn btn-danger btn-block loginBtn disabled"
+                               data-ng-show="vm.isLogging"><span class="fa fa-spinner fa-spin"></span> Logging</a>
                         </div>
-                    </div>
+                        <div class="form-group col-md-6 text-left"
+                             style="margin-top: 5px;margin-left: -15px!important;">
+                            <a ng-click="vm.passwordReset()" style="cursor: pointer"> Forgot Password ?</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                    <div ng-if="vm.resetSectionVisible" style="padding-left: 0px;">
+                        <form role="form" name="reset">
+                            <div class="form-group">
+                                <label><span class="fa fa-envelope-o fa-fw"></span>Enter Email Address</label>
+                                <input type="email" class="form-control loginInput" name="userEmail" id="email"
+                                       data-ng-model="vm.user.resetEmail" placeholder="Email Address" required=""
+                                       autocomplete="off">
 
-                </form>
+                                <div class="has-error ng-hide" ng-messages="reset.userEmail.$error"
+                                     ng-show="reset.userEmail.$touched">
+                                    <p class="help-block errorMsg" ng-show="reset.userEmail.$error.required"
+                                       ng-message="required">Your email is required.</p>
+
+                                    <p class="help-block errorMsg" ng-show="reset.userEmail.$error.email">
+                                        Your email is not valid.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="margin-left: -15px;margin-top: 5px">
+                                <a type="submit" class="btn btn-success btn-block resetBtn"
+                                   data-ng-click="vm.reset();reset.userEmail.$setPristine()"
+                                   ng-disabled="reset.userEmail.$invalid"
+                                   disabled="disabled"><span class="fa fa-lock"></span> Send Password
+                                </a>
+                            </div>
+                            <br/>
+                            <label>{{vm.message}}</label>
+                        </form>
+                    </div>
+                </div>
                 <div class="col-md-2 col-sm-2">&nbsp;</div>
                 <div class="col-md-5 col-sm-5 col-xs-12">
                     <div ng-include="'pages/register/register.html'"></div>

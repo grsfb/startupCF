@@ -16,9 +16,10 @@
             var user = {"email": email, "password": pasword};
             CommonService.post('/authenticate/user', user, callback);
         }
+
         function SetCredentials(user) {
             var currentUser = {
-                'userId'  : user.userId,
+                'userId': user.userId,
                 'userName': user.name
             };
             SessionService.create(currentUser);
@@ -26,7 +27,6 @@
 
         function ClearCredentials() {
             SessionService.destroy();
-            CommonService.removeAuth();
         }
     }
 })();

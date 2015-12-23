@@ -3,43 +3,41 @@
     angular
         .module('Chefonia')
         .controller('RegisterController', RegisterController);
-    RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
-    function RegisterController(UserService, $location, $rootScope, FlashService) {
+    RegisterController.$inject = ['UserService', 'AuthenticationService'];
+    function RegisterController(UserService, AuthenticationService) {
         var vm = this;
+        vm.user = {};
+        vm.isRegistering = false;
+        vm.messsage = "";
         vm.register = register;
+        vm.pageMsg = "";
         function register() {
-            vm.dataLoading = true;
-            UserService.Create(vm.user)
-                .then(function (response) {
-                    if (response.success) {
-                        FlashService.Success('Registration successful', true);
-                        $location.path('/login');
-                    } else {
-                        FlashService.Error(response.message);
-                        cm.dataLoading = false;
-                    }
-                });
+            if (vm.user.password != vm.user.cnfrmPswd) {
+                vm.pageMsg = "Your password and confirm password is not same.";
+                return;
+            }
+            vm.isRegistering = true;
+            var user = new User(vm.user.name, vm.user.password, vm.user.mobile, vm.user.email);
+            UserService.create(user, function (response) {
+                if (response.success) {
+                    AuthenticationService.Login(vm.user.email, vm.user.password, function (response) {
+                        if (response.success) {
+                            AuthenticationService.SetCredentials(vm.user);
+                            $('#myModal').modal('hide');
+                            vm.isRegistering = false;
+                        }
+                    });
+                } else {
+                    vm.pageMsg = "Your are already registered.";
+                }
+            });
+        }
+
+        function User(name, password, mobile, email) {
+            this.name = name;
+            this.password = password;
+            this.mobile = mobile;
+            this.email = email;
         }
     }
 })();
-var compareTo = function() {
-    return {
-        require: "ngModel",
-        scope: {
-            otherModelValue: "=compareTo"
-        },
-        link: function(scope, element, attributes, ngModel) {
-
-            ngModel.$validators.compareTo = function(modelValue) {
-                return modelValue == scope.otherModelValue;
-            };
-
-            scope.$watch("otherModelValue", function() {
-                ngModel.$validate();
-            });
-        }
-    };
-};
-
-angular
-    .module('Chefonia').directive("compareTo", compareTo);

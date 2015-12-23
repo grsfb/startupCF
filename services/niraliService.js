@@ -2,6 +2,26 @@
     'use strict';
     angular
         .module('Chefonia')
+        .directive("httpLoader",function($http){
+            return {
+                restrict: 'A',
+                scope: {
+                    httpLoader: '='
+                },
+                template: '<i class="fa fa-spinner fa-spin"></i> {{httpLoader}}',
+                link: function (scope, elem, attrs) {
+                    var original=elem;
+                    scope.isLoading = function () {
+                        return $http.pendingRequests.length > 0;
+                    };
+
+                    scope.$watch(scope.isLoading, function (v)
+                    {
+
+                    });
+                }
+            }
+        })
         .directive("bnLazySrc", function ($window, $document) {
             var lazyLoader = (function () {
                 var images = [];
