@@ -49,6 +49,7 @@
             SessionService.remove('cartTotal');
             SessionService.remove('itemIds');
             SessionService.remove('userCart');
+            SessionService.putInRootScope('cartItemCount',0);
         }
 
         function Order(userId, addressId, items, paymentType) {

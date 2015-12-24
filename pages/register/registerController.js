@@ -25,11 +25,11 @@
                             AuthenticationService.SetCredentials(vm.user);
                             $('#myModal').modal('hide');
                         }
-                        vm.isRegistering = false;
                     });
                 } else {
                     vm.pageMsg = "Your are already registered.";
                 }
+                vm.isRegistering = false;
             });
         }
 
