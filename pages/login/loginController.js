@@ -10,8 +10,9 @@
         vm.passwordReset = passwordReset;
         vm.resetSectionVisible = false;
         vm.isLogging = false;
+        vm.isPasswordChanging = false;
         vm.reset = reset;
-        vm.pageMsg="";
+        vm.pageMsg = "";
         function login() {
             vm.isLogging = true;
             AuthenticationService.Login(vm.user.email, vm.user.password, function (response) {
@@ -31,8 +32,6 @@
                 if (response.success) {
                     SessionService.putInRootScope('cartItemCount', response.data.count);
                     SessionService.put(SessionService.Session.CartCount, response.data.count);
-                } else {
-                    FlashService.Error("Something not working, Please try later");
                 }
             })
         }
@@ -43,14 +42,15 @@
         }
 
         function reset() {
-
+            vm.isPasswordChanging=true;
             CommonService.post("/user/" + vm.user.resetEmail + "/forgot-pwd", {}, function (response) {
                 if (response.success) {
                     vm.message = "Password reset email sent.";
                 } else {
                     vm.message = "Something is not working. Please try later.";
                 }
-                vm.user.resetEmail="";
+                vm.user.resetEmail = "";
+                vm.isPasswordChanging=false;
             })
         }
     }

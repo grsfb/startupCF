@@ -20,6 +20,7 @@
                         <h4 class="loginHeader" style="color: green;margin-bottom: 30px"> Sign in With Your Chefonia
                             Account! </h4>
                         <label ng-if="vm.pageMsg.length!=0" style="color: red">{{vm.pageMsg}}</label>
+
                         <div class="form-group">
                             <label for="usrname"><span class="fa fa-envelope-o fa-fw"></span> Email </label>
                             <input type="text" class="form-control loginInput" id="usrname" name="userName"
@@ -77,10 +78,12 @@
                                 </div>
                             </div>
                             <div class="col-md-6" style="margin-left: -15px;margin-top: 5px">
-                                <a type="submit" class="btn btn-success btn-block resetBtn"
-                                   data-ng-click="vm.reset();reset.userEmail.$setPristine()"
+                                <a data-ng-hide="vm.isPasswordChanging" class="btn btn-success btn-block resetBtn"
+                                   data-ng-click="vm.reset();reset.$setPristine()"
                                    ng-disabled="reset.userEmail.$invalid"
                                    disabled="disabled"><span class="fa fa-lock"></span> Send Password
+                                </a>
+                                <a data-ng-show="vm.isPasswordChanging" class="btn btn-success btn-block resetBtn disabled"><span class="fa fa-spinner fa-spin"></span> Sending Mail
                                 </a>
                             </div>
                             <br/>
