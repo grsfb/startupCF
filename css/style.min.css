@@ -10,17 +10,36 @@ html, body {
     background-color: white !important;
 }
 
-.t-content {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    padding-top: 70px;
-    margin: 0 auto -155px;
+@media (max-width: 420px) {
+    .t-content {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        padding-top: 70px;
+        margin: 0 auto -195px;
+    }
+
+    .footer, .push {
+        height: 195px !important;
+        clear: both !important;
+    }
+
 }
 
-.footer, .push {
-    height: 155px;
-    clear: both;
+@media (min-width: 421px) {
+    .t-content {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        padding-top: 70px;
+        margin: 0 auto -155px;
+    }
+
+    .footer, .push {
+        height: 155px;
+        clear: both;
+    }
+
 }
 
 .errorMsg {
@@ -119,10 +138,11 @@ html, body {
 
 .summaryText {
     color: darkgrey;
-    padding-left: 0px!important;
+    padding-left: 0px !important;
 }
-.summaryInfo{
-    padding-left: 0px!important;
+
+.summaryInfo {
+    padding-left: 0px !important;
 }
 
 .frmEMail {
@@ -155,36 +175,43 @@ html, body {
 }
 
 .bn-lazy-img {
-            background-image: url("../img/cover.png") !important;
-        }
-.shutterItemPrice{
-    color: #EB5C31!important;
-    font-size: x-large!important;
-    font-weight: 800!important;
+    background-image: url("../img/cover.png") !important;
 }
+
+.shutterItemPrice {
+    color: #EB5C31 !important;
+    font-size: x-large !important;
+    font-weight: 800 !important;
+}
+
 ul li a:hover, ul li a:focus {
-    color:#16b594!important;
+    color: #16b594 !important;
 }
-.oddPanel{
-    background-color: #ff5127!important;
-    color: white!important;
+
+.oddPanel {
+    background-color: #ff5127 !important;
+    color: white !important;
 }
-.evenPanel{
-    background-color: #ff9613!important;
-    color: white!important;
+
+.evenPanel {
+    background-color: #ff9613 !important;
+    color: white !important;
 }
-@media(max-width: 700px) {
-    .categoryContainer{
-        padding-left: 0px!important;
-        padding-right: 0px!important;
+
+@media (max-width: 700px) {
+    .categoryContainer {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
     }
+
     .itemImage {
         width: 100% !important;
     }
 }
-    .itemImage {
-        height: 250px !important;
-        width: 250px ;
-        padding-bottom: 5px !important;
-        border-bottom: 1px chocolate solid !important;
-    }
+
+.itemImage {
+    height: 250px !important;
+    width: 250px;
+    padding-bottom: 5px !important;
+    border-bottom: 1px chocolate solid !important;
+}
