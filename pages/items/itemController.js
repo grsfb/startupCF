@@ -80,6 +80,7 @@
                     updateCart(userId, item);
                 }
             } else {
+                hideProgress(item.itemId);
                 $("#myModal").modal();
             }
         }

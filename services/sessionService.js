@@ -45,6 +45,7 @@
 
         function putInRootScope(key, value) {
             rootScope.put(key, value);
+            cookieStore.put(key, value);
         }
 
         function remove(key) {

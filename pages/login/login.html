@@ -83,11 +83,14 @@
                                    ng-disabled="reset.userEmail.$invalid"
                                    disabled="disabled"><span class="fa fa-lock"></span> Send Password
                                 </a>
-                                <a data-ng-show="vm.isPasswordChanging" class="btn btn-success btn-block resetBtn disabled"><span class="fa fa-spinner fa-spin"></span> Sending Mail
+                                <a data-ng-show="vm.isPasswordChanging"
+                                   class="btn btn-success btn-block resetBtn disabled"><span
+                                        class="fa fa-spinner fa-spin"></span> Sending Mail
                                 </a>
                             </div>
-                            <br/>
-                            <label>{{vm.message}}</label>
+                            <div class="col-md-12" style="padding-left: 0px">
+                                <label>{{vm.message}}</label>
+                            </div>
                         </form>
                     </div>
                 </div>

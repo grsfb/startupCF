@@ -16,7 +16,7 @@
         vm.deleteAddress = deleteAddress;
         vm.showAddressEditor = false;
         vm.isAddingAddress = false;
-        var userId=SessionService.Session.CurrentUser.userId;
+        var userId=SessionService.get(SessionService.Session.CurrentUser).userId;
         AddressService.getAllAddress(userId, function (response) {
             if (response.success) {
                 vm.allAddress = response.data;
