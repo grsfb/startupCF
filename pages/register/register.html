@@ -1,5 +1,5 @@
 <div  data-ng-controller="RegisterController as vm">
-<form role="form" name="registerForm"   style="margin-right: 5px">
+<form role="form" name="registerForm" autocomplete="off"  style="margin-right: 5px">
     <h4 class="loginHeader" style="color: darkred;margin-bottom: 30px"> Register With Chefonia!</h4>
     <label ng-if="vm.pageMsg.length!=0" style="color: red">{{vm.pageMsg}}</label>
     <div class="form-group" ng-class="{'has-error': registerForm.newUserName.$invalid &amp;&amp; registerForm.newUserName.$dirty}">
