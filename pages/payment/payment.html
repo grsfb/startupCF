@@ -1,4 +1,4 @@
-<div    >
+<div>
     <h3 class="tstyle" style="padding: 10px;">Your order</h3>
 
     <div style="padding: 10px;">
@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <td class="th">Order total</td>
-                <td class="price"> <i class="fa fa-rupee"></i>{{vm.cartTotal+vm.shippingCost}}</td>
+                <td class="price"><i class="fa fa-rupee"></i>{{vm.cartTotal+vm.shippingCost}}</td>
             </tr>
             </tbody>
         </table>
@@ -46,7 +46,12 @@
                     PayPal <span class="pp-label"></span></label>
             </div>-->
         </div>
-        <input class="btn btn-default mybtn pull-right" type="submit" name="place-order"
-              style="width: 100%" value="Place order" data-ng-click="vm.checkAndPlaceOrder()">
+        <a class="btn btn-default mybtn pull-right" type="submit" name="place-order"
+           style="width: 100%" data-ng-hide="vm.isPlacingOrder" data-ng-click="vm.checkAndPlaceOrder()">
+            Place order
+        </a>
+        <a class="btn btn-default mybtn pull-right" type="submit" name="place-order"
+           style="width: 100%" data-ng-show="vm.isPlacingOrder">
+            <i class="fa fa-spinner fa-spin"></i> Placing order</a>
     </div>
 </div>

@@ -15,6 +15,7 @@
         vm.setSelectedAddress = setSelectedAddress;
         vm.deleteAddress = deleteAddress;
         vm.showAddressEditor = false;
+        vm.isAddingAddress = false;
 
         AddressService.getAllAddress("userId", function (response) {
             if (response.success) {
@@ -22,13 +23,13 @@
             } else {
                 FlashService.Error("Error occurred while retrieving address");
             }
-            if(vm.allAddress.length == 0) {
+            if (vm.allAddress.length == 0) {
                 enableAddressEditor();
             }
         });
 
         function setSelectedAddress(address, index) {
-            SessionService.put('deliverAddress',address);
+            SessionService.put('deliverAddress', address);
             vm.selectedIndex = index;
         }
 
@@ -51,6 +52,8 @@
         }
 
         function saveAndClose(address) {
+            vm.isAddingAddress = true;
+
             var addressToSave = new Address("userId", address.fullName, address.lineOne, address.lineTwo,
                 address.city, address.state, address.zip, address.mobile);
 
@@ -60,9 +63,10 @@
                 } else {
                     FlashService.Error("Error occurred while saving address")
                 }
+                vm.isAddingAddress = false;
+                vm.showAddressEditor = false;
+                vm.address = {};
             });
-
-            vm.showAddressEditor = false;
         }
 
         function cancel() {

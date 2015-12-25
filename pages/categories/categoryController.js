@@ -49,7 +49,7 @@
                 if (response) {
                     vm.categories = response.data.items;
                     vm.totalPageAsArray = new Array(response.data.totalPages);
-                    vm.selectedIndex = pageNumber;
+                    vm.selectedPage = pageNumber;
                 } else {
                     FlashService.Error("Something not working. Please try later");
                 }

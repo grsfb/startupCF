@@ -6,15 +6,18 @@
             <div data-ng-repeat="address in vm.allAddress">
                 <div class="col-md-4 col-lg-4 col-sm-6" style="padding:0px;">
                     <div style="width: 98%;border: 2px #f2f2f2 solid; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
-                        <div class="pull-right" style="cursor: pointer" data-ng-click="vm.deleteAddress($index)"><i style="color: teal" class="fa fa-trash-o"></i></div>
+                        <div class="pull-right" style="cursor: pointer" data-ng-click="vm.deleteAddress($index)"><i
+                                style="color: teal" class="fa fa-trash-o"></i></div>
                         <address>
                             <strong>{{address.fullName}}</strong><br>
                             {{address.lineOne}}, {{address.lineTwo}}<br>
                             {{address.city}}, {{address.state}}, {{address.zip}}<br>
                             <abbr title="Phone">Mob+:</abbr> {{address.mobile}}
                         </address>
-                        <a ng-if="$index!=vm.selectedIndex" class="btn btn-default" style="margin-bottom: 10px;" data-ng-click="vm.setSelectedAddress(address,$index)">Deliver on this address</a>
-                        <a ng-if="$index==vm.selectedIndex" class="btn btn-default deliverySelected" style="margin-bottom: 10px;">Selected delivery address</a>
+                        <a ng-if="$index!=vm.selectedIndex" class="btn btn-default" style="margin-bottom: 10px;"
+                           data-ng-click="vm.setSelectedAddress(address,$index)">Deliver on this address</a>
+                        <a ng-if="$index==vm.selectedIndex" class="btn btn-default deliverySelected"
+                           style="margin-bottom: 10px;">Selected delivery address</a>
                     </div>
                 </div>
             </div>
@@ -27,7 +30,7 @@
             </div>
         </div>
         <div data-ng-show="vm.showAddressEditor">
-            <form id="checkout-form" method="post" name="form" role="form" novalidate="novalidate">
+            <form id="checkout-form" method="post" name="form" role="form" novalidate="novalidate" autocomplete="off">
                 <div class="row">
                     <div class="form-group col-lg-12 col-md-12 col-sm-12"
                          ng-class="{'has-error': form.fullName.$dirty && form.fullName.$error.required }">
@@ -74,25 +77,37 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6 col-md-6 col-sm-6"
-                         ng-class="{'has-error': form.postcode.$dirty && form.postcode.$error.required }">
+                         ng-class="{'has-error': form.postcode.$dirty && form.postcode.$error.required ||form.postcode.$error.minlength || form.postcode.$error.pattern }">
                         <label for="postcode" style="margin-left: 5px;">Postcode *</label>
                         <input type="text" class="form-control" id="postcode" name="postcode"
-                               placeholder="Postcode/ ZIP" required="" data-ng-model="vm.address.zip">
+                               placeholder="Postcode/ ZIP" required="" data-ng-model="vm.address.zip" ng-minlength="6"
+                               data-ng-pattern="/^\d+$/">
                         <span ng-show="form.postcode.$dirty && form.postcode.$error.required" class="help-block">Postcode is required</span>
+                        <span ng-show="form.postcode.$dirty && form.postcode.$error.minlength || form.postcode.$error.pattern"
+                              class="help-block">Postcode should have 6 numeric digit</span>
                     </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-6"
-                         ng-class="{'has-error': form.mobile.$dirty && form.mobile.$error.required }">
+                         ng-class="{'has-error': form.mobile.$dirty && form.mobile.$error.required ||
+                         form.mobile.$error.pattern ||form.mobile.$error.minlength }">
                         <label for="mobile" style="margin-left: 5px;">Mobile No. *</label>
                         <input type="text" class="form-control" id="mobile" name="mobile"
-                               placeholder="Mobile number" required="" data-ng-model="vm.address.mobile">
+                               placeholder="Mobile number" required="" data-ng-model="vm.address.mobile"
+                               ng-minlength="10" data-ng-pattern="/^\d+$/">
                         <span ng-show="form.mobile.$dirty && form.mobile.$error.required" class="help-block">Mobile is required</span>
+                        <span ng-show="form.mobile.$dirty && form.mobile.$error.minlength || form.mobile.$error.pattern"
+                              class="help-block">
+                            Your mobile number should have 10 numeric digits.</span>
                     </div>
                 </div>
                 <div class="row" style="padding-right: 15px;">
                     <a class="btn btn-default pull-right"
                        data-ng-click="vm.cancel();form.$setPristine()">Cancel</a>
                     <a class="btn btn-default mybtn pull-right mybtn"
-                       data-ng-click="vm.saveAndClose(vm.address)" data-ng-disabled="form.$invalid" style="margin-right: 5px;">Save</a>
+                       data-ng-click="vm.saveAndClose(vm.address);form.$setPristine()" data-ng-disabled="form.$invalid"
+                       style="margin-right: 5px;" data-ng-hide="vm.isAddingAddress">Save</a>
+                    <a class="btn btn-default mybtn pull-right mybtn disabled"
+                       style="margin-right: 5px;" data-ng-show="vm.isAddingAddress"><i
+                            class="fa fa-spinner fa-spin"></i> Saving</a>
                 </div>
             </form>
         </div>

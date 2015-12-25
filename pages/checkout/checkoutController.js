@@ -11,7 +11,7 @@
         vm.cartTotal = SessionService.get('cartTotal');
         vm.checkAndPlaceOrder = checkAndPlaceOrder;
         vm.order = {};
-
+        vm.isPlacingOrder=false;
         function checkAndPlaceOrder() {
             vm.order.address = SessionService.get('deliverAddress');
             vm.order.paymentMethod = "COD";
@@ -25,6 +25,7 @@
                 var order = new Order(SessionService.get('currentUser').userId,
                     vm.order.address.addressId, SessionService.get('itemIds'), vm.order.paymentMethod
                 );
+                vm.isPlacingOrder=true;
                 OrderService.create(order, function (response) {
                     if (response.success) {
                         cleanUpOnOrderSuccess();
@@ -33,6 +34,7 @@
                     } else {
                         FlashService.Error("Something not working. Please try later");
                     }
+                    vm.isPlacingOrder=false;
                 });
 
             }
