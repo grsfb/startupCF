@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('Chefonia').factory('SessionService', SessionService);
-    SessionService.$inject = ['$rootScope', '$cookieStore', 'CartService', 'FlashService'];
+    SessionService.$inject = ['$rootScope', '$cookieStore'];
     function SessionService($rootScope, $cookieStore) {
         var service = {};
         service.create = create;

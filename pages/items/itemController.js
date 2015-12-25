@@ -17,9 +17,9 @@
         vm.buy = buy;
         vm.getImageUri = getImageUri;
         vm.itemType = $routeParams.categoryName;
-        vm.location =SessionService.get('location');
+        vm.location = SessionService.get('location');
         //load initial items
-        InventoryService.getAllItems(1, $routeParams.categoryName,$routeParams.chefLocation, function (response) {
+        InventoryService.getAllItems(1, $routeParams.categoryName, $routeParams.chefLocation, function (response) {
             if (response.success) {
                 vm.items = response.data.items;
                 vm.totalPageAsArray = new Array(response.data.totalPages);
@@ -32,19 +32,26 @@
         }
 
         //get all cart items
-        var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
-        CartService.getCartItems(userId,
-            function (response) {
-                if (response.success) {
-                    vm.cart = response.data;
-                    vm.isCartLoaded = true;
-                } else {
-                    FlashService.Error("Something not working. Please try later");
-                }
+        if (SessionService.get(SessionService.Session.CurrentUser)) {
+            loadCart(function () {
             });
+        }
+        function loadCart(callback) {
+            var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
+            CartService.getCartItems(userId,
+                function (response) {
+                    if (response.success) {
+                        vm.cart = response.data;
+                        vm.isCartLoaded = true;
+                        callback();
+                    } else {
+                        FlashService.Error("Something not working. Please try later");
+                    }
+                });
+        }
 
         function loadNextPage(pageNumber) {
-            InventoryService.getAllItems(pageNumber + 1, $routeParams.categoryName,$routeParams.chefLocation, function (response) {
+            InventoryService.getAllItems(pageNumber + 1, $routeParams.categoryName, $routeParams.chefLocation, function (response) {
                 if (response) {
                     vm.items = response.data.items;
                     vm.totalPageAsArray = new Array(response.data.totalPages);
@@ -62,28 +69,47 @@
 
         //cart
         function addItemInCart(item) {
-            //show progress
             showProgress(item.itemId);
-            if (vm.isCartLoaded) {
-                var cartItem = new CartItem(userId, item.itemId);
-                if (!isItemExistsInCart(vm.cart, item.itemId)) {
-                    CartService.add(cartItem, function (response) {
-                        if (response.success) {
-                            vm.cart = addItem(vm.cart, cartItem);
-                            SessionService.putInRootScope("cartItemCount", vm.cart.length);
-                            SessionService.put("cartItemCount", vm.cart.length);
-                        } else {
-                            FlashService.Error("Something not working. Please try later");
-                        }
-                        hideProgress(cartItem.itemId);
+            if (SessionService.get(SessionService.Session.CurrentUser)) {
+                var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
+                if (vm.isCartLoaded) {
+                    loadCart(function () {
+                        updateCart(userId, item);
                     });
                 } else {
-                    FlashService.Success("Item already added in your cart");
-                    hideProgress(cartItem.itemId);
+                    updateCart(userId, item);
                 }
             } else {
-                $location.path('/login');
+                $("#myModal").modal();
             }
+        }
+
+        function updateCart(userId,item) {
+            var cartItem = getCartItem(vm.cart, item.itemId);
+            if (cartItem) {
+                cartItem.quantity += 1;
+                updateCartItem(cartItem);
+            } else {
+                var newCartItem = new CartItem(userId, item.itemId, 1);
+                addNewCartItem(newCartItem);
+            }
+        }
+
+        function addNewCartItem(cartItem) {
+            CartService.add(cartItem, function (response) {
+                if (response.success) {
+                    vm.cart = addItem(vm.cart, cartItem);
+                    SessionService.putInRootScope("cartItemCount", vm.cart.length);
+                    SessionService.put("cartItemCount", vm.cart.length);
+                } else {
+                    FlashService.Error("Something not working. Please try later");
+                }
+                hideProgress(cartItem.itemId);
+            });
+        }
+
+        function updateCartItem(cartItem) {
+            hideProgress(cartItem.itemId);
         }
 
         function showProgress(id) {
@@ -94,6 +120,7 @@
         function hideProgress(id) {
             $('#' + id).css("visibility", "hidden");
             $('#button-' + id).prop('disabled', false);
+            $('#' + id+'-done').show().fadeOut(3000);
         }
 
         //private function
@@ -102,19 +129,20 @@
             return arr;
         }
 
-        function isItemExistsInCart(arr, itemId) {
+        function getCartItem(arr, itemId) {
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i].itemId === itemId) {
-                    return true;
+                    return arr[i];
                 }
             }
-            return false;
+            return undefined;
         }
 
         //cartItem class
-        function CartItem(userId, itemId) {
+        function CartItem(userId, itemId, quantity) {
             this.userId = userId;
             this.itemId = itemId;
+            this.quantity = quantity;
         }
     }
 })();
