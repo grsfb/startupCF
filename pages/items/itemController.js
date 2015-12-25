@@ -62,6 +62,8 @@
 
         //cart
         function addItemInCart(item) {
+            //show progress
+            showProgress(item.itemId);
             if (vm.isCartLoaded) {
                 var cartItem = new CartItem(userId, item.itemId);
                 if (!isItemExistsInCart(vm.cart, item.itemId)) {
@@ -73,13 +75,25 @@
                         } else {
                             FlashService.Error("Something not working. Please try later");
                         }
+                        hideProgress(cartItem.itemId);
                     });
                 } else {
                     FlashService.Success("Item already added in your cart");
+                    hideProgress(cartItem.itemId);
                 }
             } else {
                 $location.path('/login');
             }
+        }
+
+        function showProgress(id) {
+            $('#' + id).css("visibility", "visible");
+            $('#button-' + id).prop('disabled', true);
+        }
+
+        function hideProgress(id) {
+            $('#' + id).css("visibility", "hidden");
+            $('#button-' + id).prop('disabled', false);
         }
 
         //private function

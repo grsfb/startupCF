@@ -14,11 +14,17 @@
                                 <img bn-lazy-src="{{vm.getImageUri(item.chefName,item.category,item.name,'md')}}"
                                      class="bn-lazy-img img-responsive itemImage">
 
+                                <div id="{{item.itemId}}" style="position: absolute; top: 50%;
+                                left: 40%;background-color: #16b594;color:#f5f5f5;padding: 5px; visibility: hidden">
+                                    <i class="fa fa-spinner fa-spin"></i> Adding
+                                </div>
                                 <h3 class="name" style="text-align: center">
-                                    <span >{{item.name}}</span>
+                                    <span>{{item.name}}</span>
+
                                     <h3 class="name">
                                         <span class="pull-left shutterPrice">{{item.weight}} Kg</span>
-                                        <span class="pull-right shutterPrice"><i class="fa fa-inr"></i> {{item.price}}</span>
+                                        <span class="pull-right shutterPrice"><i
+                                                class="fa fa-inr"></i> {{item.price}}</span>
                                     </h3>
 
                                 </h3>
@@ -26,11 +32,13 @@
 
                                 <div class="caption caption-half-down" style="background-color: white;">
                                     <p class="shutterFont">{{item.name}} - {{item.weight}} Kg</p>
+
                                     <h2 class="shutterItemPrice"><i class="fa fa-inr"></i> {{item.price}}</h2>
-                                    <a class="btn btn-default add-to-cart" style="background-color: teal;color: white" data-ng-click="vm.buy(item)"><i
+                                    <a class="btn btn-default add-to-cart" style="background-color: teal;color: white"
+                                       data-ng-click="vm.buy(item)"><i
                                             class="fa fa-search-minus"></i> Buy Now</a>
 
-                                                                   </div>
+                                </div>
                                 <div class="caption caption-half-up" style="background-color: white;">
 
                                     <p class="shutterFontChef" style="color: #262626;">Chef Detail</p>
@@ -40,9 +48,9 @@
                                 </div>
                             </div>
                             <div class="choose text-center">
-                                <a class="btn btn-default mybtn" data-ng-click="vm.addItemInCart(item)"
-                                   style="cursor: pointer;"><i
-                                        class="fa fa-shopping-cart"></i> ADD TO
+                                <a id="button-{{item.itemId}}" class="btn btn-default mybtn"
+                                   data-ng-click="vm.addItemInCart(item)"
+                                   style="cursor: pointer"><i class="fa fa-shopping-cart"></i> ADD TO
                                     CART</a>
                             </div>
                         </div>
@@ -50,13 +58,13 @@
                 </div>
             </div>
         </div>
-        <div class="row" data-ng-if="vm.totalPageAsArray.length>1" >
+        <div class="row" data-ng-if="vm.totalPageAsArray.length>1">
             <div class="col-xs-12 col-sm-12 text-center">
                 <ul class="pagination">
-                    <li ng-class="{'disabled':vm.selectedIndex==0}" style="cursor: pointer" >
+                    <li ng-class="{'disabled':vm.selectedIndex==0}" style="cursor: pointer">
                         <a data-ng-click="vm.loadNextPage(0)">&laquo;</a></li>
                     <li ng-class="{ 'active': $index=== vm.selectedIndex}"
-                        data-ng-repeat="count in vm.totalPageAsArray track by $index"  style="cursor: pointer">
+                        data-ng-repeat="count in vm.totalPageAsArray track by $index" style="cursor: pointer">
                         <a data-ng-click="vm.loadNextPage($index)">{{$index+1}}</a></li>
                     <li ng-class="{'disabled':vm.totalPageAsArray.length-1==vm.selectedIndex}" style="cursor: pointer">
                         <a data-ng-click="vm.loadNextPage(vm.totalPageAsArray.length-1)">&raquo;</a></li>
