@@ -1,15 +1,10 @@
 <div class="navbar navbar-fixed-top" style="margin-bottom: 0px">
     <div class="container">
-        <div id="header" class="navbar-header">
+        <div id="header" class="navbar-header col-xs-6">
             <a class="header-link navbar-brand" href="#home">
                 <img src="brand.png" class="img-responsive"> </a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
         </div>
-        <div class="collapse navbar-collapse" data-ng-controller="NavbarController as vm">
+        <div class="collapse navbar-collapse hidden-xs" data-ng-controller="NavbarController as vm">
             <ul class="nav navbar-nav pull-right">
                 <li ng-if="!isLoggedIn" class="hidden-xs">
                     <a class="btn btn-default btn-lg mybtn text-center" data-ng-click="vm.login()"
@@ -17,13 +12,14 @@
                 </li>
                 <li ng-if="!isLoggedIn" class="hidden-lg hidden-md hidden-sm">
                     <button data-toggle="collapse" data-target=".navbar-collapse.in" href="#login_mble"
-                       style="padding: 0;">Login</button>
+                            style="padding: 0;">Login
+                    </button>
                 </li>
 
                 <li ng-if="isLoggedIn" style="text-decoration: none">
                     <a class="mylink" data-toggle="collapse" data-target=".navbar-collapse.in" href="#/cart"
-                                          style="cursor: pointer;text-decoration: none"><i class="fa fa-shopping-cart">
-                    <sup class="badge">{{cartItemCount}}</sup></i></a>
+                       style="cursor: pointer;text-decoration: none"><i class="fa fa-shopping-cart">
+                        <sup class="badge">{{cartItemCount}}</sup></i></a>
                 </li>
 
                 <li ng-if="isLoggedIn" style="align-content: center">
@@ -43,5 +39,6 @@
             </ul>
         </div>
         <!--/.nav-collapse -->
+        <div data-ng-include="'pages/common/m-header.html'"></div>
     </div>
 </div>

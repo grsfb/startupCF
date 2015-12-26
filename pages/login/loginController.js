@@ -3,14 +3,15 @@
     angular
         .module('Chefonia')
         .controller('LoginController', LoginController);
-    LoginController.$inject = ['SessionService', 'AuthenticationService', 'CartService', 'CommonService'];
-    function LoginController(SessionService, AuthenticationService, CartService, CommonService) {
+    LoginController.$inject = ['SessionService', 'AuthenticationService', 'CartService', 'CommonService', '$location'];
+    function LoginController(SessionService, AuthenticationService, CartService, CommonService,$location) {
         var vm = this;
         vm.login = login;
         vm.passwordReset = passwordReset;
         vm.resetSectionVisible = false;
         vm.isLogging = false;
         vm.isPasswordChanging = false;
+        vm.showMblSignup = false;
         vm.reset = reset;
         vm.pageMsg = "";
         function login() {
@@ -18,6 +19,8 @@
             AuthenticationService.Login(vm.user.email, vm.user.password, function (response) {
                 if (response.success) {
                     $('#myModal').modal('hide');
+                    //for mobile view
+                    $location.path("/home");
                     AuthenticationService.SetCredentials(response.data);
                     updateUserCart(response.data);
                 } else {
@@ -42,7 +45,7 @@
         }
 
         function reset() {
-            vm.isPasswordChanging=true;
+            vm.isPasswordChanging = true;
             CommonService.post("/user/" + vm.user.resetEmail + "/forgot-pwd", {}, function (response) {
                 if (response.success) {
                     vm.message = "Password reset email sent.";
@@ -50,7 +53,7 @@
                     vm.message = "Something is not working. Please try later.";
                 }
                 vm.user.resetEmail = "";
-                vm.isPasswordChanging=false;
+                vm.isPasswordChanging = false;
             })
         }
     }
