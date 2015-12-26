@@ -28,59 +28,64 @@
 </head>
 
 <body data-ng-cloak data-ng-app="Chefonia">
-<div ng-include="'pages/common/header.html'"></div>
-<div class="container">
-    <div ng-include="'pages/login/login.html'"></div>
-</div>
-<div class="t-content" data-ng-cloak style="background-color: #fff">
-    <div class="container" style="z-index: 111;">
-        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success',
-        'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"
-             style="margin-bottom: 0px;"></div>
+<div class="se-pre-con"></div>
+<div class="main-page">
+    <div ng-include="'pages/common/header.html'"></div>
+    <div class="container">
+        <div ng-include="'pages/login/login.html'"></div>
     </div>
-    <div data-ng-view></div>
+    <div class="t-content" data-ng-cloak style="background-color: #fff">
 
-</div>
-<div style="background: #404040;" class="footer">
-    <div data-ng-include="'pages/common/footer.html'"></div>
-    <div style="background-color: #404040">
-        <script src="lib/jquery/jquery-2.1.1.min.js"></script>
-        <script src="lib/owlCarousel/owl.carousel.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-        <!-- Scrolling Nav JavaScript --> 
-        <script src="js/jquery.easing.min.js"></script>
-        <!--<script src="foodkart/js/scrolling-nav.js"></script>-->
-        <script src="lib/angular/angular.min.js"></script>
-        <script src="lib/angular/angular-route.min.js"></script>
-        <script src="lib/angular/angular-cookies.min.js"></script>
-        <script src="js/script.min.js"></script>
-        <script src="js/jquery.lettering-0.6.min.js"></script>
-        <script src="js/jquery.textillate.min.js"></script>
-        <script src="pages/common/headerController.js"></script>
-        <script src="pages/login/loginController.js"></script>
-        <script src="pages/orderSummary/OrderSummaryController.js"></script>
-        <script src="pages/categories/categoryController.js"></script>
-        <script src="pages/orders/OrdersController.js"></script>
-        <script src="pages/front/frontPageController.js"></script>
-        <script src="pages/register/registerController.js"></script>
-        <script src="pages/items/itemController.js"></script>
-        <script src="services/wishListService.js"></script>
-        <script src="services/authenticationService.js"></script>
-        <script src="services/inventoryService.js"></script>
-        <script src="services/flashService.js"></script>
-        <script src="services/userService.js"></script>
-        <script src="pages/address/addressController.js"></script>
-        <script src="services/addressService.js"></script>
-        <script src="pages/checkout/checkoutController.js"></script>
-        <script src="pages/cart/cartController.js"></script>
-        <script src="pages/common/resetPasswordController.js"></script>
-        <script src="services/cartService.js"></script>
-        <script src="services/commonService.js"></script>
-        <script src="services/orderService.js"></script>
-        <script src="services/imageService.js"></script>
-        <script src="services/sessionService.js"></script>
-        <script src="services/niraliService.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+        <div class="container" style="z-index: 111;">
+            <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success',
+        'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"
+                 style="margin-bottom: 0px;"></div>
+        </div>
+        <div data-ng-view></div>
+
+    </div>
+    <div style="background: #404040;" class="footer">
+        <div data-ng-include="'pages/common/footer.html'"></div>
+        <div style="background-color: #404040">
+            <script src="lib/jquery/jquery-2.1.1.min.js"></script>
+            <script src="lib/jquery/modernizr.min.js"></script>
+            <script src="lib/owlCarousel/owl.carousel.min.js"></script>
+            <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+            <!-- Scrolling Nav JavaScript --> 
+            <script src="js/jquery.easing.min.js"></script>
+            <!--<script src="foodkart/js/scrolling-nav.js"></script>-->
+            <script src="lib/angular/angular.min.js"></script>
+            <script src="lib/angular/angular-route.min.js"></script>
+            <script src="lib/angular/angular-cookies.min.js"></script>
+            <script src="js/script.min.js"></script>
+            <script src="js/jquery.lettering-0.6.min.js"></script>
+            <script src="js/jquery.textillate.min.js"></script>
+            <script src="pages/common/headerController.js"></script>
+            <script src="pages/login/loginController.js"></script>
+            <script src="pages/orderSummary/OrderSummaryController.js"></script>
+            <script src="pages/categories/categoryController.js"></script>
+            <script src="pages/orders/OrdersController.js"></script>
+            <script src="pages/front/frontPageController.js"></script>
+            <script src="pages/register/registerController.js"></script>
+            <script src="pages/items/itemController.js"></script>
+            <script src="services/wishListService.js"></script>
+            <script src="services/authenticationService.js"></script>
+            <script src="services/inventoryService.js"></script>
+            <script src="services/flashService.js"></script>
+            <script src="services/userService.js"></script>
+            <script src="pages/address/addressController.js"></script>
+            <script src="services/addressService.js"></script>
+            <script src="pages/checkout/checkoutController.js"></script>
+            <script src="pages/cart/cartController.js"></script>
+            <script src="pages/common/resetPasswordController.js"></script>
+            <script src="services/cartService.js"></script>
+            <script src="services/commonService.js"></script>
+            <script src="services/orderService.js"></script>
+            <script src="services/imageService.js"></script>
+            <script src="services/sessionService.js"></script>
+            <script src="services/niraliService.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+        </div>
     </div>
 </div>
 </body>

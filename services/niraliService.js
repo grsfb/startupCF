@@ -2,23 +2,13 @@
     'use strict';
     angular
         .module('Chefonia')
-        .directive("httpLoader",function($http){
+        .directive("lazyBackground", function ($timeout) {
             return {
                 restrict: 'A',
-                scope: {
-                    httpLoader: '='
-                },
-                template: '<i class="fa fa-spinner fa-spin"></i> {{httpLoader}}',
-                link: function (scope, elem, attrs) {
-                    var original=elem;
-                    scope.isLoading = function () {
-                        return $http.pendingRequests.length > 0;
-                    };
-
-                    scope.$watch(scope.isLoading, function (v)
-                    {
-
-                    });
+                link: function (scope, elem) {
+                    $timeout(function () {
+                        angular.element(elem).addClass("frontbackground");
+                    }, 50);
                 }
             }
         })
@@ -33,6 +23,7 @@
                 var documentTimer = null;
                 var documentDelay = 2000;
                 var isWatchingWindow = false;
+
                 function addImage(image) {
                     images.push(image);
                     if (!renderTimer) {
@@ -70,7 +61,6 @@
                 }
 
                 function checkImages() {
-                    console.log("Checking for visible images...");
                     var visible = [];
                     var hidden = [];
                     var windowHeight = win.height();
@@ -94,10 +84,12 @@
                         stopWatchingWindow();
                     }
                 }
+
                 function clearRenderTimer() {
                     clearTimeout(renderTimer);
                     renderTimer = null;
                 }
+
                 function startRenderTimer() {
                     renderTimer = setTimeout(checkImages, renderDelay);
                 }
@@ -115,20 +107,24 @@
                     win.off("scroll.bnLazySrc");
                     clearInterval(documentTimer);
                 }
+
                 function windowChanged() {
                     if (!renderTimer) {
                         startRenderTimer();
                     }
                 }
+
                 return ({
                     addImage: addImage,
                     removeImage: removeImage
                 });
             })();
+
             function LazyImage(element) {
                 var source = null;
                 var isRendered = false;
                 var height = null;
+
                 function isVisible(topFoldOffset, bottomFoldOffset) {
                     if (!element.is(":visible")) {
                         return ( false );
@@ -167,6 +163,7 @@
                         renderSource();
                     }
                 }
+
                 function renderSource() {
                     element[0].src = source;
                     angular.element(element[0]).removeClass('bn-lazy-img');
@@ -178,6 +175,7 @@
                     setSource: setSource
                 });
             }
+
             function link($scope, element, attributes) {
                 var lazyImage = new LazyImage(element);
                 lazyLoader.addImage(lazyImage);
@@ -194,6 +192,7 @@
                     }
                 );
             }
+
             return ({
                 link: link,
                 restrict: "A"
