@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('ItemController', ItemController);
-    ItemController.$inject = ['SessionService', '$location', 'InventoryService', 'CartService', 'FlashService', 'ImageService', '$routeParams'];
+    ItemController.$inject = ['SessionService', '$location', 'InventoryService', 'CartService', 'FlashService', 'ImageService', '$routeParams', '$window'];
 
-    function ItemController(SessionService, $location, InventoryService, CartService, FlashService, ImageService, $routeParams) {
+    function ItemController(SessionService, $location, InventoryService, CartService, FlashService, ImageService, $routeParams, $window) {
         var vm = this;
         vm.addItemInCart = addItemInCart;
         vm.cart = [];
@@ -81,11 +81,16 @@
                 }
             } else {
                 hideProgress(item.itemId);
-                $("#myModal").modal();
+                //mobile view
+                if ($window.innerWidth < 420) {
+                    $location.path("/login-mble");
+                } else {
+                    $("#myModal").modal();
+                }
             }
         }
 
-        function updateCart(userId,item) {
+        function updateCart(userId, item) {
             var cartItem = getCartItem(vm.cart, item.itemId);
             if (cartItem) {
                 cartItem.quantity += 1;
@@ -121,7 +126,7 @@
         function hideProgress(id) {
             $('#' + id).css("visibility", "hidden");
             $('#button-' + id).prop('disabled', false);
-            $('#' + id+'-done').show().fadeOut(3000);
+            $('#' + id + '-done').show().fadeOut(3000);
         }
 
         //private function

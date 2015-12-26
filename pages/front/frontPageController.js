@@ -47,9 +47,9 @@
             };
         }]);
     ;
-    FrontPageController.$inject = ['SessionService', 'CartService', '$http', '$location', '$rootScope', '$document', 'FlashService','ImageService'];
+    FrontPageController.$inject = ['SessionService', 'CartService', '$http', '$location', '$window', '$document', 'FlashService', 'ImageService'];
 
-    function FrontPageController(SessionService, CartService, $http, $location, $rootScope, $document, FlashService,ImageService) {
+    function FrontPageController(SessionService, CartService, $http, $location, $window, $document, FlashService, ImageService) {
         var vm = this;
         vm.cityChange = cityChange;
         vm.foodChange = foodChange;
@@ -60,15 +60,15 @@
         vm.loadItems = loadItems;
         vm.slides = undefined;
         vm.newSlides = undefined;
-        vm.cityList = ['Pune', 'Nasik', 'Mumbai','Jaipur'];
+        vm.cityList = ['Pune', 'Nasik', 'Mumbai', 'Jaipur'];
         vm.userId = undefined;
-        vm.snack=undefined;
-        vm.getImageUri=getImageUri;
-        vm.getCategoryImageUri=getCategoryImageUri;
-        vm.categories=undefined;
-        vm.buy=buy;
-        vm.allCategories=allCategories;
-        if(SessionService.get('location')!=null){
+        vm.snack = undefined;
+        vm.getImageUri = getImageUri;
+        vm.getCategoryImageUri = getCategoryImageUri;
+        vm.categories = undefined;
+        vm.buy = buy;
+        vm.allCategories = allCategories;
+        if (SessionService.get('location') != null) {
             cityChange(SessionService.get('location'));
         }
         else {
@@ -86,29 +86,33 @@
             vm.newSlides = data;
         });
         function cityChange(city) {
-            if(vm.city=='All') {
+            if (vm.city == 'All') {
                 vm.cityList.unshift(vm.city);
             }
-            else{
+            else {
                 vm.cityList.push(vm.city);
             }
             vm.city = city;
-          var index=  vm.cityList.indexOf(city);
-            vm.cityList.splice(index,1);
-            SessionService.put('location',vm.city);
-        };
+            var index = vm.cityList.indexOf(city);
+            vm.cityList.splice(index, 1);
+            SessionService.put('location', vm.city);
+        }
+
         function foodChange(snack) {
-            $location.path('item/'+snack+'/'+vm.city);
-        };
-        function allCategories(city){
+            $location.path('item/' + snack + '/' + vm.city);
+        }
+
+        function allCategories(city) {
             $location.path('categories');
         }
+
         vm.foodList = ['Namkeen', 'Sweets', 'Snacks'];
         vm.popularFoodList = ['Chocolate', 'Chatani'];
         vm.newFoodList = ['Cake', 'MouthFreshners'];
         function loadItems() {
-            $location.path('item/'+'All/'+vm.city);
-        };
+            $location.path('item/' + 'All/' + vm.city);
+        }
+
         $document.find("#popularowlNext").click(function () {
             $("#owl-demo").trigger('owl.next');
         });
@@ -131,33 +135,80 @@
                     }
                 });
         }
+
         function buy(item) {
             vm.addItemInCart(item);
             $location.path("/cart");
         }
+
         function addItemInCart(item) {
-            if (SessionService.get(SessionService.Session.CurrentUser) != null) {
-                vm.userId = SessionService.get(SessionService.Session.CurrentUser).userId;
-                if (!vm.isCartLoaded){
-                    loadCart(vm.userId);
-                }
-                var cartItem = new CartItem(vm.userId, item.itemId);
-                if (!isItemExistsInCart(vm.cart, item.itemId)) {
-                    CartService.add(cartItem, function (response) {
-                        if (response.success) {
-                            vm.cart = addItem(vm.cart, cartItem);
-                            SessionService.putInRootScope("cartItemCount", vm.cart.length);
-                            SessionService.put("cartItemCount", vm.cart.length);
-                        } else {
-                            FlashService.Error("Something not working. Please try later");
-                        }
+            showProgress(item.itemId);
+            if (SessionService.get(SessionService.Session.CurrentUser)) {
+                var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
+                if (vm.isCartLoaded) {
+                    loadCart(function () {
+                        updateCart(userId, item);
                     });
                 } else {
-                    FlashService.Success("Item already added in your cart");
+                    updateCart(userId, item);
                 }
             } else {
-                $("#myModal").modal();
+                hideProgress(item.itemId);
+                //mobile view
+                if ($window.innerWidth < 420) {
+                    $location.path("/login-mble");
+                } else {
+                    $("#myModal").modal();
+                }
             }
+        }
+
+        function updateCart(userId, item) {
+            var cartItem = getCartItem(vm.cart, item.itemId);
+            if (cartItem) {
+                cartItem.quantity += 1;
+                updateCartItem(cartItem);
+            } else {
+                var newCartItem = new CartItem(userId, item.itemId, 1);
+                addNewCartItem(newCartItem);
+            }
+        }
+
+        function addNewCartItem(cartItem) {
+            CartService.add(cartItem, function (response) {
+                if (response.success) {
+                    vm.cart = addItem(vm.cart, cartItem);
+                    SessionService.putInRootScope("cartItemCount", vm.cart.length);
+                    SessionService.put("cartItemCount", vm.cart.length);
+                } else {
+                    FlashService.Error("Something not working. Please try later");
+                }
+                hideProgress(cartItem.itemId);
+            });
+        }
+
+        function updateCartItem(cartItem) {
+            hideProgress(cartItem.itemId);
+        }
+
+        function showProgress(id) {
+            $('#' + id).css("visibility", "visible");
+            $('#button-' + id).prop('disabled', true);
+        }
+
+        function hideProgress(id) {
+            $('#' + id).css("visibility", "hidden");
+            $('#button-' + id).prop('disabled', false);
+            $('#' + id + '-done').show().fadeOut(3000);
+        }
+
+
+        function getImageUri(chefName, category, itemName, size) {
+            return ImageService.getUri(chefName, category, itemName, size);
+        }
+
+        function getCategoryImageUri(category, size) {
+            return ImageService.getCategoryUri(category, size);
         }
 
         //private function
@@ -166,26 +217,22 @@
             return arr;
         }
 
-        function getImageUri(chefName,category,itemName,size) {
-            return ImageService.getUri(chefName,category,itemName,size);
-        }
-        function getCategoryImageUri(category,size) {
-            return ImageService.getCategoryUri(category,size);
-        }
-        function isItemExistsInCart(arr, itemId) {
+        function getCartItem(arr, itemId) {
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i].itemId === itemId) {
-                    return true;
+                    return arr[i];
                 }
             }
-            return false;
+            return undefined;
         }
 
         //cartItem class
-        function CartItem(userId, itemId) {
+        function CartItem(userId, itemId, quantity) {
             this.userId = userId;
             this.itemId = itemId;
+            this.quantity = quantity;
         }
+
     }
 
 })();

@@ -22,7 +22,7 @@
         }
 
         function mobileLogin() {
-            $location.path("/login_mble");
+            $location.path("/login-mble");
         }
 
         function mobileLogout() {
