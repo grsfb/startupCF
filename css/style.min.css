@@ -16,6 +16,7 @@ html, body {
     left: 100px;
     top: 0;
 }
+
 .se-pre-con {
     position: fixed;
     left: 0px;
@@ -110,10 +111,6 @@ html, body {
     font-family: "Courier New"
 }
 
-#myModal {
-    background-image: url("../img/modalback_pattern.jpg")
-}
-
 .btn-circle {
     width: 30px;
     height: 30px;
@@ -196,6 +193,8 @@ html, body {
 
 .bn-lazy-img {
     background-image: url("../img/cover.png") !important;
+    background: no-repeat;
+    max-width: 100%;
 }
 
 .shutterItemPrice {

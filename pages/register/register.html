@@ -1,53 +1,93 @@
-<div  data-ng-controller="RegisterController as vm">
-<form role="form" name="registerForm" autocomplete="off"  style="margin-right: 5px">
-    <h4 class="loginHeader" style="color: darkred;margin-bottom: 30px"> Register With Chefonia!</h4>
-    <label ng-if="vm.pageMsg.length!=0" style="color: red">{{vm.pageMsg}}</label>
-    <div class="form-group" ng-class="{'has-error': registerForm.newUserName.$invalid &amp;&amp; registerForm.newUserName.$dirty}">
-        <label ><span class="fa fa-user"></span> Name</label>
-        <input type="text" class="form-control loginInput" id="newUserName" name="newUserName" data-ng-model="vm.user.name" ng-minlength="3" data-ng-pattern="/^[A-z ]+$/"  placeholder="Enter your name" required="">
-        <div class="has-error ng-hide" ng-messages="registerForm.newUserName.$error" maxlength="30" ng-show="registerForm.newUserName.$touched">
-            <p class="help-block errorMsg" ng-show="registerForm.newUserName.$error.required" ng-message="required">Your name is required.</p>
-            <p class="help-block errorMsg" ng-show="(registerForm.newUserName.$error.minlength||registerForm.newUserName.$error.pattern)">
-                Your name is invalid.
-            </p>
-        </div>
-    </div>
-    <div class="form-group" ng-class="{'has-error': registerForm.newUserPassword.$invalid &amp;&amp; registerForm.newUserPassword.$dirty}">
-        <label ><span class="fa fa-key"></span> Password</label>
-        <input type="password" class="form-control loginInput" id="psw1" data-ng-model="vm.user.password" name="newUserPassword" placeholder="Enter password" required="">
-        <div class="has-error ng-hide" ng-messages="registerForm.newUserPassword.$error" maxlength="30" ng-show="registerForm.newUserPassword.$touched">
-            <p class="help-block errorMsg" ng-show="registerForm.newUserPassword.$error.required" ng-message="required">Your password is required.</p>
-        </div>
-    </div>
-    <div class="form-group" ng-class="{'has-error': registerForm.cnfrmPswd.$invalid &amp;&amp; registerForm.cnfrmPswd.$dirty}">
-        <label ><span class="fa fa-key"></span> Confirm Password</label>
-        <input type="password" class="form-control loginInput" id="cnfrmPswd" data-ng-model="vm.user.cnfrmPswd" name="cnfrmPswd" placeholder="Enter password" required="">
-        <div class="has-error ng-hide" ng-messages="registerForm.cnfrmPswd.$error" maxlength="30" ng-show="registerForm.cnfrmPswd.$touched">
-            <p class="help-block errorMsg" ng-show="registerForm.cnfrmPswd.$error.required" ng-message="required">Your password is required.</p>
-        </div>
-    </div>
-    <div class="form-group" ng-class="{'has-error': registerForm.userPhone.$invalid &amp;&amp; registerForm.userPhone.$dirty}">
-        <label ><span class="fa fa-mobile"></span> Phone Number</label>
-        <input type="text" class="form-control loginInput" id="phn" name="userPhone" ng-minlength="10" data-ng-pattern="/^\d+$/" maxlength="10" data-ng-model="vm.user.mobile" placeholder="Phone Number" required="">
-        <div class="has-error ng-hide" ng-messages="registerForm.userPhone.$error"  ng-show="registerForm.userPhone.$touched">
-            <p class="help-block errorMsg" ng-show="registerForm.userPhone.$error.required" ng-message="required">Your phone is required.</p>
-            <p class="help-block errorMsg" ng-show="(registerForm.userPhone.$error.minlength||registerForm.userPhone.$error.pattern)">
-                Your mobile number should have 10 numeric digits.
-            </p>
-        </div>
+<div data-ng-controller="RegisterController as vm">
+    <form role="form" name="registerForm" autocomplete="off" style="margin-right: 5px">
+        <h4 class="loginHeader" style="color: darkred;margin-bottom: 30px"> Register With Chefonia!</h4>
+        <label ng-if="vm.pageMsg.length!=0" style="color: red">{{vm.pageMsg}}</label>
 
-    </div>
-    <div class="form-group" ng-class="{'has-error': registerForm.userEmail.$invalid && registerForm.userEmail.$dirty}">
-        <label ><span class="fa fa fa-envelope-o fa-fw"></span> Email Address</label>
-        <input type="email" class="form-control loginInput" name="userEmail" id="email" data-ng-model="vm.user.email" placeholder="Email Address" required="">
-        <div class="has-error ng-hide" ng-messages="registerForm.userEmail.$error"  ng-show="registerForm.userEmail.$touched">
-            <p class="help-block errorMsg" ng-show="registerForm.userEmail.$error.required" ng-message="required">Your email is required.</p>
-            <p class="help-block errorMsg" ng-show="registerForm.userEmail.$error.email">
-                Your email is not valid.
-            </p>
+        <div class="form-group"
+             ng-class="{'has-error': registerForm.newUserName.$invalid &amp;&amp; registerForm.newUserName.$dirty}">
+            <label><span class="fa fa-user"></span> Name</label>
+            <input type="text" class="form-control loginInput" id="newUserName" name="newUserName"
+                   data-ng-model="vm.user.name" ng-minlength="3" data-ng-pattern="/^[A-z ]+$/"
+                   placeholder="Enter your name" required="">
+
+            <div class="has-error ng-hide" ng-messages="registerForm.newUserName.$error" maxlength="30"
+                 ng-show="registerForm.newUserName.$touched">
+                <p class="help-block errorMsg" ng-show="registerForm.newUserName.$error.required" ng-message="required">
+                    Your name is required.</p>
+
+                <p class="help-block errorMsg"
+                   ng-show="(registerForm.newUserName.$error.minlength||registerForm.newUserName.$error.pattern)">
+                    Your name is invalid.
+                </p>
+            </div>
         </div>
-    </div>
-    <a type="submit" class="btn btn-danger btn-block loginBtn" data-ng-hide="vm.isRegistering" data-ng-click="vm.register();registerForm.$setPristine()" ng-disabled="registerForm.$invalid" disabled="disabled" ><span class="fa fa-lock"></span> Sign Up</a>
-    <a type="submit" class="btn btn-danger btn-block loginBtn disabled" data-ng-show="vm.isRegistering"><span class="fa fa-spinner fa-spin"></span> Registering</a>
-</form>
+        <div class="form-group"
+             ng-class="{'has-error': registerForm.newUserPassword.$invalid &amp;&amp; registerForm.newUserPassword.$dirty}">
+            <label><span class="fa fa-key"></span> Password</label>
+            <input type="password" class="form-control loginInput" id="psw1" data-ng-model="vm.user.password"
+                   name="newUserPassword" placeholder="Enter password" required="">
+
+            <div class="has-error ng-hide" ng-messages="registerForm.newUserPassword.$error" maxlength="30"
+                 ng-show="registerForm.newUserPassword.$touched">
+                <p class="help-block errorMsg" ng-show="registerForm.newUserPassword.$error.required"
+                   ng-message="required">Your password is required.</p>
+            </div>
+        </div>
+        <div class="form-group"
+             ng-class="{'has-error': registerForm.cnfrmPswd.$invalid &amp;&amp; registerForm.cnfrmPswd.$dirty}">
+            <label><span class="fa fa-key"></span> Confirm Password</label>
+            <input type="password" class="form-control loginInput" id="cnfrmPswd" data-ng-model="vm.user.cnfrmPswd"
+                   name="cnfrmPswd" placeholder="Enter password" required="">
+
+            <div class="has-error ng-hide" ng-messages="registerForm.cnfrmPswd.$error" maxlength="30"
+                 ng-show="registerForm.cnfrmPswd.$touched">
+                <p class="help-block errorMsg" ng-show="registerForm.cnfrmPswd.$error.required" ng-message="required">
+                    Your password is required.</p>
+            </div>
+        </div>
+        <div class="form-group"
+             ng-class="{'has-error': registerForm.userPhone.$invalid &amp;&amp; registerForm.userPhone.$dirty}">
+            <label><span class="fa fa-mobile"></span> Phone Number</label>
+            <input type="text" class="form-control loginInput" id="phn" name="userPhone" ng-minlength="10"
+                   data-ng-pattern="/^\d+$/" maxlength="10" data-ng-model="vm.user.mobile" placeholder="Phone Number"
+                   required="">
+
+            <div class="has-error ng-hide" ng-messages="registerForm.userPhone.$error"
+                 ng-show="registerForm.userPhone.$touched">
+                <p class="help-block errorMsg" ng-show="registerForm.userPhone.$error.required" ng-message="required">
+                    Your phone is required.</p>
+
+                <p class="help-block errorMsg"
+                   ng-show="(registerForm.userPhone.$error.minlength||registerForm.userPhone.$error.pattern)">
+                    Your mobile number should have 10 numeric digits.
+                </p>
+            </div>
+
+        </div>
+        <div class="form-group"
+             ng-class="{'has-error': registerForm.userEmail.$invalid && registerForm.userEmail.$dirty}">
+            <label><span class="fa fa fa-envelope-o fa-fw"></span> Email Address</label>
+            <input type="email" class="form-control loginInput" name="userEmail" id="email"
+                   data-ng-model="vm.user.email" placeholder="Email Address" required="">
+
+            <div class="has-error ng-hide" ng-messages="registerForm.userEmail.$error"
+                 ng-show="registerForm.userEmail.$touched">
+                <p class="help-block errorMsg" ng-show="registerForm.userEmail.$error.required" ng-message="required">
+                    Your email is required.</p>
+
+                <p class="help-block errorMsg" ng-show="registerForm.userEmail.$error.email">
+                    Your email is not valid.
+                </p>
+            </div>
+        </div>
+        <p style="color: #777;font-size: 10px;">
+            By clicking Sign Up, you agree to our
+            <a style="cursor: pointer" href="#/terms" target="_blank">Terms</a> and that you have read our
+            <a style="cursor: pointer" href="#/privacy" target="_blank">Privacy Policy</a>.</p>
+        <a type="submit" class="btn btn-danger btn-block loginBtn" data-ng-hide="vm.isRegistering"
+           data-ng-click="vm.register();registerForm.$setPristine()" ng-disabled="registerForm.$invalid"
+           disabled="disabled"><span class="fa fa-lock"></span> Sign Up</a>
+        <a type="submit" class="btn btn-danger btn-block loginBtn disabled" data-ng-show="vm.isRegistering"><span
+                class="fa fa-spinner fa-spin"></span> Registering</a>
+    </form>
 </div>
