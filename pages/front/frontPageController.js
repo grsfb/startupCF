@@ -99,18 +99,18 @@
         }
 
         function foodChange(snack) {
-            $location.path('item/' + snack + '/' + vm.city);
+            $location.path('item/' + snack.toLowerCase() + '/' + vm.city.toLowerCase());
         }
 
-        function allCategories(city) {
+        function allCategories() {
             $location.path('categories');
         }
 
         vm.foodList = ['Namkeen', 'Sweets', 'Snacks'];
-        vm.popularFoodList = ['Chocolate', 'Chatani'];
+        vm.popularFoodList = ['Chocolate', 'Chatni'];
         vm.newFoodList = ['Cake', 'MouthFreshners'];
         function loadItems() {
-            $location.path('item/' + 'All/' + vm.city);
+            $location.path('item/' + 'all/' + vm.city.toLowerCase());
         }
 
         $document.find("#popularowlNext").click(function () {
@@ -137,23 +137,22 @@
         }
 
         function buy(item) {
-            vm.addItemInCart(item);
-            $location.path("/cart");
+            addItemInCart(item, function () {
+                $location.path("/cart");
+            });
         }
 
-        function addItemInCart(item) {
-            showProgress(item.itemId);
+        function addItemInCart(item, callback) {
             if (SessionService.get(SessionService.Session.CurrentUser)) {
                 var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
                 if (vm.isCartLoaded) {
-                    loadCart(function () {
-                        updateCart(userId, item);
-                    });
+                    updateCart(userId, item, callback);
                 } else {
-                    updateCart(userId, item);
+                    loadCart(function () {
+                        updateCart(userId, item, callback);
+                    });
                 }
             } else {
-                hideProgress(item.itemId);
                 //mobile view
                 if ($window.innerWidth < 420) {
                     $location.path("/login-mble");
@@ -163,18 +162,18 @@
             }
         }
 
-        function updateCart(userId, item) {
+        function updateCart(userId, item, callback) {
             var cartItem = getCartItem(vm.cart, item.itemId);
             if (cartItem) {
                 cartItem.quantity += 1;
-                updateCartItem(cartItem);
+                updateCartItem(cartItem, callback);
             } else {
                 var newCartItem = new CartItem(userId, item.itemId, 1);
-                addNewCartItem(newCartItem);
+                addNewCartItem(newCartItem, callback);
             }
         }
 
-        function addNewCartItem(cartItem) {
+        function addNewCartItem(cartItem, callback) {
             CartService.add(cartItem, function (response) {
                 if (response.success) {
                     vm.cart = addItem(vm.cart, cartItem);
@@ -183,23 +182,28 @@
                 } else {
                     FlashService.Error("Something not working. Please try later");
                 }
-                hideProgress(cartItem.itemId);
+                callback();
             });
         }
 
-        function updateCartItem(cartItem) {
-            hideProgress(cartItem.itemId);
+        function updateCartItem(cartItem, callback) {
+            CartService.update(cartItem, function (response) {
+                if (response.success) {
+                    vm.cart = updateCartItemCount(vm.cart, cartItem.itemId);
+                } else {
+                    FlashService.Error("Something not working. Please try later");
+                }
+                callback();
+            });
         }
 
-        function showProgress(id) {
-            $('#' + id).css("visibility", "visible");
-            $('#button-' + id).prop('disabled', true);
-        }
-
-        function hideProgress(id) {
-            $('#' + id).css("visibility", "hidden");
-            $('#button-' + id).prop('disabled', false);
-            $('#' + id + '-done').show().fadeOut(3000);
+        function updateCartItemCount(arr, itemId) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].itemId === itemId) {
+                    return arr[i].quantity + 1;
+                }
+            }
+            return undefined;
         }
 
 

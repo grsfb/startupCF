@@ -73,11 +73,11 @@
             if (SessionService.get(SessionService.Session.CurrentUser)) {
                 var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
                 if (vm.isCartLoaded) {
+                    updateCart(userId, item);
+                } else {
                     loadCart(function () {
                         updateCart(userId, item);
                     });
-                } else {
-                    updateCart(userId, item);
                 }
             } else {
                 hideProgress(item.itemId);
@@ -115,7 +115,14 @@
         }
 
         function updateCartItem(cartItem) {
-            hideProgress(cartItem.itemId);
+            CartService.update(cartItem, function (response) {
+                if (response.success) {
+                    vm.cart = updateCartItemCount(vm.cart, cartItem.itemId);
+                } else {
+                    FlashService.Error("Something not working. Please try later");
+                }
+                hideProgress(cartItem.itemId);
+            });
         }
 
         function showProgress(id) {
@@ -139,6 +146,15 @@
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i].itemId === itemId) {
                     return arr[i];
+                }
+            }
+            return undefined;
+        }
+
+        function updateCartItemCount(arr, itemId) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].itemId === itemId) {
+                    return arr[i].quantity + 1;
                 }
             }
             return undefined;
