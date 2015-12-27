@@ -27,23 +27,28 @@
                 <div class="fooddiv inner-addon left-addon col-md-7 col-sm-6 col-xs-12">
                     <span>  <i class="fontawesome fa fa-cutlery"></i></span>
                     <input data-toggle="dropdown" class="form-control dropdown-toggle delicacy" type="text"
-                           placeholder="Search Homemade Delicacies" ng-model="snack">
+                           placeholder="Search Homemade Delicacies" ng-model="search.$">
 
 
                     <ul class="dropdown-menu list-group"
                         style="width: 100%;z-index: 9999;overflow: visible;padding: 0px;margin-top: 5px">
-
-                        <li class="list-group-item itemlist" ng-repeat="snack in vm.foodList" style="cursor: pointer;"
-                            data-ng-click="vm.foodChange(snack)">
+                        <li class="list-group-item itemlist" ng-repeat="snack in vm.foodList | filter:search:strict"
+                            style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
                             <span class="badge">Popularity ***</span>{{snack}}
                         </li>
-                        <li class="list-group-item disabled">Popular Delicacies</li>
-                        <li class="list-group-item" style="cursor: pointer;" ng-repeat="snack in vm.popularFoodList"
+                        <li class="list-group-item disabled"
+                            ng-show="(vm.popularFoodList | filter:search:strict).length">Popular Delicacies
+                        </li>
+                        <li class="list-group-item" style="cursor: pointer;"
+                            ng-repeat="snack in vm.popularFoodList | filter:search:strict"
                             data-ng-click="vm.foodChange(snack)">
                             <span class="badge">Popularity *****</span>{{snack}}
                         </li>
-                        <li class="list-group-item disabled">Newly Launched Delicacies</li>
-                        <li class="list-group-item" style="cursor: pointer;" ng-repeat="snack in vm.newFoodList"
+                        <li class="list-group-item disabled" ng-show="(vm.newFoodList | filter:search:strict).length">
+                            Newly Launched Delicacies
+                        </li>
+                        <li class="list-group-item" style="cursor: pointer;"
+                            ng-repeat="snack in vm.newFoodList | filter:search:strict"
                             data-ng-click="vm.foodChange(snack)">
                             <span class="badge">New</span>{{snack}}
                         </li>
