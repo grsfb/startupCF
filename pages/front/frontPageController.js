@@ -99,7 +99,7 @@
         }
 
         function foodChange(snack) {
-            $location.path('item/' + snack.toLowerCase() + '/' + vm.city.toLowerCase());
+            $location.path('item/' + snack + '/' + vm.city);
         }
 
         function allCategories() {
@@ -107,10 +107,10 @@
         }
 
         vm.foodList = ['Namkeen', 'Sweets', 'Snacks'];
-        vm.popularFoodList = ['Chocolate', 'Chatni'];
+        vm.popularFoodList = ['Chocolate', 'Chatani'];
         vm.newFoodList = ['Cake', 'MouthFreshners'];
         function loadItems() {
-            $location.path('item/' + 'all/' + vm.city.toLowerCase());
+            $location.path('item/' + 'all/' + vm.city);
         }
 
         $document.find("#popularowlNext").click(function () {
