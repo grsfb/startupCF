@@ -2,7 +2,7 @@
     <div class="container categoryContainer">
         <div class="row">
             <div class="col-sm-12 col-xs-12">
-                <h1 class="page-title" style="padding: 10px;">{{vm.itemType}} in {{vm.location}}</h1>
+                <h1 class="page-title" style="padding: 10px;">{{vm.categoryName}} in {{vm.chefLocation}}</h1>
             </div>
         </div>
         <div class="row">
@@ -11,7 +11,7 @@
                     <div class="col-md-3 col-sm-4 col-xs-12" style="padding: 0px;">
                         <div style="padding: 20px;">
                             <div class="thumbnail">
-                                <img bn-lazy-src="{{vm.getImageUri(item.chefName,item.category,item.name,'md')}}"
+                                <img bn-lazy-src="img/md/{{item.imageHash}}.png"
                                      class="bn-lazy-img img-responsive itemImage">
 
                                 <div id="{{item.itemId}}" style="position: absolute; top: 50%;
@@ -26,7 +26,7 @@
                                     <span>{{item.name}}</span>
 
                                     <h3 class="name">
-                                        <span class="pull-left shutterPrice">{{item.weight}} Kg</span>
+                                        <span class="pull-left shutterPrice">{{item.weight}}</span>
                                         <span class="pull-right shutterPrice"><i
                                                 class="fa fa-inr"></i> {{item.price}}</span>
                                     </h3>
@@ -35,7 +35,7 @@
 
 
                                 <div class="caption caption-half-down" style="background-color: white;">
-                                    <p class="shutterFont">{{item.name}} - {{item.weight}} Kg</p>
+                                    <p class="shutterFont">{{item.name}} - {{item.weight}}</p>
 
                                     <h2 class="shutterItemPrice"><i class="fa fa-inr"></i> {{item.price}}</h2>
                                     <a class="btn btn-default add-to-cart" style="background-color: teal;color: white"

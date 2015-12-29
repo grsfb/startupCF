@@ -47,9 +47,9 @@
             };
         }]);
     ;
-    FrontPageController.$inject = ['SessionService', 'CartService', '$http', '$location', '$window', '$document', 'FlashService', 'ImageService'];
+    FrontPageController.$inject = ['SessionService', 'CartService', '$http', '$location', '$window', '$document', 'FlashService', 'MappingService'];
 
-    function FrontPageController(SessionService, CartService, $http, $location, $window, $document, FlashService, ImageService) {
+    function FrontPageController(SessionService, CartService, $http, $location, $window, $document, FlashService, MappingService) {
         var vm = this;
         vm.cityChange = cityChange;
         vm.foodChange = foodChange;
@@ -63,8 +63,6 @@
         vm.cityList = ['Pune', 'Nasik', 'Mumbai', 'Jaipur'];
         vm.userId = undefined;
         vm.snack = undefined;
-        vm.getImageUri = getImageUri;
-        vm.getCategoryImageUri = getCategoryImageUri;
         vm.categories = undefined;
         vm.buy = buy;
         vm.allCategories = allCategories;
@@ -99,18 +97,18 @@
         }
 
         function foodChange(snack) {
-            $location.path('item/' + snack + '/' + vm.city);
+            $location.path('item/' + snack + '/' + vm.city.toLowerCase());
         }
 
         function allCategories() {
             $location.path('categories');
         }
 
-        vm.foodList = ['Namkeen', 'Sweets', 'Snacks'];
+        vm.foodList = MappingService.getAllOptions();
         vm.popularFoodList = ['Chocolate', 'Chatani'];
         vm.newFoodList = ['Cake', 'MouthFreshners'];
         function loadItems() {
-            $location.path('item/' + 'all/' + vm.city);
+            $location.path('item/' + 'all/' + vm.city.toLowerCase());
         }
 
         $document.find("#popularowlNext").click(function () {
@@ -204,15 +202,6 @@
                 }
             }
             return undefined;
-        }
-
-
-        function getImageUri(chefName, category, itemName, size) {
-            return ImageService.getUri(chefName, category, itemName, size);
-        }
-
-        function getCategoryImageUri(category, size) {
-            return ImageService.getCategoryUri(category, size);
         }
 
         //private function

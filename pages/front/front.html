@@ -32,7 +32,8 @@
 
                     <ul class="dropdown-menu list-group"
                         style="width: 100%;z-index: 9999;overflow: visible;padding: 0px;margin-top: 5px">
-                        <li class="list-group-item itemlist" ng-repeat="snack in vm.foodList | filter:search:strict"
+                        <li id="jquery-list-view-limit" class="list-group-item itemlist"
+                            ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:8"
                             style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
                             <span class="badge">Popularity ***</span>{{snack}}
                         </li>
@@ -85,7 +86,7 @@
                                 <div owl-carousel-item="" ng-repeat="item in vm.slides" class="item"
                                      style="width: 220px;margin-right: 20px;border: none">
                                     <div class="thumbnail">
-                                        <img bn-lazy-src="{{vm.getImageUri(item.chefName,item.category,item.name,'md')}}"
+                                        <img bn-lazy-src=""
                                              class="bn-lazy-img popularimg img-responsive">
 
                                         <h2 style="color: #FE980F" class="slideItem"><i class="fa fa-inr"></i>
@@ -139,24 +140,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-sm-12">
-                    <div class="container">
+                <div class="col-md-12 col-sm-12" style="padding: 0">
+                    <div class="container" style="padding: 0">
                         <div ng-repeat="item in vm.categories">
                             <div class="col-md-4 col-sm-6">
                                 <div class="panel panel-default">
                                     <div class="panel-heading" ng-class-odd="'oddPanel'" ng-class-even="'evenPanel'">
                                         <span class="fontawesome fa fa-heart">  </span>&nbsp;<label>{{item.category}}</label>
                                         <label class="pull-right">{{item.totalItems}} items</label>
-                                        <!--<div>
-                                            <span class="pull-left"> Achar</span>
-                                            <span class="pull-right"> 50 items</span>
-                                        </div>-->
                                     </div>
                                     <div class="panel-body" style="padding: 5px">
-                                        <img bn-lazy-src="{{vm.getCategoryImageUri(item.category,'md')}}"
+                                        <img bn-lazy-src="img/all-categories/{{item.imageHash}}.png"
                                              class="bn-lazy-img popularCategoryimg img-responsive">
 
-                                        <p class="slideDescription"> {{item.description}}</p>
+                                        <p class="slideDescription" style="padding-left: 5px"> {{item.description}}</p>
                                     </div>
                                     <div class="panel-footer"
                                          style="border: none;background-color: transparent;margin-bottom: 10px">
@@ -180,7 +177,7 @@
         <div>
             <div ng-repeat="item in vm.slides" class="item">
                 <div class="thumbnail col-xs-12" style="width: 100%; height: 200px">
-                    <img bn-lazy-src="{{vm.getImageUri(item.chefName,item.category,item.name,'md')}}" alt="product"
+                    <img bn-lazy-src="" alt="product"
                          class="bn-lazy-img popularimgmble img-responsive">
 
                     <h2 class="slideItem" style="color: #FE980F;margin-top: -5px"><i class="fa fa-inr"></i>

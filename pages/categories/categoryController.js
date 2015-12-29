@@ -3,48 +3,23 @@
     angular
         .module('Chefonia')
         .controller('CategoryController', CategoryController);
-    CategoryController.$inject = ['SessionService', '$location', 'InventoryService', 'CartService', 'FlashService', 'ImageService', '$routeParams'];
+    CategoryController.$inject = ['$location', 'FlashService', 'CommonService'];
 
-    function CategoryController(SessionService, $location, InventoryService, CartService, FlashService, ImageService, $routeParams) {
+    function CategoryController($location, FlashService, CommonService) {
         var vm = this;
-        vm.currentPage = 1;
-        vm.totalPageAsArray = new Array(1);
-        vm.loadNextPage = loadNextPage;
-        vm.getImageUri = getImageUri;
-        vm.getCategoryImageUri = getCategoryImageUri;
-        vm.location = SessionService.get('location');
-        vm.categories = undefined;
-        vm.foodChange = foodChange;
-        //load initial items
-        InventoryService.getAllCategories(1, vm.location, function (response) {
+        vm.categories = [];
+        vm.loadCategoryItems = loadCategoryItems;
+        CommonService.get('/categories/all', function (response) {
             if (response.success) {
-                vm.categories = response.data.items;
-                vm.totalPageAsArray = new Array(response.data.totalPages);
+                vm.categories = response.data;
             } else {
-                FlashService.Error("Something not working. Please try later");
+                FlashService.Error("Something is not working please try after some time");
             }
         });
-        function getImageUri(chefName, category, itemName, size) {
-            return ImageService.getUri(chefName, category, itemName, size);
+
+        function loadCategoryItems(category) {
+            $location.path("/item/" + category.toLowerCase() + "/all");
         }
 
-        function foodChange(snack) {
-            $location.path('item/' + snack + '/' + vm.location);
-        };
-        function getCategoryImageUri(category, size) {
-            return ImageService.getCategoryUri(category, size);
-        }
-
-        function loadNextPage(pageNumber) {
-            InventoryService.getAllCategories(pageNumber + 1, $routeParams.chefLocation, function (response) {
-                if (response) {
-                    vm.categories = response.data.items;
-                    vm.totalPageAsArray = new Array(response.data.totalPages);
-                    vm.selectedPage = pageNumber;
-                } else {
-                    FlashService.Error("Something not working. Please try later");
-                }
-            });
-        }
     }
 })();

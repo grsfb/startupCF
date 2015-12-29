@@ -1,50 +1,42 @@
 <div id="items" class="product">
     <div class="container categoryContainer">
-        <div class="row"> <div class="col-md-12 page-title dishesCarousel" style="margin-top: 0px;margin-bottom:10px; ">
-            <div class="container">Popular Categories</div>
-        </div></div>
+        <div class="row">
+            <div class="col-md-12 page-title dishesCarousel" style="margin-top: 0px;margin-bottom:10px; ">
+                <div class="container">Popular Categories</div>
+            </div>
+        </div>
 
-        <div class="row"> <div class="col-md-12 col-sm-12">
-            <div class="container categoryContainer">
-                <div ng-repeat="item in vm.categories">
-                    <div class="col-md-4 col-sm-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" ng-class-odd="'oddPanel'" ng-class-even="'evenPanel'">
-                                <span class="fontawesome fa fa-heart">  </span>&nbsp;<label>{{item.category}}</label>
-                                <label class="pull-right">{{item.totalItems}} items</label>
-                                <!--<div>
-                                    <span class="pull-left"> Achar</span>
-                                    <span class="pull-right"> 50 items</span>
-                                </div>-->
-                            </div>
-                            <div class="panel-body" style="padding: 5px">
-                                <img bn-lazy-src="{{vm.getCategoryImageUri(item.category,'md')}}"
-                                     class="bn-lazy-img popularCategoryimg img-responsive">
-                                <p class="slideDescription"> {{item.description}}</p>
-                            </div>
-                            <div class="panel-footer" style="border: none;background-color: transparent;margin-bottom: 10px">
-                                <a href="" data-ng-click="vm.foodChange(item.category)"
-                                   class="jbtn add-to-cart"><i></i>View All Items</a>
+        <div class="row">
+            <div class="col-md-12 col-sm-12" style="padding: 0">
+                <div class="container categoryContainer" style="padding: 0">
+                    <div ng-repeat="item in vm.categories">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" ng-class-odd="'oddPanel'" ng-class-even="'evenPanel'">
+                                    <span class="fontawesome fa fa-heart">  </span>&nbsp;<label>{{item.category}}</label>
+                                    <label class="pull-right">{{item.totalItems}} items</label>
+                                    <!--<div>
+                                        <span class="pull-left"> Achar</span>
+                                        <span class="pull-right"> 50 items</span>
+                                    </div>-->
+                                </div>
+                                <div class="panel-body" style="padding: 5px">
+                                    <img bn-lazy-src="img/all-categories/{{item.imageHash}}.png"
+                                         class="bn-lazy-img popularCategoryimg  img-responsive">
+
+                                    <p class="slideDescription" style="padding-left: 10px;"> {{item.description}}</p>
+                                </div>
+                                <div class="panel-footer"
+                                     style="border: none;background-color: transparent;margin-bottom: 10px">
+                                    <a href="" data-ng-click="vm.loadCategoryItems(item.category)"
+                                       class="jbtn add-to-cart"><i></i>View All Items</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div></div>
-
-        <div class="row" data-ng-if="vm.totalPageAsArray.length>1" >
-            <div class="col-xs-12 col-sm-12 text-center">
-                <ul class="pagination">
-                    <li ng-class="{'disabled':vm.selectedIndex==0}" style="cursor: pointer" >
-                        <a data-ng-click="vm.loadNextPage(0)">&laquo;</a></li>
-                    <li ng-class="{ 'active': $index=== vm.selectedIndex}"
-                        data-ng-repeat="count in vm.totalPageAsArray track by $index"  style="cursor: pointer">
-                        <a data-ng-click="vm.loadNextPage($index)">{{$index+1}}</a></li>
-                    <li ng-class="{'disabled':vm.totalPageAsArray.length-1==vm.selectedIndex}" style="cursor: pointer">
-                        <a data-ng-click="vm.loadNextPage(vm.totalPageAsArray.length-1)">&raquo;</a></li>
-                </ul>
-            </div>
         </div>
     </div>
-<div class="push"></div>
+    <div class="push"></div>
 </div>

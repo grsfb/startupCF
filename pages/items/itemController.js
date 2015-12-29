@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('ItemController', ItemController);
-    ItemController.$inject = ['SessionService', '$location', 'InventoryService', 'CartService', 'FlashService', 'ImageService', '$routeParams', '$window'];
+    ItemController.$inject = ['SessionService', '$location', 'InventoryService', 'CartService', 'FlashService','$routeParams', '$window'];
 
-    function ItemController(SessionService, $location, InventoryService, CartService, FlashService, ImageService, $routeParams, $window) {
+    function ItemController(SessionService, $location, InventoryService, CartService, FlashService, $routeParams, $window) {
         var vm = this;
         vm.addItemInCart = addItemInCart;
         vm.cart = [];
@@ -15,11 +15,11 @@
         vm.selectedIndex = 0;
         vm.isCartLoaded = false;
         vm.buy = buy;
-        vm.getImageUri = getImageUri;
-        vm.itemType = $routeParams.categoryName;
-        vm.location = SessionService.get('location');
+        vm.categoryName = $routeParams.categoryName == undefined ? all : $routeParams.categoryName;
+        vm.chefLocation = $routeParams.chefLocation == undefined ? all : $routeParams.chefLocation;
+
         //load initial items
-        InventoryService.getAllItems(1, $routeParams.categoryName, $routeParams.chefLocation, function (response) {
+        InventoryService.getAllItems(1, vm.categoryName, vm.chefLocation, function (response) {
             if (response.success) {
                 vm.items = response.data.items;
                 vm.totalPageAsArray = new Array(response.data.totalPages);
@@ -27,13 +27,11 @@
                 FlashService.Error("Something not working. Please try later");
             }
         });
-        function getImageUri(chefName, category, itemName, size) {
-            return ImageService.getUri(chefName, category, itemName, size);
-        }
 
         //get all cart items
         if (SessionService.get(SessionService.Session.CurrentUser)) {
             loadCart(function () {
+                //nothing to do
             });
         }
         function loadCart(callback) {
@@ -51,7 +49,7 @@
         }
 
         function loadNextPage(pageNumber) {
-            InventoryService.getAllItems(pageNumber + 1, $routeParams.categoryName, $routeParams.chefLocation, function (response) {
+            InventoryService.getAllItems(pageNumber + 1, vm.categoryName, vm.chefLocation, function (response) {
                 if (response) {
                     vm.items = response.data.items;
                     vm.totalPageAsArray = new Array(response.data.totalPages);
