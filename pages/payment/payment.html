@@ -29,22 +29,28 @@
             <p>Please use your Order ID as the payment
                 reference.</p>
 
-            <div class="radio light">
-                <label>
-                    <div class="iradio" style="position: relative;"><input type="radio" name="payment"
-                                                                           id="payment02"
-                                                                           style="position: absolute;" checked>
-                    </div>
-                    Cash On Delivery</label>
-            </div>
-            <!--<div class="radio light">
-                <label>
-                    <div style="position: relative;"><input type="radio" name="payment"
-                                                            id="payment03"
-                                                            style="position: absolute;">
-                    </div>
-                    PayPal <span class="pp-label"></span></label>
-            </div>-->
+            <form id="payment-form" name="payment-form" role="form" novalidate>
+                <div class="radio light" style="background-color: #FFFFFF">
+                    <label>
+                        <div style="position: relative;"><input type="radio" name="payment"
+                                                                id="payment03" class="with-font"
+                                                                style="position: absolute;
+                                                                top: 15px;left: 5px;" checked
+                                                                onchange="vm.usePayMethod('PAYU')">
+                        </div>
+                        <img style="height: 50px;width: 150px;" src="img/third-party/payU.png"></label>
+                </div>
+                <div class="radio light" style="background-color: #FFFFFF;padding: 5px;">
+                    <label style="color: darkgreen;font-weight: bold">
+                        <div class="iradio" style="position: relative;"><input class="with-font" type="radio"
+                                                                               name="payment"
+                                                                               id="payment02"
+                                                                               style="position: absolute;"
+                                                                               onchange="vm.usePayMethod('COD')">
+                        </div>
+                        Cash On Delivery</label>
+                </div>
+            </form>
         </div>
         <a class="btn btn-default mybtn pull-right" type="submit" name="place-order"
            style="width: 100%" data-ng-hide="vm.isPlacingOrder" data-ng-click="vm.checkAndPlaceOrder()">

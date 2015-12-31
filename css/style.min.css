@@ -181,8 +181,7 @@ html, body {
 
 .shutterPrice {
     color: #EB5C31 !important;
-    font-size: medium !important;
-    font-weight: 800 !important;
+    font-weight: bold;
 }
 
 .shutterItemPrice {
@@ -229,8 +228,8 @@ ul li a:hover, ul li a:focus {
 }
 
 .itemImage {
-    height: 250px !important;
-    width: 250px;
+    height: 200px !important;
+    width: 200px;
     padding-bottom: 5px !important;
     border-bottom: 1px chocolate solid !important;
 }

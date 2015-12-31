@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('CartController', CartController);
-    CartController.$inject = ['SessionService', '$location', 'CartService', 'ImageService', 'FlashService'];
+    CartController.$inject = ['SessionService', '$location', 'CartService', 'FlashService'];
 
-    function CartController(SessionService, $location, CartService, ImageService, FlashService) {
+    function CartController(SessionService, $location, CartService, FlashService) {
         var vm = this;
         vm.cartItems = [];
         vm.minusItemCount = minusItemCount;
@@ -14,7 +14,6 @@
         vm.enableCouponEditor = enableCouponEditor;
         vm.applyCoupon = applyCoupon;
         vm.cancelCoupon = cancelCoupon;
-        vm.getImageUri = getImageUri;
         vm.removeItemFromCart = removeItemFromCart;
         vm.showCouponEditor = false;
         var currentUserId = SessionService.get(SessionService.Session.CurrentUser).userId;
@@ -90,10 +89,6 @@
             updateCartCost();
         }
 
-        function getImageUri(chefName, category, itemName, size) {
-            return ImageService.getUri(chefName, category, itemName, size);
-        }
-
         function checkout() {
             //post checkout request and redirect to payment page
             SessionService.put('itemIds', getItemsIdArray(vm.cartItems));
@@ -118,9 +113,9 @@
                     vm.cartItems = removeItem(vm.cartItems, item);
                     SessionService.put(SessionService.Session.CartCount, vm.cartItems.length);
                     SessionService.putInRootScope("cartItemCount", vm.cartItems.length);
-                    var location= SessionService.get("location");
+                    var location = SessionService.get("location");
                     if (vm.cartItems.length == 0) {
-                        $location.path('/item/All/'+location);
+                        $location.path('/item/All/' + location);
                     }
                 }
                 else {
