@@ -13,7 +13,7 @@
                          style="font-size:large;font-weight: 200;">
                         <span> Order Id : </span>
                         <a href="#/orderDetail/{{order.orderId}}"
-                           style="margin-top: 5px;color: #EB5C31">{{order.orderId}}</a>
+                           style="margin-top: 5px;color: #EB5C31;border-bottom: 1px solid orangered;text-decoration: none">{{order.orderId}}</a>
                     </div>
                 </div>
 
@@ -23,7 +23,7 @@
                         <div class="col-sm-8" style="padding-top: 10px;">
                             <!--<span class="hidden-md hidden-lg hidden-sm" data-ng-click="vm.removeItemFromCart(item)"><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>-->
                             <div class="col-sm-4 col-xs-4" style="padding-left: 0px!important;padding-bottom: 10px;">
-                                <img src="{{vm.getImageUri(item.chefName,item.category,item.itemName,'md')}}"
+                                <img bn-lazy-src="img/md/{{item.imageHash}}.png"
                                      class="img-responsive" style="height: 80px;width: 120px;">
                             </div>
                             <div class="col-sm-8 col-xs-8" style="padding: 0px;">

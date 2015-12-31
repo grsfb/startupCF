@@ -16,7 +16,8 @@
                 <div class="col-sm-8" style="padding-left: 0px!important; padding-top: 10px;">
                     <span class="hidden-md hidden-lg hidden-sm" data-ng-click="vm.removeItemFromCart(item)"><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>
                     <div class="col-sm-4 col-xs-12" style="padding-left: 0px!important;padding-bottom: 10px;">
-                        <img ng-src="" class="img-responsive" style="height: 80px;width: 120px;">
+
+                        <img bn-lazy-src="img/md/{{item.imageHash}}.png" class="img-responsive" style="height: 80px;width: 120px;">
                     </div>
                     <div class="col-sm-8 col-xs-12" style="padding: 0px;">
                         <div>
@@ -48,7 +49,7 @@
                         </div>
                         <div class="hidden-md hidden-lg hidden-sm">
                             <div class=" col-xs-4" style="padding-left:0px; padding-bottom: 10px;">Weight:</div>
-                            <div class=" col-xs-8" style="padding-left: 0px;"><label>{{item.weight *item.quantity}} Kg</label></div>
+                            <div class=" col-xs-8" style="padding-left: 0px;"><label> {{item.weight}}</label></div>
                         </div>
                     </div>
                 </div>
@@ -64,7 +65,7 @@
                         <div class="col-sm-12 pull-right">
                             <div class="col-sm-4">Weight:</div>
                             <div class="col-sm-8">
-                                <label>{{item.weight*item.quantity}} Kg</label>
+                                <label>{{item.weight}}</label>
                             </div>
                         </div>
                     </div>
@@ -78,13 +79,19 @@
         <div class="col-sm-12 tstyle" style="font-size: 14px !important; padding: 20px;">
             <div class="col-sm-12" style="padding-left: 0px; padding-top: 10px;">
                 <div class="col-sm-12" style="padding: 0px !important;">Merchandise <label class="pull-right"><i
-                        class="fa fa-inr"></i> {{vm.cartTotal}}</label></div>
+                        class="fa fa-inr"></i> {{vm.cartItemTotal}}</label></div>
             </div>
             <div class="col-sm-12"
                  style="padding-left: 0px; padding-top:10px;
                  padding-bottom:10px;border-bottom: 1px #B3AFA8 solid">
                 <div class="col-sm-12" style="padding: 0px !important;">Shipping <label class="pull-right"><i
                         class="fa fa-inr"></i> {{vm.shippingCost}}</label></div>
+            </div>
+            <div class="col-sm-12"
+                 style="padding-left: 0px; padding-top:10px;
+                 padding-bottom:10px;border-bottom: 1px #B3AFA8 solid">
+                <div class="col-sm-12" style="padding: 0px !important;">Coupon Discount <label class="pull-right"><i
+                        class="fa fa-inr"></i> {{vm.couponDiscount}}</label></div>
             </div>
             <div class="col-sm-12" style="padding-left: 0px; padding-top: 10px;;">
                 <div class="col-sm-12" style="padding: 0px !important;">Total <label class="pull-right"><i
@@ -94,11 +101,11 @@
                 <a class="btn btn-default mybtn" data-ng-click="vm.checkout()" style="width: 100%;"> Start Checkout</a>
             </div>
         </div>
-        <div class="col-sm-12 tstyle" style="font-size: 14px !important; padding: 20px; margin-top: 10px; margin-bottom: 10px;">
-            <div class="col-sm-12" style="padding-left: 0px; padding-top: 10px; ">
+        <div class="col-sm-12 tstyle" style="font-size: 14px !important; padding: 20px; margin-top: 10px; margin-bottom: 10px;" >
+            <div class="col-sm-12" style="padding-left: 0px; padding-top: 10px; " data-ng-show="!vm.showAppliedCouponEditor">
                 <a data-ng-click="vm.enableCouponEditor()"
                    style="cursor:pointer; text-decoration: none; color: #101010"><i
-                        class="fa fa-plus"></i> Add Promotion</a>
+                        class="fa fa-plus"></i> Coupon</a>
 
                 <div class="row" style="padding: 10px;" data-ng-show="vm.showCouponEditor">
                     <div class="col-sm-12" style="padding: 0px;">
@@ -107,19 +114,31 @@
                                 <div class="form-group"
                                      ng-class="{'has-error': form.code.$dirty && form.code.$error.required}">
                                     <label class="sr-only" for="code">Enter coupon code</label>
-                                    <input type="text" class="form-control col-xs-12" id="code" name="code"
-                                           placeholder="Enter coupon code" required="">
+                                    <input type="text" class="form-control col-xs-12" id="code" name="code" autocomplete="off"
+                                           placeholder="Enter coupon code" required="" data-ng-model="vm.couponCode">
                                     <span ng-show="form.code.$dirty && form.code.$error.required" class="help-block">Coupon code is required</span>
                                 </div>
                                 <input class="btn btn-default mybtn" type="submit" name="apply-coupon"
                                        value="Apply Coupon" data-ng-click="vm.applyCoupon();form.$setPristine()"
-                                       data-ng-disabled="form.$invalid" style="margin-top: 5px;">
-                                <input class="btn btn-default" type="submit" name="apply-coupon"
-                                       value="Cancel" data-ng-click="vm.cancelCoupon()" style="margin-top: 5px;">
+                                       data-ng-disabled="form.$invalid;" style="margin-top: 5px;">
+
                             </form>
+                            <p style="color: darkred;margin-top: 10px">{{vm.couponMessage}}</p>
                         </div>
+
                     </div>
                 </div>
+
+            </div>
+            <div class="col-sm-12" style="padding-left: 0px; " class="hidden-panel" id="appliedCoupon" data-ng-show="vm.showAppliedCouponEditor">
+                <span
+                   style="cursor:pointer; text-decoration: none; color: green"><i
+                        class="col-sm-12"></i> Coupon Applied</span>
+                <div class="col-sm-12" style="padding-top: 10px;padding-left: 0px"><div class="pull-left">  <span style="color: darkgreen;margin-top: 10px">{{vm.couponCode}}</span></div>
+                    <div class="pull-right">  <a data-ng-click="vm.cancelCoupon()"
+                                                 style="cursor:pointer; text-decoration: none; color: #101010"><i
+                            class="fa fa-minus-circle"></i> Remove</a> </div></div>
+
             </div>
         </div>
     </div>

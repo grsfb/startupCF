@@ -16,6 +16,8 @@
         vm.deleteAddress = deleteAddress;
         vm.showAddressEditor = false;
         vm.isAddingAddress = false;
+        vm.estimateDeliveryTime=undefined;
+        vm.isChefFromPune=SessionService.get('isChefFromPune');
         var userId=SessionService.get(SessionService.Session.CurrentUser).userId;
         AddressService.getAllAddress(userId, function (response) {
             if (response.success) {
@@ -26,11 +28,27 @@
             if (vm.allAddress.length == 0) {
                 enableAddressEditor();
             }
+            else if(vm.allAddress.length == 1){
+                setSelectedAddress(vm.allAddress[0],0);
+            }
         });
 
         function setSelectedAddress(address, index) {
             SessionService.put('deliverAddress', address);
             vm.selectedIndex = index;
+            var addressFromPune=address.city.toLowerCase()=='pune' || address.zip.slice(0,3)=='411';
+         if(addressFromPune==true && vm.isChefFromPune==true){
+             vm.estimateDeliveryTime="Your all items Will be delivered in 2 to 4 working days";
+             FlashService.Success(vm.estimateDeliveryTime);
+            }
+            else if(addressFromPune==true && vm.isChefFromPune==false){
+             vm.estimateDeliveryTime="Your all items Will be delivered in 5 to 7 working days";
+             FlashService.Success(vm.estimateDeliveryTime);
+         }
+            else{
+             FlashService.Error("Items can not be delivered to specified delivery location. Currently we are in pune only.");
+         }
+            SessionService.put('EstimateDeliveryTime', vm.estimateDeliveryTime);
         }
 
         function enableAddressEditor() {
@@ -43,6 +61,9 @@
                     if (response.success) {
                         SessionService.remove('deliverAddress');
                         vm.allAddress.splice(index, 1);
+                        if(vm.allAddress.length == 1){
+                            setSelectedAddress(vm.allAddress[0],0);
+                        }
                     } else {
                         FlashService.Error("Error occurred while deleting address");
                     }

@@ -2,7 +2,7 @@
     <div class="container categoryContainer">
         <div class="row">
             <div class="col-sm-12 col-xs-12">
-                <h1 class="page-title" style="padding: 10px;">{{vm.categoryName}} in {{vm.chefLocation}}</h1>
+                <h1 class="page-title" style="padding: 10px;">{{vm.itemType}} in {{vm.location}} Location</h1>
             </div>
         </div>
         <div class="row">
@@ -28,16 +28,20 @@
                                     <h3 class="name" style="padding-left: 10px;padding-right: 10px;">
                                         <span class="pull-left shutterPrice">{{item.weight}}</span>
                                         <span class="pull-right shutterPrice"><i
-                                                class="fa fa-inr"></i> {{item.price}}</span>
+                                                class="fa fa-inr"></i> {{item.weightToPrice[item.weight.trim()]}}</span>
                                     </h3>
 
                                 </h3>
 
 
                                 <div class="caption caption-half-down" style="background-color: white;">
-                                    <p class="shutterFont">{{item.name}} - {{item.weight}}</p>
-
-                                    <h2 class="shutterItemPrice"><i class="fa fa-inr"></i> {{item.price}}</h2>
+                                    <p class="shutterFont">{{item.name}} </p>
+                                    <select ng-model="item.weight" ng-change="item.price=item.weightToPrice[item.weight.trim()]">
+                                        <option ng-selected="{{item.weight==key}}"
+                                                ng-repeat="(key,value) in item.weightToPrice"><a>{{key}}</a>
+                                        </option>
+                                    </select>
+                                    <h2 class="shutterItemPrice"><i class="fa fa-inr"></i>{{item.weightToPrice[item.weight.trim()]}}</h2>
                                     <a class="btn btn-default add-to-cart" style="background-color: teal;color: white"
                                        data-ng-click="vm.buy(item)"><i
                                             class="fa fa-search-minus"></i> Buy Now</a>

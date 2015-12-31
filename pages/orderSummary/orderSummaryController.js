@@ -3,11 +3,10 @@
     angular
         .module('Chefonia')
         .controller('OrderSummaryController', OrderSummaryController);
-    OrderSummaryController.$inject = ['SessionService','$location', 'OrderService', 'ImageService', 'FlashService','$routeParams'];
+    OrderSummaryController.$inject = [ 'OrderService', 'FlashService','$routeParams'];
 
-    function OrderSummaryController(SessionService,$location, OrderService, ImageService, FlashService,$routeParams) {
+    function OrderSummaryController(OrderService, FlashService,$routeParams) {
         var vm = this;
-        vm.getImageUri=getImageUri;
         vm.orderItem = undefined;
         vm.printOrder=printOrder;
         vm.showEmail=showEmail;
@@ -23,9 +22,6 @@
         });
 
 
-        function getImageUri(chefName, category, itemName, size) {
-            return ImageService.getUri(chefName, category, itemName, size);
-        }
 
         function printOrder() {
             window.print();

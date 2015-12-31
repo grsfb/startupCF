@@ -20,7 +20,6 @@
 
         function checkAndPlaceOrder() {
             var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
-
             CommonService.post("/payu/initiate-payment", {"userId": userId, "totalAmount": 12.42}, function (res) {
                 if (res.success) {
                     payUform(res.data);
@@ -75,7 +74,12 @@
 
              }
         }
-
+        function checkIfOrderBelongToPune(address) {
+            if(address.city.toLowerCase()=='pune' || address.zip.slice(0,3)=='411' ){
+                return true;
+            }
+            return false;
+        }
         function cleanUpOnOrderSuccess() {
             CartService.remove(SessionService.get('currentUser').userId,
                 function (response) {
@@ -87,7 +91,9 @@
             SessionService.remove('cartTotal');
             SessionService.remove('itemIds');
             SessionService.remove('userCart');
-            SessionService.putInRootScope('cartItemCount', 0);
+            SessionService.putInRootScope('cartItemCount',0);
+            SessionService.remove('deliverAddress');
+            SessionService.remove('isAnyBakeryItem');
         }
 
         function Order(userId, addressId, items, paymentType) {
@@ -98,6 +104,7 @@
                 this.items.push({'itemId': items[item]})
             }
             this.paymentType = paymentType;
+            this.estimateDeliveryTime=SessionService.get('EstimateDeliveryTime');
         }
     }
 })();
