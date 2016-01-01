@@ -94,6 +94,7 @@
             SessionService.putInRootScope('cartItemCount',0);
             SessionService.remove('deliverAddress');
             SessionService.remove('isAnyBakeryItem');
+            SessionService.remove('isAnyBakeryItem');
         }
 
         function Order(userId, addressId, items, paymentType) {
