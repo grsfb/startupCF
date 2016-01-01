@@ -19,7 +19,7 @@
         }
 
         function checkAndPlaceOrder() {
-            var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
+            /* var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
             CommonService.post("/payu/initiate-payment", {"userId": userId, "totalAmount": 12.42}, function (res) {
                 if (res.success) {
                     payUform(res.data);
@@ -47,7 +47,7 @@
                 $(form).appendTo('body').submit();
 
             }
-
+*/
              vm.order.address = SessionService.get('deliverAddress');
              vm.order.paymentMethod = "COD";
              if (vm.order.address == undefined) {
@@ -93,7 +93,6 @@
             SessionService.remove('userCart');
             SessionService.putInRootScope('cartItemCount',0);
             SessionService.remove('deliverAddress');
-            SessionService.remove('isAnyBakeryItem');
             SessionService.remove('isAnyBakeryItem');
         }
 

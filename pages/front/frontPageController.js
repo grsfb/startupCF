@@ -72,15 +72,15 @@
         else {
             SessionService.put('location', vm.city);
         }
-        $http.get('/client/data/items.json').success(function (data) {
+        $http.get('data/items.json').success(function (data) {
             vm.slides = data;
 
         });
-        $http.get('/client/data/categories.json').success(function (data) {
+        $http.get('data/categories.json').success(function (data) {
             vm.categories = data;
 
         });
-        $http.get('/client/data/popularItems.json').success(function (data) {
+        $http.get('data/popularItems.json').success(function (data) {
             vm.newSlides = data;
         });
         function cityChange(city) {
@@ -140,7 +140,9 @@
             });
         }
 
+        //cart
         function addItemInCart(item, callback) {
+            //don't show progress if user not logged in
             if (SessionService.get(SessionService.Session.CurrentUser)) {
                 var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
                 if (vm.isCartLoaded) {
@@ -151,22 +153,17 @@
                     });
                 }
             } else {
-                //mobile view
-                if ($window.innerWidth < 420) {
-                    $location.path("/login-mble");
-                } else {
-                    $("#myModal").modal();
-                }
+                openLogin();
             }
         }
 
         function updateCart(userId, item, callback) {
-            var cartItem = getCartItem(vm.cart, item.itemId);
+            var cartItem = getCartItem(vm.cart, item.itemId, item.weight);
             if (cartItem) {
                 cartItem.quantity += 1;
                 updateCartItem(cartItem, callback);
             } else {
-                var newCartItem = new CartItem(userId, item.itemId, 1);
+                var newCartItem = new CartItem(userId, item.itemId, 1, item.weight, item.price);
                 addNewCartItem(newCartItem, callback);
             }
         }
@@ -178,9 +175,11 @@
                     SessionService.putInRootScope("cartItemCount", vm.cart.length);
                     SessionService.put("cartItemCount", vm.cart.length);
                 } else {
-                    FlashService.Error("Something not working. Please try later");
+                    FlashService.Error("Something not working. Please try later", true);
                 }
-                callback();
+                if (callback) {
+                    callback();
+                }
             });
         }
 
@@ -189,10 +188,27 @@
                 if (response.success) {
                     vm.cart = updateCartItemCount(vm.cart, cartItem.itemId);
                 } else {
-                    FlashService.Error("Something not working. Please try later");
+                    FlashService.Error("Something not working. Please try later", true);
                 }
-                callback();
+                if (callback) {
+                    callback();
+                }
             });
+        }
+
+        //private function
+        function addItem(arr, item) {
+            arr.push(item);
+            return arr;
+        }
+
+        function getCartItem(arr, itemId, weight) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].itemId === itemId && arr[i].weight == weight) {
+                    return arr[i];
+                }
+            }
+            return undefined;
         }
 
         function updateCartItemCount(arr, itemId) {
@@ -204,28 +220,23 @@
             return undefined;
         }
 
-        //private function
-        function addItem(arr, item) {
-            arr.push(item);
-            return arr;
-        }
-
-        function getCartItem(arr, itemId) {
-            for (var i = 0; i < arr.length; i++) {
-                if (arr[i].itemId === itemId) {
-                    return arr[i];
-                }
+        function openLogin() {
+            //mobile view
+            if ($window.innerWidth < 420) {
+                $location.path("/login-mble");
+            } else {
+                $("#myModal").modal();
             }
-            return undefined;
         }
 
         //cartItem class
-        function CartItem(userId, itemId, quantity) {
+        function CartItem(userId, itemId, quantity, weight, price) {
             this.userId = userId;
             this.itemId = itemId;
+            this.weight = weight;
+            this.price = price;
             this.quantity = quantity;
         }
-
     }
 
 })();

@@ -1,92 +1,136 @@
-[  {
-  "itemId": "0068f84f-92e3-4d46-ad96-fea63a19d6a5",
-  "name": "Chocolate",
-  "weight": 1,
-  "price": 150,
-  "category": "Chocolate",
-  "chefId": "chef123",
-  "chefName": "Pinky",
-  "recipe": "Milk and oil",
-  "popularity": 0,
-  "quantity":1,
-  "chefLocation":"Pune"
-},
+[
   {
-    "itemId": "370b57c8-ae74-4d7e-bf14-e5f153d03f35",
-    "name": "Strawberry Cake",
-    "weight": 1,
-    "price": 100,
-    "category": "Cake",
-    "chefId": "chef123",
-    "chefName": "Prajakta Malkar",
-    "recipe": "Milk and oil",
-    "popularity": 0,
-    "quantity":1,
-    "chefLocation":"Pune"
-  },
-  {
-    "itemId": "f65d53a8-8119-4632-8dd3-92bf0c428e84",
-    "name": "Black Forest Cake",
-    "weight": 1,
-    "price": 300,
-    "category": "Cake",
-    "chefId": "chef123",
-    "chefName": "Prajakta Malkar",
-    "recipe": "Nuts and oil",
-    "popularity": 0,
-    "quantity":1,
-    "chefLocation":"Pune"
-  },
-  {
-    "itemId": "27fbed99-6f7b-43a2-b208-3524c9d8f57e",
+    "itemId": "19dccd9a-6e84-49b2-9a8a-98a9e60d4851",
     "name": "Chocolate Cake",
-    "weight": 1,
-    "price": 300,
-    "category": "Cake",
-    "chefId": "chef123",
+    "weightToPrice": {
+      "0.5 kg": "400",
+      "1 kg": "800"
+    },
+    "price": 400,
+    "weight": "0.5 kg",
+    "category": "BAKERY",
+    "chefId": "1",
     "chefName": "Prajakta Malkar",
-    "recipe": "Rice and oil",
-    "popularity": 0,
-    "quantity":1,
-    "chefLocation":"Pune"
-  }
-  ,{
-    "itemId": "b9b41e18-c62d-4ef6-9367-9cd26107141b",
-    "name": "Handwa",
-    "weight": 1,
-    "price": 100,
-    "category": "Snacks",
-    "chefId": "chef123",
-    "chefName": "Pinky",
-    "recipe": "Milk and oil",
-    "popularity": 0,
-    "quantity":1,
-    "chefLocation":"Pune"
+    "chefLocation": "MUMBAI",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "935bcecb97eff76104833fa9d01a0854"
+  },
+
+  {
+    "itemId": "ce91e7dd-f4ca-4faa-9c00-6d8c8501dcc2",
+    "name": "Milk Chocolates - Almonds",
+    "weightToPrice": {
+      "0.5 kg": "300",
+      "1 kg": "600"
+    },
+    "price": 350,
+    "weight": "0.5 Kg",
+    "category": "CHOCOLATES",
+    "chefId": "3",
+    "chefName": "Pooja Dewoolkar",
+    "chefLocation": "MUMBAI",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "4ebb974cb43a0904cc710155cbfc3e48"
   },
   {
-    "itemId": "3366ce37-3449-4a3c-9348-b80a351ead93",
-    "name": "Thepla",
-    "weight": 1,
+    "itemId": "2798b645-b3a6-4668-bfd7-507a74be6be5",
+    "name": "Mash mellows with sprinkles",
+    "weightToPrice": {},
     "price": 100,
-    "category": "Snacks",
-    "chefId": "chef123",
-    "chefName": "Pinky",
-    "recipe": "Milk and oil",
-    "popularity": 0,
-    "quantity":1,
-    "chefLocation":"Pune"
+    "weight": "4 Pcs",
+    "category": "CHOCOLATES",
+    "chefId": "5",
+    "chefName": "Vasavi",
+    "chefLocation": "HYDERABAD",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "32067bfd7f39040bd04fdba3c0d1ba27"
   },
   {
-    "itemId": "2edc6d81-e669-44f6-b8f1-d28d687d8f3a",
-    "name": "White Dhokla",
-    "weight": 1,
-    "price": 100,
-    "category": "Snacks",
-    "chefId": "chef123",
-    "chefName": "Pinky",
-    "recipe": "Milk and oil",
-    "popularity": 0,
-    "quantity":1,
-    "chefLocation":"Pune"
+    "itemId": "dcf7557b-10d3-42a7-a27b-ffacc212904b",
+    "name": "Chocolate with Choco Chips",
+    "weightToPrice": {
+      "150 gm":"150",
+      "300 gm":"150"
+    },
+    "price": 150,
+    "weight": "150 gm",
+    "category": "CHOCOLATES",
+    "chefId": "4",
+    "chefName": "Satin Chocolates",
+    "chefLocation": "DELHI",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "40e74754ca0f10987f9567bc32f00483"
+  },
+  {
+    "itemId": "7d662e5f-5314-44c5-9798-ef9176acce76",
+    "name": "NYLON SEV",
+    "weightToPrice": {
+      "200 gm":"35",
+      "400 gm":"70"
+    },
+    "price": 35,
+    "weight": "200 gm",
+    "category": "MIXTURES",
+    "chefId": "6",
+    "chefName": "Sageeta",
+    "chefLocation": "AHEMDABAD",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "ae0f374c15ce615a380bd054d7a666be"
+  },
+  {
+    "itemId": "20cb51ed-3bb2-47df-97da-534ceb6a9a0d",
+    "name": "Black Forest Cake",
+    "weightToPrice": {
+      "0.5 kg": "350",
+      "1 kg": "700"
+    },
+    "price": 350,
+    "weight": "0.5 kg",
+    "category": "BAKERY",
+    "chefId": "1",
+    "chefName": "Prajakta Malkar",
+    "chefLocation": "MUMBAI",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "e3bda12a82295b313a135576f606a00c"
+  },
+  {
+    "itemId": "1c6e016c-7d7b-4658-ac97-07338b627476",
+    "name": "Dryfruit Achar",
+    "weightToPrice": {
+      "250 gm": "220",
+      "0.5 kg": "440"
+    },
+    "price": 220,
+    "weight": "250 gm",
+    "category": "PICKLES",
+    "chefId": "2",
+    "chefName": "Pashmin Shah",
+    "chefLocation": "PUNE",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "6a73e9bad1c99f635c93f7b23cbfec7e"
+  },
+  {
+    "itemId": "5f06b7a9-8236-4ae4-a4a2-b18f26d3e9b0",
+    "name": "LASAN SEV",
+    "weightToPrice": {
+      "200 gm": "70",
+      "400 gm": "140"
+    },
+    "price": 35,
+    "weight": "200 gm",
+    "category": "MIXTURES",
+    "chefId": "6",
+    "chefName": "Sageeta",
+    "chefLocation": "AHEMDABAD",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "f6c9138af1816c3258bc6351ed4530e4"
   }
 ]

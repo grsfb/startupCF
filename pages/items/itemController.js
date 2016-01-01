@@ -17,9 +17,10 @@
         vm.buy = buy;
         vm.categoryName = $routeParams.categoryName == undefined ? all : $routeParams.categoryName;
         vm.chefLocation = $routeParams.chefLocation == undefined ? all : $routeParams.chefLocation;
+        vm.actualCategory=MappingService.getCategory(vm.categoryName)==undefined ?'all':MappingService.getCategory(vm.categoryName);
 
         //load initial items
-        InventoryService.getAllItems(1, MappingService.getCategory(vm.categoryName), vm.chefLocation, function (response) {
+        InventoryService.getAllItems(1,vm.actualCategory, vm.chefLocation, function (response) {
             if (response.success) {
                 vm.items = response.data.items;
                 vm.totalPageAsArray = new Array(response.data.totalPages);

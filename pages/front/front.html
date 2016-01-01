@@ -79,33 +79,57 @@
                             <data-owl-carousel style="height: 250px;width: auto;margin-left: 35px"
                                                id="owl-demo" class="owl-carousel" data-options="{rewindNav : true}">
                                 <div owl-carousel-item="" ng-repeat="item in vm.slides" class="item"
-                                     style="width: 220px;margin-right: 20px;border: none">
+                                     style="width: 275px;margin-right: 20px;border: none">
                                     <div class="thumbnail">
-                                        <img bn-lazy-src=""
+                                        <img bn-lazy-src="img/md/{{item.imageHash}}.png"
                                              class="bn-lazy-img popularimg img-responsive">
 
-                                        <h2 style="color: #FE980F" class="slideItem"><i class="fa fa-inr"></i>
-                                            {{vm.slides[$index].price}}</h2>
+                                        <h4 style="color: #FE980F;padding-top: 5px;" class="slideItem">
+                                            <i class="fa fa-inr"></i>
+                                            {{item.price}}
+                                        </h4>
 
-                                        <p class="slideItem">{{vm.slides[$index].name}} - {{vm.slides[$index].quantity}}
-                                            Kg</p>
+                                        <h5 class="slideItem">{{item.name}} - {{item.weight}}
+                                        </h5>
 
                                         <div class="caption caption-half-down" style="background-color: white;">
                                             <p class="shutterFont">{{vm.slides[$index].name}} -
-                                                {{vm.slides[$index].quantity}} Kg</p>
+                                                {{vm.slides[$index].quantity}}</p>
 
-                                            <h2 class="shutterItemPrice"><i class="fa fa-inr"></i>
-                                                {{vm.slides[$index].price}}</h2>
+                                            <div class="btn-group">
+                                                <button class="btn btn-default" style="padding: 0;width: auto;">
+                                                    <span style="padding-left: 5px">{{item.weight}}</span>
+                                                <span class="pull-right" style="padding-right: 5px;padding-left: 15px;">
+                                                    <i class="fa fa-inr" style="color: #EB5C31;"></i> {{item.price}}
+                                                </span>
+                                                </button>
+                                                <button data-toggle="dropdown" style="padding-top: 0;padding-bottom: 0"
+                                                        class="btn btn-default dropdown-toggle"
+                                                        data-placeholder="false"><span class="caret"></span></button>
+                                                <ul class="dropdown-menu" style="min-width: 100%;max-height: 50px;
+                                        overflow-y: auto">
+                                                    <li style="padding-left: 5px;padding-right: 15px;cursor: pointer"
+                                                        data-ng-repeat="(weight,price) in item.weightToPrice"
+                                                        data-ng-click="item.weight=weight.trim();
+                                                item.price=price.trim()">
+                                                        <span>{{weight}} </span>
+                                                <span class="pull-right">
+                                                    <i class="fa fa-inr" style="color: #EB5C31;"></i> {{price}}
+                                                </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <h4 class="shutterItemPrice"><i class="fa fa-inr"></i>
+                                                {{item.price}}</h4>
+                                        </div>
+                                        <div class="caption caption-half-up" style="background-color: white;">
+                                            <p class="shutterFontChef" style="color: #262626;margin-top: 0">Chef Detail</p>
+                                            <h5 class="shutterFont" style="margin-top: 0">{{item.chefName}} , {{item.chefLocation}}</h5>
                                             <a href="" data-ng-click="vm.buy(item)"
-                                               style="background-color: teal;color: white;padding-top: 0px;text-align: center"
+                                               style="background-color: teal;color: white;margin-top: 0;text-align: center"
                                                class="btn btn-default add-to-cart"><i
                                                     class="fa fa-shopping-cart"></i> Buy</a>
-                                        </div>
-
-                                        <div class="caption caption-half-up" style="background-color: white;">
-
-                                            <p class="shutterFontChef" style="color: #262626;">Chef Detail</p>
-                                            <h5 class="shutterFont">{{item.chefName}} , {{item.chefLocation}}</h5>
                                         </div>
                                     </div>
                                 </div>
