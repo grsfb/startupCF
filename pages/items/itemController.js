@@ -3,7 +3,7 @@
     angular
         .module('Chefonia')
         .controller('ItemController', ItemController);
-    ItemController.$inject = ['SessionService', '$location', 'InventoryService', 'CartService', 'FlashService','$routeParams', '$window'];
+    ItemController.$inject = ['SessionService', '$location', 'InventoryService', 'CartService', 'FlashService', '$routeParams', '$window'];
 
     function ItemController(SessionService, $location, InventoryService, CartService, FlashService, $routeParams, $window) {
         var vm = this;
@@ -28,7 +28,7 @@
             }
         });
 
-        //get all cart items
+        //get all cart items parallel
         if (SessionService.get(SessionService.Session.CurrentUser)) {
             loadCart(function () {
                 //nothing to do
@@ -61,65 +61,67 @@
         }
 
         function buy(item) {
-            vm.addItemInCart(item);
-            $location.path("/cart");
+            addItemInCart(item, function () {
+                $location.path("/cart");
+            });
         }
 
         //cart
-        function addItemInCart(item) {
-            showProgress(item.itemId);
+        function addItemInCart(item, callback) {
+            //don't show progress if user not logged in
             if (SessionService.get(SessionService.Session.CurrentUser)) {
+                showProgress(item.itemId);
                 var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
                 if (vm.isCartLoaded) {
-                    updateCart(userId, item);
+                    updateCart(userId, item, callback);
                 } else {
                     loadCart(function () {
-                        updateCart(userId, item);
+                        updateCart(userId, item, callback);
                     });
                 }
             } else {
-                hideProgress(item.itemId);
-                //mobile view
-                if ($window.innerWidth < 420) {
-                    $location.path("/login-mble");
-                } else {
-                    $("#myModal").modal();
-                }
+                openLogin();
             }
         }
 
-        function updateCart(userId, item) {
-            var cartItem = getCartItem(vm.cart, item.itemId,item.weight);
+        function updateCart(userId, item, callback) {
+            var cartItem = getCartItem(vm.cart, item.itemId, item.weight);
             if (cartItem) {
                 cartItem.quantity += 1;
-                updateCartItem(cartItem);
+                updateCartItem(cartItem, callback);
             } else {
-                var newCartItem = new CartItem(userId, item.itemId, 1,item.weight,item.price);
-                addNewCartItem(newCartItem);
+                var newCartItem = new CartItem(userId, item.itemId, 1, item.weight, item.price);
+                addNewCartItem(newCartItem, callback);
             }
         }
 
-        function addNewCartItem(cartItem) {
+        function addNewCartItem(cartItem, callback) {
             CartService.add(cartItem, function (response) {
                 if (response.success) {
                     vm.cart = addItem(vm.cart, cartItem);
                     SessionService.putInRootScope("cartItemCount", vm.cart.length);
                     SessionService.put("cartItemCount", vm.cart.length);
                 } else {
-                    FlashService.Error("Something not working. Please try later");
+                    FlashService.Error("Something not working. Please try later", true);
                 }
                 hideProgress(cartItem.itemId);
+                if (callback) {
+                    callback();
+                }
             });
         }
 
-        function updateCartItem(cartItem) {
+        function updateCartItem(cartItem, callback) {
             CartService.update(cartItem, function (response) {
                 if (response.success) {
                     vm.cart = updateCartItemCount(vm.cart, cartItem.itemId);
                 } else {
-                    FlashService.Error("Something not working. Please try later");
+                    FlashService.Error("Something not working. Please try later", true);
                 }
                 hideProgress(cartItem.itemId);
+                if (callback) {
+                    callback();
+                }
             });
         }
 
@@ -140,9 +142,9 @@
             return arr;
         }
 
-        function getCartItem(arr, itemId,weight) {
+        function getCartItem(arr, itemId, weight) {
             for (var i = 0; i < arr.length; i++) {
-                if (arr[i].itemId === itemId && arr[i].weight ==weight) {
+                if (arr[i].itemId === itemId && arr[i].weight == weight) {
                     return arr[i];
                 }
             }
@@ -158,12 +160,21 @@
             return undefined;
         }
 
+        function openLogin() {
+            //mobile view
+            if ($window.innerWidth < 420) {
+                $location.path("/login-mble");
+            } else {
+                $("#myModal").modal();
+            }
+        }
+
         //cartItem class
-        function CartItem(userId, itemId, quantity,weight,price) {
+        function CartItem(userId, itemId, quantity, weight, price) {
             this.userId = userId;
             this.itemId = itemId;
-            this.weight=weight;
-            this.price=price;
+            this.weight = weight;
+            this.price = price;
             this.quantity = quantity;
         }
     }

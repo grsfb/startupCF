@@ -4,9 +4,9 @@
         .module('Chefonia')
         .controller('CartController', CartController);
 
-    CartController.$inject = ['SessionService', '$location', 'CartService', 'FlashService','CampaignService'];
+    CartController.$inject = ['SessionService', '$location', 'CartService', 'FlashService', 'CampaignService'];
 
-    function CartController(SessionService, $location, CartService, FlashService,CampaignService) {
+    function CartController(SessionService, $location, CartService, FlashService, CampaignService) {
         var vm = this;
         vm.cartItems = [];
         vm.minusItemCount = minusItemCount;
@@ -14,16 +14,16 @@
         vm.checkout = checkout;
         vm.enableCouponEditor = enableCouponEditor;
         vm.applyCoupon = applyCoupon;
-        vm.couponDiscount=0;
-        vm.discountData=undefined;
-        vm.couponCode=undefined;
+        vm.couponDiscount = 0;
+        vm.discountData = undefined;
+        vm.couponCode = undefined;
         vm.cancelCoupon = cancelCoupon;
         vm.removeItemFromCart = removeItemFromCart;
         vm.showCouponEditor = false;
-        vm.isChefFromPune=true;
-        vm.disableApplyCoupon=false;
-        vm.showAppliedCouponEditor=false;
-        vm.couponMessage=undefined;
+        vm.isChefFromPune = true;
+        vm.disableApplyCoupon = false;
+        vm.showAppliedCouponEditor = false;
+        vm.couponMessage = undefined;
         var currentUserId = SessionService.get(SessionService.Session.CurrentUser).userId;
 
         CartService.getCartItems(currentUserId, function (response) {
@@ -48,7 +48,7 @@
                     vm.discountData = response.data;
                     vm.couponMessage = vm.discountData.message;
                     vm.couponDiscount = vm.discountData.discount;
-                    vm.cartTotal=vm.cartTotal-vm.couponDiscount;
+                    vm.cartTotal = vm.cartTotal - vm.couponDiscount;
                     vm.showCouponEditor = false;
                     vm.showAppliedCouponEditor = true;
                 } else {
@@ -64,47 +64,41 @@
             CampaignService.cancelCoupon(vm.couponCode, function (response) {
                 if (response.success) {
                     updateCartCost();
-                  resetCoupon();
+                    resetCoupon();
                 }
                 else {
+                    FlashService.Error("Something not working. Please try later.")
                 }
             });
         }
 
         function updateCartCost() {
             vm.cartTotal = 0;
-            vm.cartItemTotal=0;
+            vm.cartItemTotal = 0;
             vm.shippingCost = 0;
 
             for (var i = 0; i < vm.cartItems.length; i++) {
                 vm.cartItemTotal += vm.cartItems[i].price * vm.cartItems[i].quantity;
-                vm.cartTotal=vm.cartItemTotal;
+                vm.cartTotal = vm.cartItemTotal;
             }
             if (vm.cartTotal < 200) {
                 vm.shippingCost = 50;
             }
-          resetCoupon();
+            resetCoupon();
         }
-function resetCoupon(){
 
-    vm.showAppliedCouponEditor = false;
-    vm.showCouponEditor = true;
-    vm.couponMessage = undefined;
-    vm.couponCode = undefined;
-    vm.couponDiscount = 0;
-}
-        function minusItemCount(cartItem) {
-            for (var i = 0; i < vm.cartItems.length; i++) {
-                if (vm.cartItems[i].itemId === cartItem.itemId&& vm.cartItems[i].weight === cartItem.weight) {
-                    if (vm.cartItems[i].quantity > 1) {
-                        vm.cartItems[i].quantity = vm.cartItems[i].quantity - 1;
-                        var cartItem = new CartItem(currentUserId, vm.cartItems[i].itemId, vm.cartItems[i].quantity,vm.cartItems[i].weight,vm.cartItems[i].price);
-                        updateQuantity(cartItem);
-                        break;
-                    }
-                }
-            }
+        function resetCoupon() {
+            vm.showAppliedCouponEditor = false;
+            vm.showCouponEditor = false;
+            vm.couponMessage = undefined;
+            vm.couponCode = undefined;
+            vm.couponDiscount = 0;
+        }
 
+        function minusItemCount(index) {
+            vm.cartItems[index].quantity -= 1;
+            //update cart async
+            updateQuantity(vm.cartItems[index]);
             updateCartCost();
         }
 
@@ -116,17 +110,10 @@ function resetCoupon(){
             });
         }
 
-        function plusItemCount(cartItem) {
-            for (var i = 0; i < vm.cartItems.length; i++) {
-                if (vm.cartItems[i].itemId === cartItem.itemId && vm.cartItems[i].weight === cartItem.weight) {
-                    if (vm.cartItems[i].quantity < 5) {
-                        vm.cartItems[i].quantity = vm.cartItems[i].quantity + 1;
-                        var cartItem = new CartItem(currentUserId, vm.cartItems[i].itemId, vm.cartItems[i].quantity,vm.cartItems[i].weight,vm.cartItems[i].price);
-                        updateQuantity(cartItem);
-                        break;
-                    }
-                }
-            }
+        function plusItemCount(index) {
+            vm.cartItems[index].quantity += 1;
+            //update cart async
+            updateQuantity(vm.cartItems[index]);
             updateCartCost();
         }
 
@@ -144,8 +131,8 @@ function resetCoupon(){
             for (var item in cartItems) {
                 if (cartItems.hasOwnProperty(item)) {
                     itemIds.push(cartItems[item].itemId);
-                    if(cartItems[item].chefLocation.toLowerCase()!='pune'){
-                        vm.isChefFromPune=false;
+                    if (cartItems[item].chefLocation.toLowerCase() != 'pune') {
+                        vm.isChefFromPune = false;
                     }
                 }
             }
@@ -153,15 +140,14 @@ function resetCoupon(){
         }
 
         function removeItemFromCart(item) {
-            CartService.removeCartItem(currentUserId, item.itemId, function (response) {
+            CartService.removeCartItem(currentUserId, item.cartItemId, function (response) {
                 if (response.success) {
-                    resetCoupon();
                     vm.cartItems = removeItem(vm.cartItems, item);
                     SessionService.put(SessionService.Session.CartCount, vm.cartItems.length);
                     SessionService.putInRootScope("cartItemCount", vm.cartItems.length);
-                    var location = SessionService.get("location");
+                    resetCoupon();
                     if (vm.cartItems.length == 0) {
-                        $location.path('/item/All/' + location);
+                        $location.path('#/home');
                     }
                 }
                 else {
@@ -180,14 +166,7 @@ function resetCoupon(){
             return arr;
         }
 
-        function CartItem(userId, itemId, quantity,weight,price) {
-            this.userId = userId;
-            this.itemId = itemId;
-            this.quantity = quantity;
-            this.weight=weight;
-            this.price=price;
-        }
-        function CartCoupon(coupon, cartItems, quantity) {
+        function CartCoupon(coupon, cartItems) {
             this.couponCode = coupon;
             this.cartItems = cartItems;
         }

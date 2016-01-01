@@ -28,30 +28,48 @@
                                     <h3 class="name" style="padding-left: 10px;padding-right: 10px;">
                                         <span class="pull-left shutterPrice">{{item.weight}}</span>
                                         <span class="pull-right shutterPrice"><i
-                                                class="fa fa-inr"></i> {{item.weightToPrice[item.weight.trim()]}}</span>
+                                                class="fa fa-inr"></i> {{item.price}}</span>
                                     </h3>
 
                                 </h3>
+                                <div class="caption caption-half-down" style="background-color:#f5f5f5">
+                                    <p class="shutterFont" style="margin: 0">{{item.name}} </p>
 
-
-                                <div class="caption caption-half-down" style="background-color: white;">
-                                    <p class="shutterFont">{{item.name}} </p>
-                                    <select ng-model="item.weight" ng-change="item.price=item.weightToPrice[item.weight.trim()]">
-                                        <option ng-selected="{{item.weight==key}}"
-                                                ng-repeat="(key,value) in item.weightToPrice"><a>{{key}}</a>
-                                        </option>
-                                    </select>
-                                    <h2 class="shutterItemPrice"><i class="fa fa-inr"></i>{{item.weightToPrice[item.weight.trim()]}}</h2>
-                                    <a class="btn btn-default add-to-cart" style="background-color: teal;color: white"
-                                       data-ng-click="vm.buy(item)"><i
-                                            class="fa fa-search-minus"></i> Buy Now</a>
-
+                                    <div class="btn-group">
+                                        <button class="btn btn-default" style="padding: 0;width: auto;">
+                                            <span style="padding-left: 5px">{{item.weight}}</span>
+                                                <span class="pull-right" style="padding-right: 5px;padding-left: 15px;">
+                                                    <i class="fa fa-inr" style="color: #EB5C31;"></i> {{item.price}}
+                                                </span>
+                                        </button>
+                                        <button data-toggle="dropdown" style="padding-top: 0;padding-bottom: 0"
+                                                class="btn btn-default dropdown-toggle"
+                                                data-placeholder="false"><span class="caret"></span></button>
+                                        <ul class="dropdown-menu" style="min-width: 100%;max-height: 70px;
+                                        overflow-y: auto">
+                                            <li style="padding-left: 5px;padding-right: 15px;cursor: pointer"
+                                                data-ng-repeat="(weight,price) in item.weightToPrice"
+                                                data-ng-click="item.weight=weight.trim();
+                                                item.price=price.trim()">
+                                                <span>{{weight}} </span>
+                                                <span class="pull-right">
+                                                    <i class="fa fa-inr" style="color: #EB5C31;"></i> {{price}}
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h2 class="shutterItemPrice">
+                                        <i class="fa fa-inr"></i>{{item.price}}
+                                    </h2>
                                 </div>
-                                <div class="caption caption-half-up" style="background-color: white;">
+                                <div class="caption caption-half-up" style="background-color: #f5f5f5;">
 
                                     <p class="shutterFontChef" style="color: #262626;">Chef Detail</p>
                                     <h5 class="shutterFont">{{item.chefName}} , {{item.chefLocation}}</h5>
-
+                                    <a class="btn btn-default add-to-cart"
+                                       style="background-color: teal;color: white;margin: 0"
+                                       data-ng-click="vm.buy(item)"><i
+                                            class="fa fa-shopping-cart"></i> Buy Now</a>
 
                                 </div>
                             </div>
