@@ -18,15 +18,9 @@
     "imageHash":"2d473f0039e580f5e2970cd7b514ca4a"
   },
   {
-    "category": "CHUTNEY",
-    "totalItems": 50,
-    "description": "Get authentic regional chutney",
+    "category": "BAKERY",
+    "totalItems": "5 plus",
+    "description": "Get authentic regional bakery",
     "imageHash":"7056f7b887e9ef7e7f1a9ffd4f401b97"
-  },
-  {
-    "category": "SWEETS",
-    "totalItems": 21,
-    "description": "Get authentic regional sweets",
-    "imageHash":"2cf526b094e5d3ce9e0a56ab78658868"
   }
 ]

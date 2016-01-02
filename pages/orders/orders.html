@@ -11,9 +11,10 @@
                      style="background-color: #f9f9f9;border-bottom: 1px solid #16b594;padding-left: 0px">
                     <div class="col-md-12 col-xs-12"
                          style="font-size:large;font-weight: 200;">
-                        <span> Order Id : </span>
-                        <a href="#/orderDetail/{{order.orderId}}"
-                           style="margin-top: 5px;color: #EB5C31;border-bottom: 1px solid orangered;text-decoration: none">{{order.orderId}}</a>
+                        <div class="pull-left"><span> Order Id : </span>
+                            <a href="#/orderDetail/{{order.orderId}}"
+                               style="margin-top: 5px;color: #EB5C31;border-bottom: 1px solid orangered;text-decoration: none">{{order.orderId}}</a></div>
+                        <div class="pull-right" style="font-size: medium;color:teal;font-weight: 500">{{order.estimateDeliveryTime}}</div>
                     </div>
                 </div>
 
@@ -39,28 +40,25 @@
                                 <div class="col-sm-12 col-xs-12" style="padding: 0px;">
                                     <div class="col-sm-4 col-xs-4" style="padding: 0px;">Quantity:</div>
                                     <div>
-                                        {{item.quantity}} kg
+                                        {{item.quantity}}
                                     </div>
                                 </div>
                                 <div class="hidden-md hidden-lg hidden-sm">
                                     <div class=" col-xs-4" style="padding-left: 0px;padding-top: 5px;">Price:</div>
                                     <div class=" col-xs-8" style="padding-left: 0px;padding-top: 5px;">
-                                        <label><i class="fa fa-inr"></i> {{item.price *
-                                            item.quantity}}</label>
+                                        <label><i class="fa fa-inr"></i> {{item.price}}</label>
 
                                         <div class="col-sm-4 hidden-xs" style="padding-top: 10px;padding-right: 15px;">
                                             <div class="pull-right">
                                                 <div class="col-sm-12 pull-right">
                                                     <div class="col-sm-4">Price:</div>
-                                                    <div class="col-sm-8"><label><i class="fa fa-inr"></i> {{item.price
-                                                        *
-                                                        item.quantity}} </label>
+                                                    <div class="col-sm-8"><label><i class="fa fa-inr"></i> {{item.price}} </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 pull-right">
                                                     <div class="col-sm-4">Quantity:</div>
                                                     <div class="col-sm-8">
-                                                        <label>{{item.quantity}} Kg</label>
+                                                        <label>{{item.quantity}}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -84,11 +82,11 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-8">
-                        <div class="col-md-4 col-sm-6 col-xs-5 summaryText">
+                        <div class="col-md-4 col-sm-6 col-xs-6 summaryText">
                             Order Date:
                         </div>
 
-                        <div class="col-md-8 col-sm-6 col-xs-7 summaryInfo">
+                        <div class="col-md-8 col-sm-6 col-xs-6 summaryInfo">
                             {{order.creationTime | date}}
                         </div>
                     </div>

@@ -34,68 +34,69 @@
             <form id="checkout-form" method="post" name="form" role="form" novalidate="novalidate" autocomplete="off">
                 <div class="row">
                     <div class="form-group col-lg-12 col-md-12 col-sm-12"
-                         ng-class="{'has-error': form.fullName.$dirty && form.fullName.$error.required }">
+                         ng-class="{'has-error': form.fullName.$touched && form.fullName.$error.required }">
                         <label for="fullName" style="margin-left: 5px;">Full Name *</label>
                         <input type="text" class="form-control" id="fullName" name="fullName"
                                placeholder="Full name" required="" data-ng-model="vm.address.fullName" autocomplete="off">
-                        <span ng-show="form.fullName.$dirty && form.fullName.$error.required" class="help-block">Full name is required</span>
+                        <span ng-show="form.fullName.$touched && form.fullName.$error.required" class="help-block">Full name is required</span>
                     </div>
                 </div>
                 <div class="row">
-                    <label for="line1" style="margin-left: 20px;">Adress *</label>
+                    <label for="line1" style="margin-left: 20px;">Address *</label>
 
                     <div>
                         <div class="form-group col-lg-6 col-md-6 col-sm-6"
-                             ng-class="{'has-error': form.line1.$dirty && form.line1.$error.required }">
+                             ng-class="{'has-error': form.line1.$touched && form.line1.$error.required }">
                             <input type="text" class="form-control" id="line1" name="line1"
                                    placeholder="Appartment Address" required="" data-ng-model="vm.address.lineOne" autocomplete="off">
-                            <span ng-show="form.line1.$dirty && form.line1.$error.required" class="help-block">Appartment Address is required</span>
+                            <span ng-show="form.line1.$touched && form.line1.$error.required" class="help-block">Apartment Address is required</span>
                         </div>
+                        <label for="line2" style="margin-left: 20px;">Landmark *</label>
                         <div class="form-group col-lg-6 col-md-6 col-sm-6"
-                             ng-class="{'has-error': form.line2.$dirty && form.line2.$error.required }">
-                            <input type="text" class="form-control" id="co-appartment" name="co-appartment"
+                             ng-class="{'has-error': form.line2.$touched && form.line2.$error.required }">
+                            <input type="text" class="form-control" id="line2" name="line2"
                                    placeholder="Landmark" required="" data-ng-model="vm.address.lineTwo" autocomplete="off">
-                            <span ng-show="form.line2.$dirty && form.line2.$error.required" class="help-block">Landmark is required</span>
+                            <span ng-show="form.line2.$touched && form.line2.$error.required" class="help-block">Landmark is required</span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6 col-md-6 col-sm-6"
-                         ng-class="{'has-error': form.city.$dirty && form.city.$error.required }">
+                         ng-class="{'has-error': form.city.$touched && form.city.$error.required }">
                         <label for="city" style="margin-left: 5px;">City *</label>
                         <input type="text" class="form-control" id="city" name="city"
                                placeholder="City" required="" data-ng-model="vm.address.city" autocomplete="off">
-                        <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">City is required</span>
+                        <span ng-show="form.city.$touched && form.city.$error.required" class="help-block">City is required</span>
 
                     </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-6"
-                         ng-class="{'has-error': form.state.$dirty && form.state.$error.required }">
+                         ng-class="{'has-error': form.state.$touched && form.state.$error.required }">
                         <label for="state" style="margin-left: 5px;">State *</label>
                         <input type="text" class="form-control" id="state" name="state"
                                placeholder="State" required="" data-ng-model="vm.address.state" autocomplete="off">
-                        <span ng-show="form.state.$dirty && form.state.$error.required" class="help-block">State is required</span>
+                        <span ng-show="form.state.$touched && form.state.$error.required" class="help-block">State is required</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6 col-md-6 col-sm-6"
-                         ng-class="{'has-error': form.postcode.$dirty && form.postcode.$error.required ||form.postcode.$error.minlength || form.postcode.$error.pattern }">
+                         ng-class="{'has-error': form.postcode.$touched && form.postcode.$error.required ||form.postcode.$error.minlength || form.postcode.$error.pattern }">
                         <label for="postcode" style="margin-left: 5px;">Postcode *</label>
                         <input type="text" class="form-control" id="postcode" name="postcode"
                                placeholder="Postcode/ ZIP" required="" data-ng-model="vm.address.zip" ng-minlength="6"
                                data-ng-pattern="/^\d+$/" autocomplete="off">
-                        <span ng-show="form.postcode.$dirty && form.postcode.$error.required" class="help-block">Postcode is required</span>
-                        <span ng-show="form.postcode.$dirty && form.postcode.$error.minlength || form.postcode.$error.pattern"
+                        <span ng-show="form.postcode.$touched && form.postcode.$error.required" class="help-block">Postcode is required</span>
+                        <span ng-show="form.postcode.$touched && form.postcode.$error.minlength || form.postcode.$error.pattern"
                               class="help-block">Postcode should have 6 numeric digit</span>
                     </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-6"
-                         ng-class="{'has-error': form.mobile.$dirty && form.mobile.$error.required ||
+                         ng-class="{'has-error': form.mobile.$touched && form.mobile.$error.required ||
                          form.mobile.$error.pattern ||form.mobile.$error.minlength }">
                         <label for="mobile" style="margin-left: 5px;">Mobile No. *</label>
                         <input type="text" class="form-control" id="mobile" name="mobile"
                                placeholder="Mobile number" required="" data-ng-model="vm.address.mobile"
                                ng-minlength="10" data-ng-pattern="/^\d+$/" autocomplete="off">
-                        <span ng-show="form.mobile.$dirty && form.mobile.$error.required" class="help-block">Mobile is required</span>
-                        <span ng-show="form.mobile.$dirty && form.mobile.$error.minlength || form.mobile.$error.pattern"
+                        <span ng-show="form.mobile.$touched && form.mobile.$error.required" class="help-block">Mobile is required</span>
+                        <span ng-show="form.mobile.$touched && form.mobile.$error.minlength || form.mobile.$error.pattern"
                               class="help-block">
                             Your mobile number should have 10 numeric digits.</span>
                     </div>

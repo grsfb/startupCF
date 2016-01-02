@@ -14,6 +14,7 @@
         vm.showContact = showContact;
         vm.contactDetail = false;
         vm.localize = localize;
+        FlashService.ClearAllFlashMessage();
         OrderService.getAllItemForOrder($routeParams.orderId, function (response) {
             if (response.success) {
                 vm.orderItem = response.data;

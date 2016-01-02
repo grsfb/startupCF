@@ -34,21 +34,21 @@
         });
 
         function setSelectedAddress(address, index) {
-            SessionService.put('deliverAddress', address);
+            SessionService.putInRootScope('deliverAddress', address);
             vm.selectedIndex = index;
             var addressFromPune = address.city.toLowerCase() == 'pune' || address.zip.slice(0, 3) == '411';
             if (addressFromPune == true && vm.isChefFromPune == true) {
-                vm.estimateDeliveryTime = "Your all items Will be delivered in 2 to 4 working days";
-                FlashService.Success(vm.estimateDeliveryTime);
+                vm.estimateDeliveryTime = "Your all items will be delivered in 2 to 4 working days";
+                FlashService.Success(vm.estimateDeliveryTime,false);
             }
             else if (addressFromPune == true && vm.isChefFromPune == false) {
-                vm.estimateDeliveryTime = "Your all items Will be delivered in 5 to 7 working days";
-                FlashService.Success(vm.estimateDeliveryTime);
+                vm.estimateDeliveryTime = "Your all items will be delivered in 5 to 7 working days";
+                FlashService.Success(vm.estimateDeliveryTime,false);
             }
             else {
-                FlashService.Error("Items can not be delivered to specified delivery location. Currently we are in pune only.");
+                FlashService.Error("Items can not be delivered to specified delivery location. Currently we are in pune only.",false);
             }
-            SessionService.put('EstimateDeliveryTime', vm.estimateDeliveryTime);
+            SessionService.putInRootScope('EstimateDeliveryTime', vm.estimateDeliveryTime);
         }
 
         function enableAddressEditor() {

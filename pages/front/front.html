@@ -17,7 +17,7 @@
                             ng-repeat="city in vm.cityList" data-ng-click="vm.cityChange(city)">
                             <a style="padding: 0px;height: 50px;vertical-align: middle;padding: 15px">
                                 <span style="margin-left: 10px;font-weight: 800;font-family:'Tahoma', Geneva, sans-serif">{{city}}</span>
-                            </a>
+                            </a>i
                         </li>
                     </ul>
                 </div>
@@ -28,7 +28,7 @@
                     <ul class="dropdown-menu list-group"
                         style="width: 100%;z-index: 9999;overflow: visible;padding: 0px;margin-top: 5px">
                         <li id="jquery-list-view-limit" class="list-group-item itemlist"
-                            ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:8"
+                            ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:6"
                             style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
                             <span class="badge">Popularity ***</span>{{snack}}
                         </li>
@@ -76,7 +76,7 @@
                             </a>
                         </div>
                         <div class="container">
-                            <data-owl-carousel style="height: 250px;width: auto;margin-left: 35px"
+                            <data-owl-carousel style="height: 260px;width: auto;margin-left: 35px"
                                                id="owl-demo" class="owl-carousel" data-options="{rewindNav : true}">
                                 <div owl-carousel-item="" ng-repeat="item in vm.slides" class="item"
                                      style="width: 275px;margin-right: 20px;border: none">

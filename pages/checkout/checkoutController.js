@@ -7,6 +7,11 @@
 
     function CheckoutController(SessionService, $location, CartService, FlashService, OrderService, CommonService) {
         var vm = this;
+        if(SessionService.get('itemIds')==undefined ){
+            FlashService.ClearAllFlashMessage();
+            $location.path('#/home');
+            return;
+        }
         vm.shippingCost = SessionService.get('shippingCost');
         vm.cartTotal = SessionService.get('cartTotal');
         vm.checkAndPlaceOrder = checkAndPlaceOrder;
@@ -14,6 +19,8 @@
         vm.isPlacingOrder = false;
         vm.usePayMethod = usePayMethod;
         vm.paymentType = "PAYU";
+        vm.paymentStatus="COD_PENDING";
+        vm.orderTotal=vm.cartTotal+vm.shippingCost;
         function usePayMethod(method) {
             vm.paymentType = method;
         }
@@ -58,7 +65,7 @@
              }
              if (vm.order.address != undefined && vm.order.paymentMethod != null) {
              var order = new Order(SessionService.get('currentUser').userId,
-             vm.order.address.addressId, SessionService.get('itemIds'), vm.order.paymentMethod
+             vm.order.address.addressId, SessionService.get('itemIds'), vm.order.paymentMethod,vm.orderTotal,vm.paymentStatus
              );
              vm.isPlacingOrder=true;
              OrderService.create(order, function (response) {
@@ -96,13 +103,15 @@
             SessionService.remove('isAnyBakeryItem');
         }
 
-        function Order(userId, addressId, items, paymentType) {
+        function Order(userId, addressId, items, paymentType,orderTotal,paymentStatus) {
             this.userId = userId;
             this.deliveryAddress = {"addressId": addressId};
             this.items = [];
             for (var item in items) {
                 this.items.push({'itemId': items[item]})
             }
+            this.orderTotal=orderTotal;
+            this.paymentStatus=paymentStatus;
             this.paymentType = paymentType;
             this.estimateDeliveryTime=SessionService.get('EstimateDeliveryTime');
         }

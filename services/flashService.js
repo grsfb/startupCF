@@ -9,6 +9,7 @@
         var service = {};
         service.Success = Success;
         service.Error = Error;
+        service.ClearAllFlashMessage=ClearAllFlashMessage;
         initService();
 
         return service;
@@ -17,7 +18,6 @@
             $rootScope.$on('$locationChangeStart', function () {
                 clearFlashMessage();
             });
-
             function clearFlashMessage() {
                 var flash = $rootScope.flash;
                 if (flash) {
@@ -30,7 +30,10 @@
                 }
             }
         }
+        function ClearAllFlashMessage() {
+                    delete $rootScope.flash;
 
+        }
         function Success(message, keepAfterLocationChange) {
             $rootScope.flash = {
                 message: message,
