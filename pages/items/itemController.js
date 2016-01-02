@@ -17,7 +17,7 @@
         vm.buy = buy;
         vm.categoryName = $routeParams.categoryName == undefined ? all : $routeParams.categoryName;
         vm.chefLocation = $routeParams.chefLocation == undefined ? all : $routeParams.chefLocation;
-        vm.actualCategory=MappingService.getCategory(vm.categoryName)==undefined ?'all':MappingService.getCategory(vm.categoryName);
+        vm.actualCategory=MappingService.getCategory(vm.categoryName)==undefined ?vm.categoryName:MappingService.getCategory(vm.categoryName);
 
         //load initial items
         InventoryService.getAllItems(1,vm.actualCategory, vm.chefLocation, function (response) {
