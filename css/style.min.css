@@ -39,6 +39,10 @@ html, body {
         padding-top: 70px;
         margin: 0 auto -195px;
     }
+    .mobileView{
+        padding-left: 0px!important;
+        padding-right: 0px!important;
+    }
 
     .footer, .push {
         height: 195px !important;
