@@ -10,7 +10,7 @@
         $http.defaults.headers.common['Content-Type'] = 'application/json';
         $http.defaults.headers.common['Accept'] = 'application/json';
         $http.defaults.headers.common['Authorization'] = 'Basic Y2hlZm9uaWE6YmFzaWMtcGFzc3dvcmQ='; // jshint ignore:line
-        var baseURL = "http://www.chefonia.com/endpoint";
+        var baseURL = "http://localhost:8080";
         service.get = getCall;
         service.post = postCall;
         service.delete = deleteCall;

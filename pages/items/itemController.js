@@ -50,7 +50,7 @@
         }
 
         function loadNextPage(pageNumber) {
-            InventoryService.getAllItems(pageNumber + 1, vm.categoryName, vm.chefLocation, function (response) {
+            InventoryService.getAllItems(pageNumber + 1, vm.actualCategory, vm.chefLocation, function (response) {
                 if (response) {
                     vm.items = response.data.items;
                     vm.totalPageAsArray = new Array(response.data.totalPages);
