@@ -28,8 +28,9 @@
         function destroy() {
             rootScope.put('isLoggedIn', false);
             rootScope.put('cartItemCount', 0);
-            cookieStore.remove("currentUser");
-            cookieStore.remove("cartItemCount");
+            rootScope.put('currentUser',undefined);
+            remove("currentUser");
+            remove("cartItemCount");
         }
 
         function get(key) {
@@ -77,16 +78,16 @@
             }
 
             function get(key) {
-                try{
+                try {
                     return $cookieStore.get(key);
                 }
-                catch(e){
+                catch (e) {
                     return undefined;
                 }
             }
 
             function remove(key) {
-                 $cookieStore.remove[key];
+                $cookieStore.remove[key];
             }
         }
     }

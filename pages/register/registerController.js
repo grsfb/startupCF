@@ -22,12 +22,12 @@
                 if (response.success) {
                     AuthenticationService.Login(vm.user.email, vm.user.password, function (response) {
                         if (response.success) {
-                            AuthenticationService.SetCredentials(vm.user);
+                            AuthenticationService.SetCredentials(response.data);
                             $('#myModal').modal('hide');
                         }
                     });
                 } else {
-                    vm.pageMsg = "Your are already registered.";
+                    vm.pageMsg = "You are already registered.";
                 }
                 vm.isRegistering = false;
             });
