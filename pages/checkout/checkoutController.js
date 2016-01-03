@@ -63,7 +63,7 @@
              if (vm.order.paymentMethod == undefined) {
              FlashService.Error("Payment method is not selected");
              }
-             if (vm.order.address != undefined && vm.order.paymentMethod != null) {
+             if (vm.order.address != undefined && vm.order.paymentMethod != null && checkIfOrderBelongToPune(vm.order.address)) {
              var order = new Order(SessionService.get('currentUser').userId,
              vm.order.address.addressId, SessionService.get('itemIds'), vm.order.paymentMethod,vm.orderTotal,vm.paymentStatus
              );
@@ -82,7 +82,7 @@
              }
         }
         function checkIfOrderBelongToPune(address) {
-            if(address.city.toLowerCase()=='pune' || address.zip.slice(0,3)=='411' ){
+            if(address.city.toLowerCase()=='pune' && address.zip.slice(0,3)=='411' ){
                 return true;
             }
             return false;

@@ -36,7 +36,7 @@
         function setSelectedAddress(address, index) {
             SessionService.putInRootScope('deliverAddress', address);
             vm.selectedIndex = index;
-            var addressFromPune = address.city.toLowerCase() == 'pune' || address.zip.slice(0, 3) == '411';
+            var addressFromPune = address.city.toLowerCase() == 'pune' && address.zip.slice(0, 3) == '411';
             if (addressFromPune == true && vm.isChefFromPune == true) {
                 vm.estimateDeliveryTime = "Your all items will be delivered in 2 to 4 working days";
                 FlashService.Success(vm.estimateDeliveryTime,false);
