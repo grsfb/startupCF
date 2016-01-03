@@ -3,21 +3,18 @@
         <div class="divElement">
             <div class="container">
                 <div class="locationdiv inner-addon left-addon col-md-3 col-sm-3 col-xs-12">
-                    <span>  <i class="fontawesome fa fa-location-arrow"></i></span>
-                    <input data-toggle="dropdown"
-
-                           class="location form-control dropdown-toggle " type="text" placeholder="Current Location"
-                           ng-model="vm.city"
-                           data-ng-keydown="vm.getLocation();">
-
-                    <ul class="dropdown-menu list-group-item-heading"
-                        style="width: 100%;padding: 0px;margin-top: 5px">
+                    <!--<span>  <i class="fa fa-location-arrow"></i></span>-->
+                    <button data-toggle="dropdown"
+                            class="location form-control dropdown-toggle" style="text-align: left;">
+                        <span><i class="fa fa-location-arrow"></i> {{vm.city}} chefs</span>
+                    </button>
+                    <ul class="dropdown-menu list-group-item-heading" style="width: 100%;padding: 0;margin-top: 5px">
                         <li class="list-group-item"
-                            style="cursor: pointer;font-weight: 500;padding: 0px;height: 50px;margin-top: 5px;border: none;border-bottom: 1px solid lightseagreen"
+                            style="cursor: pointer;"
                             ng-repeat="city in vm.cityList" data-ng-click="vm.cityChange(city)">
-                            <a style="padding: 0px;height: 50px;vertical-align: middle;padding: 15px">
-                                <span style="margin-left: 10px;font-weight: 800;font-family:'Tahoma', Geneva, sans-serif">{{city}}</span>
-                            </a>i
+                            <a style="padding: 0;vertical-align: middle">
+                                <span style="margin-left: 10px;font-weight: 400;font-family:'Tahoma', Geneva, sans-serif">{{city}} chefs</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -124,8 +121,10 @@
                                                 {{item.price}}</h4>
                                         </div>
                                         <div class="caption caption-half-up" style="background-color: white;">
-                                            <p class="shutterFontChef" style="color: #262626;margin-top: 0">Chef Detail</p>
-                                            <h5 class="shutterFont" style="margin-top: 0">{{item.chefName}} , {{item.chefLocation}}</h5>
+                                            <p class="shutterFontChef" style="color: #262626;margin-top: 0">Chef
+                                                Detail</p>
+                                            <h5 class="shutterFont" style="margin-top: 0">{{item.chefName}} ,
+                                                {{item.chefLocation}}</h5>
                                             <a href="" data-ng-click="vm.buy(item)"
                                                style="background-color: teal;color: white;margin-top: 0;text-align: center"
                                                class="btn btn-default add-to-cart"><i

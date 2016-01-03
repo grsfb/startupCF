@@ -60,18 +60,13 @@
         vm.loadItems = loadItems;
         vm.slides = undefined;
         vm.newSlides = undefined;
-        vm.cityList = ['Pune', 'Nasik', 'Mumbai', 'Jaipur'];
+        vm.cityList = ['All', 'Pune', 'Mumbai', 'Delhi', 'Hyderabad', 'Ahemdabad', 'Nandurbar'];
         vm.userId = undefined;
         vm.snack = undefined;
         vm.categories = undefined;
         vm.buy = buy;
         vm.allCategories = allCategories;
-        if (SessionService.get('location') != null) {
-            cityChange(SessionService.get('location'));
-        }
-        else {
-            SessionService.put('location', vm.city);
-        }
+
         $http.get('data/items.json').success(function (data) {
             vm.slides = data;
 
@@ -84,16 +79,7 @@
             vm.newSlides = data;
         });
         function cityChange(city) {
-            if (vm.city == 'All') {
-                vm.cityList.unshift(vm.city);
-            }
-            else {
-                vm.cityList.push(vm.city);
-            }
             vm.city = city;
-            var index = vm.cityList.indexOf(city);
-            vm.cityList.splice(index, 1);
-            SessionService.put('location', vm.city);
         }
 
         function foodChange(snack) {
@@ -105,7 +91,7 @@
         }
 
         vm.foodList = MappingService.getAllOptions();
-        vm.popularFoodList = ['Chocolate','Bakery'];
+        vm.popularFoodList = ['Chocolate', 'Bakery'];
         vm.newFoodList = ['Mouth Freshner'];
         function loadItems() {
             $location.path('item/' + 'all/' + vm.city.toLowerCase());
