@@ -37,11 +37,14 @@
         }
 
         function showEmail() {
+            vm.contactDetail=false;
             vm.sendEmail = true;
         }
 
         function showContact() {
+            vm.sendEmail=false;
             vm.contactDetail = true;
+
         }
     }
 

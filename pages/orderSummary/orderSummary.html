@@ -3,13 +3,13 @@
         <h1 class="page-title" style="padding: 10px;margin-top: 5px">Order Details</h1>
     </div>
     <div style="background-color: white" class="row">
-        <div class="col-md-12"
+        <div class="col-md-12 col-sm-12 col-xs-12"
              style="font-size:large;font-weight: 600;margin-bottom: 20px;line-height: 50px ;background-color: #f2f2f2">
-       <div class="pull-left">Order Summary </div>
-           <div class="pull-right" style="color: teal;font-size: medium"> Status: {{vm.localize(vm.orderItem.status)}}</div>
+       <div class="pull-left mobileFont">Order Summary </div>
+           <div class="pull-right mobileFont" style="color: teal;"> Status: {{vm.localize(vm.orderItem.status)}}</div>
 
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-12 col-xs-12">
 
             <div class="col-md-12 col-xs-12">
                 <div class="col-md-4 col-xs-5 summaryText">
@@ -62,11 +62,11 @@
                 <hr class="divider col-md-12 orderDivider">
             </div>
         </div>
-        <div class="col-md-6" style="text-align: left">
-            <div class="col-md-12" style="font-size: large;font-weight: 500;color: darkgray"> {{currentUser.userName |
+        <div class="col-md-6 col-sm-12 col-xs-12" style="text-align: left">
+            <div class="col-md-12 col-sm-12" style="font-size: large;font-weight: 500;color: darkgray"> {{currentUser.userName |
                 uppercase}}, {{vm.orderItem.deliveryAddress.mobile}}
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 {{vm.orderItem.deliveryAddress.lineOne}} {{vm.orderItem.deliveryAddress.lineTwo}}
                 {{vm.orderItem.deliveryAddress.city}} {{vm.orderItem.deliveryAddress.state}}
                 {{vm.orderItem.deliveryAddress.zip}}
@@ -84,21 +84,20 @@
                     <a href="" class="col-md-12" data-ng-click="vm.printOrder()"><i
                             class="fontawesome fa fa-print fa-4x"></i>&nbsp;</a>
 
-                    <span>PRINT ORDER</span>
+                    <span class="col-md-12 col-xs-12">PRINT ORDER</span>
                 </li>
                 <li class="col-md-4 col-xs-4">
                     <a data-toggle="dropdown" data-ng-click="vm.showEmail()" href=""
                        class="col-md-12 dropdown-toggle"><i class="fontawesome fa fa-mail-forward fa-4x"></i>&nbsp;</a>
-                    EMAIL INVOICE
-
-                    <ul ng-show="vm.sendEmail" class="ng-cloak frmEMail">
+                    <span class="col-md-12 col-xs-12">EMAIL INVOICE</span>
+                    <ul ng-show="vm.sendEmail" class="ng-cloak frmEMail hidden-xs" style="padding: 0;width: 100%">
 
                         <div style="margin-top: 5px">
-                            <form class="col-md-12" name="emailForm">
+                            <form class="col-md-12 col-xs-12" name="emailForm">
                                 <div ng-class="{'has-error': emailForm.email.$invalid && emailForm.email.$dirty}"
                                      class="form-group">
                                     <span style="font-size: medium;color: green;text-align: left;padding: 0"
-                                          class="col-md-12">Invoice will be sent to : </span>
+                                          class="col-md-12 col-xs-12">Invoice will be sent to : </span>
                                     <input type="email" style="height: 30px" id="emailUser" name="userEmail"
                                            placeholder="Enter email" required="" class="col-md-9">
 
@@ -122,8 +121,8 @@
                 <li class="col-md-4 col-xs-4">
                     <a href="" class="col-md-12" data-ng-click="vm.showContact()"><i
                             class="fontawesome fa fa-phone fa-4x"></i>&nbsp;</a>
-                    CONTACT US
-                    <ul ng-show="vm.contactDetail" class="ng-cloak frmCntct">
+                 <span class="col-md-12 col-xs-12">CONTACT US</span>
+                    <ul ng-show="vm.contactDetail" class="ng-cloak frmCntct hidden-xs">
 
                         <div style="margin-top: 5px;font-size: medium;font-style: italic;color:#16b594">
                             <div class="col-md-12"> We have 24 by 7 working support.</div>
@@ -131,6 +130,39 @@
                         </div>
                     </ul>
                 </li>
+            </ul>
+            <ul ng-show="vm.contactDetail" class="ng-cloak frmCntct hidden-md hidden-lg hidden-sm col-xs-12">
+
+                <div style="margin-top: 5px;font-size: medium;font-style: italic;color:#16b594">
+                    <div class="col-md-12"> We have 24 by 7 working support.</div>
+                    <div class="col-md-12"> Kindly Contact us via Email admin@chefonia.com</div>
+                </div>
+            </ul>
+            <ul ng-show="vm.sendEmail" class="ng-cloak frmEMail hidden-md hidden-lg hidden-sm col-xs-12" style="padding: 0;width: 100%">
+
+                <div style="margin-top: 5px">
+                    <form class="col-md-12 col-xs-12" name="emailForm">
+                        <div ng-class="{'has-error': emailForm.email.$invalid && emailForm.email.$dirty}"
+                             class="form-group">
+                                    <span style="font-size: medium;color: green;text-align: left;padding: 0"
+                                          class="col-md-12 col-xs-12">Invoice will be sent to : </span>
+                            <input type="email" style="height: 30px" id="emailUser1" name="userEmail"
+                                   placeholder="Enter email" required="" class="col-md-9">
+
+                            <div class="has-error ng-hide" ng-messages="emailForm.userEmail.$error"
+                                 ng-show="emailForm.userEmail.$touched">
+                                <p class="help-block errorMsg" ng-show="emailForm.userEmail.$error.required"
+                                   ng-message="required">Your email is required.</p>
+
+                                <p class="help-block errorMsg" ng-show="emailForm.userEmail.$error.email">
+                                    Your email is not valid.
+                                </p>
+                            </div>
+                            <input type="submit" style="background-color: green;color: white;height: 30px"
+                                   value="Send" class="btn btn-small btn-blue col-md-3">
+                        </div>
+                    </form>
+                </div>
             </ul>
         </div>
     </div>
