@@ -1,74 +1,80 @@
-<div style="padding: 15px;">
-    <div class="row" data-ng-controller="LoginController as vm">
+<div style="padding: 5px">
+    <div class="col-xs-12" data-ng-controller="LoginController as vm">
 
-        <form role="form" name="loginform" class="col-xs-12" data-ng-hide="vm.showMblSignup">
-            <h4 class="loginHeader" style="color: green;margin-bottom: 20px"> Chefonia Sign in </h4>
-            <label style="padding-bottom: 5px;padding-left:5px;color: red" data-ng-show="vm.pageMsg.length>0">{{vm.pageMsg}}</label>
+        <form role="form" name="loginform" class="col-xs-12 text-center" data-ng-hide="vm.showMblSignup">
+            <h4 class="loginHeader" style="color: green"> Chefonia Sign in </h4>
+            <label style="padding:5px;color: red" data-ng-show="vm.pageMsg.length>0">{{vm.pageMsg}}</label>
             <div class="form-group">
-                <label for="usrname"><span class="fa fa-user"></span> Username</label>
-                <input type="text" class="form-control loginInput" id="usrname" name="userName"
-                       data-ng-model="vm.user.email" placeholder="Enter email or phone number" required="">
+                <input type="email" class="form-control" style="height: 44px; font-size: 16px;" id="usrname"
+                       name="userName"
+                       data-ng-model="vm.user.email" placeholder="Enter email address" required="">
 
                 <div class="has-error ng-hide" ng-messages="loginform.userName.$error" maxlength="30"
                      ng-show="loginform.userName.$touched && !loginForm.username.$pristine">
-                    <p class="help-block" ng-show="loginform.userName.$error.required" ng-message="required">Your user
-                        name is required.</p>
+                    <p class="help-block text-left" ng-show="loginform.userName.$error.required"
+                       ng-message="required">Your email address is required.</p>
+                    <p class="help-block errorMsg" ng-show="loginform.userName.$error.email">
+                        Your email is not valid.
+                    </p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="psw"><span class="fa fa-key"></span> Password</label>
-                <input type="password" class="form-control loginInput" id="psw" name="userPassword"
+                <input type="password" class="form-control" style="height: 44px; font-size: 16px;" id="psw"
+                       name="userPassword"
                        data-ng-model="vm.user.password" placeholder="Enter password" required="">
 
                 <div class="help-block has-error ng-hide" ng-messages="loginform.userPassword.$error"
                      ng-show="loginform.userPassword.$touched">
-                    <p class="help-block" ng-show="loginform.userPassword.$error.required" ng-message="required">Your
+                    <p class="help-block text-left" ng-show="loginform.userPassword.$error.required" ng-message="required">Your
                         password is required.</p>
                 </div>
             </div>
-            <div class="form-group col-xs-12" style="padding: 0px;">
-                <a data-ng-hide="vm.isLogging" class="btn btn-success btn-block loginBtn col-xs-6"
+            <div>
+                <a data-ng-hide="vm.isLogging" class="btn btn-success col-xs-12"
                    data-ng-click="vm.login();loginform.$setPristine()" ng-disabled="loginform.$invalid"
                    disabled="disabled"><i class="fa fa-lock"></i> Login
                 </a>
-                <a data-ng-show="vm.isLogging" class="btn btn-success loginBtn col-xs-6 disabled">
+                <a data-ng-show="vm.isLogging" class="btn btn-success col-xs-12 disabled">
                     <i class="fa fa-spinner fa-spin"></i> Logging
                 </a>
-                <a type="submit" class="col-xs-5" data-ng-click="vm.showMblSignup=!vm.showMblSignup"
-                   style="font-size: 18px;padding-top: 5px;">
-                    Sign up <i class="fa fa-chevron-right"></i>
+            </div>
+            <div style="font-size: 16px">
+                <a class="col-xs-12 text-center" data-ng-click="vm.showMblSignup=!vm.showMblSignup"
+                   style="margin-top: 15px;color: #222222">
+                    Need an account? Sign up </i>
                 </a>
             </div>
-            <div class="form-group col-xs-12 text-left" style="margin-top: 5px;margin-left: -15px!important;"><a
-                    ng-click="vm.passwordReset()"> Forgot Password ?</a>
+            <div style="font-size: 16px">
+                <a class="col-xs-12 text-center" data-ng-click="vm.passwordReset()"
+                   style="margin-top: 15px;margin-bottom: 15px;color: #222222"> Forgot Password ?</a>
             </div>
 
-            <div class='col-xs-12' ng-if="vm.resetSectionVisible" style="padding: 0px;">
-                <div ng-class="{'has-error': loginform.userEmail.$invalid && loginform.userEmail.$dirty}">
-                    <label><span class="fa fa-envelope"></span> Email Address</label>
-                    <input type="email" class="form-control loginInput" name="userEmail" id="email"
-                           data-ng-model="vm.user.email" placeholder="Email Address" required="">
+            <div ng-if="vm.resetSectionVisible" style="padding: 0px;">
+                    <div ng-class="{'has-error': loginform.userEmail.$invalid && loginform.userEmail.$dirty}">
+                        <input type="email" class="form-control" name="userEmail" id="email"
+                               data-ng-model="vm.user.email" placeholder="Enter email address" required="">
 
-                    <div class="has-error ng-hide" ng-messages="loginform.userEmail.$error"
-                         ng-show="loginform.userEmail.$touched">
-                        <p class="help-block errorMsg" ng-show="loginform.userEmail.$error.required"
-                           ng-message="required">Your email is required.</p>
+                        <div class="has-error ng-hide" ng-messages="loginform.userEmail.$error"
+                             ng-show="loginform.userEmail.$touched">
+                            <p class="help-block errorMsg text-left" ng-show="loginform.userEmail.$error.required"
+                               ng-message="required">Your email is required.</p>
 
-                        <p class="help-block errorMsg" ng-show="loginform.userEmail.$error.email">
-                            Your email is not valid.
-                        </p>
+                            <p class="help-block errorMsg text-left" ng-show="loginform.userEmail.$error.email">
+                                Your email is not valid.
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6" style="margin-left: -15px;margin-top: 5px">
-                    <a data-ng-hide="vm.isPasswordChanging" class="btn btn-success resetBtn"
-                       data-ng-click="vm.reset();userEmail.$setPristine()" ng-disabled="userEmail.$invalid"
-                       disabled="disabled"><span class="fa fa-lock"></span> Send Password
-                    </a>
-                    <a data-ng-show="vm.isPasswordChanging" class="btn btn-success resetBtn disabled">
-                        <span class="fa fa-spinner fa-spin"></span> Sending Password
-                    </a>
-                </div>
-                <label style="padding-top: 5px;padding-left:5px;color: red" data-ng-show="vm.message.length>0">{{vm.message}}</label>
+                    <div style="padding-top: 15px;padding-bottom: 15px;">
+                        <a data-ng-hide="vm.isPasswordChanging" class="btn btn-success col-xs-12"
+                           data-ng-click="vm.reset();loginform.userEmail.$setPristine()"
+                           ng-disabled="loginform.userEmail.$invalid"
+                           disabled="disabled"><span class="fa fa-lock"></span> Send Password
+                        </a>
+                        <a data-ng-show="vm.isPasswordChanging" class="btn btn-success col-xs-12 disabled">
+                            <span class="fa fa-spinner fa-spin"></span> Sending Password
+                        </a>
+                    </div>
+                    <label style="padding-top: 5px;padding-left:5px;color: red" data-ng-show="vm.message.length>0">{{vm.message}}</label>
             </div>
 
         </form>
