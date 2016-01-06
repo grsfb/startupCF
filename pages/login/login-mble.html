@@ -52,7 +52,7 @@
             <div ng-if="vm.resetSectionVisible" style="padding: 0px;">
                     <div ng-class="{'has-error': loginform.userEmail.$invalid && loginform.userEmail.$dirty}">
                         <input type="email" class="form-control" name="userEmail" id="email"
-                               data-ng-model="vm.user.email" placeholder="Enter email address" required="">
+                               data-ng-model="vm.user.resetEmail" placeholder="Enter email address" required="">
 
                         <div class="has-error ng-hide" ng-messages="loginform.userEmail.$error"
                              ng-show="loginform.userEmail.$touched">
