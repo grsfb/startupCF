@@ -3,24 +3,24 @@
     angular
         .module('Chefonia')
         .controller('ItemController', ItemController);
-    ItemController.$inject = ['SessionService', '$location', 'InventoryService', 'CartService', 'FlashService', '$routeParams', '$window','MappingService'];
+    ItemController.$inject = ['SessionService', '$location', 'InventoryService', 'CartService', 'FlashService', '$routeParams', '$window', 'MappingService'];
 
-    function ItemController(SessionService, $location, InventoryService, CartService, FlashService, $routeParams, $window,MappingService) {
+    function ItemController(SessionService, $location, InventoryService, CartService, FlashService, $routeParams, $window, MappingService) {
         var vm = this;
         vm.addItemInCart = addItemInCart;
-        vm.cart = [];
         vm.currentPage = 1;
         vm.totalPageAsArray = new Array(1);
         vm.loadNextPage = loadNextPage;
         vm.selectedIndex = 0;
-        vm.isCartLoaded = false;
         vm.buy = buy;
         vm.categoryName = $routeParams.categoryName == undefined ? all : $routeParams.categoryName;
         vm.chefLocation = $routeParams.chefLocation == undefined ? all : $routeParams.chefLocation;
-        vm.actualCategory=MappingService.getCategory(vm.categoryName)==undefined ?vm.categoryName:MappingService.getCategory(vm.categoryName);
+        vm.actualCategory = MappingService.getCategory(vm.categoryName) == undefined ? vm.categoryName : MappingService.getCategory(vm.categoryName);
+        var isCartLoaded = false;
+        var cart = [];
 
         //load initial items
-        InventoryService.getAllItems(1,vm.actualCategory, vm.chefLocation, function (response) {
+        InventoryService.getAllItems(1, vm.actualCategory, vm.chefLocation, function (response) {
             if (response.success) {
                 vm.items = response.data.items;
                 vm.totalPageAsArray = new Array(response.data.totalPages);
@@ -29,19 +29,26 @@
             }
         });
 
+        function isUserLoggedIn() {
+            return SessionService.get(SessionService.Session.CurrentUser);
+        }
+
+        function getUserId() {
+            return SessionService.get(SessionService.Session.CurrentUser).userId;
+        }
+
         //get all cart items parallel
-        if (SessionService.get(SessionService.Session.CurrentUser)) {
+        if (isUserLoggedIn()) {
             loadCart(function () {
                 //nothing to do
             });
         }
         function loadCart(callback) {
-            var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
-            CartService.getCartItems(userId,
+            CartService.getCartItems(getUserId(),
                 function (response) {
                     if (response.success) {
-                        vm.cart = response.data;
-                        vm.isCartLoaded = true;
+                        cart = response.data;
+                        isCartLoaded = true;
                         callback();
                     } else {
                         FlashService.Error("Something not working. Please try later");
@@ -69,15 +76,13 @@
 
         //cart
         function addItemInCart(item, callback) {
-            //don't show progress if user not logged in
-            if (SessionService.get(SessionService.Session.CurrentUser)) {
+            if (isUserLoggedIn()) {
                 showProgress(item.itemId);
-                var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
-                if (vm.isCartLoaded) {
-                    updateCart(userId, item, callback);
+                if (isCartLoaded) {
+                    updateCart(item, callback);
                 } else {
                     loadCart(function () {
-                        updateCart(userId, item, callback);
+                        updateCart(item, callback);
                     });
                 }
             } else {
@@ -85,13 +90,13 @@
             }
         }
 
-        function updateCart(userId, item, callback) {
-            var cartItem = getCartItem(vm.cart, item.itemId, item.weight);
+        function updateCart(item, callback) {
+            var cartItem = getItem(item.itemId, item.weight);
             if (cartItem) {
                 cartItem.quantity += 1;
                 updateCartItem(cartItem, callback);
             } else {
-                var newCartItem = new CartItem(userId, item.itemId, 1, item.weight, item.price);
+                var newCartItem = new CartItem(getUserId(), item.itemId, 1, item.weight, item.price);
                 addNewCartItem(newCartItem, callback);
             }
         }
@@ -99,9 +104,9 @@
         function addNewCartItem(cartItem, callback) {
             CartService.add(cartItem, function (response) {
                 if (response.success) {
-                    vm.cart = addItem(vm.cart, cartItem);
-                    SessionService.putInRootScope("cartItemCount", vm.cart.length);
-                    SessionService.put("cartItemCount", vm.cart.length);
+                    cart.push(response.data);
+                    SessionService.putInRootScope("cartItemCount", cart.length);
+                    SessionService.put("cartItemCount", cart.length);
                 } else {
                     FlashService.Error("Something not working. Please try later", true);
                 }
@@ -114,9 +119,7 @@
 
         function updateCartItem(cartItem, callback) {
             CartService.update(cartItem, function (response) {
-                if (response.success) {
-                    vm.cart = updateCartItemCount(vm.cart, cartItem.itemId);
-                } else {
+                if (!response.success) {
                     FlashService.Error("Something not working. Please try later", true);
                 }
                 hideProgress(cartItem.itemId);
@@ -128,34 +131,19 @@
 
         function showProgress(id) {
             $('#' + id).css("visibility", "visible");
-            $('#button-' + id).prop('disabled', true);
+            $('#button-' + id).addClass('disabled');
         }
 
         function hideProgress(id) {
             $('#' + id).css("visibility", "hidden");
-            $('#button-' + id).prop('disabled', false);
+            $('#button-' + id).removeClass('disabled');
             $('#' + id + '-done').show().fadeOut(3000);
         }
 
-        //private function
-        function addItem(arr, item) {
-            arr.push(item);
-            return arr;
-        }
-
-        function getCartItem(arr, itemId, weight) {
-            for (var i = 0; i < arr.length; i++) {
-                if (arr[i].itemId === itemId && arr[i].weight == weight) {
-                    return arr[i];
-                }
-            }
-            return undefined;
-        }
-
-        function updateCartItemCount(arr, itemId) {
-            for (var i = 0; i < arr.length; i++) {
-                if (arr[i].itemId === itemId) {
-                    return arr[i].quantity + 1;
+        function getItem(itemId, weight) {
+            for (var i = 0; i < cart.length; i++) {
+                if (cart[i].itemId === itemId && cart[i].weight == weight) {
+                    return cart[i];
                 }
             }
             return undefined;

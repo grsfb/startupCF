@@ -140,7 +140,8 @@
         }
 
         function removeItemFromCart(item) {
-            CartService.removeCartItem(currentUserId, item.cartItemId, function (response) {
+            $('delete-' + item.cartItemId).addClass('disabled');
+            CartService.removeCartItem(item.cartItemId, function (response) {
                 if (response.success) {
                     vm.cartItems = removeItem(vm.cartItems, item);
                     SessionService.put(SessionService.Session.CartCount, vm.cartItems.length);
@@ -151,6 +152,7 @@
                     }
                 }
                 else {
+                    $('delete-' + item.cartItemId).removeClass('disabled');
                     FlashService.Error("Unable to remove cart item");
                 }
             });

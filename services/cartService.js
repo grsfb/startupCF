@@ -31,8 +31,8 @@
             CommonService.update('/cart/update', cartItem, callback);
         }
 
-        function removeCartItem(userId, itemId, callback) {
-            CommonService.delete("/cart/" + userId + '/delete/' + itemId, callback);
+        function removeCartItem(itemId, callback) {
+            CommonService.delete('/cart/delete/' + itemId, callback);
         }
 
         function remove(userId, callback) {
