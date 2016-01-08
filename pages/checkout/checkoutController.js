@@ -7,7 +7,7 @@
 
     function CheckoutController(SessionService, $location, FlashService, OrderService) {
         var vm = this;
-        if (SessionService.get('cartItemIds')) {
+        if (!SessionService.get('isOrderInProgress')) {
             FlashService.ClearAllFlashMessage();
             $location.path('#/home');
             return;
