@@ -118,23 +118,9 @@
 
         function checkout() {
             //post checkout request and redirect to payment page
-            SessionService.put('cartItemIds', getItemsIdArray(vm.cartItems));
             SessionService.put('cartTotal', vm.cartTotal);
             SessionService.put('shippingCost', vm.shippingCost);
             $location.path('checkout');
-        }
-
-        function getItemsIdArray(cartItems) {
-            var cartItemIds = [];
-            for (var item in cartItems) {
-                if (cartItems.hasOwnProperty(item)) {
-                    cartItemIds.push(cartItems[item].cartItemId);
-                    if (cartItems[item].chefLocation.toLowerCase() != 'pune') {
-                        SessionService.put('isAnyChefNotFromPune', true);
-                    }
-                }
-            }
-            return cartItemIds;
         }
 
         function removeItemFromCart(item) {
