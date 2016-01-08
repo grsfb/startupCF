@@ -35,8 +35,9 @@
                         <div style="position: relative;"><input type="radio" name="payment"
                                                                 id="payment03" class="with-font"
                                                                 style="position: absolute;
-                                                                top: 15px;left: 5px;" disabled
-                                                                onchange="vm.usePayMethod('PAYU')">
+                                                                top: 15px;left: 5px;"
+                                                                value="PAYU"
+                                                                data-ng-model="vm.paymentType">
                         </div>
                         <img style="height: 50px;width: 150px;" src="img/third-party/payU.png"></label>
                 </div>
@@ -46,7 +47,8 @@
                                                                                name="payment"
                                                                                id="payment02" checked
                                                                                style="position: absolute;"
-                                                                               onchange="vm.usePayMethod('COD')">
+                                                                               data-ng-model="vm.paymentType"
+                                                                               value="COD">
                         </div>
                         Cash On Delivery</label>
                 </div>

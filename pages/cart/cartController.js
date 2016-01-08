@@ -20,7 +20,6 @@
         vm.cancelCoupon = cancelCoupon;
         vm.removeItemFromCart = removeItemFromCart;
         vm.showCouponEditor = false;
-        vm.isChefFromPune = true;
         vm.disableApplyCoupon = false;
         vm.showAppliedCouponEditor = false;
         vm.couponMessage = undefined;
@@ -119,24 +118,23 @@
 
         function checkout() {
             //post checkout request and redirect to payment page
-            SessionService.put('itemIds', getItemsIdArray(vm.cartItems));
+            SessionService.put('cartItemIds', getItemsIdArray(vm.cartItems));
             SessionService.put('cartTotal', vm.cartTotal);
             SessionService.put('shippingCost', vm.shippingCost);
-            SessionService.put('isChefFromPune', vm.isChefFromPune);
             $location.path('checkout');
         }
 
         function getItemsIdArray(cartItems) {
-            var itemIds = [];
+            var cartItemIds = [];
             for (var item in cartItems) {
                 if (cartItems.hasOwnProperty(item)) {
-                    itemIds.push(cartItems[item].itemId);
+                    cartItemIds.push(cartItems[item].cartItemId);
                     if (cartItems[item].chefLocation.toLowerCase() != 'pune') {
-                        vm.isChefFromPune = false;
+                        SessionService.put('isAnyChefNotFromPune', true);
                     }
                 }
             }
-            return itemIds;
+            return cartItemIds;
         }
 
         function removeItemFromCart(item) {

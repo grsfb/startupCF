@@ -37,15 +37,32 @@
         }
 
         function showEmail() {
-            vm.contactDetail=false;
+            vm.contactDetail = false;
             vm.sendEmail = true;
         }
 
         function showContact() {
-            vm.sendEmail=false;
+            vm.sendEmail = false;
             vm.contactDetail = true;
 
         }
+
+        cleanUpOnOrderSuccess();
+        function cleanUpOnOrderSuccess() {
+            CartService.remove(SessionService.get('currentUser').userId,
+                function (response) {
+                    if (!response.success) {
+                        FlashService.Error("Something is not working. Please try later", true);
+                    }
+                });
+            SessionService.remove('shippingCost');
+            SessionService.remove('cartTotal');
+            SessionService.remove('itemIds');
+            SessionService.remove('userCart');
+            SessionService.putInRootScope('cartItemCount', 0);
+            SessionService.remove('deliverAddress');
+        }
+
     }
 
 })();
