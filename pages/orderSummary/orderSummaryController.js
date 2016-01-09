@@ -55,6 +55,8 @@
             SessionService.remove('cartTotal');
             SessionService.remove('userCart');
             SessionService.putInRootScope('cartItemCount', 0);
+            SessionService.putInRootScope('isOrderInProgress', 0);
+            SessionService.putInRootScope('deliverAddress', undefined);
             SessionService.deleteFromRootScope('deliverAddress');
             SessionService.deleteFromRootScope('isOrderInProgress');
         }
