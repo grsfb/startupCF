@@ -39,13 +39,16 @@ html, body {
         padding-top: 70px;
         margin: 0 auto -195px;
     }
-    .mobileView{
-        padding-left: 0px!important;
-        padding-right: 0px!important;
+
+    .mobileView {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
     }
-.mobileFont{
-    font-size: small;
-}
+
+    .mobileFont {
+        font-size: small;
+    }
+
     .footer, .push {
         height: 195px !important;
         clear: both !important;
@@ -68,10 +71,12 @@ html, body {
     }
 
 }
-.paddingClass{
-    padding-left: 0!important;
-    padding-right: 0!important;
+
+.paddingClass {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
+
 .errorMsg {
     margin-bottom: -10px !important;
 }
