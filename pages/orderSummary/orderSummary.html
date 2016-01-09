@@ -5,8 +5,8 @@
     <div style="background-color: white" class="row">
         <div class="col-md-12 col-sm-12 col-xs-12"
              style="font-size:large;font-weight: 600;margin-bottom: 20px;line-height: 50px ;background-color: #f2f2f2">
-       <div class="pull-left mobileFont">Order Summary </div>
-           <div class="pull-right mobileFont" style="color: teal;"> Status: {{vm.localize(vm.orderItem.status)}}</div>
+            <div class="pull-left mobileFont">Order Summary</div>
+            <div class="pull-right mobileFont" style="color: teal;"> Status: {{vm.localize(vm.orderItem.status)}}</div>
 
         </div>
         <div class="col-md-6 col-sm-12 col-xs-12">
@@ -49,21 +49,14 @@
                 </div>
 
                 <div class="col-md-8 col-xs-7">
-                   <i class="fa fa-inr"></i> {{vm.orderItem.orderTotal}}
-                </div>
-                <hr class="divider col-md-12 orderDivider">
-                <div class="col-md-4 col-xs-5 summaryText">
-                    Payment Status:
-                </div>
-
-                <div class="col-md-8 col-xs-7">
-                    {{vm.localize(vm.orderItem.paymentStatus)}}
+                    <i class="fa fa-inr"></i> {{vm.orderItem.orderTotal}}
                 </div>
                 <hr class="divider col-md-12 orderDivider">
             </div>
         </div>
         <div class="col-md-6 col-sm-12 col-xs-12" style="text-align: left">
-            <div class="col-md-12 col-sm-12" style="font-size: large;font-weight: 500;color: darkgray"> {{currentUser.userName |
+            <div class="col-md-12 col-sm-12" style="font-size: large;font-weight: 500;color: darkgray">
+                {{currentUser.userName |
                 uppercase}}, {{vm.orderItem.deliveryAddress.mobile}}
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -121,7 +114,7 @@
                 <li class="col-md-4 col-xs-4">
                     <a href="" class="col-md-12" data-ng-click="vm.showContact()"><i
                             class="fontawesome fa fa-phone fa-4x"></i>&nbsp;</a>
-                 <span class="col-md-12 col-xs-12">CONTACT US</span>
+                    <span class="col-md-12 col-xs-12">CONTACT US</span>
                     <ul ng-show="vm.contactDetail" class="ng-cloak frmCntct hidden-xs">
 
                         <div style="margin-top: 5px;font-size: medium;font-style: italic;color:#16b594">
@@ -138,7 +131,8 @@
                     <div class="col-md-12"> Kindly Contact us via Email admin@chefonia.com</div>
                 </div>
             </ul>
-            <ul ng-show="vm.sendEmail" class="ng-cloak frmEMail hidden-md hidden-lg hidden-sm col-xs-12" style="padding: 0;width: 100%">
+            <ul ng-show="vm.sendEmail" class="ng-cloak frmEMail hidden-md hidden-lg hidden-sm col-xs-12"
+                style="padding: 0;width: 100%">
 
                 <div style="margin-top: 5px">
                     <form class="col-md-12 col-xs-12" name="emailForm">
@@ -177,7 +171,8 @@
                 <div class="col-sm-8" style="padding-left: 0px!important; padding-top: 10px;">
                     <!--<span class="hidden-md hidden-lg hidden-sm" data-ng-click="vm.removeItemFromCart(item)"><i class="fa fa-trash-o pull-right" style="padding-top: 5px;cursor: pointer"></i></span>-->
                     <div class="col-sm-4 col-xs-4" style="padding-left: 0px!important;padding-bottom: 10px;">
-                        <img bn-lazy-src="img/md/{{item.imageHash}}.png" class="img-responsive" style="height: 80px;width: 120px;">
+                        <img bn-lazy-src="img/md/{{item.imageHash}}.png" class="img-responsive"
+                             style="height: 80px;width: 120px;">
                     </div>
                     <div class="col-sm-8 col-xs-8" style="padding: 0px;">
                         <div>

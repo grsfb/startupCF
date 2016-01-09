@@ -32,9 +32,10 @@
 
         function checkAndPlaceOrder() {
             var address = SessionService.get('deliverAddress');
+            var estimatedDelivery = SessionService.get('estimatedDeliveryTime');
             if (verifyDeliveryAddress(address)) {
                 var userOrder = new Order(SessionService.get('currentUser').userId,
-                    address.addressId, vm.paymentType);
+                    address.addressId, vm.paymentType, estimatedDelivery);
                 vm.isPlacingOrder = true;
                 OrderService.create(userOrder, function (response) {
                     if (response.success) {
@@ -51,10 +52,11 @@
             }
         }
 
-        function Order(userId, addressId, paymentType) {
+        function Order(userId, addressId, paymentType, estimateDeliveryTime) {
             this.userId = userId;
             this.deliveryAddress = {"addressId": addressId};
             this.paymentType = paymentType;
+            this.estimateDeliveryTime = estimateDeliveryTime;
         }
     }
 })();

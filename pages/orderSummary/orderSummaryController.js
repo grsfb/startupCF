@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('OrderSummaryController', OrderSummaryController);
-    OrderSummaryController.$inject = ['OrderService', 'FlashService', '$routeParams'];
+    OrderSummaryController.$inject = ['OrderService', 'FlashService', '$routeParams', 'CartService', 'SessionService'];
 
-    function OrderSummaryController(OrderService, FlashService, $routeParams) {
+    function OrderSummaryController(OrderService, FlashService, $routeParams, CartService, SessionService) {
         var vm = this;
         vm.orderItem = undefined;
         vm.printOrder = printOrder;
@@ -28,12 +28,8 @@
         }
 
         function localize(status) {
-            var lz = "";
-            var temp = status.split("_");
-            for (var i = 0; i < temp.length; i++) {
-                lz += temp[i] + " ";
-            }
-            return lz;
+            var lz = {"IN_PROGRESS": "In progress", "FAILED": "Failed", "COMPLETED": "Completed"};
+            return lz[status];
         }
 
         function showEmail() {
@@ -57,10 +53,10 @@
                 });
             SessionService.remove('shippingCost');
             SessionService.remove('cartTotal');
-            SessionService.remove('itemIds');
             SessionService.remove('userCart');
             SessionService.putInRootScope('cartItemCount', 0);
-            SessionService.remove('deliverAddress');
+            SessionService.deleteFromRootScope('deliverAddress');
+            SessionService.deleteFromRootScope('isOrderInProgress');
         }
 
     }

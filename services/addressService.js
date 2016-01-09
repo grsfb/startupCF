@@ -10,6 +10,7 @@
         service.create = create;
         service.remove = remove;
         service.getAllAddress = getAllAddress;
+        service.getEstimatedDelivery = getEstimatedDelivery;
 
         return service;
         function create(address, callback) {
@@ -23,5 +24,10 @@
         function getAllAddress(userId, callback) {
             CommonService.get('/address/' + userId + '/all', callback);
         }
+
+        function getEstimatedDelivery(addressId, callback) {
+            CommonService.get('/address/delivery-estimates/' + addressId, callback);
+        }
+
     }
 })();

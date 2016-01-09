@@ -16,8 +16,6 @@
         vm.deleteAddress = deleteAddress;
         vm.showAddressEditor = false;
         vm.isAddingAddress = false;
-        vm.estimateDeliveryTime = undefined;
-        vm.isChefFromPune = SessionService.get('isChefFromPune');
         var userId = SessionService.get(SessionService.Session.CurrentUser).userId;
         AddressService.getAllAddress(userId, function (response) {
             if (response.success) {
@@ -36,19 +34,14 @@
         function setSelectedAddress(address, index) {
             SessionService.putInRootScope('deliverAddress', address);
             vm.selectedIndex = index;
-            var addressFromPune = address.city.toLowerCase() == 'pune' && address.zip.slice(0, 3) == '411';
-            if (addressFromPune == true && vm.isChefFromPune == true) {
-                vm.estimateDeliveryTime = "Your all items will be delivered in 2 to 4 working days";
-                FlashService.Success(vm.estimateDeliveryTime,false);
-            }
-            else if (addressFromPune == true && vm.isChefFromPune == false) {
-                vm.estimateDeliveryTime = "Your all items will be delivered in 5 to 7 working days";
-                FlashService.Success(vm.estimateDeliveryTime,false);
-            }
-            else {
-                FlashService.Error("Items can not be delivered to specified delivery location. Currently we are in pune only.",false);
-            }
-            SessionService.putInRootScope('EstimateDeliveryTime', vm.estimateDeliveryTime);
+            getEstimatedDelivery(address.addressId)
+        }
+
+        function getEstimatedDelivery(addressId) {
+            AddressService.getEstimatedDelivery(addressId, function (response) {
+                SessionService.putInRootScope('estimatedDeliveryTime', response.data.deliveryTime);
+                FlashService.Success("Estimated delivery time for this order is by "+response.data.deliveryTime);
+            });
         }
 
         function enableAddressEditor() {

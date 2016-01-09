@@ -120,7 +120,7 @@
             //post checkout request and redirect to payment page
             SessionService.put('cartTotal', vm.cartTotal);
             SessionService.put('shippingCost', vm.shippingCost);
-            SessionService.put('isOrderInProgress', true);
+            SessionService.putInRootScope('isOrderInProgress', true);
             $location.path('checkout');
         }
 

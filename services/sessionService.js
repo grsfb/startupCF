@@ -10,6 +10,7 @@
         service.put = put;
         service.remove = remove;
         service.putInRootScope = putInRootScope;
+        service.deleteFromRootScope = deleteFromRootScope;
         service.Session = {'CartCount': 'cartItemCount', 'CurrentUser': 'currentUser'};
         var cookieStore = new CookieStore();
         var rootScope = new RootScope();
@@ -28,7 +29,7 @@
         function destroy() {
             rootScope.put('isLoggedIn', false);
             rootScope.put('cartItemCount', 0);
-            rootScope.put('currentUser',undefined);
+            rootScope.put('currentUser', undefined);
             remove("currentUser");
             remove("cartItemCount");
         }
@@ -49,6 +50,10 @@
             cookieStore.put(key, value);
         }
 
+        function deleteFromRootScope(key) {
+            rootScope.remove(key);
+        }
+
         function remove(key) {
             cookieStore.put(key, undefined);
             cookieStore.remove(key);
@@ -66,7 +71,7 @@
             }
 
             function remove(key) {
-                return $rootScope[key] = undefined;
+                delete $rootScope[key];
             }
         }
 

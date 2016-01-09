@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <td class="th">Order total</td>
-                <td class="price"><i class="fa fa-rupee"></i>{{vm.orderTotal}}</td>
+                <td class="price"><i class="fa fa-rupee"></i> {{vm.cartTotal+vm.shippingCost}}</td>
             </tr>
             </tbody>
         </table>
@@ -58,7 +58,7 @@
            style="width: 100%" data-ng-hide="vm.isPlacingOrder" data-ng-click="vm.checkAndPlaceOrder()">
             Place order
         </a>
-        <a class="btn btn-default mybtn pull-right" type="submit" name="place-order"
+        <a class="btn btn-default mybtn pull-right disabled" type="submit" name="place-order"
            style="width: 100%" data-ng-show="vm.isPlacingOrder">
             <i class="fa fa-spinner fa-spin"></i> Placing order</a>
     </div>
