@@ -121,8 +121,8 @@
             CartService.getCartItems(getUserId(),
                 function (response) {
                     if (response.success) {
-                        vm.cart = response.data;
-                        vm.isCartLoaded = true;
+                        cart = response.data;
+                        isCartLoaded = true;
                         callback();
                     } else {
                         FlashService.Error("Something not working. Please try later");
