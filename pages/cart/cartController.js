@@ -42,7 +42,7 @@
         }
 
         function applyCoupon() {
-            var cartCoupon = new CartCoupon(vm.couponCode, currentUserId);
+            var cartCoupon = new CartCoupon(null,vm.couponCode, currentUserId);
             CampaignService.applyCoupon(cartCoupon, function (response) {
                 if (response.success) {
                     vm.discountData = response.data;
@@ -62,7 +62,7 @@
         }
 
         function cancelCoupon() {
-            var cartCoupon = new CartCoupon(vm.couponCode, currentUserId);
+            var cartCoupon = new CartCoupon(vm.discountData.userCouponId,vm.couponCode, currentUserId);
             CampaignService.cancelCoupon(cartCoupon, function (response) {
                 if (response.success) {
                     SessionService.put('userCouponId', undefined);
@@ -91,10 +91,14 @@
         }
 
         function resetCoupon() {
+            if(vm.discountData !=null) {
+                cancelCoupon();
+            }
             vm.showAppliedCouponEditor = false;
             vm.showCouponEditor = false;
             vm.couponMessage = undefined;
             vm.couponCode = undefined;
+            vm.discountData = undefined;
             vm.couponDiscount = 0;
         }
 
@@ -103,6 +107,7 @@
             //update cart async
             updateQuantity(vm.cartItems[index]);
             updateCartCost();
+            resetCoupon();
         }
 
         function updateQuantity(cartItem) {
@@ -110,6 +115,7 @@
                 if (!response.success) {
                     FlashService.Error("Unable to update quantity");
                 }
+                resetCoupon();
             });
         }
 
@@ -135,7 +141,6 @@
                     vm.cartItems = removeItem(vm.cartItems, item);
                     SessionService.put(SessionService.Session.CartCount, vm.cartItems.length);
                     SessionService.putInRootScope("cartItemCount", vm.cartItems.length);
-                    resetCoupon();
                     if (vm.cartItems.length == 0) {
                         $location.path('#/home');
                     }
@@ -144,6 +149,8 @@
                     $('delete-' + item.cartItemId).removeClass('disabled');
                     FlashService.Error("Unable to remove cart item");
                 }
+                updateCartCost();
+                resetCoupon();
             });
         }
 
@@ -157,7 +164,8 @@
             return arr;
         }
 
-        function CartCoupon(coupon, userId) {
+        function CartCoupon(userCouponId,coupon, userId) {
+            this.userCouponId = userCouponId;
             this.couponCode = coupon;
             this.userId = userId;
         }
