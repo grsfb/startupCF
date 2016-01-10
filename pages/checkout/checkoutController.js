@@ -16,7 +16,7 @@
         vm.cartTotal = SessionService.get('cartTotal');
         vm.checkAndPlaceOrder = checkAndPlaceOrder;
         vm.isPlacingOrder = false;
-        vm.paymentType = "PAYU";
+        vm.paymentType = "COD";
         vm.setPaymentType = setPaymentType;
         function setPaymentType(method) {
             vm.paymentType = method;
