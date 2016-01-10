@@ -90,7 +90,7 @@ html, body {
     margin-right: auto;
     margin-left: auto;
     width: 80% !important;
-    height: 90% !important;
+    height: 97% !important;
 }
 
 .modal-content {
@@ -98,7 +98,6 @@ html, body {
     width: 100%;
     align-content: center;
     height: 100%;
-    background-image: url(../img/loginModal.png)
 }
 
 .loginInput {
@@ -240,7 +239,15 @@ ul li a:hover, ul li a:focus {
         width: 100% !important;
     }
 }
-
+@media (max-width: 800px) {
+    .modal-dialog {
+        margin: 20 !important;
+        margin-right: auto;
+        margin-left: auto;
+        width: 90% !important;
+        height: 90% !important;
+    }
+}
 .itemImage {
     height: 200px !important;
     width: 200px;

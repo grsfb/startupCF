@@ -56,7 +56,7 @@
             this.userId = userId;
             this.deliveryAddress = {"addressId": addressId};
             this.paymentType = paymentType;
-            this.estimateDeliveryTime = estimateDeliveryTime;
+            this.userCouponId=SessionService.get('userCouponId');
         }
     }
 })();

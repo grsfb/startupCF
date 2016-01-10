@@ -24,6 +24,7 @@
         vm.showAppliedCouponEditor = false;
         vm.couponMessage = undefined;
         var currentUserId = SessionService.get(SessionService.Session.CurrentUser).userId;
+        SessionService.put('userCouponId', undefined);
 
         CartService.getCartItems(currentUserId, function (response) {
             if (response.success) {
@@ -41,10 +42,11 @@
         }
 
         function applyCoupon() {
-            var cartCoupon = new CartCoupon(vm.couponCode, vm.cartItems);
+            var cartCoupon = new CartCoupon(vm.couponCode, currentUserId);
             CampaignService.applyCoupon(cartCoupon, function (response) {
                 if (response.success) {
                     vm.discountData = response.data;
+                    SessionService.put('userCouponId', vm.discountData.userCouponId);
                     vm.couponMessage = vm.discountData.message;
                     vm.couponDiscount = vm.discountData.discount;
                     vm.cartTotal = vm.cartTotal - vm.couponDiscount;
@@ -60,8 +62,10 @@
         }
 
         function cancelCoupon() {
-            CampaignService.cancelCoupon(vm.couponCode, function (response) {
+            var cartCoupon = new CartCoupon(vm.couponCode, currentUserId);
+            CampaignService.cancelCoupon(cartCoupon, function (response) {
                 if (response.success) {
+                    SessionService.put('userCouponId', undefined);
                     updateCartCost();
                     resetCoupon();
                 }
@@ -153,9 +157,9 @@
             return arr;
         }
 
-        function CartCoupon(coupon, cartItems) {
+        function CartCoupon(coupon, userId) {
             this.couponCode = coupon;
-            this.cartItems = cartItems;
+            this.userId = userId;
         }
     }
 

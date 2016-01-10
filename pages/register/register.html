@@ -24,19 +24,21 @@
         <div class="form-group"
              ng-class="{'has-error': registerForm.newUserPassword.$invalid &amp;&amp; registerForm.newUserPassword.$dirty}">
             <label><span class="fa fa-key"></span> Password</label>
-            <input type="password" class="form-control loginInput" id="psw1" data-ng-model="vm.user.password"
+            <input type="password" class="form-control loginInput" id="psw1" data-ng-model="vm.user.password" ng-maxlength="20"
                    name="newUserPassword" placeholder="Enter password" required="">
 
             <div class="has-error ng-hide" ng-messages="registerForm.newUserPassword.$error" maxlength="30"
                  ng-show="registerForm.newUserPassword.$touched">
                 <p class="help-block errorMsg" ng-show="registerForm.newUserPassword.$error.required"
                    ng-message="required">Your password is required.</p>
+                <p class="help-block errorMsg" ng-show="registerForm.newUserPassword.$error.maxlength"
+                   ng-message="maxlength">Your password max length is 20</p>
             </div>
         </div>
         <div class="form-group"
              ng-class="{'has-error': registerForm.cnfrmPswd.$invalid &amp;&amp; registerForm.cnfrmPswd.$dirty}">
             <label><span class="fa fa-key"></span> Confirm Password</label>
-            <input type="password" class="form-control loginInput" id="cnfrmPswd" data-ng-model="vm.user.cnfrmPswd"
+            <input type="password" class="form-control loginInput" id="cnfrmPswd" data-ng-model="vm.user.cnfrmPswd" ng-maxlength="30"
                    name="cnfrmPswd" placeholder="Enter password" required="">
 
             <div class="has-error ng-hide" ng-messages="registerForm.cnfrmPswd.$error" maxlength="30"
