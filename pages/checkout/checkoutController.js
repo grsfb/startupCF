@@ -35,7 +35,7 @@
             var estimatedDelivery = SessionService.get('estimatedDeliveryTime');
             if (verifyDeliveryAddress(address)) {
                 var userOrder = new Order(SessionService.get('currentUser').userId,
-                    address.addressId, vm.paymentType, estimatedDelivery);
+                    address.addressId, vm.paymentType, SessionService.get("couponCode"));
                 vm.isPlacingOrder = true;
                 OrderService.create(userOrder, function (response) {
                     if (response.success) {
@@ -52,11 +52,13 @@
             }
         }
 
-        function Order(userId, addressId, paymentType, estimateDeliveryTime) {
+        function Order(userId, addressId, paymentType, couponId) {
             this.userId = userId;
             this.deliveryAddress = {"addressId": addressId};
             this.paymentType = paymentType;
-            this.userCouponId=SessionService.get('userCouponId');
+            if (couponId) {
+                this.couponId = couponId;
+            }
         }
     }
 })();

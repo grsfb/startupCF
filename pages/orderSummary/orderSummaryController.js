@@ -43,23 +43,19 @@
 
         }
 
-        cleanUpOnOrderSuccess();
         function cleanUpOnOrderSuccess() {
-            CartService.remove(SessionService.get('currentUser').userId,
-                function (response) {
-                    if (!response.success) {
-                        FlashService.Error("Something is not working. Please try later", true);
-                    }
-                });
             SessionService.remove('shippingCost');
             SessionService.remove('cartTotal');
             SessionService.remove('userCart');
+            SessionService.remove('couponCode');
             SessionService.putInRootScope('cartItemCount', 0);
-            SessionService.putInRootScope('isOrderInProgress', 0);
+            SessionService.putInRootScope('isOrderInProgress', false);
             SessionService.putInRootScope('deliverAddress', undefined);
             SessionService.deleteFromRootScope('deliverAddress');
             SessionService.deleteFromRootScope('isOrderInProgress');
         }
+
+        cleanUpOnOrderSuccess();
 
     }
 
