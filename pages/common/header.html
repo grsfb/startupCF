@@ -1,8 +1,10 @@
 <div class="navbar navbar-fixed-top" style="margin-bottom: 0px">
-    <div class="container mobileView" style="padding-left: 0px;padding-right: 0px">
-        <div id="header" class="navbar-header col-xs-6">
+    <div class="container mobileView" style="padding-left: 0px;padding-right: 0px" >
+        <div id="header" class="navbar-header col-xs-6" itemscope itemtype="http://schema.org/Organization">
             <a class="header-link navbar-brand" href="#home">
-                <img src="brand.png" class="img-responsive"> </a>
+                <img src="brand.png" itemprop="logo" class="img-responsive" alt="Chefonia">
+                <span style="display: none" itemprop="name">Chefonia</span>
+            </a>
         </div>
         <div class="collapse navbar-collapse hidden-xs" data-ng-controller="NavbarController as vm">
             <ul class="nav navbar-nav pull-right">
