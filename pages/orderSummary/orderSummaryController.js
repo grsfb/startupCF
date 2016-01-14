@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('OrderSummaryController', OrderSummaryController);
-    OrderSummaryController.$inject = ['OrderService', 'FlashService', '$routeParams', 'CartService', 'SessionService'];
+    OrderSummaryController.$inject = ['OrderService', 'FlashService', '$routeParams', 'SessionService'];
 
-    function OrderSummaryController(OrderService, FlashService, $routeParams, CartService, SessionService) {
+    function OrderSummaryController(OrderService, FlashService, $routeParams, SessionService) {
         var vm = this;
         vm.orderItem = undefined;
         vm.printOrder = printOrder;
@@ -46,7 +46,7 @@
         function cleanUpOnOrderSuccess() {
             SessionService.remove('shippingCost');
             SessionService.remove('cartTotal');
-            SessionService.remove('userCart');
+            SessionService.remove('discount');
             SessionService.remove('couponCode');
             SessionService.putInRootScope('cartItemCount', 0);
             SessionService.putInRootScope('isOrderInProgress', false);

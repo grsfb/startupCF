@@ -1,35 +1,34 @@
 <div>
-    <h3 class="tstyle" style="padding: 10px;">Your order</h3>
+    <h3 class="tstyle" style="padding: 10px;">Payment Details</h3>
 
-    <div style="padding: 10px;">
-        <table>
-            <tbody>
-            <tr>
-                <th>Payment Details</th>
-            </tr>
-            <tr>
-                <td class="th">Cart subtotal</td>
-                <td class="price"><i class="fa fa-rupee"></i> {{vm.cartTotal}}</td>
-            </tr>
-            <tr>
-                <td class="th border">Shipping</td>
-                <td class="border" style="text-align: right"><i class="fa fa-rupee"></i> {{vm.shippingCost}}</td>
-            </tr>
-            <tr>
-                <td class="th">Order total</td>
-                <td class="price"><i class="fa fa-rupee"></i> {{vm.cartTotal+vm.shippingCost}}</td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="payment-method">
-            <div>
-                <label>
-                    Select Payment Method</label>
-            </div>
-            <p>Please use your Order ID as the payment
-                reference.</p>
+    <div>
+        <div style="padding: 10px;">
+            <table>
+                <tbody>
+                <tr>
+                    <td class="th" style="padding-top: 0">Cart subtotal</td>
+                    <td class="price" style="padding-top: 0"><i class="fa fa-rupee"></i> {{vm.cartTotal}}</td>
+                </tr>
+                <tr>
+                    <td class="th border" style="padding-top: 5px">Shipping</td>
+                    <td class="border" style="text-align: right;padding-top: 5px"><i class="fa fa-rupee"></i> {{vm.shippingCost}}</td>
+                </tr>
+                <tr data-ng-show="vm.discount">
+                    <td class="th border" style="padding-top: 5px"> Discount</td>
+                    <td class="border" style="text-align: right;padding-top: 5px"><i class="fa fa-rupee"></i> {{vm.discount}}</td>
+                </tr>
+                <tr>
+                    <td class="th" style="padding-top: 5px">Order total</td>
+                    <td class="price" style="padding-top: 5px"><i class="fa fa-rupee"></i> {{vm.cartTotal+vm.shippingCost-vm.discount}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3 class="tstyle" style="padding: 10px;margin: 0">Select Payment Method</h3>
 
-            <form id="payment-form" name="payment-form" role="form" novalidate>
+            <form id="payment-form" name="payment-form" role="form" novalidate style="padding-left: 10px;
+            margin-top: -5px;">
                 <div class="radio light" style="background-color: #FFFFFF">
                     <label>
                         <div style="position: relative;"><input type="radio" name="payment"
@@ -41,7 +40,7 @@
                         </div>
                         <img style="height: 50px;width: 150px;" src="img/third-party/payU.png"></label>
                 </div>
-                <div class="radio light" style="background-color: #FFFFFF;padding: 5px;">
+                <div class="radio light" style="padding: 5px;">
                     <label style="color: darkgreen;font-weight: bold">
                         <div class="iradio" style="position: relative;"><input class="with-font" type="radio"
                                                                                name="payment"

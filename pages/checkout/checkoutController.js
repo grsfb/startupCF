@@ -14,6 +14,7 @@
         }
         vm.shippingCost = SessionService.get('shippingCost');
         vm.cartTotal = SessionService.get('cartTotal');
+        vm.discount = SessionService.get('discount');
         vm.checkAndPlaceOrder = checkAndPlaceOrder;
         vm.isPlacingOrder = false;
         vm.paymentType = "COD";
@@ -32,7 +33,6 @@
 
         function checkAndPlaceOrder() {
             var address = SessionService.get('deliverAddress');
-            var estimatedDelivery = SessionService.get('estimatedDeliveryTime');
             if (verifyDeliveryAddress(address)) {
                 var userOrder = new Order(SessionService.get('currentUser').userId,
                     address.addressId, vm.paymentType, SessionService.get("couponCode"));

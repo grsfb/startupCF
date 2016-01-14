@@ -58,7 +58,7 @@
             for (var i = 0; i < vm.cartItems.length; i++) {
                 vm.cartItemTotal += vm.cartItems[i].price * vm.cartItems[i].quantity;
             }
-            if (vm.cartTotal < 200) {
+            if (vm.cartItemTotal < 200) {
                 vm.shippingCost = 50;
             }
             resetCoupon();
@@ -96,10 +96,11 @@
 
         function checkout() {
             //post checkout request and redirect to payment page
-            SessionService.put('cartTotal', vm.cartTotal);
+            SessionService.put('cartTotal', vm.cartItemTotal);
             SessionService.put('shippingCost', vm.shippingCost);
             SessionService.putInRootScope('isOrderInProgress', true);
-            SessionService.put('couponCode', vm.discountData);
+            SessionService.put('discount', vm.coupon.discount);
+            SessionService.put('couponCode', vm.coupon.couponCode);
             $location.path('checkout');
         }
 
