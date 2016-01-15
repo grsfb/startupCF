@@ -8,7 +8,6 @@
     function ItemController(SessionService, $location, InventoryService, CartService, FlashService, $routeParams, $window, MappingService) {
         var vm = this;
         vm.addItemInCart = addItemInCart;
-        vm.currentPage = 1;
         vm.totalPageAsArray = new Array(1);
         vm.loadNextPage = loadNextPage;
         vm.selectedIndex = 0;
@@ -20,7 +19,7 @@
         var cart = [];
 
         //load initial items
-        InventoryService.getAllItems(1, vm.actualCategory, vm.chefLocation, function (response) {
+        InventoryService.getAllItems(0, vm.actualCategory, vm.chefLocation, function (response) {
             if (response.success) {
                 vm.items = response.data.items;
                 vm.totalPageAsArray = new Array(response.data.totalPages);

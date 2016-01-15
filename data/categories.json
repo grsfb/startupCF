@@ -1,26 +1,26 @@
 [
   {
     "category": "SNACKS",
-    "totalItems": 50,
+    "totalItems": 20,
     "description": "Get authentic regional snacks",
     "imageHash":"f42f024415c983c091fdef3d4bdc27da"
   },
   {
     "category": "MIXTURES",
-    "totalItems": 10,
+    "totalItems": 79,
     "description": "Get authentic mixture items",
     "imageHash":"4a54823d79113a0b32fab29a66547cd6"
   },
   {
     "category": "CHOCOLATES",
-    "totalItems": 10,
+    "totalItems": 52,
     "description": "Get authentic yummy chocolates",
     "imageHash":"2d473f0039e580f5e2970cd7b514ca4a"
   },
   {
-    "category": "BAKERY",
-    "totalItems": "5 plus",
-    "description": "Get authentic regional bakery",
-    "imageHash":"7056f7b887e9ef7e7f1a9ffd4f401b97"
+    "category": "SWEETS",
+    "totalItems": 16,
+    "description": "Get authentic regional sweets",
+    "imageHash":"2cf526b094e5d3ce9e0a56ab78658868"
   }
 ]

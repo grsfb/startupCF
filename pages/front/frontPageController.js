@@ -46,7 +46,6 @@
                 }
             };
         }]);
-    ;
     FrontPageController.$inject = ['SessionService', 'CartService', '$http', '$location', '$window', '$document', 'FlashService', 'MappingService'];
 
     function FrontPageController(SessionService, CartService, $http, $location, $window, $document, FlashService, MappingService) {
@@ -82,9 +81,6 @@
         $http.get('data/categories.json').success(function (data) {
             vm.categories = data;
 
-        });
-        $http.get('data/popularItems.json').success(function (data) {
-            vm.newSlides = data;
         });
         function cityChange(city) {
             vm.city = city;

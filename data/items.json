@@ -1,27 +1,9 @@
 [
   {
-    "itemId": "19dccd9a-6e84-49b2-9a8a-98a9e60d4851",
-    "name": "Chocolate Cake",
-    "weightToPrice": {
-      "0.5 kg": "400",
-      "1 kg": "800"
-    },
-    "price": 400,
-    "weight": "0.5 kg",
-    "category": "BAKERY",
-    "chefId": "1",
-    "chefName": "Prajakta Malkar",
-    "chefLocation": "MUMBAI",
-    "recipe": "NA",
-    "popularity": 1,
-    "imageHash": "935bcecb97eff76104833fa9d01a0854"
-  },
-
-  {
     "itemId": "ce91e7dd-f4ca-4faa-9c00-6d8c8501dcc2",
-    "name": "Milk Chocolates - Almonds",
+    "name": "Almonds Milk Chocolates",
     "weightToPrice": {
-      "0.5 kg": "300",
+      "500 gm": "300",
       "1 kg": "600"
     },
     "price": 350,
@@ -36,8 +18,11 @@
   },
   {
     "itemId": "2798b645-b3a6-4668-bfd7-507a74be6be5",
-    "name": "Mash mellows with sprinkles",
-    "weightToPrice": {},
+    "name": "Mash mellows",
+    "weightToPrice": {
+      "4 Pcs": "100",
+      "12 Pcs": "300"
+    },
     "price": 100,
     "weight": "4 Pcs",
     "category": "CHOCOLATES",
@@ -50,10 +35,10 @@
   },
   {
     "itemId": "dcf7557b-10d3-42a7-a27b-ffacc212904b",
-    "name": "Chocolate with Choco Chips",
+    "name": "Choco Chips Chocolate",
     "weightToPrice": {
-      "150 gm":"150",
-      "300 gm":"150"
+      "150 gm": "150",
+      "300 gm": "300"
     },
     "price": 150,
     "weight": "150 gm",
@@ -69,11 +54,11 @@
     "itemId": "7d662e5f-5314-44c5-9798-ef9176acce76",
     "name": "NYLON SEV",
     "weightToPrice": {
-      "200 gm":"35",
-      "400 gm":"70"
+      "400 gm": "70",
+      "1 Kg": "160"
     },
-    "price": 35,
-    "weight": "200 gm",
+    "price": 70,
+    "weight": "400 gm",
     "category": "MIXTURES",
     "chefId": "6",
     "chefName": "Sageeta",
@@ -83,28 +68,11 @@
     "imageHash": "ae0f374c15ce615a380bd054d7a666be"
   },
   {
-    "itemId": "20cb51ed-3bb2-47df-97da-534ceb6a9a0d",
-    "name": "Black Forest Cake",
-    "weightToPrice": {
-      "0.5 kg": "350",
-      "1 kg": "700"
-    },
-    "price": 350,
-    "weight": "0.5 kg",
-    "category": "BAKERY",
-    "chefId": "1",
-    "chefName": "Prajakta Malkar",
-    "chefLocation": "MUMBAI",
-    "recipe": "NA",
-    "popularity": 1,
-    "imageHash": "e3bda12a82295b313a135576f606a00c"
-  },
-  {
     "itemId": "1c6e016c-7d7b-4658-ac97-07338b627476",
     "name": "Dryfruit Achar",
     "weightToPrice": {
       "250 gm": "220",
-      "0.5 kg": "440"
+      "500 gm": "440"
     },
     "price": 220,
     "weight": "250 gm",
@@ -120,11 +88,11 @@
     "itemId": "5f06b7a9-8236-4ae4-a4a2-b18f26d3e9b0",
     "name": "LASAN SEV",
     "weightToPrice": {
-      "200 gm": "70",
-      "400 gm": "140"
+      "400 gm": "70",
+      "1 kg": "160"
     },
-    "price": 35,
-    "weight": "200 gm",
+    "price": 70,
+    "weight": "400 gm",
     "category": "MIXTURES",
     "chefId": "6",
     "chefName": "Sageeta",
