@@ -1,7 +1,7 @@
 <div class="navbar navbar-fixed-top" style="margin-bottom: 0px">
     <div class="container mobileView" style="padding-left: 0px;padding-right: 0px" >
         <div id="header" class="navbar-header col-xs-6" itemscope itemtype="http://schema.org/Organization">
-            <a class="header-link navbar-brand" href="#home">
+            <a class="header-link navbar-brand" href="#!home">
                 <img src="brand.png" itemprop="logo" class="img-responsive" alt="Chefonia">
                 <span style="display: none" itemprop="name">Chefonia</span>
             </a>
@@ -13,13 +13,13 @@
                        style="padding-left: 30px;padding-right: 30px;">Login or Signup </a>
                 </li>
                 <li ng-if="!isLoggedIn" class="hidden-lg hidden-md hidden-sm">
-                    <button data-toggle="collapse" data-target=".navbar-collapse.in" href="#login_mble"
+                    <button data-toggle="collapse" data-target=".navbar-collapse.in" href="#!login_mble"
                             style="padding: 0;">Login
                     </button>
                 </li>
 
                 <li ng-if="isLoggedIn" style="text-decoration: none">
-                    <a class="mylink" data-toggle="collapse" data-target=".navbar-collapse.in" href="#/cart"
+                    <a class="mylink" data-toggle="collapse" data-target=".navbar-collapse.in" href="#!cart"
                        style="cursor: pointer;text-decoration: none"><i class="fa fa-shopping-cart">
                         <sup class="badge">{{cartItemCount}}</sup></i></a>
                 </li>
@@ -32,9 +32,9 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" style="width: 100%">
-                            <li><a href="#/orders">Your Orders</a></li>
+                            <li><a href="#!orders">Your Orders</a></li>
                             <li class="divider"></li>
-                            <li><a href="#" data-ng-click="vm.logout()">Sign Out?</a></li>
+                            <li><a style="cursor: pointer" data-ng-click="vm.logout()">Sign Out?</a></li>
                         </ul>
                     </div>
                 </li>
