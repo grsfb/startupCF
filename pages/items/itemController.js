@@ -7,10 +7,11 @@
 
     function ItemController(SessionService, $location, InventoryService, CartService, FlashService, $routeParams, $window, MappingService) {
         var vm = this;
+        vm.isLast = true;
+        vm.currentPage = 0;
+        vm.isLoadingMore=false;
         vm.addItemInCart = addItemInCart;
-        vm.totalPageAsArray = new Array(1);
         vm.loadNextPage = loadNextPage;
-        vm.selectedIndex = 0;
         vm.buy = buy;
         vm.categoryName = $routeParams.categoryName == undefined ? all : $routeParams.categoryName;
         vm.chefLocation = $routeParams.chefLocation == undefined ? all : $routeParams.chefLocation;
@@ -19,10 +20,10 @@
         var cart = [];
 
         //load initial items
-        InventoryService.getAllItems(0, vm.actualCategory, vm.chefLocation, function (response) {
+        InventoryService.getAllItems(vm.currentPage, vm.actualCategory, vm.chefLocation, function (response) {
             if (response.success) {
                 vm.items = response.data.items;
-                vm.totalPageAsArray = new Array(response.data.totalPages);
+                vm.isLast = response.data.lastPage;
             } else {
                 FlashService.Error("Something not working. Please try later");
             }
@@ -55,15 +56,17 @@
                 });
         }
 
-        function loadNextPage(pageNumber) {
-            InventoryService.getAllItems(pageNumber, vm.actualCategory, vm.chefLocation, function (response) {
+        function loadNextPage() {
+            vm.currentPage++;
+            vm.isLoadingMore=true;
+            InventoryService.getAllItems(vm.currentPage, vm.actualCategory, vm.chefLocation, function (response) {
                 if (response) {
-                    vm.items = response.data.items;
-                    vm.totalPageAsArray = new Array(response.data.totalPages);
-                    vm.selectedIndex = pageNumber;
+                    vm.items = vm.items.concat(response.data.items);
+                    vm.isLast = response.data.lastPage;
                 } else {
                     FlashService.Error("Something not working. Please try later");
                 }
+                vm.isLoadingMore=false;
             });
         }
 
