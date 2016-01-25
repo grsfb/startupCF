@@ -2,7 +2,7 @@
   {
     "category": "SNACKS",
     "totalItems": 20,
-    "description": "Get authentic regional snacks",
+    "description": "Get homemade regional snacks",
     "imageHash":"f42f024415c983c091fdef3d4bdc27da"
   },
   {
@@ -14,13 +14,13 @@
   {
     "category": "CHOCOLATES",
     "totalItems": 52,
-    "description": "Get authentic yummy chocolates",
+    "description": "Get yummy chocolates",
     "imageHash":"2d473f0039e580f5e2970cd7b514ca4a"
   },
   {
     "category": "SWEETS",
     "totalItems": 16,
-    "description": "Get authentic regional sweets",
+    "description": "Get pure regional sweets",
     "imageHash":"2cf526b094e5d3ce9e0a56ab78658868"
   }
 ]

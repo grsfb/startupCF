@@ -3,8 +3,8 @@
     angular
         .module('Chefonia')
         .controller('RegisterController', RegisterController);
-    RegisterController.$inject = ['UserService', 'AuthenticationService'];
-    function RegisterController(UserService, AuthenticationService) {
+    RegisterController.$inject = ['UserService', 'AuthenticationService','$location'];
+    function RegisterController(UserService, AuthenticationService,$location) {
         var vm = this;
         vm.user = {};
         vm.isRegistering = false;
@@ -24,6 +24,7 @@
                         if (response.success) {
                             AuthenticationService.SetCredentials(response.data);
                             $('#myModal').modal('hide');
+                            $location.path('#!home');
                         }
                     });
                 } else {

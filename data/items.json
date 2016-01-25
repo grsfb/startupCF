@@ -3,11 +3,11 @@
     "itemId": "ce91e7dd-f4ca-4faa-9c00-6d8c8501dcc2",
     "name": "Almonds Milk Chocolates",
     "weightToPrice": {
-      "500 gm": "300",
+      "500 gm": "350",
       "1 kg": "600"
     },
     "price": 350,
-    "weight": "0.5 Kg",
+    "weight": "500 gm",
     "category": "CHOCOLATES",
     "chefId": "3",
     "chefName": "Pooja Dewoolkar",
@@ -18,7 +18,7 @@
   },
   {
     "itemId": "2798b645-b3a6-4668-bfd7-507a74be6be5",
-    "name": "Mash mellows",
+    "name": "Marsh mellows",
     "weightToPrice": {
       "4 Pcs": "100",
       "12 Pcs": "300"

@@ -3,13 +3,13 @@
     angular
         .module('Chefonia')
         .controller('CheckoutController', CheckoutController);
-    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService'];
+    CheckoutController.$inject = ['$rootScope','SessionService', '$location', 'FlashService', 'OrderService',];
 
-    function CheckoutController(SessionService, $location, FlashService, OrderService) {
+    function CheckoutController($rootScope,SessionService, $location, FlashService, OrderService) {
         var vm = this;
         if (!SessionService.get('isOrderInProgress')) {
             FlashService.ClearAllFlashMessage();
-            $location.path('#/home');
+            $location.path('#!home');
             return;
         }
         vm.shippingCost = SessionService.get('shippingCost');
@@ -27,6 +27,12 @@
             if (address == undefined) {
                 FlashService.Error("Delivery address is not selected");
                 return false;
+            }
+            if (vm.paymentType == 'COD') {
+                if (!("pune"==address.city.toLowerCase() && "411"==(address.zip.substring(0, 3)))) {
+                    FlashService.Error("Cash on Delivery is only available in pune");
+                    return false;
+                }
             }
             return true;
         }

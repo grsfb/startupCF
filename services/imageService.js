@@ -16,7 +16,7 @@
             "Fresh Cream Cake": "BAKERY",
             "Pure Veg Cakes": "BAKERY",
             "Two Tier Cake": "BAKERY",
-
+            "Sweets":"SWEETS",
             "Mango Achar": "PICKLES",
             "Mango Pickle": "PICKLES",
             "Achar": "PICKLES",
@@ -30,7 +30,6 @@
             "Mahani Aachar": "PICKLES",
             "Dryfruit Achar": "PICKLES",
             "Woodapple Preserve Achar": "PICKLES",
-
             "Chocolate": "CHOCOLATES",
             "Dark Chocolates": "CHOCOLATES",
             "Almonds Dark Chocolates": "CHOCOLATES",
@@ -80,6 +79,7 @@
             "Chico Chip Brownie": "BROWNIES",
             "Dates Brownie": "BROWNIES",
 
+            "Namkeen": "MIXTURES",
             "Churmura Chivda": "MIXTURES",
             "Chivda": "MIXTURES",
             "Poha Chivda": "MIXTURES",
@@ -180,7 +180,7 @@
             "Potato Chips": "PAPAD",
             "Kurdai": "PAPAD",
             "Chips": "PAPAD",
-
+            "Snacks": "SNACKS",
             "White Dhokla": "SNACKS",
             "Thepla": "SNACKS",
             "Masala Khaakhara": "SNACKS",
@@ -200,21 +200,30 @@
             "Ginger Chilli Khakhra": "SNACKS",
             "Chilli Garlic Khakhra": "SNACKS",
             "Chat Chaska Khakhra": "SNACKS",
-            "Sp. Farali Khakhra": "SNACKS"
+            "Sp. Farali Khakhra": "SNACKS",
+
+            "Spices":"SPICES"
         };
         var keys = [
-            "Chocolate Cake",
+            "Chocolates",
+            "Sweets",
+            "Snacks",
+            "Namkeen",
+            "Brownies",
+            "Achar",
+            "Spices",
+
             "Cashew Chocolate",
             "Mango Pickle",
             //"Til Chikki",
+            "Dryfruit Achar",
             "Almonds Milk Chocolates",
             "Chocolate Brownie",
-            "Black Forest Cake",
+            "Mix Chivda",
+            "Glouse Para Namkeen",
+
             "Nuts Brownie",
-            "Strawberry Cake",
-            "Fresh Cream Cake",
-            "Pure Veg Cakes",
-            "Two Tier Cake",
+
             "Mango Achar",
             "Achar",
             "Black Lemon Achar",
@@ -224,7 +233,7 @@
             "Red Chilly Achar",
             "Green Chilly Aachar",
             "Mahani Aachar",
-            "Dryfruit Achar",
+
             "Woodapple Preserve Achar",
             "Dark Chocolates",
             "Almonds Dark Chocolates",
@@ -234,6 +243,12 @@
             "Cashew Chocolate",
             "Rasin Chocolate",
             "Walnut Chocolate",
+            "Chocolate Cake",
+            "Strawberry Cake",
+            "Fresh Cream Cake",
+            "Black Forest Cake",
+            "Pure Veg Cakes",
+            "Two Tier Cake",
             "White Almond Roasted Chocolate",
             "White Cashew Roasted Chocolate",
             "Chocolates",

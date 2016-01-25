@@ -6,13 +6,13 @@
                     <!--<span>  <i class="fa fa-location-arrow"></i></span>-->
                     <button data-toggle="dropdown"
                             class="location form-control dropdown-toggle" style="text-align: left;">
-                        <span><i class="fa fa-location-arrow"></i> {{vm.city}} chefs</span>
+                        <span><i class="fa fa-location-arrow"></i> {{vm.city}} Chef's Items</span>
                     </button>
                     <ul class="dropdown-menu list-group-item-heading" style="width: 100%;padding: 0;margin-top: 5px">
                         <li class="list-group-item"
                             style="cursor: pointer;"
                             ng-repeat="city in vm.cityList" data-ng-click="vm.cityChange(city)">
-                            <span style="margin-left: 10px;font-weight: 400;font-family:'Tahoma', Geneva, sans-serif">{{city}} chefs</span>
+                            <span style="margin-left: 10px;font-weight: 400;font-family:'Tahoma', Geneva, sans-serif">{{city}} Chef's Items</span>
                         </li>
                     </ul>
                 </div>
@@ -23,15 +23,15 @@
                     <ul class="dropdown-menu list-group"
                         style="width: 100%;z-index: 9999;overflow: visible;padding: 0px;margin-top: 5px">
                         <li id="jquery-list-view-limit" class="list-group-item itemlist"
-                            ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:6"
+                            ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:10"
                             style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
                             <span class="badge">Popularity ***</span>{{snack}}
                         </li>
                         <li class="list-group-item disabled"
-                            ng-show="(vm.popularFoodList | filter:search:strict).length">Popular Delicacies
+                            ng-show="(vm.popularFoodList | filter:search:strict | limitTo:0).length">Popular Delicacies
                         </li>
                         <li class="list-group-item" style="cursor: pointer;"
-                            ng-repeat="snack in vm.popularFoodList | filter:search:strict"
+                            ng-repeat="snack in vm.popularFoodList | filter:search:strict }limitTo:0"
                             data-ng-click="vm.foodChange(snack)">
                             <span class="badge">Popularity *****</span>{{snack}}
                         </li>
@@ -149,7 +149,7 @@
                     <div class="container">
                         <div class="pull-left">Popular Categories</div>
                         <div class="pull-right">
-                            <div style="text-align: center"><a href="#/categories" class="btn btn-info" id="searchbtn1">
+                            <div style="text-align: center"><a href="#!categories" class="btn btn-info" id="searchbtn1">
                                 <span class="fontawesome fa fa-search" style="align-content: center"></span> Browse All
                                 Categories</a>
                             </div>
@@ -247,7 +247,7 @@
             </div>
         </div>
 
-        <a class="btn home_page_button" href="#/categories">BROWSE ALL COLLECTIONS</a>
+        <a class="btn home_page_button" href="#!categories">BROWSE ALL COLLECTIONS</a>
 
     </div>
     <div style="clear: both"></div>

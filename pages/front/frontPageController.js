@@ -83,7 +83,7 @@
 
         });
         function cityChange(city) {
-            vm.city = city;
+            $location.path('item/all'  + '/' + city.toLowerCase());
         }
 
         function foodChange(snack) {
