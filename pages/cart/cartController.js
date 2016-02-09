@@ -18,6 +18,12 @@
         vm.removeItemFromCart = removeItemFromCart;
         vm.showCouponEditor = false;
         vm.showAppliedCouponEditor = false;
+        vm.showMessageEditor = false;
+        vm.isGiftMessageAdded=false;
+        vm.saveMessage = saveMessage;
+        vm.enableMsgEditor = enableMsgEditor;
+        vm.editMessage=editMessage;
+        vm.removeMessage=removeMessage;
 
         var currentUserId = SessionService.get(SessionService.Session.CurrentUser).userId;
 
@@ -132,6 +138,32 @@
                 }
             }
             return arr;
+        }
+
+        function saveMessage() {
+            var message={"uniqueId":currentUserId,"message": vm.giftMessage};
+            CartService.saveGiftMessage(message, function(response){
+                if (response.success) {
+                    vm.isGiftMessageAdded=true;
+                } else {
+                    FlashService.Error("Something not working. Please try later");
+                }
+            });
+        }
+
+        function removeMessage(){
+            vm.giftMessage="";
+            vm.isGiftMessageAdded=!vm.isGiftMessageAdded;
+            vm.checkbox=false;
+            vm.showMessageEditor=false;
+        }
+
+        function editMessage(){
+            vm.isGiftMessageAdded=!vm.isGiftMessageAdded;
+        }
+
+        function enableMsgEditor() {
+            vm.showMessageEditor=!vm.showMessageEditor;
         }
 
         function CouponDTO(userId, couponCode) {

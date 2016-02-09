@@ -13,6 +13,7 @@
         service.remove = remove;
         service.removeCartItem = removeCartItem;
         service.count = count;
+        service.saveGiftMessage=saveGiftMessage;
         return service;
 
         function getCartItems(userId, callback) {
@@ -37,6 +38,10 @@
 
         function remove(userId, callback) {
             CommonService.delete("/cart/" + userId + '/delete-all', callback);
+        }
+
+        function saveGiftMessage(message,callback){
+            CommonService.post('/gift-message/save', message, callback);
         }
     }
 

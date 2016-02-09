@@ -117,7 +117,7 @@
             </div>
         </div>
         <div class="col-sm-12 tstyle col-xs-12"
-             style="font-size: 14px !important; padding: 20px; margin-top: 10px; margin-bottom: 10px;">
+             style="font-size: 14px !important; padding: 10px; margin-top: 10px; margin-bottom: 10px;">
             <div class="col-sm-12 col-xs-12" style="padding-left: 0; padding-top: 10px; "
                  data-ng-hide="vm.showAppliedCouponEditor">
                 <a data-ng-click="vm.showCouponEditor=!vm.showCouponEditor"
@@ -165,6 +165,48 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+        <div data-ng-hide="vm.isGiftMessageAdded" class="col-sm-12 tstyle col-xs-12"
+             style="font-size: 14px !important; padding-left: 0; margin-bottom: 10px;">
+            <div class="col-xs-12 col-sm-12 checkbox" style="margin-bottom: 10px;">
+                <label>
+                    <input type="checkbox" data-ng-change="vm.enableMsgEditor()" data-ng-model="vm.checkbox"> Is this
+                    gift?
+                </label></div>
+            <div class="col-sm-12 col-xs-12" data-ng-show="vm.showMessageEditor"
+                 style="margin-top: 0;margin-bottom: 10px;">
+                <form name="form" role="form" method="post" class="ng-pristine ng-invalid ng-invalid-required">
+                    <div class="form-group"
+                         ng-class="{'has-error': form.code.$dirty &amp;&amp; form.code.$error.required}">
+
+                        <input type="text"
+                               class="form-control col-xs-12 ng-pristine ng-untouched ng-invalid ng-invalid-required"
+                               id="message" name="code" autocomplete="off" placeholder="Enter your message" required=""
+                               data-ng-model="vm.giftMessage" maxlength="120">
+                        <span ng-show="form.code.$dirty &amp;&amp; form.code.$error.required"
+                              class="help-block ng-hide">Message is required</span>
+                    </div>
+                    <input class="btn btn-default mybtn" type="submit" name="apply-coupon" value="Save"
+                           data-ng-click="vm.saveMessage();form.$setPristine()" data-ng-disabled="form.$invalid;"
+                           style="margin-top: 5px;">
+
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-12 tstyle" style="margin-bottom: 5px;font-size: 14px;" data-ng-show="vm.isGiftMessageAdded">
+            <div>
+                <div class="col-xs-6 col-sm-6 pull-left" style="margin-bottom: 5px;margin-top: 5px;padding-left: 0">
+                    <b> Your Message</b>
+                </div>
+                <div class="col-sm-6 col-xs-6 pull-right" style="margin-top: 10px;">
+                    <i class="fa fa-trash-o pull-right" data-ng-click="vm.removeMessage()"></i>
+                    <i class="fa fa-edit pull-right" style="margin-right: 5px;" data-ng-click="vm.editMessage()"></i>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12" data-ng-show="vm.showMessageEditor"
+                 style="margin-top: 0;margin-bottom: 10px;padding-left: 0">
+                <span ng-bind="vm.giftMessage"></span>
             </div>
         </div>
     </div>
