@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('CheckoutController', CheckoutController);
-    CheckoutController.$inject = ['$rootScope','SessionService', '$location', 'FlashService', 'OrderService',];
+    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService',];
 
-    function CheckoutController($rootScope,SessionService, $location, FlashService, OrderService) {
+    function CheckoutController(SessionService, $location, FlashService, OrderService) {
         var vm = this;
         if (!SessionService.get('isOrderInProgress')) {
             FlashService.ClearAllFlashMessage();
