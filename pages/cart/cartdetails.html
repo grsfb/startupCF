@@ -140,7 +140,7 @@
                                        data-ng-disabled="form.$invalid;" style="margin-top: 5px;">
 
                             </form>
-                            <p style="color: darkred;margin-top: 10px">{{vm.couponMessage}}</p>
+                            <p style="color: darkred;margin-top: 10px">{{vm.discountData['message']}}</p>
                         </div>
 
                     </div>
@@ -176,7 +176,7 @@
                 </label></div>
             <div class="col-sm-12 col-xs-12" data-ng-show="vm.showMessageEditor"
                  style="margin-top: 0;margin-bottom: 10px;">
-                <form name="form" role="form" method="post" class="ng-pristine ng-invalid ng-invalid-required">
+                <form name="giftForm" role="form" method="post" class="ng-pristine ng-invalid ng-invalid-required">
                     <div class="form-group"
                          ng-class="{'has-error': form.code.$dirty &amp;&amp; form.code.$error.required}">
 
@@ -184,11 +184,11 @@
                                class="form-control col-xs-12 ng-pristine ng-untouched ng-invalid ng-invalid-required"
                                id="message" name="code" autocomplete="off" placeholder="Enter your message" required=""
                                data-ng-model="vm.giftMessage" maxlength="120">
-                        <span ng-show="form.code.$dirty &amp;&amp; form.code.$error.required"
+                        <span ng-show="giftForm.code.$dirty &amp;&amp; giftForm.code.$error.required"
                               class="help-block ng-hide">Message is required</span>
                     </div>
                     <input class="btn btn-default mybtn" type="submit" name="apply-coupon" value="Save"
-                           data-ng-click="vm.saveMessage();form.$setPristine()" data-ng-disabled="form.$invalid;"
+                           data-ng-click="vm.saveMessage();giftForm.$setPristine()" data-ng-disabled="giftForm.$invalid;"
                            style="margin-top: 5px;">
 
                 </form>
