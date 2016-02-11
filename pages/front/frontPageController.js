@@ -95,8 +95,6 @@
         }
 
         vm.foodList = MappingService.getAllOptions();
-        vm.popularFoodList = ['Chocolate', 'Bakery'];
-        vm.newFoodList = ['Mouth Freshner'];
         function loadItems() {
             $location.path('item/' + 'all/' + vm.city.toLowerCase());
         }

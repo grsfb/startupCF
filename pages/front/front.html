@@ -27,22 +27,7 @@
                             style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
                             <span class="badge">Popularity ***</span>{{snack}}
                         </li>
-                        <li class="list-group-item disabled"
-                            ng-show="(vm.popularFoodList | filter:search:strict | limitTo:0).length">Popular Delicacies
-                        </li>
-                        <li class="list-group-item" style="cursor: pointer;"
-                            ng-repeat="snack in vm.popularFoodList | filter:search:strict }limitTo:0"
-                            data-ng-click="vm.foodChange(snack)">
-                            <span class="badge">Popularity *****</span>{{snack}}
-                        </li>
-                        <li class="list-group-item disabled" ng-show="(vm.newFoodList | filter:search:strict).length">
-                            Newly Launched Delicacies
-                        </li>
-                        <li class="list-group-item" style="cursor: pointer;"
-                            ng-repeat="snack in vm.newFoodList | filter:search:strict"
-                            data-ng-click="vm.foodChange(snack)">
-                            <span class="badge">New</span>{{snack}}
-                        </li>
+
                     </ul>
                 </div>
                 <div class="searchdiv col-md-2 col-sm-3 col-xs-12"
