@@ -17,7 +17,7 @@
         vm.discount = SessionService.get('discount');
         vm.checkAndPlaceOrder = checkAndPlaceOrder;
         vm.isPlacingOrder = false;
-        vm.paymentType = "COD";
+        vm.paymentType = "PAYU";
         vm.setPaymentType = setPaymentType;
         function setPaymentType(method) {
             vm.paymentType = method;
