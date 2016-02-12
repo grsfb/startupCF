@@ -19,6 +19,7 @@
 
         function logout() {
             AuthenticationService.ClearCredentials();
+            $location.path("/home");
         }
 
         function mobileLogin() {
