@@ -14,6 +14,7 @@
         vm.showContact = showContact;
         vm.contactDetail = false;
         vm.localize = localize;
+        vm.sendInvoice = sendInvoice;
         FlashService.ClearAllFlashMessage();
         OrderService.getAllItemForOrder($routeParams.orderId, function (response) {
             if (response.success) {
@@ -56,7 +57,18 @@
         }
 
         cleanUpOnOrderSuccess();
+        function sendInvoice() {
+            var currentUserId = SessionService.get(SessionService.Session.CurrentUser).userId;
+            var request = {"orderId": $routeParams.orderId, "userId": currentUserId, "invoiceEmail": vm.invoiceEmail};
+            OrderService.sendInvoice(request, function (response) {
+                if (response.success) {
+                    vm.invoiceMsg = "Invoice sent successfully";
+                } else {
+                    vm.invoiceMsg = "Please try later";
+                }
+                vm.invoiceEmail = "";
+            });
 
+        }
     }
-
 })();

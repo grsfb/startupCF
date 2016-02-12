@@ -93,7 +93,7 @@
                                     <span style="font-size: medium;color: green;text-align: left;padding: 0"
                                           class="col-md-12 col-xs-12">Invoice will be sent to : </span>
                                     <input type="email" style="height: 30px" id="emailUser" name="userEmail"
-                                           placeholder="Enter email" required="" class="col-md-9">
+                                           placeholder="Enter email" required="" data-ng-model="vm.invoiceEmail" class="col-md-9">
 
                                     <div class="has-error ng-hide" ng-messages="emailForm.userEmail.$error"
                                          ng-show="emailForm.userEmail.$touched">
@@ -105,7 +105,8 @@
                                         </p>
                                     </div>
                                     <input type="submit" style="background-color: green;color: white;height: 30px"
-                                           value="Send" class="btn btn-small btn-blue col-md-3">
+                                           value="Send" data-ng-click="vm.sendInvoice()" class="btn btn-small btn-blue col-md-3">
+                                    <p data-ng-bind="vm.invoiceMsg"></p>
                                 </div>
                             </form>
                         </div>
