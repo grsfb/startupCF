@@ -4,8 +4,8 @@
         .module('Chefonia')
         .factory('CartService', CartService);
 
-    CartService.$inject = ['CommonService'];
-    function CartService(CommonService) {
+    CartService.$inject = ['CommonService','SessionService'];
+    function CartService(CommonService,SessionService) {
         var service = {};
         service.getCartItems = getCartItems;
         service.add = add;
@@ -15,13 +15,26 @@
         service.count = count;
         service.saveGiftMessage=saveGiftMessage;
         return service;
+        function isUserLoggedIn() {
+            return SessionService.get(SessionService.Session.CurrentUser);
+        }
 
-        function getCartItems(userId, callback) {
-            CommonService.get('/cart/' + userId + '/all', callback);
+        function getUserId() {
+            if (isUserLoggedIn()) {
+                return SessionService.get(SessionService.Session.CurrentUser).userId;
+            }
+            else {
+                return null;
+            }
+        }
+
+        function getCartItems(bagId, callback) {
+            var bagId = SessionService.get('bagId');
+            CommonService.get('/cart/' + getUserId() + '/all/'+bagId, callback);
         }
 
         function count(userId, callback) {
-            CommonService.get('/cart/' + userId + '/count', callback);
+            CommonService.get('/cart/' + bagId + '/count', callback);
         }
 
         function add(cartItem, callback) {

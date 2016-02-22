@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <base href="/client/">
     <meta name="fragment" content="!"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,22 +23,12 @@
     <link href="lib/owlCarousel/owl.theme.css" rel="stylesheet">
     <link href="lib/owlCarousel/owl.transitions.css" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link href="css/toastr.min.css" rel="stylesheet">
+
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-                document,'script','//connect.facebook.net/en_US/fbevents.js');
-
-        fbq('init', '1531790737149177');
-        fbq('track', "PageView");</script>
-    <noscript><img height="1" width="1" style="display:none"
-                   src="https://www.facebook.com/tr?id=1531790737149177&ev=PageView&noscript=1"
-            /></noscript>
 </head>
 
 <body data-ng-cloak data-ng-app="Chefonia">
@@ -61,12 +52,14 @@
         <script src="lib/jquery/modernizr.min.js"></script>
         <script src="lib/owlCarousel/owl.carousel.min.js"></script>
         <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
         <!-- Scrolling Nav JavaScript --> 
         <script src="js/jquery.easing.min.js"></script>
         <script src="lib/angular/angular.min.js"></script>
         <script src="lib/angular/angular-route.min.js"></script>
         <script src="lib/angular/angular-cookies.min.js"></script>
         <script src="js/script.min.js"></script>
+        <script src="js/toastr.min.js"></script>
         <script src="js/jquery.lettering-0.6.min.js"></script>
         <script src="js/jquery.textillate.min.js"></script>
         <script src="pages/payu/paymentController.js"></script>
@@ -95,6 +88,7 @@
         <script src="services/imageService.js"></script>
         <script src="services/sessionService.js"></script>
         <script src="services/niraliService.js"></script>
+        <script src="services/eventHandingService.js"></script>
         <script type="application/ld+json">
             {
               "@context" : "http://schema.org",

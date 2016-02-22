@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('ItemController', ItemController);
-    ItemController.$inject = ['SessionService', '$location', 'InventoryService', 'CartService', 'FlashService', '$routeParams', '$window', 'MappingService'];
+    ItemController.$inject = ['SessionService','AuthenticationService', '$location', 'InventoryService', 'CartService', 'FlashService', '$routeParams', '$window', 'MappingService'];
 
-    function ItemController(SessionService, $location, InventoryService, CartService, FlashService, $routeParams, $window, MappingService) {
+    function ItemController(SessionService,AuthenticationService, $location, InventoryService, CartService, FlashService, $routeParams, $window, MappingService) {
         var vm = this;
         vm.isLast = true;
         vm.currentPage = 0;
@@ -17,8 +17,11 @@
         vm.chefLocation = $routeParams.chefLocation == undefined ? all : $routeParams.chefLocation;
         vm.actualCategory = MappingService.getCategory(vm.categoryName) == undefined ? vm.categoryName : MappingService.getCategory(vm.categoryName);
         var isCartLoaded = false;
-        var cart = [];
+        vm.cart = undefined;
 
+        loadCart(function () {
+            //do nothing
+        });
         //load initial items
         InventoryService.getAllItems(vm.currentPage, vm.actualCategory, vm.chefLocation, function (response) {
             if (response.success) {
@@ -34,26 +37,16 @@
         }
 
         function getUserId() {
-            return SessionService.get(SessionService.Session.CurrentUser).userId;
+            if (isUserLoggedIn()) {
+                return SessionService.get(SessionService.Session.CurrentUser).userId;
+            }
+            else {
+                return null;
+            }
         }
 
-        //get all cart items parallel
-        if (isUserLoggedIn()) {
-            loadCart(function () {
-                //nothing to do
-            });
-        }
-        function loadCart(callback) {
-            CartService.getCartItems(getUserId(),
-                function (response) {
-                    if (response.success) {
-                        cart = response.data;
-                        isCartLoaded = true;
-                        callback();
-                    } else {
-                        FlashService.Error("Something not working. Please try later");
-                    }
-                });
+        function getBagId() {
+            return SessionService.get('bagId');
         }
 
         function loadNextPage() {
@@ -69,46 +62,76 @@
                 vm.isLoadingMore=false;
             });
         }
+        function loadCart(callback) {
+            if (getBagId() != null || getUserId() !=null) {
+                CartService.getCartItems(getBagId(),
+                    function (response) {
+                        if (response.success) {
+                            vm.cart = response.data;
+                            vm.isCartLoaded = true;
+                            SessionService.putInRootScope("cartItemCount", vm.cart.length);
+                            callback();
+                        } else {
+                            FlashService.Error("Something not working. Please try later");
+                        }
+                    });
+            }
+            else {
+                vm.isCartLoaded = true;
+                callback();
+            }
+        }
 
         function buy(item) {
             addItemInCart(item, function () {
-                $location.path("/cart");
+                $location.path("cart");
             });
         }
 
         //cart
         function addItemInCart(item, callback) {
-            if (isUserLoggedIn()) {
-                showProgress(item.itemId);
-                if (isCartLoaded) {
-                    updateCart(item, callback);
-                } else {
-                    loadCart(function () {
-                        updateCart(item, callback);
-                    });
-                }
-            } else {
-                openLogin();
-            }
+
+            addToCart(item, callback);
+
+
+        }
+
+        function addToCart(item, callback) {
+            showProgress(item.itemId);
+            updateCart(item, callback);
+
         }
 
         function updateCart(item, callback) {
+            if (getBagId() == null) {
+                var newCartItem = new CartItem(getBagId(), getUserId(), item.itemId, 1, item.weight, item.price);
+                addNewCartItem(newCartItem, callback);
+
+            }
+            else {
+                cartUpdation(item, callback);
+            }
+        }
+        function cartUpdation(item,callback)
+        {
             var cartItem = getItem(item.itemId, item.weight);
             if (cartItem) {
                 cartItem.quantity += 1;
                 updateCartItem(cartItem, callback);
             } else {
-                var newCartItem = new CartItem(getUserId(), item.itemId, 1, item.weight, item.price);
+                var newCartItem = new CartItem(getBagId(), getUserId(), item.itemId, 1, item.weight, item.price);
                 addNewCartItem(newCartItem, callback);
             }
         }
-
         function addNewCartItem(cartItem, callback) {
             CartService.add(cartItem, function (response) {
                 if (response.success) {
-                    cart.push(response.data);
-                    SessionService.putInRootScope("cartItemCount", cart.length);
-                    SessionService.put("cartItemCount", cart.length);
+                    vm.cart.push(response.data);
+                    if (getBagId() == null) {
+                        SessionService.put("bagId", response.data.bagId);
+                        SessionService.putInRootScope("cartItemCount", 1);
+                    }
+                    SessionService.putInRootScope("cartItemCount", vm.cart.length);
                 } else {
                     FlashService.Error("Something not working. Please try later", true);
                 }
@@ -130,7 +153,6 @@
                 }
             });
         }
-
         function showProgress(id) {
             $('#' + id).css("visibility", "visible");
             $('#button-' + id).addClass('disabled');
@@ -143,9 +165,9 @@
         }
 
         function getItem(itemId, weight) {
-            for (var i = 0; i < cart.length; i++) {
-                if (cart[i].itemId === itemId && cart[i].weight == weight) {
-                    return cart[i];
+            for (var i = 0; i < vm.cart.length; i++) {
+                if (vm.cart[i].itemId === itemId && vm.cart[i].weight == weight) {
+                    return vm.cart[i];
                 }
             }
             return undefined;
@@ -161,7 +183,8 @@
         }
 
         //cartItem class
-        function CartItem(userId, itemId, quantity, weight, price) {
+        function CartItem(bagId,userId, itemId, quantity, weight, price) {
+            this.bagId = bagId;
             this.userId = userId;
             this.itemId = itemId;
             this.weight = weight;

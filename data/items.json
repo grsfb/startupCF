@@ -1,13 +1,81 @@
 [
   {
-    "itemId": "ce91e7dd-f4ca-4faa-9c00-6d8c8501dcc2",
-    "name": "Almonds Milk Chocolates",
+    "itemId": "ff4586f6-6d6f-4c25-9dbb-7ea02e847eca",
+    "name": "Dark Chocolates - Almonds",
     "weightToPrice": {
-      "500 gm": "350",
-      "1 kg": "600"
+      "20 pcs": "480",
+      "1 kg": "780"
     },
-    "price": 350,
-    "weight": "500 gm",
+    "price": 480,
+    "weight": "20 pcs",
+    "category": "CHOCOLATES",
+    "chefId": "3",
+    "chefName": "Pooja Dewoolkar",
+    "chefLocation": "MUMBAI",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "0e80785028e96a905a52eeff1a410ab8"
+  },
+  {
+    "itemId": "045f82b5-9ae9-4bd9-8602-1760a6492afe",
+    "name": "Dark Chocolates - Plain",
+    "weightToPrice": {
+      "20 pcs": "440",
+      "1 kg": "720"
+    },
+    "price": 440,
+    "weight": "20 pcs",
+    "category": "CHOCOLATES",
+    "chefId": "3",
+    "chefName": "Pooja Dewoolkar",
+    "chefLocation": "MUMBAI",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "0cc37810329854423f8e83c0107de082"
+  },
+  {
+    "itemId": "2af4b179-bb4d-49f3-8be5-a26e118c353d",
+    "name": "Designer Chocolates",
+    "weightToPrice": {
+      "1 kg": "1300"
+    },
+    "price": 1300,
+    "weight": "1 kg",
+    "category": "CHOCOLATES",
+    "chefId": "9",
+    "chefName": "Kanan Mehta",
+    "chefLocation": "MUMBAI",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "28288d6943c59bc83127c3a76d00cd7e"
+  },
+  {
+    "itemId": "cfbcb082-835e-41ea-a58e-6037a7a53d14",
+    "name": "Mix Milk Chocolates - Plain",
+    "weightToPrice": {
+      "20 pcs": "440",
+      "1 kg": "720"
+    },
+    "price": 440,
+    "weight": "20 pcs",
+    "category": "CHOCOLATES",
+    "chefId": "3",
+    "chefName": "Pooja Dewoolkar",
+    "chefLocation": "MUMBAI",
+    "recipe": "NA",
+    "popularity": 1,
+    "imageHash": "ca2ad58fc61fb0bf902bf26738d229d3"
+  },
+
+  {
+    "itemId": "ce91e7dd-f4ca-4faa-9c00-6d8c8501dcc2",
+    "name": "Milk Chocolates - Almonds",
+    "weightToPrice": {
+      "20 pcs": "480",
+      "1 kg": "780"
+    },
+    "price": 480,
+    "weight": "20 pcs",
     "category": "CHOCOLATES",
     "chefId": "3",
     "chefName": "Pooja Dewoolkar",
@@ -16,89 +84,22 @@
     "popularity": 1,
     "imageHash": "4ebb974cb43a0904cc710155cbfc3e48"
   },
+
   {
-    "itemId": "2798b645-b3a6-4668-bfd7-507a74be6be5",
-    "name": "Marsh mellows",
+    "itemId": "b3e3940f-3514-4d61-80de-e894fbf9a89e",
+    "name": "Chocolates",
     "weightToPrice": {
-      "4 Pcs": "100",
-      "12 Pcs": "300"
+      "200 gm": "180",
+      "500 gm": "430"
     },
-    "price": 100,
-    "weight": "4 Pcs",
+    "price": 180,
+    "weight": "200 gm",
     "category": "CHOCOLATES",
-    "chefId": "5",
-    "chefName": "Vasavi",
-    "chefLocation": "HYDERABAD",
+    "chefId": "8",
+    "chefName": "Pinky",
+    "chefLocation": "Pune",
     "recipe": "NA",
     "popularity": 1,
-    "imageHash": "32067bfd7f39040bd04fdba3c0d1ba27"
-  },
-  {
-    "itemId": "dcf7557b-10d3-42a7-a27b-ffacc212904b",
-    "name": "Choco Chips Chocolate",
-    "weightToPrice": {
-      "150 gm": "150",
-      "300 gm": "300"
-    },
-    "price": 150,
-    "weight": "150 gm",
-    "category": "CHOCOLATES",
-    "chefId": "4",
-    "chefName": "Satin Chocolates",
-    "chefLocation": "DELHI",
-    "recipe": "NA",
-    "popularity": 1,
-    "imageHash": "40e74754ca0f10987f9567bc32f00483"
-  },
-  {
-    "itemId": "7d662e5f-5314-44c5-9798-ef9176acce76",
-    "name": "NYLON SEV",
-    "weightToPrice": {
-      "400 gm": "70",
-      "1 Kg": "160"
-    },
-    "price": 70,
-    "weight": "400 gm",
-    "category": "MIXTURES",
-    "chefId": "6",
-    "chefName": "Sageeta",
-    "chefLocation": "AHEMDABAD",
-    "recipe": "NA",
-    "popularity": 1,
-    "imageHash": "ae0f374c15ce615a380bd054d7a666be"
-  },
-  {
-    "itemId": "1c6e016c-7d7b-4658-ac97-07338b627476",
-    "name": "Dryfruit Achar",
-    "weightToPrice": {
-      "250 gm": "220",
-      "500 gm": "440"
-    },
-    "price": 220,
-    "weight": "250 gm",
-    "category": "PICKLES",
-    "chefId": "2",
-    "chefName": "Pashmin Shah",
-    "chefLocation": "PUNE",
-    "recipe": "NA",
-    "popularity": 1,
-    "imageHash": "6a73e9bad1c99f635c93f7b23cbfec7e"
-  },
-  {
-    "itemId": "5f06b7a9-8236-4ae4-a4a2-b18f26d3e9b0",
-    "name": "LASAN SEV",
-    "weightToPrice": {
-      "400 gm": "70",
-      "1 kg": "160"
-    },
-    "price": 70,
-    "weight": "400 gm",
-    "category": "MIXTURES",
-    "chefId": "6",
-    "chefName": "Sageeta",
-    "chefLocation": "AHEMDABAD",
-    "recipe": "NA",
-    "popularity": 1,
-    "imageHash": "f6c9138af1816c3258bc6351ed4530e4"
+    "imageHash": "035d090b113a0517b09e9d475bcd99e1"
   }
 ]

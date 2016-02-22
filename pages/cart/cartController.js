@@ -24,21 +24,53 @@
         vm.enableMsgEditor = enableMsgEditor;
         vm.editMessage=editMessage;
         vm.removeMessage=removeMessage;
-
-        var currentUserId = SessionService.get(SessionService.Session.CurrentUser).userId;
-
-        CartService.getCartItems(currentUserId, function (response) {
-            if (response.success) {
-                vm.cartItems = response.data;
-                SessionService.put('cartItemCount', vm.cartItems.length);
-                updateCartCost();
-            } else {
-                FlashService.Error("Something not working. Please try later");
-            }
+        loadCart(function () {
+            //do nothing
         });
+        function isUserLoggedIn() {
+            return SessionService.get(SessionService.Session.CurrentUser);
+        }
+        function getUserId() {
+            if (isUserLoggedIn()) {
+                return SessionService.get(SessionService.Session.CurrentUser).userId;
+            }
+            else {
+                return null;
+            }
+        }
+        function getBagId() {
+            return SessionService.get('bagId');
+        }
+        function loadCart(callback) {
+            if (getBagId() != null) {
+                CartService.getCartItems(getBagId(), function (response) {
+                    if (response.success) {
+                        vm.cartItems = response.data;
+                        SessionService.putInRootScope('cartItemCount', vm.cartItems.length);
+                        SessionService.put('cartItemCount', vm.cartItems.length);
+                        updateCartCost();
+                    } else {
+                        FlashService.Error("Something not working. Please try later");
+                    }
+                });
+            }
+            else {
+                $location.path('home');
+                callback();
+            }
+        }
+        //CartService.getCartItems(getBagId(), function (response) {
+        //    if (response.success) {
+        //        vm.cartItems = response.data;
+        //        SessionService.put('cartItemCount', vm.cartItems.length);
+        //        updateCartCost();
+        //    } else {
+        //        FlashService.Error("Something not working. Please try later");
+        //    }
+        //});
 
         function applyCoupon() {
-            var cartCoupon = new CouponDTO(currentUserId, vm.couponCode);
+            var cartCoupon = new CouponDTO(getUserId(), vm.couponCode);
             CampaignService.applyCoupon(cartCoupon, function (response) {
                 if (response.success) {
                     vm.coupon = response.data;

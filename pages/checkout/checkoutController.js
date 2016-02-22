@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('CheckoutController', CheckoutController);
-    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService',];
+    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService','EventHandlingService','$scope','UserService','AuthenticationService'];
 
-    function CheckoutController(SessionService, $location, FlashService, OrderService) {
+    function CheckoutController(SessionService, $location, FlashService, OrderService,EventHandlingService,$scope,UserService,AuthenticationService) {
         var vm = this;
         if (!SessionService.get('isOrderInProgress')) {
             FlashService.ClearAllFlashMessage();
@@ -18,7 +18,25 @@
         vm.checkAndPlaceOrder = checkAndPlaceOrder;
         vm.isPlacingOrder = false;
         vm.paymentType = "PAYU";
+        vm.guestLogin=guestLogin;
+        vm.changeLogin=changeLogin;
+        vm.changeAddress=changeAddress;
+        vm.changePayment=changePayment;
         vm.setPaymentType = setPaymentType;
+        vm.hasLogged=false;
+        vm.addressLogged=false;
+        vm.payAllowed=false;
+        vm.guestEmail=undefined;
+        vm.login=login;
+        function isUserLoggedIn() {
+            return SessionService.get(SessionService.Session.CurrentUser);
+        }
+        if(isUserLoggedIn()){
+            vm.guestEmail = SessionService.get(SessionService.Session.CurrentUser).email;
+            $('#loginPanel').collapse('hide');
+            $('#addressPanel').collapse('show');
+            vm.hasLogged = true;
+        }
         function setPaymentType(method) {
             vm.paymentType = method;
         }
@@ -60,11 +78,95 @@
 
         function Order(userId, addressId, paymentType, couponId) {
             this.userId = userId;
+            this.bagId=SessionService.get('bagId');
             this.deliveryAddress = {"addressId": addressId};
             this.paymentType = paymentType;
             if (couponId) {
                 this.couponId = couponId;
             }
         }
+        //$scope.initSlider = function () {
+        //    $(function () {
+        //        // wait till load event fires so all resources are available
+        //        $("#collapse2").collapse('show');
+        //    });
+        //
+        //};
+        function login(){
+            $("#myModal").modal();
+        }
+        function openGuestLogin(callback){
+
+            AuthenticationService.GuestLogin(function (response) {
+                if (response.success) {
+                    AuthenticationService.SetCredentials(response.data);
+                }
+                if (callback) {
+                    callback();
+                }
+            });
+        }
+        function guestLogin() {
+            var user = {"name": "Guest", "email": vm.guestEmail};
+            UserService.create(user, function (response) {
+                if (response.success) {
+                    AuthenticationService.GuestLogin(vm.guestEmail, function (response) {
+                        if (response.success) {
+                            AuthenticationService.SetCredentials(response.data);
+                            $('#addressPanel').collapse('show');
+                            $('#loginPanel').collapse('hide');
+                            $('#paymentPanel').collapse('hide');
+                            vm.hasLogged = true;
+                        }
+                    });
+                }
+            });
+            //CommonService.update("/updateGuestUser", user, function (response) {
+            //    if (response.success) {
+
+                }
+
+          //  });
+
+        function changeLogin(){
+            $('#loginPanel').collapse('show');
+
+            $('#addressPanel').collapse('hide');
+            $('#paymentPanel').collapse('hide');
+        }
+        function changeAddress(){
+            $('#loginPanel').collapse('hide');
+
+            $('#addressPanel').collapse('show');
+            $('#paymentPanel').collapse('hide');
+        }
+        function changePayment(){
+            $('#loginPanel').collapse('hide');
+
+            $('#addressPanel').collapse('hide');
+            $('#paymentPanel').collapse('show');
+        }
+        $scope.$on('handleAddressSelected', function() {
+            if(EventHandlingService.message==true){
+                $('#loginPanel').collapse('hide');
+
+                $('#addressPanel').collapse('hide');
+                $('#paymentPanel').collapse('show');
+                vm.addressLogged=true;
+                vm.payAllowed=true;
+                vm.hasLogged=true;
+            }
+
+        });
+        //$scope.initSlider = function () {
+        //    $(function () {
+        //        // wait till load event fires so all resources are available
+        //            $("#panel3").collapse('hide');
+        //
+        //
+        //    });
+        //};
+        //
+        //$scope.initSlider();
     }
 })();

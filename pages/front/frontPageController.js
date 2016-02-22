@@ -46,9 +46,9 @@
                 }
             };
         }]);
-    FrontPageController.$inject = ['SessionService', 'CartService', '$http', '$location', '$window', '$document', 'FlashService', 'MappingService'];
+    FrontPageController.$inject = ['SessionService','AuthenticationService', 'CartService', '$http', '$location', '$rootScope', '$document', 'FlashService', 'MappingService','$scope'];
 
-    function FrontPageController(SessionService, CartService, $http, $location, $window, $document, FlashService, MappingService) {
+    function FrontPageController(SessionService,AuthenticationService, CartService, $http, $location, $rootScope, $document, FlashService, MappingService,$scope) {
         var vm = this;
         vm.cityChange = cityChange;
         vm.foodChange = foodChange;
@@ -64,14 +64,34 @@
         vm.buy = buy;
         vm.allCategories = allCategories;
         var isCartLoaded = false;
-        var cart = [];
-
+        vm.cart = undefined;
+        loadCart(function () {
+            //do nothing
+        });
+        $scope.$on('handleBagUpdate', function() {
+            loadCart(function () {
+                //do nothing
+            });
+        });
+       //if(SessionService.get("cartItemCount"))
+       //{
+       //    return SessionService.get("cartItemCount");
+       //}
         function isUserLoggedIn() {
             return SessionService.get(SessionService.Session.CurrentUser);
         }
 
         function getUserId() {
-            return SessionService.get(SessionService.Session.CurrentUser).userId;
+                if (isUserLoggedIn()) {
+                    return SessionService.get(SessionService.Session.CurrentUser).userId;
+                }
+                else {
+                    return null;
+                }
+        }
+
+        function getBagId() {
+            return SessionService.get('bagId');
         }
 
         $http.get('data/items.json').success(function (data) {
@@ -83,7 +103,7 @@
 
         });
         function cityChange(city) {
-            $location.path('item/all'  + '/' + city.toLowerCase());
+            $location.path('item/all' + '/' + city.toLowerCase());
         }
 
         function foodChange(snack) {
@@ -106,53 +126,70 @@
             $("#owl-demo").trigger('owl.prev');
         });
 
-        if (isUserLoggedIn()) {
-            loadCart(function () {
-                //do nothing
-            });
-        }
         function loadCart(callback) {
-            CartService.getCartItems(getUserId(),
-                function (response) {
-                    if (response.success) {
-                        cart = response.data;
-                        isCartLoaded = true;
-                        callback();
-                    } else {
-                        FlashService.Error("Something not working. Please try later");
-                    }
-                });
+            if (getBagId() != null || getUserId() !=null) {
+                CartService.getCartItems(getBagId(),
+                    function (response) {
+                        if (response.success) {
+                            vm.cart = response.data;
+                            vm.isCartLoaded = true;
+                            SessionService.putInRootScope("cartItemCount", vm.cart.length);
+                            callback();
+                        } else {
+                            FlashService.Error("Something not working. Please try later");
+                        }
+                    });
+            }
+            else {
+                isCartLoaded = true;
+                callback();
+            }
         }
 
         function buy(item) {
             addItemInCart(item, function () {
-                $location.path("/cart");
+                $location.path("cart");
             });
         }
 
         //cart
         function addItemInCart(item, callback) {
-            if (isUserLoggedIn()) {
-                showProgress(item.itemId);
-                if (isCartLoaded) {
-                    updateCart(item, callback);
-                } else {
-                    loadCart(function () {
-                        updateCart(item, callback);
-                    });
-                }
-            } else {
-                openLogin();
+            if(vm.cart==undefined) {
+                loadCart(function () {
+                    addToCart(item, callback);
+                });
             }
+            else {
+                addToCart(item, callback);
+            }
+
+        }
+
+        function addToCart(item, callback) {
+            showProgress(item.itemId);
+            updateCart(item, callback);
+
         }
 
         function updateCart(item, callback) {
+            if (getBagId() == null) {
+                            var newCartItem = new CartItem(getBagId(), getUserId(), item.itemId, 1, item.weight, item.price);
+                            addNewCartItem(newCartItem, callback);
+
+            }
+            else {
+                cartUpdation(item, callback);
+            }
+
+        }
+        function cartUpdation(item,callback)
+        {
             var cartItem = getItem(item.itemId, item.weight);
             if (cartItem) {
                 cartItem.quantity += 1;
                 updateCartItem(cartItem, callback);
             } else {
-                var newCartItem = new CartItem(getUserId(), item.itemId, 1, item.weight, item.price);
+                var newCartItem = new CartItem(getBagId(), getUserId(), item.itemId, 1, item.weight, item.price);
                 addNewCartItem(newCartItem, callback);
             }
         }
@@ -160,11 +197,15 @@
         function addNewCartItem(cartItem, callback) {
             CartService.add(cartItem, function (response) {
                 if (response.success) {
-                    cart.push(response.data);
-                    SessionService.putInRootScope("cartItemCount", cart.length);
-                    SessionService.put("cartItemCount", cart.length);
+                    if (getBagId() == null) {
+                        SessionService.put("bagId", response.data.bagId);
+                        SessionService.putInRootScope("cartItemCount", 1);
+                    }
+                    else {
+                        SessionService.putInRootScope("cartItemCount", vm.cart.length+1);
+                    }
                 } else {
-                    FlashService.Error("Something not working. Please try later", true);
+                    FlashService.Success("Item Already added.", true);
                 }
                 hideProgress(cartItem.itemId);
                 if (callback) {
@@ -197,25 +238,18 @@
         }
 
         function getItem(itemId, weight) {
-            for (var i = 0; i < cart.length; i++) {
-                if (cart[i].itemId === itemId && cart[i].weight == weight) {
-                    return cart[i];
+            for (var i = 0; i < vm.cart.length; i++) {
+                if (vm.cart[i].itemId === itemId && vm.cart[i].weight == weight) {
+                    return vm.cart[i];
                 }
             }
             return undefined;
         }
 
-        function openLogin() {
-            //mobile view
-            if ($window.innerWidth < 420) {
-                $location.path("/login-mble");
-            } else {
-                $("#myModal").modal();
-            }
-        }
 
         //cartItem class
-        function CartItem(userId, itemId, quantity, weight, price) {
+        function CartItem(bagId, userId, itemId, quantity, weight, price) {
+            this.bagId = bagId;
             this.userId = userId;
             this.itemId = itemId;
             this.weight = weight;
@@ -223,5 +257,4 @@
             this.quantity = quantity;
         }
     }
-
 })();

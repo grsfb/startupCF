@@ -15,6 +15,8 @@
         vm.contactDetail = false;
         vm.localize = localize;
         vm.sendInvoice = sendInvoice;
+        SessionService.put('bagId',null);
+        SessionService.putInRootScope('cartItemCount',0);
         FlashService.ClearAllFlashMessage();
         OrderService.getAllItemForOrder($routeParams.orderId, function (response) {
             if (response.success) {
