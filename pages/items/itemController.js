@@ -126,12 +126,18 @@
         function addNewCartItem(cartItem, callback) {
             CartService.add(cartItem, function (response) {
                 if (response.success) {
+                    if(vm.cart == undefined){
+                        vm.cart=[];
+                    }
                     vm.cart.push(response.data);
                     if (getBagId() == null) {
                         SessionService.put("bagId", response.data.bagId);
                         SessionService.putInRootScope("cartItemCount", 1);
                     }
-                    SessionService.putInRootScope("cartItemCount", vm.cart.length);
+                    else{
+                        SessionService.putInRootScope("cartItemCount", vm.cart.length);
+                    }
+
                 } else {
                     FlashService.Error("Something not working. Please try later", true);
                 }

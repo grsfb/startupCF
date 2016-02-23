@@ -62,7 +62,7 @@
             getItems(function () {
                 //do nothing
             });
-            vm.itemAdded=true;
+
         }
         function getItems(callback){
             if(getBagId()!=null || getUserId()!=null){
@@ -71,6 +71,7 @@
                     vm.cart = response.data;
                     SessionService.putInRootScope("cartItemCount", vm.cart.length);
                     updateCartCost();
+                    vm.itemAdded=true;
                 } else {
                     FlashService.Error("Something not working. Please try later");
                 }
@@ -78,6 +79,7 @@
             }
             else{
                 SessionService.putInRootScope("cartItemCount", 0);
+                vm.itemAdded=false;
                 callback();
             }
         }
