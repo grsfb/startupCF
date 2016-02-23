@@ -103,14 +103,10 @@
         }
 
         function updateCart(item, callback) {
-            if (getBagId() == null) {
-                var newCartItem = new CartItem(getBagId(), getUserId(), item.itemId, 1, item.weight, item.price);
-                addNewCartItem(newCartItem, callback);
-
+            if(vm.cart == undefined){
+                vm.cart=[];
             }
-            else {
                 cartUpdation(item, callback);
-            }
         }
         function cartUpdation(item,callback)
         {
@@ -126,9 +122,6 @@
         function addNewCartItem(cartItem, callback) {
             CartService.add(cartItem, function (response) {
                 if (response.success) {
-                    if(vm.cart == undefined){
-                        vm.cart=[];
-                    }
                     vm.cart.push(response.data);
                     if (getBagId() == null) {
                         SessionService.put("bagId", response.data.bagId);
