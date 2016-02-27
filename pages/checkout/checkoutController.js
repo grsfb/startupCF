@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('CheckoutController', CheckoutController);
-    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService','EventHandlingService','$scope','UserService','AuthenticationService'];
+    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService', 'EventHandlingService', '$scope', 'UserService', 'AuthenticationService'];
 
-    function CheckoutController(SessionService, $location, FlashService, OrderService,EventHandlingService,$scope,UserService,AuthenticationService) {
+    function CheckoutController(SessionService, $location, FlashService, OrderService, EventHandlingService, $scope, UserService, AuthenticationService) {
         var vm = this;
         if (!SessionService.get('isOrderInProgress')) {
             FlashService.ClearAllFlashMessage();
@@ -18,20 +18,21 @@
         vm.checkAndPlaceOrder = checkAndPlaceOrder;
         vm.isPlacingOrder = false;
         vm.paymentType = "PAYU";
-        vm.guestLogin=guestLogin;
-        vm.changeLogin=changeLogin;
-        vm.changeAddress=changeAddress;
-        vm.changePayment=changePayment;
+        vm.guestLogin = guestLogin;
+        vm.changeLogin = changeLogin;
+        vm.changeAddress = changeAddress;
+        vm.changePayment = changePayment;
         vm.setPaymentType = setPaymentType;
-        vm.hasLogged=false;
-        vm.addressLogged=false;
-        vm.payAllowed=false;
-        vm.guestEmail=undefined;
-        vm.login=login;
+        vm.hasLogged = false;
+        vm.addressLogged = false;
+        vm.payAllowed = false;
+        vm.guestEmail = undefined;
+        vm.login = login;
         function isUserLoggedIn() {
             return SessionService.get(SessionService.Session.CurrentUser);
         }
-        if(isUserLoggedIn()){
+
+        if (isUserLoggedIn()) {
             vm.guestEmail = SessionService.get(SessionService.Session.CurrentUser).email;
             $('#loginPanel').collapse('hide');
             $('#addressPanel').collapse('show');
@@ -47,7 +48,7 @@
                 return false;
             }
             if (vm.paymentType == 'COD') {
-                if (!("pune"==address.city.toLowerCase() && "411"==(address.zip.substring(0, 3)))) {
+                if (!("pune" == address.city.toLowerCase() && "411" == (address.zip.substring(0, 3)))) {
                     FlashService.Error("Cash on Delivery is only available in pune");
                     return false;
                 }
@@ -78,13 +79,14 @@
 
         function Order(userId, addressId, paymentType, couponId) {
             this.userId = userId;
-            this.bagId=SessionService.get('bagId');
+            this.bagId = SessionService.get('bagId');
             this.deliveryAddress = {"addressId": addressId};
             this.paymentType = paymentType;
             if (couponId) {
                 this.couponId = couponId;
             }
         }
+
         //$scope.initSlider = function () {
         //    $(function () {
         //        // wait till load event fires so all resources are available
@@ -92,10 +94,11 @@
         //    });
         //
         //};
-        function login(){
+        function login() {
             $("#myModal").modal();
         }
-        function openGuestLogin(callback){
+
+        function openGuestLogin(callback) {
 
             AuthenticationService.GuestLogin(function (response) {
                 if (response.success) {
@@ -106,6 +109,7 @@
                 }
             });
         }
+
         function guestLogin() {
             var user = {"name": "Guest", "email": vm.guestEmail};
             UserService.create(user, function (response) {
@@ -121,52 +125,40 @@
                     });
                 }
             });
-            //CommonService.update("/updateGuestUser", user, function (response) {
-            //    if (response.success) {
 
-                }
+            function changeLogin() {
+                $('#loginPanel').collapse('show');
 
-          //  });
+                $('#addressPanel').collapse('hide');
+                $('#paymentPanel').collapse('hide');
+            }
 
-        function changeLogin(){
-            $('#loginPanel').collapse('show');
+            function changeAddress() {
+                $('#loginPanel').collapse('hide');
 
-            $('#addressPanel').collapse('hide');
-            $('#paymentPanel').collapse('hide');
-        }
-        function changeAddress(){
-            $('#loginPanel').collapse('hide');
+                $('#addressPanel').collapse('show');
+                $('#paymentPanel').collapse('hide');
+            }
 
-            $('#addressPanel').collapse('show');
-            $('#paymentPanel').collapse('hide');
-        }
-        function changePayment(){
-            $('#loginPanel').collapse('hide');
-
-            $('#addressPanel').collapse('hide');
-            $('#paymentPanel').collapse('show');
-        }
-        $scope.$on('handleAddressSelected', function() {
-            if(EventHandlingService.message==true){
+            function changePayment() {
                 $('#loginPanel').collapse('hide');
 
                 $('#addressPanel').collapse('hide');
                 $('#paymentPanel').collapse('show');
-                vm.addressLogged=true;
-                vm.payAllowed=true;
-                vm.hasLogged=true;
             }
 
-        });
-        //$scope.initSlider = function () {
-        //    $(function () {
-        //        // wait till load event fires so all resources are available
-        //            $("#panel3").collapse('hide');
-        //
-        //
-        //    });
-        //};
-        //
-        //$scope.initSlider();
+            $scope.$on('handleAddressSelected', function () {
+                if (EventHandlingService.message == true) {
+                    $('#loginPanel').collapse('hide');
+
+                    $('#addressPanel').collapse('hide');
+                    $('#paymentPanel').collapse('show');
+                    vm.addressLogged = true;
+                    vm.payAllowed = true;
+                    vm.hasLogged = true;
+                }
+
+            });
+        }
     }
 })();

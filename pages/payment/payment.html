@@ -17,81 +17,12 @@
                     <td class="th border" style="padding-top: 5px"> Discount</td>
                     <td class="border" style="text-align: right;padding-top: 5px"><i class="fa fa-rupee"></i> {{vm.discount}}</td>
                 </tr>
-                <tr>
-                    <td class="th border" style="padding-top: 5px">Order total</td>
+                <tr style="border-bottom: 1px solid #b2b2b2;margin-bottom: 15px;">
+                    <td class="th" style="padding-top: 5px">Order total</td>
                     <td class="price" style="padding-top: 5px"><i class="fa fa-rupee"></i> {{vm.cartTotal+vm.shippingCost-vm.discount}}</td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <!--<div>-->
-            <!--<h3 class="tstyle" style="padding: 10px;margin: 0">Select Payment Method</h3>-->
-
-            <form id="payment-form" name="payment-form" role="form" novalidate style="padding-left: 10px;
-            margin-top: -5px;">
-                <div class="radio light" style="background-color: #FFFFFF;">
-                    <label>
-                        <div style="position: relative;"><input type="radio" name="payment"
-                                                                id="payment03" class="with-font"
-                                                                style="position: absolute;
-                                                                top: 15px;left: 5px;" checked
-                                                                value="PAYU"
-                                                                data-ng-model="vm.paymentType">
-                        </div>
-                        <img style="height: 50px;width: 150px;" src="img/third-party/payU.png"></label>
-                </div>
-                <div class="radio light" style="padding:5px;">
-                    <label style="color: darkgreen;font-weight: bold">
-                        <div class="iradio" style="position: relative;"><input class="with-font" type="radio"
-                                                                               name="payment"
-                                                                               id="payment02"
-                                                                               style="position: absolute;"
-                                                                               data-ng-model="vm.paymentType"
-                                                                               value="COD">
-                        </div>
-                        Cash On Delivery</label>
-                </div>
-            </form>
-        </div>
-        <a class="btn btn-default mybtn pull-right" type="submit" name="place-order"
-           style="width: 100%" data-ng-hide="vm.isPlacingOrder" data-ng-click="vm.checkAndPlaceOrder()">
-            Place order
-        </a>
-        <a class="btn btn-default mybtn pull-right disabled" type="submit" name="place-order"
-           style="width: 100%" data-ng-show="vm.isPlacingOrder">
-            <i class="fa fa-spinner fa-spin"></i> Placing order</a>
-            <!--<form id="payment-form" name="payment-form" role="form" novalidate style="padding-left: 10px;-->
-            <!--margin-top: -5px;">-->
-                <!--<div class="radio light" style="background-color: #FFFFFF;">-->
-                    <!--<label>-->
-                        <!--<div style="position: relative;"><input type="radio" name="payment"-->
-                                                                <!--id="payment03" class="with-font disabled"-->
-                                                                <!--style="position: absolute;-->
-                                                                <!--top: 15px;left: 5px;"-->
-                                                                <!--value="PAYU"-->
-                                                                <!--data-ng-model="vm.paymentType">-->
-                        <!--</div>-->
-                        <!--<img style="height: 50px;width: 150px;" src="img/third-party/payU.png"></label>-->
-                <!--</div>-->
-                <!--<div class="radio light" style="padding:5px;">-->
-                    <!--<label style="color: darkgreen;font-weight: bold">-->
-                        <!--<div class="iradio" style="position: relative;"><input class="with-font" type="radio"-->
-                                                                               <!--name="payment"-->
-                                                                               <!--id="payment02" checked-->
-                                                                               <!--style="position: absolute;"-->
-                                                                               <!--data-ng-model="vm.paymentType"-->
-                                                                               <!--value="COD">-->
-                        <!--</div>-->
-                        <!--Cash On Delivery</label>-->
-                <!--</div>-->
-            <!--</form>-->
-        <!--</div>-->
-        <!--<a class="btn btn-default mybtn pull-right" type="submit" name="place-order"-->
-           <!--style="width: 100%" data-ng-hide="vm.isPlacingOrder" data-ng-click="vm.checkAndPlaceOrder()">-->
-            <!--Place order-->
-        <!--</a>-->
-        <!--<a class="btn btn-default mybtn pull-right disabled" type="submit" name="place-order"-->
-           <!--style="width: 100%" data-ng-show="vm.isPlacingOrder">-->
-            <!--<i class="fa fa-spinner fa-spin"></i> Placing order</a>-->
     </div>
 </div>

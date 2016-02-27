@@ -1,138 +1,168 @@
 <div class="checkout" style="text-align: left">
     <div class="container" style="padding-bottom: 20px;">
-
-        <!--&lt;!&ndash;Expandable Panels&ndash;&gt;-->
-        <!--<div class="row">-->
-            <!--<div class="col-lg-12">-->
-                <!--&lt;!&ndash;<h1 class="page-title">Checkout</h1>&ndash;&gt;-->
-                <!--<h1 class="page-title" style="padding: 10px;">Checkout</h1>-->
-
-            <!--</div>-->
-        <!--</div>-->
-        <div class="row" style="padding: 10px;">
-            <div class="panel-group col-md-8" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading page-title"  style="height: 45px">
-                            <div class="panel-title">
-                                <a class="accordion-toggle col-md-4" style="text-decoration: none;padding-left: 0px" data-toggle="collapse" data-parent="#accordion">1. LOGIN ID</a>
-                                <label ng-bind="vm.guestEmail" class="col-md-4"></label>
-                                <a class="btn btn-success pull-right col-md-3" style="height: 35px;text-align: center;border-radius: 0;font-size: medium;margin-top:-5px;padding-top: 3px;background-color: white"
-                                   data-ng-click="vm.changeLogin()" ng-if="vm.hasLogged">CHANGE
-                                </a>
-                            </div>
-
-                    </div>
-                    <div id="loginPanel" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            <div  style="padding-left: 0px;">
-                            <div class="row">
-                            <form role="form" class="col-md-6" name="loginform">
-                            <div class="form-group">
-                            <input type="email" class="form-control loginInput" name="userEmail" id="email"
-                            data-ng-model="vm.guestEmail" placeholder="Email Address" required=""
-                            autocomplete="on" style="border-radius: 0">
-
-                            <div class="has-error ng-hide" ng-messages="loginform.userEmail.$error"
-                            ng-show="loginform.userEmail.$touched">
-                            <p class="help-block errorMsg" ng-show="loginform.userEmail.$error.required"
-                            ng-message="required">Your email is required.</p>
-
-                            <p class="help-block errorMsg" ng-show="loginform.userEmail.$error.email">
-                            Your email is not valid.
-                            </p>
-                            </div>
-                            </div>
-                            <div class="col-md-12" style="padding-left: 0px;width: 230px;">
-                            <a class="btn btn-success btn-block"  type="submit" ng-disabled="loginform.$invalid" style="height: 38px;text-align: center;border-radius: 0;font-size: large"
-                            data-ng-click="vm.guestLogin()" >CONTINUE AS GUEST
-                            </a>
-                            </div>
-                            </form>
-                            <span class="col-md-1">OR</span>
-                            <div class="col-md-5">
-
-                            <div><a class="btn btn-success btn-block" style="height: 38px;text-align: center;border-radius: 0;font-size: large;background-color: teal"
-                            data-ng-click="vm.login()">LOGIN/ SIGN UP
-                            </a></div>
-                            </div>
-                            </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading page-title" style="height: 45px">
-                        <div class="panel-title">
-                            <a  class="accordion-toggle" data-toggle="collapse" style="text-decoration: none;padding-left: 0px"  data-parent="#accordion">2. ADD ADDRESS</a>
-                            <a class="btn btn-success pull-right col-md-3"  style="height: 35px;text-align: center;border-radius: 0;font-size: medium;margin-top:-5px;padding-top: 3px;background-color: white"
-                               data-ng-click="vm.changeAddress()" ng-if="vm.addressLogged">CHANGE
-                            </a>
-                            </div>
-                    </div>
-                    <div id="addressPanel" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div data-ng-include="'pages/address/address.html'"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading page-title" style="height: 45px">
-                        <div class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" style="text-decoration: none;padding-left: 0px"  data-parent="#accordion">3. MAKE PAYMENT/COD</a>
-                            <a class="btn btn-success pull-right col-md-3" style="height: 35px;text-align: center;border-radius: 0;font-size: medium;margin-top:-5px;padding-top: 3px;background-color: white"
-                               data-ng-click="vm.changePayment()" ng-if="vm.payAllowed">PAY
-                            </a>
-                        </div>
-                    </div>
-                    <div id="paymentPanel" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div>
-                                <h3 class="tstyle" style="padding: 10px;margin: 0">Select Payment Method</h3>
-
-                                <form id="payment-form" name="payment-form" role="form" novalidate style="padding-left: 10px;
-            margin-top: -5px;">
-                                    <div class="radio light" style="background-color: #FFFFFF;">
-                                        <label>
-                                            <div style="position: relative;"><input type="radio" name="payment"
-                                                                                    id="payment03" class="with-font"
-                                                                                    style="position: absolute;
-                                                                top: 15px;left: 5px;"
-                                                                                    value="PAYU"
-                                                                                    data-ng-model="vm.paymentType">
-                                            </div>
-                                            <img style="height: 50px;width: 150px;" src="img/third-party/payU.png"></label>
-                                    </div>
-                                    <div class="radio light" style="padding:5px;">
-                                        <label style="color: darkgreen;font-weight: bold">
-                                            <div class="iradio" style="position: relative;"><input class="with-font" type="radio"
-                                                                                                   name="payment"
-                                                                                                   id="payment02" checked
-                                                                                                   style="position: absolute;"
-                                                                                                   data-ng-model="vm.paymentType"
-                                                                                                   value="COD">
-                                            </div>
-                                            Cash On Delivery</label>
-                                    </div>
-                                </form>
-                                <a class="btn btn-default mybtn pull-left" type="submit" name="place-order"
-                                   style="width: 200px" data-ng-hide="vm.isPlacingOrder" data-ng-click="vm.checkAndPlaceOrder()">
-                                    Place order
-                                </a>
-                                <a class="btn btn-default mybtn pull-left disabled" type="submit" name="place-order"
-                                   style="width: 200px" data-ng-show="vm.isPlacingOrder">
-                                    <i class="fa fa-spinner fa-spin"></i> Placing order</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--Right Column-->
-            <div class="col-lg-3 col-lg-offset-1 col-md-4 col-sm-4">
-                <div data-ng-include="'pages/payment/payment.html'"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-title" style="padding: 10px;">Checkout</h1>
             </div>
         </div>
+        <div class="col-sm-8 col-md-8 col-xs-12 col-lg-8" style="padding: 0">
+            <div class="col-sm-12 col-xs-12" style="padding: 0">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="padding: 5px 5px;">
+                            <h4 class="panel-title">
+                                <label style="width: 100%;font-weight: normal;margin-bottom: 0">
+                                    <span class="pull-left"> 1. LOGIN ID</span>
+                                    <span class="hidden-xs" ng-bind="vm.guestEmail" style="margin-left: 25%;"></span>
+                                    <a class="pull-right hidden-xs" data-toggle="collapse"
+                                       data-parent="#accordion" href="#collapse1"
+                                       style="border: 1px solid black;padding: 5px;text-decoration: none;color: black">
+                                        Change</a>
+                                    <a class="pull-right hidden-lg hidden-md hidden-sm" data-toggle="collapse"
+                                       data-parent="#accordion" href="#collapse1"
+                                       style="text-decoration: none;color: black">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </label>
+
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div style="padding-left: 0px;">
+                                    <div class="row">
+                                        <form role="form" class="col-md-6" name="loginform">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control loginInput" name="userEmail"
+                                                       id="email"
+                                                       data-ng-model="vm.guestEmail" placeholder="Email Address"
+                                                       required=""
+                                                       autocomplete="on" style="border-radius: 0">
+
+                                                <div class="has-error ng-hide" ng-messages="loginform.userEmail.$error"
+                                                     ng-show="loginform.userEmail.$touched">
+                                                    <p class="help-block errorMsg"
+                                                       ng-show="loginform.userEmail.$error.required"
+                                                       ng-message="required">Your email is required.</p>
+
+                                                    <p class="help-block errorMsg"
+                                                       ng-show="loginform.userEmail.$error.email">
+                                                        Your email is not valid.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-left: 0px;width: 230px;">
+                                                <a class="btn btn-success btn-block" type="submit"
+                                                   ng-disabled="loginform.$invalid"
+                                                   style="height: 38px;text-align: center;border-radius: 0;font-size: large"
+                                                   data-ng-click="vm.guestLogin()">CONTINUE AS GUEST
+                                                </a>
+                                            </div>
+                                        </form>
+                                        <span class="col-md-1">OR</span>
+
+                                        <div class="col-md-5">
+
+                                            <div><a class="btn btn-success btn-block"
+                                                    style="height: 38px;text-align: center;border-radius: 0;font-size: large;background-color: teal"
+                                                    data-ng-click="vm.login()">LOGIN/ SIGN UP
+                                            </a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="padding: 5px 5px;">
+                            <h4 class="panel-title">
+                                <label style="width: 100%;font-weight: normal;margin-bottom: 0">
+                                    <span class="pull-left" data-toggle="collapse"
+                                          data-parent="#accordion">2. ADD SHIPPING ADDRESS</span>
+                                    <a class="pull-right hidden-xs" data-toggle="collapse"
+                                       data-parent="#accordion" href="#collapse2"
+                                       style="border: 1px solid black;padding: 5px;text-decoration: none;color: black">
+                                        Change</a>
+                                    <a class="pull-right hidden-lg hidden-md hidden-sm" data-toggle="collapse"
+                                       data-parent="#accordion" href="#collapse2"
+                                       style="text-decoration: none;color: black">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </label>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div data-ng-include="'pages/address/address.html'"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="padding: 5px 5px;">
+                            <h4 class="panel-title">
+                                <label style="width: 100%;font-weight: normal;margin-bottom: 0">
+                                    <span>3. CHOOSE PAYMENT TYPE</span>
+                                    <a class="pull-right hidden-xs" data-toggle="collapse"
+                                       data-parent="#accordion" href="#collapse3"
+                                       style="border: 1px solid black;padding: 5px;text-decoration: none;color: black">
+                                        Change</a>
+                                    <a class="pull-right hidden-lg hidden-md hidden-sm" data-toggle="collapse"
+                                       data-parent="#accordion" href="#collapse3"
+                                       style="text-decoration: none;color: black">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </label>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div>
+                                    <form id="payment-form" name="payment-form" role="form"
+                                          novalidate style="padding-left: 10px; margin-top: -5px;">
+                                        <div class="radio light" style="background-color: #FFFFFF;">
+                                            <label>
+                                                <div style="position: relative;"><input type="radio" name="payment"
+                                                                                        id="payment03" class="with-font"
+                                                                                        style="position: absolute;
+                                                                top: 15px;left: 5px;"
+                                                                                        value="PAYU"
+                                                                                        data-ng-model="vm.paymentType">
+                                                </div>
+                                                <img style="height: 50px;width: 150px;"
+                                                     src="img/third-party/payU.png"></label>
+                                        </div>
+                                        <div class="radio light" style="padding:5px;">
+                                            <label style="color: darkgreen;font-weight: bold">
+                                                <div class="iradio" style="position: relative;">
+                                                    <input class="with-font" type="radio"
+                                                           name="payment" id="payment02"
+                                                           checked style="position: absolute;"
+                                                           data-ng-model="vm.paymentType" value="COD">
+                                                </div>
+                                                Cash On Delivery</label>
+                                        </div>
+                                    </form>
+                                    <a class="btn btn-default mybtn pull-left" type="submit" name="place-order"
+                                       style="width: 200px" data-ng-hide="vm.isPlacingOrder"
+                                       data-ng-click="vm.checkAndPlaceOrder()">
+                                        Place order
+                                    </a>
+                                    <a class="btn btn-default mybtn pull-left disabled" type="submit" name="place-order"
+                                       style="width: 200px" data-ng-show="vm.isPlacingOrder">
+                                        <i class="fa fa-spinner fa-spin"></i> Placing order</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both" class="hidden-sm hidden-md hidden-lg"></div>
+        <!--Right Column-->
+        <div class="col-lg-3 col-lg-offset-1 col-md-4 col-sm-4 col-xs-12" style="padding: 0">
+            <div data-ng-include="'pages/payment/payment.html'"></div>
+        </div>
     </div>
-    <div class="push"></div>
+</div>
+<div class="push"></div>
 </div>
