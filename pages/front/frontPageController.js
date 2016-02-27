@@ -172,15 +172,10 @@
         }
 
         function updateCart(item, callback) {
-            if (getBagId() == null) {
-                            var newCartItem = new CartItem(getBagId(), getUserId(), item.itemId, 1, item.weight, item.price);
-                            addNewCartItem(newCartItem, callback);
-
+            if(vm.cart == undefined){
+                vm.cart=[];
             }
-            else {
                 cartUpdation(item, callback);
-            }
-
         }
         function cartUpdation(item,callback)
         {
