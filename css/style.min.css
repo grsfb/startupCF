@@ -277,11 +277,11 @@ ul li a:hover, ul li a:focus {
     margin-top: 20px;
 }
 .up-arrow {
-    background-color: darkgrey;
+    background-color: mintcream;
     display: inline-block;
     height: auto;
     position: absolute;
-    top: 30px;
+    top: 35px;
     left:-370px;
     width: 435px;
     padding: 0px!important;
@@ -297,5 +297,5 @@ ul li a:hover, ul li a:focus {
     bottom: 100%;
     right: 50px;
     border: 10px solid transparent;
-    border-bottom-color: darkgrey;
+    border-bottom-color: mintcream;
 }

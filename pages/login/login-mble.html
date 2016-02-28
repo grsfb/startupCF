@@ -43,11 +43,15 @@
                    style="margin-top: 15px;color: #222222">
                     Need an account? Sign up </i>
                 </a>
+                <div class="login_or" style="text-align: center"><img src="img/login_or.png"></div>
+                <a class="btn log_in_bf col-xs-12" style="text-decoration: none;margin-top:5px" data-ng-click="vm.doFBLogin()">LOGIN WITH FACEBOOK</a>
+                <label class="col-md-12" style="font-size: smaller;color: darkgray;margin-top: 2px">We don't post any thing on your facebook account.</label>
             </div>
             <div style="font-size: 16px">
                 <a class="col-xs-12 text-center" data-ng-click="vm.passwordReset()"
                    style="margin-top: 15px;margin-bottom: 15px;color: #222222"> Forgot Password ?</a>
             </div>
+
 
             <div ng-if="vm.resetSectionVisible" style="padding: 0px;">
                     <div ng-class="{'has-error': loginform.userEmail.$invalid && loginform.userEmail.$dirty}">

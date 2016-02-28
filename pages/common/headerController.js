@@ -78,7 +78,6 @@
             });
             }
             else{
-                SessionService.putInRootScope("cartItemCount", 0);
                 vm.itemAdded=false;
                 callback();
             }

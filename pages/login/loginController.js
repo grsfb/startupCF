@@ -36,18 +36,6 @@
             return SessionService.get(SessionService.Session.CurrentUser);
         }
 
-
-        //function updateUserCart(currentUser) {
-        //    if(currentUser.bagId!=null) {
-        //        CartService.count(currentUser.bagId, function (response) {
-        //            if (response.success) {
-        //                SessionService.putInRootScope('cartItemCount', response.data.count);
-        //                SessionService.put(SessionService.Session.CartCount, response.data.count);
-        //            }
-        //        });
-        //    }
-        //}
-
         function passwordReset() {
             vm.resetSectionVisible = !vm.resetSectionVisible;
 
