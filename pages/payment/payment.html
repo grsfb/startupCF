@@ -1,12 +1,12 @@
 <div>
-    <h3 class="tstyle" style="padding: 10px;margin-top: 0px">Order Details</h3>
+    <h3 class="tstyle" style="padding: 10px;margin-top: 0px">Order Summary</h3>
 
-    <div>
+    <div class="tstyle" style="font-size: 14px;">
         <div style="padding: 10px;">
             <table>
                 <tbody>
                 <tr>
-                    <td class="th" style="padding-top: 0">Cart subtotal</td>
+                    <td class="th" style="padding-top: 0">Merchandise</td>
                     <td class="price" style="padding-top: 0"><i class="fa fa-rupee"></i> {{vm.cartTotal}}</td>
                 </tr>
                 <tr>
@@ -17,7 +17,7 @@
                     <td class="th border" style="padding-top: 5px"> Discount</td>
                     <td class="border" style="text-align: right;padding-top: 5px"><i class="fa fa-rupee"></i> {{vm.discount}}</td>
                 </tr>
-                <tr style="border-bottom: 1px solid #b2b2b2;margin-bottom: 15px;">
+                <tr>
                     <td class="th" style="padding-top: 5px">Order total</td>
                     <td class="price" style="padding-top: 5px"><i class="fa fa-rupee"></i> {{vm.cartTotal+vm.shippingCost-vm.discount}}</td>
                 </tr>

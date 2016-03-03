@@ -24,23 +24,12 @@
                             style="padding: 0;">Login
                     </button>
                 </li>
-<!--<div>-->
-    <!--<div >-->
-        <!--<div class="cart-notification row" style="opacity: 1; display: none;">-->
-            <!--<div class="col-md-5">-->
-                <!--<img src="http://static11.jassets.com/p/Phosphorus-Tan-Loafers-0403-6812391-1-new_cart.jpg" class="img-cart-add-success">-->
-            <!--</div><div class="col-md-7">Phosphorus Tan Loafers  has been added to your bag</div>-->
-            <!--<button class="btn btn-filled text-uppercase view-bag"> view bag</button></div></div>-->
-<!--</div>-->
-
-
 
                 <li style="text-decoration: none">
                     <div style="margin-top: 15px; width: 50px"  ng-mouseleave="vm.itemAdded=false" ng-mouseenter="vm.viewcart()">
                         <a class="mylink" data-target=".navbar-collapse.in" href="#!cart"
                            style="cursor: pointer;text-decoration: none"><i class="fa  fa-1.5x fa-shopping-cart">
                             <sup class="badge">{{cartItemCount}}</sup></i></a>
-<!--ng-if="vm.itemAdded"-->
                         <div class="up-arrow" ng-if="vm.itemAdded" ng-show="vm.itemAdded && {{cartItemCount}}>0">
                             <div class="row" style="text-align: center ;color: black;margin: 5px;font-weight: 600">YOUR BAG ({{vm.cart.length}} ITEMS)</div>
                           <div style="overflow-y: auto;max-height: 250px;overflow-x: hidden">
@@ -63,13 +52,6 @@
                                               <label> {{item.quantity}}</label>
                                           </div>
                                       </div>
-                                      <!--<div class="col-md-12" style="padding:5px">-->
-                                      <!--<div class=" col-xs-4" >Price:</div>-->
-                                      <!--<div class=" col-xs-8" style="text-align: center">-->
-                                      <!--<label><i class="fa fa-inr"></i> {{item.price}}</label>-->
-
-                                      <!--</div>-->
-                                      <!--</div>-->
                                       <div class="col-md-12" style="padding-top:0px;padding-bottom: 10px;margin-top: 0px;padding-left: 2px">
                                           <div class=" col-xs-4" >Weight:</div>
                                           <div class=" col-xs-8"><label> {{item.weight}}</label></div>
