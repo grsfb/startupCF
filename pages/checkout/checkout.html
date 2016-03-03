@@ -9,27 +9,34 @@
             <div class="col-sm-12 col-xs-12" style="padding: 0">
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
-                        <div class="panel-heading" style="padding: 5px 5px;">
-                            <h4 class="panel-title">
+                        <div class="panel-heading" style="padding: 8px 8px;">
+                            <h4 class="panel-title" style="min-height: 25px;">
                                 <label style="width: 100%;font-weight: normal;margin-bottom: 0">
                                     <span class="pull-left"> 1. LOGIN ID</span>
-                                    <span class="hidden-xs" ng-bind="vm.guestEmail" style="margin-left: 25%;"></span>
+                                    <span class="hidden-xs" ng-bind="vm.loggedInUserEmail"
+                                          style="margin-left: 25%;"></span>
                                     <a class="pull-right hidden-xs" data-toggle="collapse"
-                                       data-parent="#accordion" href="#collapse1"
+                                       data-parent="#accordion" href="#loginPanel"
+                                       data-ng-show="vm.isGuestLogin && vm.loggedInUserEmail!=undefined"
                                        style="border: 1px solid black;padding: 5px;text-decoration: none;color: black">
                                         Change</a>
                                     <a class="pull-right hidden-lg hidden-md hidden-sm" data-toggle="collapse"
-                                       data-parent="#accordion" href="#collapse1"
+                                       data-parent="#accordion" href="#loginPanel"
+                                       data-ng-show="vm.isGuestLogin && vm.loggedInUserEmail!=undefined"
                                        style="text-decoration: none;color: black">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </label>
+                                <label class="hidden-sm hidden-lg hidden-md">
+                                    <span class="pull-left" ng-bind="vm.loggedInUserEmail"
+                                          style="margin-top: 5px;font-weight: normal"></span>
+                                </label>
 
                             </h4>
                         </div>
-                        <div id="collapse1" class="panel-collapse collapse in">
+                        <div id="loginPanel" class="panel-collapse collapse in">
                             <div class="panel-body">
-                                <div style="padding-left: 0px;">
+                                <div style="padding-left: 0;">
                                     <div class="row">
                                         <form role="form" class="col-md-6" name="loginform">
                                             <div class="form-group">
@@ -55,7 +62,7 @@
                                                 <a class="btn btn-success btn-block" type="submit"
                                                    ng-disabled="loginform.$invalid"
                                                    style="height: 38px;text-align: center;border-radius: 0;font-size: large"
-                                                   data-ng-click="vm.guestLogin()">CONTINUE AS GUEST
+                                                   data-ng-click="vm.guestLogin(vm.guestEmail)">CONTINUE AS GUEST
                                                 </a>
                                             </div>
                                         </form>
@@ -74,47 +81,52 @@
                         </div>
                     </div>
                     <div class="panel panel-default">
-                        <div class="panel-heading" style="padding: 5px 5px;">
-                            <h4 class="panel-title">
+                        <div class="panel-heading" style="padding: 8px 8px;">
+                            <h4 class="panel-title" style="min-height: 25px">
                                 <label style="width: 100%;font-weight: normal;margin-bottom: 0">
                                     <span class="pull-left" data-toggle="collapse"
                                           data-parent="#accordion">2. ADD SHIPPING ADDRESS</span>
                                     <a class="pull-right hidden-xs" data-toggle="collapse"
-                                       data-parent="#accordion" href="#collapse2"
-                                       style="border: 1px solid black;padding: 5px;text-decoration: none;color: black">
+                                       data-parent="#accordion" data-target="#addressPanel"
+                                       style="border: 1px solid black;padding: 5px;text-decoration: none;
+                                       color: black"
+                                       data-ng-show="vm.loggedInUserEmail!=undefined && vm.isDeliveryAddressAdded==true">
                                         Change</a>
                                     <a class="pull-right hidden-lg hidden-md hidden-sm" data-toggle="collapse"
-                                       data-parent="#accordion" href="#collapse2"
+                                       data-parent="#accordion" data-target="#addressPanel"
+                                       data-ng-show="vm.loggedInUserEmail!=undefined && vm.isDeliveryAddressAdded==true"
                                        style="text-decoration: none;color: black">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </label>
                             </h4>
                         </div>
-                        <div id="collapse2" class="panel-collapse collapse">
+                        <div id="addressPanel" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <div data-ng-include="'pages/address/address.html'"></div>
                             </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
-                        <div class="panel-heading" style="padding: 5px 5px;">
-                            <h4 class="panel-title">
+                        <div class="panel-heading" style="padding: 8px 8px;">
+                            <h4 class="panel-title" style="min-height: 25px">
                                 <label style="width: 100%;font-weight: normal;margin-bottom: 0">
                                     <span>3. CHOOSE PAYMENT TYPE</span>
                                     <a class="pull-right hidden-xs" data-toggle="collapse"
-                                       data-parent="#accordion" href="#collapse3"
+                                       data-parent="#accordion" data-target="#paymentPanel"
+                                       data-ng-show="vm.isDeliveryAddressAdded"
                                        style="border: 1px solid black;padding: 5px;text-decoration: none;color: black">
-                                        Change</a>
+                                        Pay</a>
                                     <a class="pull-right hidden-lg hidden-md hidden-sm" data-toggle="collapse"
-                                       data-parent="#accordion" href="#collapse3"
+                                       data-parent="#accordion" data-target="#paymentPanel"
+                                       data-ng-show="vm.isDeliveryAddressAdded"
                                        style="text-decoration: none;color: black">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </label>
                             </h4>
                         </div>
-                        <div id="collapse3" class="panel-collapse collapse">
+                        <div id="paymentPanel" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <div>
                                     <form id="payment-form" name="payment-form" role="form"

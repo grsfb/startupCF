@@ -3,19 +3,19 @@
     angular
         .module('Chefonia')
         .controller('AddressController', AddressController);
-    AddressController.$inject = ['SessionService', '$window', 'AddressService', 'FlashService','EventHandlingService'];
-    function AddressController(SessionService, $window, AddressService, FlashService,EventHandlingService) {
-        var vm = this;
-        vm.showAddressEditor = true;
-        vm.allAddress = [];
-        vm.address = {};
-        vm.enableAddressEditor = enableAddressEditor;
-        vm.saveAndClose = saveAndClose;
-        vm.cancel = cancel;
-        vm.setSelectedAddress = setSelectedAddress;
-        vm.deleteAddress = deleteAddress;
-        vm.showAddressEditor = false;
-        vm.isAddingAddress = false;
+    AddressController.$inject = ['SessionService', '$window', 'AddressService', 'FlashService', 'EventHandlingService'];
+    function AddressController(SessionService, $window, AddressService, FlashService, EventHandlingService) {
+        var avm = this;
+        avm.showAddressEditor = true;
+        avm.allAddress = [];
+        avm.address = {};
+        avm.enableAddressEditor = enableAddressEditor;
+        avm.saveAndClose = saveAndClose;
+        avm.cancel = cancel;
+        avm.setSelectedAddress = setSelectedAddress;
+        avm.deleteAddress = deleteAddress;
+        avm.showAddressEditor = false;
+        avm.isAddingAddress = false;
         loadAddress(function () {
             //do nothing
         });
@@ -31,24 +31,21 @@
                 return null;
             }
         }
-        function loadAddress(callback) {
-            if(getUserId()!=null){
 
+        function loadAddress(callback) {
+            if (getUserId() != null) {
                 AddressService.getAllAddress(getUserId(), function (response) {
                     if (response.success) {
-                        vm.allAddress = response.data;
+                        avm.allAddress = response.data;
                     } else {
                         FlashService.Error("Error occurred while retrieving address");
                     }
-                    if (vm.allAddress.length == 0) {
+                    if (avm.allAddress.length == 0) {
                         enableAddressEditor();
-                    }
-                    else if (vm.allAddress.length == 1) {
-                        setSelectedAddress(vm.allAddress[0], 0);
                     }
                 });
             }
-        else {
+            else {
                 enableAddressEditor();
                 callback();
             }
@@ -58,29 +55,29 @@
         function setSelectedAddress(address, index) {
             SessionService.putInRootScope('deliverAddress', address);
             EventHandlingService.eventForAddressSelectionBroadcast(true);
-            vm.selectedIndex = index;
+            avm.selectedIndex = index;
             getEstimatedDelivery(address.addressId)
         }
 
         function getEstimatedDelivery(addressId) {
             AddressService.getEstimatedDelivery(addressId, function (response) {
                 SessionService.putInRootScope('estimatedDeliveryTime', response.data.deliveryTime);
-                FlashService.Success("Estimated delivery time for this order is by "+response.data.deliveryTime);
+                FlashService.Success("Estimated delivery time for this order is by " + response.data.deliveryTime);
             });
         }
 
         function enableAddressEditor() {
-            vm.showAddressEditor = true;
+            avm.showAddressEditor = true;
         }
 
         function deleteAddress(index) {
             if ($window.confirm("Do you want to continue?")) {
-                AddressService.remove(vm.allAddress[index].addressId, function (response) {
+                AddressService.remove(avm.allAddress[index].addressId, function (response) {
                     if (response.success) {
                         SessionService.remove('deliverAddress');
-                        vm.allAddress.splice(index, 1);
-                        if (vm.allAddress.length == 1) {
-                            setSelectedAddress(vm.allAddress[0], 0);
+                        avm.allAddress.splice(index, 1);
+                        if (avm.allAddress.length == 1) {
+                            setSelectedAddress(avm.allAddress[0], 0);
                         }
                     } else {
                         FlashService.Error("Error occurred while deleting address");
@@ -91,26 +88,26 @@
         }
 
         function saveAndClose(address) {
-            vm.isAddingAddress = true;
+            avm.isAddingAddress = true;
 
             var addressToSave = new Address(getUserId(), address.fullName, address.lineOne, address.lineTwo,
                 address.city, address.state, address.zip, address.mobile);
 
             AddressService.create(addressToSave, function (response) {
                 if (response.success) {
-                    vm.allAddress.push(response.data);
+                    avm.allAddress.push(response.data);
                 } else {
                     FlashService.Error("Error occurred while saving address")
                 }
-                vm.isAddingAddress = false;
-                vm.showAddressEditor = false;
-                vm.address = {};
+                avm.isAddingAddress = false;
+                avm.showAddressEditor = false;
+                avm.address = {};
             });
         }
 
         function cancel() {
-            vm.address = {};
-            vm.showAddressEditor = false;
+            avm.address = {};
+            avm.showAddressEditor = false;
         }
 
         function Address(userId, fullName, lineOne, lineTwo, city, state, zip, mobile) {

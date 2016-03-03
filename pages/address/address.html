@@ -1,10 +1,10 @@
-<div data-ng-controller="AddressController as vm">
+<div data-ng-controller="AddressController as avm">
     <div>
         <div class="form-group">
-            <div data-ng-repeat="address in vm.allAddress">
+            <div data-ng-repeat="address in avm.allAddress">
                 <div class="col-md-4 col-lg-4 col-sm-6" style="padding:0px;">
                     <div style="width: 98%;border: 2px #f2f2f2 solid; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
-                        <div class="pull-right" style="cursor: pointer" data-ng-click="vm.deleteAddress($index)"><i
+                        <div class="pull-right" style="cursor: pointer" data-ng-click="avm.deleteAddress($index)"><i
                                 style="color: teal" class="fa fa-trash-o"></i></div>
                         <address>
                             <strong>{{address.fullName}}</strong><br>
@@ -12,9 +12,9 @@
                             {{address.city}}, {{address.state}}, {{address.zip}}<br>
                             <abbr title="Phone">Mob+:</abbr> {{address.mobile}}
                         </address>
-                        <a ng-if="$index!=vm.selectedIndex" class="btn btn-default" style="margin-bottom: 10px;"
-                           data-ng-click="vm.setSelectedAddress(address,$index)">Deliver on this address</a>
-                        <a ng-if="$index==vm.selectedIndex" class="btn btn-default deliverySelected"
+                        <a ng-if="$index!=avm.selectedIndex" class="btn btn-default" style="margin-bottom: 10px;"
+                           data-ng-click="avm.setSelectedAddress(address,$index);vm.notifyDeliveryAddressSelected();">Deliver on this address</a>
+                        <a ng-if="$index==avm.selectedIndex" class="btn btn-default deliverySelected"
                            style="margin-bottom: 10px;">Selected delivery address</a>
 
                     </div>
@@ -22,20 +22,20 @@
 
             </div>
             <div class="row" style="padding-left: 15px;">
-                <div class="col-sm-12" style="margin-top: 20px;padding-left: 2px;" data-ng-show="!vm.showAddressEditor">
-                    <a class="btn btn-default mybtn" name="add-address" data-ng-click="vm.enableAddressEditor()">
+                <div class="col-sm-12" style="margin-top: 20px;padding-left: 2px;" data-ng-show="!avm.showAddressEditor">
+                    <a class="btn btn-default mybtn" name="add-address" data-ng-click="avm.enableAddressEditor()">
                         Add New Address</a>
                 </div>
             </div>
         </div>
-        <div data-ng-show="vm.showAddressEditor">
+        <div data-ng-show="avm.showAddressEditor">
             <form id="checkout-form" method="post" name="form" role="form" novalidate="novalidate" autocomplete="off">
                 <div class="row">
                     <div class="form-group col-lg-12 col-md-12 col-sm-12"
                          ng-class="{'has-error': form.fullName.$touched && form.fullName.$error.required }">
                         <label for="fullName">Full Name *</label>
                         <input type="text" class="form-control" id="fullName" name="fullName"
-                               placeholder="Full name" required="" data-ng-model="vm.address.fullName" autocomplete="off">
+                               placeholder="Full name" required="" data-ng-model="avm.address.fullName" autocomplete="off">
                         <span ng-show="form.fullName.$touched && form.fullName.$error.required" class="help-block">Full name is required</span>
                     </div>
                 </div>
@@ -47,14 +47,14 @@
                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12"
                              ng-class="{'has-error': form.line1.$touched && form.line1.$error.required }">
                             <input type="text" class="form-control" id="line1" name="line1"
-                                   placeholder="Appartment Address" required="" data-ng-model="vm.address.lineOne" autocomplete="off">
+                                   placeholder="Appartment Address" required="" data-ng-model="avm.address.lineOne" autocomplete="off">
                             <span ng-show="form.line1.$touched && form.line1.$error.required" class="help-block">Apartment Address is required</span>
                         </div>
                         <label for="line2" class="col-xs-12 hidden-lg hidden-md hidden-sm">Landmark *</label>
                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12"
                              ng-class="{'has-error': form.line2.$touched && form.line2.$error.required }">
                             <input type="text" class="form-control" id="line2" name="line2"
-                                   placeholder="Landmark" required="" data-ng-model="vm.address.lineTwo" autocomplete="off">
+                                   placeholder="Landmark" required="" data-ng-model="avm.address.lineTwo" autocomplete="off">
                             <span ng-show="form.line2.$touched && form.line2.$error.required" class="help-block">Landmark is required</span>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                          ng-class="{'has-error': form.city.$touched && form.city.$error.required }">
                         <label for="city" >City *</label>
                         <input type="text" class="form-control" id="city" name="city"
-                               placeholder="City" required="" data-ng-model="vm.address.city" autocomplete="off">
+                               placeholder="City" required="" data-ng-model="avm.address.city" autocomplete="off">
                         <span ng-show="form.city.$touched && form.city.$error.required" class="help-block">City is required</span>
 
                     </div>
@@ -72,7 +72,7 @@
                          ng-class="{'has-error': form.state.$touched && form.state.$error.required }">
                         <label for="state">State *</label>
                         <input type="text" class="form-control" id="state" name="state"
-                               placeholder="State" required="" data-ng-model="vm.address.state" autocomplete="off">
+                               placeholder="State" required="" data-ng-model="avm.address.state" autocomplete="off">
                         <span ng-show="form.state.$touched && form.state.$error.required" class="help-block">State is required</span>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                          ng-class="{'has-error': form.postcode.$touched && form.postcode.$error.required ||form.postcode.$error.minlength || form.postcode.$error.pattern }">
                         <label for="postcode" >Postcode *</label>
                         <input type="text" class="form-control" id="postcode" name="postcode"
-                               placeholder="Postcode/ ZIP" required="" data-ng-model="vm.address.zip" ng-minlength="6"
+                               placeholder="Postcode/ ZIP" required="" data-ng-model="avm.address.zip" ng-minlength="6"
                                data-ng-pattern="/^\d+$/" autocomplete="off">
                         <span ng-show="form.postcode.$touched && form.postcode.$error.required" class="help-block">Postcode is required</span>
                         <span ng-show="form.postcode.$touched && form.postcode.$error.minlength || form.postcode.$error.pattern"
@@ -92,7 +92,7 @@
                          form.mobile.$error.pattern ||form.mobile.$error.minlength }">
                         <label for="mobile" >Mobile No. *</label>
                         <input type="text" class="form-control" id="mobile" name="mobile"
-                               placeholder="Mobile number" required="" data-ng-model="vm.address.mobile"
+                               placeholder="Mobile number" required="" data-ng-model="avm.address.mobile"
                                ng-minlength="10" data-ng-pattern="/^\d+$/" autocomplete="off">
                         <span ng-show="form.mobile.$touched && form.mobile.$error.required" class="help-block">Mobile is required</span>
                         <span ng-show="form.mobile.$touched && form.mobile.$error.minlength || form.mobile.$error.pattern"
@@ -102,12 +102,12 @@
                 </div>
                 <div class="row" style="padding-right: 15px;">
                     <a class="btn btn-default pull-right"
-                       data-ng-click="vm.cancel();form.$setPristine()">Cancel</a>
+                       data-ng-click="avm.cancel();form.$setPristine()">Cancel</a>
                     <a class="btn btn-default mybtn pull-right mybtn"
-                       data-ng-click="vm.saveAndClose(vm.address);form.$setPristine()" data-ng-disabled="form.$invalid"
-                       style="margin-right: 5px;" data-ng-hide="vm.isAddingAddress">Save</a>
+                       data-ng-click="avm.saveAndClose(avm.address);form.$setPristine()" data-ng-disabled="form.$invalid"
+                       style="margin-right: 5px;" data-ng-hide="avm.isAddingAddress">Save</a>
                     <a class="btn btn-default mybtn pull-right mybtn disabled"
-                       style="margin-right: 5px;" data-ng-show="vm.isAddingAddress"><i
+                       style="margin-right: 5px;" data-ng-show="avm.isAddingAddress"><i
                             class="fa fa-spinner fa-spin"></i> Saving</a>
                 </div>
             </form>

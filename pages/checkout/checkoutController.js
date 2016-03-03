@@ -18,22 +18,27 @@
         vm.checkAndPlaceOrder = checkAndPlaceOrder;
         vm.isPlacingOrder = false;
         vm.paymentType = "PAYU";
-        vm.guestLogin = guestLogin;
-        vm.changeLogin = changeLogin;
-        vm.changeAddress = changeAddress;
-        vm.changePayment = changePayment;
+        vm.isGuestLogin = true;
+        vm.guestLogin=guestLogin;
         vm.setPaymentType = setPaymentType;
-        vm.hasLogged = false;
-        vm.addressLogged = false;
-        vm.payAllowed = false;
-        vm.guestEmail = undefined;
+        vm.loggedInUserEmail = undefined;
+        vm.isDeliveryAddressAdded=false;
         vm.login = login;
+        vm.notifyDeliveryAddressSelected = notifyDeliveryAddressSelected;
+
+        function notifyDeliveryAddressSelected() {
+            vm.isDeliveryAddressAdded=true;
+            $('#addressPanel').collapse('hide');
+            $('#paymentPanel').collapse('show');
+        }
+
         function isUserLoggedIn() {
             return SessionService.get(SessionService.Session.CurrentUser);
         }
 
         if (isUserLoggedIn()) {
-            vm.guestEmail = SessionService.get(SessionService.Session.CurrentUser).email;
+            vm.loggedInUserEmail = SessionService.get(SessionService.Session.CurrentUser).email;
+            vm.isGuestLogin = false;
             $('#loginPanel').collapse('hide');
             $('#addressPanel').collapse('show');
             vm.hasLogged = true;
@@ -87,13 +92,6 @@
             }
         }
 
-        //$scope.initSlider = function () {
-        //    $(function () {
-        //        // wait till load event fires so all resources are available
-        //        $("#collapse2").collapse('show');
-        //    });
-        //
-        //};
         function login() {
             $("#myModal").modal();
         }
@@ -110,12 +108,13 @@
             });
         }
 
-        function guestLogin() {
-            var user = {"name": "Guest", "email": vm.guestEmail};
+        function guestLogin(guestEmail) {
+            var user = {"name": "Guest", "email": guestEmail};
             UserService.create(user, function (response) {
                 if (response.success) {
-                    AuthenticationService.GuestLogin(vm.guestEmail, function (response) {
+                    AuthenticationService.GuestLogin(guestEmail, function (response) {
                         if (response.success) {
+                            vm.loggedInUserEmail=guestEmail;
                             AuthenticationService.SetCredentials(response.data);
                             $('#addressPanel').collapse('show');
                             $('#loginPanel').collapse('hide');
@@ -126,6 +125,8 @@
                 }
             });
 
+
+/*
             function changeLogin() {
                 $('#loginPanel').collapse('show');
 
@@ -158,7 +159,7 @@
                     vm.hasLogged = true;
                 }
 
-            });
+            });*/
         }
     }
 })();
