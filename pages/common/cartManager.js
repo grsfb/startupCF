@@ -19,10 +19,12 @@
         function addOrUpdateItem(item, callback) {
             var cartItem = getItem(item.itemId, item.weight);
             if (cartItem) {
+                cartItem.quantity++;
                 update(cartItem, callback);
+            } else {
+                var newCartItem = new CartItem(getBagId(), getUserId(), item.itemId, 1, item.weight, item.price);
+                add(newCartItem, callback);
             }
-            var newCartItem = new CartItem(getBagId(), getUserId(), item.itemId, 1, item.weight, item.price);
-            add(newCartItem, callback);
         }
 
         function removeItem(cartItem, callback) {
@@ -50,8 +52,9 @@
 
         function add(cartItem, callback) {
             CartService.add(cartItem, function (response) {
-                if (response.success && getBagId() == undefined) {
+                if (response.success) {
                     SessionService.put("bagId", response.data.bagId);
+                    service.cartItems.push(response.data);
                 } else {
                     FlashService.Error("Something is not working. Please try later");
                 }
@@ -112,7 +115,5 @@
                 callback();
             }
         }
-
-
     }
 })();

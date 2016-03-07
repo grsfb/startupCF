@@ -46,9 +46,9 @@
                 }
             };
         }]);
-    FrontPageController.$inject = ['CartManager', 'ClientDataService', '$location', '$document', 'MappingService'];
+    FrontPageController.$inject = ['CartManager', 'ClientDataService', '$location', 'MappingService'];
 
-    function FrontPageController(CartManager, ClientDataService, $location, $document, MappingService) {
+    function FrontPageController(CartManager, ClientDataService, $location, MappingService) {
         var vm = this;
         vm.cityChange = cityChange;
         vm.foodChange = foodChange;
