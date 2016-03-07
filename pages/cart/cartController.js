@@ -19,55 +19,58 @@
         vm.showCouponEditor = false;
         vm.showAppliedCouponEditor = false;
         vm.showMessageEditor = false;
-        vm.isGiftMessageAdded=false;
+        vm.isGiftMessageAdded = false;
         vm.saveMessage = saveMessage;
         vm.enableMsgEditor = enableMsgEditor;
-        vm.editMessage=editMessage;
-        vm.removeMessage=removeMessage;
-        loadCart(function () {
-            //do nothing
-        });
+        vm.editMessage = editMessage;
+        vm.removeMessage = removeMessage;
+
+        function hasBagId() {
+            return SessionService.get('bagId') != undefined;
+        }
+
+        function getBagId() {
+            if (hasBagId()) {
+                return SessionService.get('bagId');
+            }
+            return undefined;
+        }
+
         function isUserLoggedIn() {
             return SessionService.get(SessionService.Session.CurrentUser);
         }
+
         function getUserId() {
             if (isUserLoggedIn()) {
                 return SessionService.get(SessionService.Session.CurrentUser).userId;
             }
-            else {
-                return null;
-            }
+            return undefined;
         }
-        function getBagId() {
-            return SessionService.get('bagId');
+
+        //load bag first time
+        if (hasBagId()) {
+            loadCart(function () { /**do nothing**/
+            });
+        } else {
+            $location.path('home');
         }
+
+
         function loadCart(callback) {
-            if (getBagId() != null) {
-                CartService.getCartItems(getBagId(), function (response) {
-                    if (response.success) {
-                        vm.cartItems = response.data;
-                        SessionService.putInRootScope('cartItemCount', vm.cartItems.length);
-                        SessionService.put('cartItemCount', vm.cartItems.length);
-                        updateCartCost();
-                    } else {
-                        FlashService.Error("Something not working. Please try later");
-                    }
-                });
-            }
-            else {
-                $location.path('home');
+            CartService.getCartItems(getBagId(), function (response) {
+                if (response.success) {
+                    vm.cartItems = response.data;
+                    SessionService.putInRootScope('cartItemCount', vm.cartItems.length);
+                    SessionService.put('cartItemCount', vm.cartItems.length);
+                    updateCartCost();
+                } else {
+                    FlashService.Error("Something not working. Please try later");
+                }
+
                 callback();
-            }
+            });
         }
-        //CartService.getCartItems(getBagId(), function (response) {
-        //    if (response.success) {
-        //        vm.cartItems = response.data;
-        //        SessionService.put('cartItemCount', vm.cartItems.length);
-        //        updateCartCost();
-        //    } else {
-        //        FlashService.Error("Something not working. Please try later");
-        //    }
-        //});
+
 
         function applyCoupon() {
             var cartCoupon = new CouponDTO(getUserId(), vm.couponCode);
@@ -173,29 +176,29 @@
         }
 
         function saveMessage() {
-            var message={"uniqueId":currentUserId,"message": vm.giftMessage};
-            CartService.saveGiftMessage(message, function(response){
+            var message = {"uniqueId": currentUserId, "message": vm.giftMessage};
+            CartService.saveGiftMessage(message, function (response) {
                 if (response.success) {
-                    vm.isGiftMessageAdded=true;
+                    vm.isGiftMessageAdded = true;
                 } else {
                     FlashService.Error("Something not working. Please try later");
                 }
             });
         }
 
-        function removeMessage(){
-            vm.giftMessage="";
-            vm.isGiftMessageAdded=!vm.isGiftMessageAdded;
-            vm.checkbox=false;
-            vm.showMessageEditor=false;
+        function removeMessage() {
+            vm.giftMessage = "";
+            vm.isGiftMessageAdded = !vm.isGiftMessageAdded;
+            vm.checkbox = false;
+            vm.showMessageEditor = false;
         }
 
-        function editMessage(){
-            vm.isGiftMessageAdded=!vm.isGiftMessageAdded;
+        function editMessage() {
+            vm.isGiftMessageAdded = !vm.isGiftMessageAdded;
         }
 
         function enableMsgEditor() {
-            vm.showMessageEditor=!vm.showMessageEditor;
+            vm.showMessageEditor = !vm.showMessageEditor;
         }
 
         function CouponDTO(userId, couponCode) {

@@ -46,62 +46,22 @@
                 }
             };
         }]);
-    FrontPageController.$inject = ['SessionService','AuthenticationService', 'CartService', '$http', '$location', '$rootScope', '$document', 'FlashService', 'MappingService','$scope'];
+    FrontPageController.$inject = ['CartManager', 'ClientDataService', '$location', '$document', 'MappingService'];
 
-    function FrontPageController(SessionService,AuthenticationService, CartService, $http, $location, $rootScope, $document, FlashService, MappingService,$scope) {
+    function FrontPageController(CartManager, ClientDataService, $location, $document, MappingService) {
         var vm = this;
         vm.cityChange = cityChange;
         vm.foodChange = foodChange;
-        vm.addItemInCart = addItemInCart;
         vm.city = 'All';
         vm.loadItems = loadItems;
         vm.slides = undefined;
         vm.newSlides = undefined;
         vm.cityList = ['All', 'Pune', 'Mumbai', 'Delhi', 'Hyderabad', 'Ahemdabad', 'Nandurbar'];
-        vm.userId = undefined;
         vm.snack = undefined;
         vm.categories = undefined;
         vm.buy = buy;
         vm.allCategories = allCategories;
-        var isCartLoaded = false;
-        vm.cart = undefined;
-        loadCart(function () {
-            //do nothing
-        });
-        $scope.$on('handleBagUpdate', function() {
-            loadCart(function () {
-                //do nothing
-            });
-        });
-       //if(SessionService.get("cartItemCount"))
-       //{
-       //    return SessionService.get("cartItemCount");
-       //}
-        function isUserLoggedIn() {
-            return SessionService.get(SessionService.Session.CurrentUser);
-        }
 
-        function getUserId() {
-                if (isUserLoggedIn()) {
-                    return SessionService.get(SessionService.Session.CurrentUser).userId;
-                }
-                else {
-                    return null;
-                }
-        }
-
-        function getBagId() {
-            return SessionService.get('bagId');
-        }
-
-        $http.get('data/items.json').success(function (data) {
-            vm.slides = data;
-
-        });
-        $http.get('data/categories.json').success(function (data) {
-            vm.categories = data;
-
-        });
         function cityChange(city) {
             $location.path('item/all' + '/' + city.toLowerCase());
         }
@@ -114,142 +74,33 @@
             $location.path('categories');
         }
 
+        function buy(item) {
+            CartManager.addOrUpdateItem(item, function () {
+                $location.path("cart");
+            });
+        }
+
+        ClientDataService.get('data/items.json', function (res) {
+            vm.slides = res.data;
+        });
+
+        ClientDataService.get('data/categories.json', function (res) {
+            vm.categories = res.data;
+        });
+
+
         vm.foodList = MappingService.getAllOptions();
         function loadItems() {
             $location.path('item/' + 'all/' + vm.city.toLowerCase());
         }
 
-        $document.find("#popularowlNext").click(function () {
+
+        $("#popularowlNext").click(function () {
             $("#owl-demo").trigger('owl.next');
         });
-        $document.find("#popularowlPrev").click(function () {
+
+        $("#popularowlPrev").click(function () {
             $("#owl-demo").trigger('owl.prev');
         });
-
-        function loadCart(callback) {
-            if (getBagId() != null || getUserId() !=null) {
-                CartService.getCartItems(getBagId(),
-                    function (response) {
-                        if (response.success) {
-                            vm.cart = response.data;
-                            vm.isCartLoaded = true;
-                            SessionService.putInRootScope("cartItemCount", vm.cart.length);
-                            callback();
-                        } else {
-                            FlashService.Error("Something not working. Please try later");
-                        }
-                    });
-            }
-            else {
-                isCartLoaded = true;
-                callback();
-            }
-        }
-
-        function buy(item) {
-            addItemInCart(item, function () {
-                $location.path("cart");
-            });
-        }
-
-        //cart
-        function addItemInCart(item, callback) {
-            if(vm.cart==undefined) {
-                loadCart(function () {
-                    addToCart(item, callback);
-                });
-            }
-            else {
-                addToCart(item, callback);
-            }
-
-        }
-
-        function addToCart(item, callback) {
-            showProgress(item.itemId);
-            updateCart(item, callback);
-
-        }
-
-        function updateCart(item, callback) {
-            if(vm.cart == undefined){
-                vm.cart=[];
-            }
-                cartUpdation(item, callback);
-        }
-        function cartUpdation(item,callback)
-        {
-            var cartItem = getItem(item.itemId, item.weight);
-            if (cartItem) {
-                cartItem.quantity += 1;
-                updateCartItem(cartItem, callback);
-            } else {
-                var newCartItem = new CartItem(getBagId(), getUserId(), item.itemId, 1, item.weight, item.price);
-                addNewCartItem(newCartItem, callback);
-            }
-        }
-
-        function addNewCartItem(cartItem, callback) {
-            CartService.add(cartItem, function (response) {
-                if (response.success) {
-                    if (getBagId() == null) {
-                        SessionService.put("bagId", response.data.bagId);
-                        SessionService.putInRootScope("cartItemCount", 1);
-                    }
-                    else {
-                        SessionService.putInRootScope("cartItemCount", vm.cart.length+1);
-                    }
-                } else {
-                    FlashService.Success("Item Already added.", true);
-                }
-                hideProgress(cartItem.itemId);
-                if (callback) {
-                    callback();
-                }
-            });
-        }
-
-        function updateCartItem(cartItem, callback) {
-            CartService.update(cartItem, function (response) {
-                if (!response.success) {
-                    FlashService.Error("Something not working. Please try later", true);
-                }
-                hideProgress(cartItem.itemId);
-                if (callback) {
-                    callback();
-                }
-            });
-        }
-
-        function showProgress(id) {
-            $('#' + id).css("visibility", "visible");
-            $('#button-' + id).addClass('disabled');
-        }
-
-        function hideProgress(id) {
-            $('#' + id).css("visibility", "hidden");
-            $('#button-' + id).removeClass('disabled');
-            $('#' + id + '-done').show().fadeOut(3000);
-        }
-
-        function getItem(itemId, weight) {
-            for (var i = 0; i < vm.cart.length; i++) {
-                if (vm.cart[i].itemId === itemId && vm.cart[i].weight == weight) {
-                    return vm.cart[i];
-                }
-            }
-            return undefined;
-        }
-
-
-        //cartItem class
-        function CartItem(bagId, userId, itemId, quantity, weight, price) {
-            this.bagId = bagId;
-            this.userId = userId;
-            this.itemId = itemId;
-            this.weight = weight;
-            this.price = price;
-            this.quantity = quantity;
-        }
     }
 })();
