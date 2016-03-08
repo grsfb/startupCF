@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('ItemController', ItemController);
-    ItemController.$inject = ['SessionService', 'CartManager', '$location', 'InventoryService', 'CartService', 'FlashService', '$routeParams', '$window', 'MappingService'];
+    ItemController.$inject = ['CartManager', '$location', 'InventoryService', 'FlashService', '$routeParams', 'MappingService'];
 
-    function ItemController(SessionService, CartManager, $location, InventoryService, CartService, FlashService, $routeParams, $window, MappingService) {
+    function ItemController(CartManager, $location, InventoryService, FlashService, $routeParams, MappingService) {
         var vm = this;
         vm.isLast = true;
         vm.currentPage = 0;

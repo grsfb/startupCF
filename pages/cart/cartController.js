@@ -4,9 +4,9 @@
         .module('Chefonia')
         .controller('CartController', CartController);
 
-    CartController.$inject = ['SessionService', '$location', 'CartService', 'FlashService', 'CampaignService'];
+    CartController.$inject = ['SessionService', 'CartManager', '$location', 'CartService', 'FlashService', 'CampaignService'];
 
-    function CartController(SessionService, $location, CartService, FlashService, CampaignService) {
+    function CartController(SessionService, CartManager, $location, CartService, FlashService, CampaignService) {
         var vm = this;
         vm.cartItems = [];
         vm.minusItemCount = minusItemCount;
@@ -25,55 +25,16 @@
         vm.editMessage = editMessage;
         vm.removeMessage = removeMessage;
 
-        function hasBagId() {
-            return SessionService.get('bagId') != undefined;
-        }
-
-        function getBagId() {
-            if (hasBagId()) {
-                return SessionService.get('bagId');
-            }
-            return undefined;
-        }
-
-        function isUserLoggedIn() {
-            return SessionService.get(SessionService.Session.CurrentUser);
-        }
-
-        function getUserId() {
-            if (isUserLoggedIn()) {
-                return SessionService.get(SessionService.Session.CurrentUser).userId;
-            }
-            return undefined;
-        }
-
-        //load bag first time
-        if (hasBagId()) {
-            loadCart(function () { /**do nothing**/
-            });
-        } else {
+        updateCartCost();
+        if (!SessionService.get('bagId')) {
             $location.path('home');
         }
-
-
-        function loadCart(callback) {
-            CartService.getCartItems(getBagId(), function (response) {
-                if (response.success) {
-                    vm.cartItems = response.data;
-                    SessionService.putInRootScope('cartItemCount', vm.cartItems.length);
-                    SessionService.put('cartItemCount', vm.cartItems.length);
-                    updateCartCost();
-                } else {
-                    FlashService.Error("Something not working. Please try later");
-                }
-
-                callback();
-            });
-        }
-
+        CartManager.loadUserBag(function () {
+            vm.cartItems = CartManager.getUserCart();
+        });
 
         function applyCoupon() {
-            var cartCoupon = new CouponDTO(getUserId(), vm.couponCode);
+            var cartCoupon = new CouponDTO("user-id", vm.couponCode);
             CampaignService.applyCoupon(cartCoupon, function (response) {
                 if (response.success) {
                     vm.coupon = response.data;
@@ -83,8 +44,6 @@
                     vm.discountData = response.data;
                 }
             });
-
-
         }
 
         function cancelCoupon() {
@@ -93,12 +52,9 @@
         }
 
         function updateCartCost() {
-            vm.cartItemTotal = 0;
+            vm.cartItemTotal = CartManager.cartSumTotal();
             vm.shippingCost = 0;
 
-            for (var i = 0; i < vm.cartItems.length; i++) {
-                vm.cartItemTotal += vm.cartItems[i].price * vm.cartItems[i].quantity;
-            }
             if (vm.cartItemTotal < 200) {
                 vm.shippingCost = 50;
             }
@@ -114,24 +70,15 @@
         function minusItemCount(index) {
             vm.cartItems[index].quantity -= 1;
             //update cart async
-            updateQuantity(vm.cartItems[index]);
+            CartManager.minusOneItemCount(vm.cartItems[index].cartItemId, undefined);
             updateCartCost();
-            resetCoupon();
         }
 
-        function updateQuantity(cartItem) {
-            CartService.update(cartItem, function (response) {
-                if (!response.success) {
-                    FlashService.Error("Unable to update quantity");
-                }
-                resetCoupon();
-            });
-        }
 
         function plusItemCount(index) {
             vm.cartItems[index].quantity += 1;
             //update cart async
-            updateQuantity(vm.cartItems[index]);
+            CartManager.plusOneItemCount(vm.cartItems[index].cartItemId, undefined);
             updateCartCost();
         }
 
@@ -147,36 +94,17 @@
 
         function removeItemFromCart(item) {
             $('delete-' + item.cartItemId).addClass('disabled');
-            CartService.removeCartItem(item.cartItemId, function (response) {
-                if (response.success) {
-                    vm.cartItems = removeItem(vm.cartItems, item);
-                    SessionService.put(SessionService.Session.CartCount, vm.cartItems.length);
-                    SessionService.putInRootScope("cartItemCount", vm.cartItems.length);
-                    if (vm.cartItems.length == 0) {
-                        $location.path('#/home');
-                    }
-                }
-                else {
-                    $('delete-' + item.cartItemId).removeClass('disabled');
-                    FlashService.Error("Unable to remove cart item");
+            CartManager.remove(item.cartItemId, function () {
+                vm.cartItems = CartManager.getUserCart();
+                if (vm.cartItems.length == 0) {
+                    $location.path('#/home');
                 }
                 updateCartCost();
-                resetCoupon();
             });
         }
 
-        function removeItem(arr, item) {
-            for (var i = 0; i < arr.length; i++) {
-                if (arr[i].itemId === item.itemId) {
-                    arr.splice(i, 1);
-                    break;
-                }
-            }
-            return arr;
-        }
-
         function saveMessage() {
-            var message = {"uniqueId": currentUserId, "message": vm.giftMessage};
+            var message = {"uniqueId": "user-id", "message": vm.giftMessage};
             CartService.saveGiftMessage(message, function (response) {
                 if (response.success) {
                     vm.isGiftMessageAdded = true;

@@ -10,9 +10,12 @@
         var service = {};
         service.cartItems = [];
         service.addOrUpdateItem = addOrUpdateItem;
-        service.removeItem = removeItem;
+        service.remove = remove;
         service.loadUserBag = loadUserBag;
         service.cartSumTotal = cartSumTotal;
+        service.getUserCart = getUserCart;
+        service.minusOneItemCount = minusOneItemCount;
+        service.plusOneItemCount = plusOneItemCount;
         //always eagerly load cart
         loadUserBag(undefined);
         return service;
@@ -27,9 +30,57 @@
             }
         }
 
-        function removeItem(cartItem, callback) {
-            //TODO: not implemented
+        function remove(cartItemId, callback) {
+            CartService.removeCartItem(cartItemId, function (response) {
+                if (response.success) {
+                    service.cartItems = removeItem(service.cartItems, cartItemId);
+                    updateCartItemCount();
+                } else {
+                    FlashService.Error("Something not working. Please try later.")
+                }
+            });
+
             invokeCallback(callback);
+        }
+
+        function removeItem(arr, cartItemId) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].cartItemId === cartItemId) {
+                    arr.splice(i, 1);
+                    break;
+                }
+            }
+            return arr;
+        }
+
+        function minusOneItemCount(cartItemId, callback) {
+            var index = getCartItemIndex(cartItemId);
+            if (index) {
+                service.cartItems[index].quantity -= 1;
+                update(service.cartItems[index], callback);
+                return;
+            }
+            FlashService.Error("Something not working. Please try later")
+        }
+
+        function plusOneItemCount(cartItemId, callback) {
+            var index = getCartItemIndex(cartItemId);
+            if (index) {
+                service.cartItems[index].quantity += 1;
+                update(service.cartItems[index], callback);
+                invokeCallback(callback);
+                return;
+            }
+            FlashService.Error("Something not working. Please try later")
+        }
+
+        function getCartItemIndex(cartItemId) {
+            for (var i = 0; i < service.cartItems.length; i++) {
+                if (service.cartItems[i].cartItemId === cartItemId) {
+                    return i;
+                }
+            }
+            return undefined;
         }
 
         function loadUserBag(callback) {
@@ -46,8 +97,16 @@
             }
         }
 
-        function cartSumTotal() {
+        function getUserCart() {
+            return service.cartItems;
+        }
 
+        function cartSumTotal() {
+            var cartSubtotal = 0;
+            for (var i = 0; i < service.cartItems.length; i++) {
+                cartSubtotal += service.cartItems[i].price * service.cartItems[i].quantity;
+            }
+            return cartSubtotal;
         }
 
         function add(cartItem, callback) {
@@ -56,7 +115,7 @@
                     SessionService.put("bagId", response.data.bagId);
                     service.cartItems.push(response.data);
                 } else {
-                    FlashService.Error("Something is not working. Please try later");
+                    FlashService.Error("Something is not working. Please try later", true);
                 }
                 invokeCallback(callback);
             });
