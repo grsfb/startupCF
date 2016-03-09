@@ -8,18 +8,28 @@
 
     function CartManager(CartService, SessionService, FlashService) {
         var service = {};
+        var isCartLoaded = false;
         service.cartItems = [];
         service.addOrUpdateItem = addOrUpdateItem;
         service.remove = remove;
         service.loadUserBag = loadUserBag;
         service.cartSumTotal = cartSumTotal;
         service.getUserCart = getUserCart;
-        service.minusOneItemCount = minusOneItemCount;
-        service.plusOneItemCount = plusOneItemCount;
+        service.update = update;
         //always eagerly load cart
         loadUserBag(undefined);
         return service;
         function addOrUpdateItem(item, callback) {
+            if (isCartLoaded) {
+                addOrUpdate(item, callback);
+            } else {
+                loadUserBag(function () {
+                    addOrUpdate(item, callback)
+                });
+            }
+        }
+
+        function addOrUpdate(item, callback) {
             var cartItem = getItem(item.itemId, item.weight);
             if (cartItem) {
                 cartItem.quantity++;
@@ -38,9 +48,8 @@
                 } else {
                     FlashService.Error("Something not working. Please try later.")
                 }
+                invokeCallback(callback);
             });
-
-            invokeCallback(callback);
         }
 
         function removeItem(arr, cartItemId) {
@@ -51,36 +60,6 @@
                 }
             }
             return arr;
-        }
-
-        function minusOneItemCount(cartItemId, callback) {
-            var index = getCartItemIndex(cartItemId);
-            if (index) {
-                service.cartItems[index].quantity -= 1;
-                update(service.cartItems[index], callback);
-                return;
-            }
-            FlashService.Error("Something not working. Please try later")
-        }
-
-        function plusOneItemCount(cartItemId, callback) {
-            var index = getCartItemIndex(cartItemId);
-            if (index) {
-                service.cartItems[index].quantity += 1;
-                update(service.cartItems[index], callback);
-                invokeCallback(callback);
-                return;
-            }
-            FlashService.Error("Something not working. Please try later")
-        }
-
-        function getCartItemIndex(cartItemId) {
-            for (var i = 0; i < service.cartItems.length; i++) {
-                if (service.cartItems[i].cartItemId === cartItemId) {
-                    return i;
-                }
-            }
-            return undefined;
         }
 
         function loadUserBag(callback) {
@@ -94,6 +73,9 @@
                     updateCartItemCount();
                     invokeCallback(callback);
                 });
+                isCartLoaded = true;
+            } else {
+                invokeCallback(callback);
             }
         }
 

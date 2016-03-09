@@ -25,12 +25,13 @@
         vm.editMessage = editMessage;
         vm.removeMessage = removeMessage;
 
-        updateCartCost();
         if (!SessionService.get('bagId')) {
             $location.path('home');
         }
+
         CartManager.loadUserBag(function () {
             vm.cartItems = CartManager.getUserCart();
+            updateCartCost();
         });
 
         function applyCoupon() {
@@ -70,16 +71,18 @@
         function minusItemCount(index) {
             vm.cartItems[index].quantity -= 1;
             //update cart async
-            CartManager.minusOneItemCount(vm.cartItems[index].cartItemId, undefined);
-            updateCartCost();
-        }
+            CartManager.update(vm.cartItems[index], function () {
+                updateCartCost();
+            });
 
+        }
 
         function plusItemCount(index) {
             vm.cartItems[index].quantity += 1;
             //update cart async
-            CartManager.plusOneItemCount(vm.cartItems[index].cartItemId, undefined);
-            updateCartCost();
+            CartManager.update(vm.cartItems[index], function () {
+                updateCartCost();
+            });
         }
 
         function checkout() {
