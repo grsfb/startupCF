@@ -35,7 +35,7 @@
         });
 
         function applyCoupon() {
-            var cartCoupon = new CouponDTO("user-id", vm.couponCode);
+            var cartCoupon = new CouponDTO(SessionService.get('bagId'), vm.couponCode);
             CampaignService.applyCoupon(cartCoupon, function (response) {
                 if (response.success) {
                     vm.coupon = response.data;
@@ -107,7 +107,7 @@
         }
 
         function saveMessage() {
-            var message = {"uniqueId": "user-id", "message": vm.giftMessage};
+            var message = {"uniqueId": SessionService.get('bagId'), "message": vm.giftMessage};
             CartService.saveGiftMessage(message, function (response) {
                 if (response.success) {
                     vm.isGiftMessageAdded = true;
