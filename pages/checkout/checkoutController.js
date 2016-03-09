@@ -3,11 +3,11 @@
     angular
         .module('Chefonia')
         .controller('CheckoutController', CheckoutController);
-    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService', 'EventHandlingService', '$scope', 'UserService', 'AuthenticationService'];
+    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService', 'UserService', 'AuthenticationService'];
 
-    function CheckoutController(SessionService, $location, FlashService, OrderService, EventHandlingService, $scope, UserService, AuthenticationService) {
+    function CheckoutController(SessionService, $location, FlashService, OrderService, UserService, AuthenticationService) {
         var vm = this;
-        if (!SessionService.get('isOrderInProgress') && SessionService.get('bagId') ) {
+        if (!SessionService.get('isOrderInProgress') && SessionService.get('bagId')) {
             FlashService.ClearAllFlashMessage();
             $location.path('#!home');
             return;
@@ -19,15 +19,15 @@
         vm.isPlacingOrder = false;
         vm.paymentType = "PAYU";
         vm.isGuestLogin = true;
-        vm.guestLogin=guestLogin;
+        vm.guestLogin = guestLogin;
         vm.setPaymentType = setPaymentType;
         vm.loggedInUserEmail = undefined;
-        vm.isDeliveryAddressAdded=false;
+        vm.isDeliveryAddressAdded = false;
         vm.login = login;
         vm.notifyDeliveryAddressSelected = notifyDeliveryAddressSelected;
 
         function notifyDeliveryAddressSelected() {
-            vm.isDeliveryAddressAdded=true;
+            vm.isDeliveryAddressAdded = true;
             $('#addressPanel').collapse('hide');
             $('#paymentPanel').collapse('show');
         }
@@ -114,7 +114,7 @@
                 if (response.success) {
                     AuthenticationService.GuestLogin(guestEmail, function (response) {
                         if (response.success) {
-                            vm.loggedInUserEmail=guestEmail;
+                            vm.loggedInUserEmail = guestEmail;
                             AuthenticationService.SetCredentials(response.data);
                             $('#addressPanel').collapse('show');
                             $('#loginPanel').collapse('hide');
@@ -125,41 +125,6 @@
                 }
             });
 
-
-/*
-            function changeLogin() {
-                $('#loginPanel').collapse('show');
-
-                $('#addressPanel').collapse('hide');
-                $('#paymentPanel').collapse('hide');
-            }
-
-            function changeAddress() {
-                $('#loginPanel').collapse('hide');
-
-                $('#addressPanel').collapse('show');
-                $('#paymentPanel').collapse('hide');
-            }
-
-            function changePayment() {
-                $('#loginPanel').collapse('hide');
-
-                $('#addressPanel').collapse('hide');
-                $('#paymentPanel').collapse('show');
-            }
-
-            $scope.$on('handleAddressSelected', function () {
-                if (EventHandlingService.message == true) {
-                    $('#loginPanel').collapse('hide');
-
-                    $('#addressPanel').collapse('hide');
-                    $('#paymentPanel').collapse('show');
-                    vm.addressLogged = true;
-                    vm.payAllowed = true;
-                    vm.hasLogged = true;
-                }
-
-            });*/
         }
     }
 })();
