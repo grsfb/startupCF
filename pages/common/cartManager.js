@@ -20,6 +20,7 @@
         loadUserBag(undefined);
         return service;
         function addOrUpdateItem(item, callback) {
+            clearUserCartIfBagNotExist();
             if (isCartLoaded) {
                 addOrUpdate(item, callback);
             } else {
@@ -29,6 +30,12 @@
             }
         }
 
+        function clearUserCartIfBagNotExist(){
+            if(SessionService.get("bagId")==undefined){
+                service.cartItems=[];
+                isCartLoaded=false;
+            }
+        }
         function addOrUpdate(item, callback) {
             var cartItem = getItem(item.itemId, item.weight);
             if (cartItem) {
@@ -99,6 +106,7 @@
                 } else {
                     FlashService.Error("Something is not working. Please try later", true);
                 }
+                updateCartItemCount();
                 invokeCallback(callback);
             });
         }

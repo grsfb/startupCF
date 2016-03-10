@@ -34,7 +34,7 @@
 
         function ClearCredentials() {
             SessionService.destroy();
-            SessionService.put('bagId',null);
+            SessionService.put('bagId',undefined);
         }
     }
 })();
