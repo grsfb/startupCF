@@ -52,18 +52,19 @@
 
 @media (max-width: 768px) {
 
-
     .frontcontainer {
-          padding: 40px 0 80px 0;
+        padding: 40px 0 80px 0;
 
-      }
+    }
+
     .divElement {
-        position: absolute!important;
-        top: 30%!important;
-        left:1%!important;
+        position: absolute !important;
+        top: 30% !important;
+        left: 1% !important;
         /*margin-top: -20px;*/
         height: 100px;
     }
+
     /*.divElement{*/
     /*top:15% !important;*/
     /*}*/
@@ -98,11 +99,12 @@
 .divElement {
     position: absolute;
     top: 30%;
-    left:10%;
+    left: 10%;
     right: 10%;
     /*margin-top: -20px;*/
     height: 100px;
 }
+
 .divElementMble {
     margin-top: -20px !important;
 }
@@ -287,15 +289,20 @@ ul li:hover, ul li:focus {
 .carousel-inner .item {
     background: white;
 }
-.frontCarouselText{
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace!important;
 
-    font-size: large!important;
+.frontCarouselText {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+    font-size: 22px;
+    font-weight: 500;
+    text-shadow: black 10px 0 50px;
 }
-.frontCarouselHeading{
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif!important;
-    font-size: xx-large!important;
+
+.frontCarouselHeading {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: xx-large !important;
 }
+
 .sliderImg {
-min-width: 100%!important;
+    min-width: 100% !important;
+    height: 500px !important;
 }

@@ -103,7 +103,7 @@
             $("#owl-demo").trigger('owl.prev');
         });
         $('#homeCarousel').carousel({
-            interval:5000,
+            interval:7000,
             pause: "false"
     });
     }
