@@ -13,7 +13,7 @@
                             <abbr title="Phone">Mob+:</abbr> {{address.mobile}}
                         </address>
                         <a ng-if="$index!=avm.selectedIndex" class="btn btn-default" style="margin-bottom: 10px;"
-                           data-ng-click="avm.setSelectedAddress(address,$index);vm.notifyDeliveryAddressSelected();">Deliver on this address</a>
+                           data-ng-click="avm.setSelectedAddress(address,$index);">Deliver on this address</a>
                         <a ng-if="$index==avm.selectedIndex" class="btn btn-default deliverySelected"
                            style="margin-bottom: 10px;">Selected delivery address</a>
 
@@ -81,7 +81,7 @@
                          ng-class="{'has-error': form.postcode.$touched && form.postcode.$error.required ||form.postcode.$error.minlength || form.postcode.$error.pattern }">
                         <label for="postcode" >Postcode *</label>
                         <input type="text" class="form-control" id="postcode" name="postcode"
-                               placeholder="Postcode/ ZIP" required="" data-ng-model="avm.address.zip" ng-minlength="6"
+                               placeholder="Postcode/ ZIP" required="" data-ng-model="avm.address.zip" ng-minlength="6" maxlength="6"
                                data-ng-pattern="/^\d+$/" autocomplete="off">
                         <span ng-show="form.postcode.$touched && form.postcode.$error.required" class="help-block">Postcode is required</span>
                         <span ng-show="form.postcode.$touched && form.postcode.$error.minlength || form.postcode.$error.pattern"
@@ -92,7 +92,7 @@
                          form.mobile.$error.pattern ||form.mobile.$error.minlength }">
                         <label for="mobile" >Mobile No. *</label>
                         <input type="text" class="form-control" id="mobile" name="mobile"
-                               placeholder="Mobile number" required="" data-ng-model="avm.address.mobile"
+                               placeholder="Mobile number" required="" data-ng-model="avm.address.mobile" maxlength="10"
                                ng-minlength="10" data-ng-pattern="/^\d+$/" autocomplete="off">
                         <span ng-show="form.mobile.$touched && form.mobile.$error.required" class="help-block">Mobile is required</span>
                         <span ng-show="form.mobile.$touched && form.mobile.$error.minlength || form.mobile.$error.pattern"

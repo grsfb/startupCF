@@ -129,6 +129,7 @@
             });
 
         }
+
         $scope.$on('handleAddressSelected', function () {
             if (EventHandlingService.message == true) {
                 notifyDeliveryAddressSelected();
@@ -147,4 +148,4 @@
 
         });
     }
-})();
+    })();
