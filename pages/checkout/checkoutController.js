@@ -3,9 +3,9 @@
     angular
         .module('Chefonia')
         .controller('CheckoutController', CheckoutController);
-    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService', 'UserService', 'AuthenticationService'];
+    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService', 'UserService', 'AuthenticationService','EventHandlingService','$scope'];
 
-    function CheckoutController(SessionService, $location, FlashService, OrderService, UserService, AuthenticationService) {
+    function CheckoutController(SessionService, $location, FlashService, OrderService, UserService, AuthenticationService,EventHandlingService,$scope) {
         var vm = this;
         if (!SessionService.get('isOrderInProgress') && SessionService.get('bagId')==undefined) {
             FlashService.ClearAllFlashMessage();
@@ -97,7 +97,6 @@
         }
 
         function openGuestLogin(callback) {
-
             AuthenticationService.GuestLogin(function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials(response.data);
@@ -107,6 +106,17 @@
                 }
             });
         }
+        $scope.$on('handleLoginUpdate', function() {
+            if(EventHandlingService.message==true){
+                vm.loggedInUserEmail = SessionService.get(SessionService.Session.CurrentUser).email;
+                vm.isGuestLogin = false;
+                $('#loginPanel').collapse('hide');
+                $('#addressPanel').collapse('show');
+                vm.hasLogged = true;
+
+            }
+
+        });
 
         function guestLogin(guestEmail) {
             var user = {"name": "Guest", "email": guestEmail};

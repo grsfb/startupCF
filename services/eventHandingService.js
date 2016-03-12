@@ -17,13 +17,13 @@
         sharedService.broadcastItem = function() {
             $rootScope.$broadcast('handleAddressSelected');
         };
-        sharedService.eventForUpdateBagSelectionBroadcast = function(msg) {
+        sharedService.eventForLoginBroadcast = function(msg) {
             this.message = msg;
-            this.broadBagUpdateItem();
+            this.broadLoginUpdateItem();
         };
 
-        sharedService.broadBagUpdateItem = function() {
-            $rootScope.$broadcast('handleBagUpdate');
+        sharedService.broadLoginUpdateItem = function() {
+            $rootScope.$broadcast('handleLoginUpdate');
         };
         return sharedService;
     }

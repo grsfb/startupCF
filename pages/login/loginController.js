@@ -3,8 +3,8 @@
     angular
         .module('Chefonia')
         .controller('LoginController', LoginController);
-    LoginController.$inject = ['SessionService', 'UserService', 'AuthenticationService', 'CartManager', 'CommonService', '$location'];
-    function LoginController(SessionService, UserService, AuthenticationService, CartManager, CommonService, $location) {
+    LoginController.$inject = ['SessionService', 'UserService', 'AuthenticationService', 'CartManager', 'CommonService', '$location','EventHandlingService'];
+    function LoginController(SessionService, UserService, AuthenticationService, CartManager, CommonService, $location,EventHandlingService) {
         var vm = this;
         vm.login = login;
         vm.passwordReset = passwordReset;
@@ -23,6 +23,7 @@
                     $('#myModal').modal('hide');
                     //for mobile view
                     AuthenticationService.SetCredentials(response.data);
+                    EventHandlingService.eventForLoginBroadcast(true);
                     CartManager.loadUserBag(undefined);
                     if (SessionService.get('mobileLogin')) {
                         $location.path('home');
