@@ -1,51 +1,56 @@
 <div data-ng-controller="NavbarController as vm" class="hidden-sm hidden-lg hidden-md" style="padding: 0">
     <ul class="nav navbar-nav navbar-left col-xs-6" style="width: 100px;height: 100%;margin: 0px">
-        <a class="header-link navbar-brand" href="#!home">
-            <img src="chefonia.png" itemprop="logo" class="img-responsive" alt="Chefonia">
+        <a class="header-link navbar-brand" href="#!home" style="padding: 0">
+            <img src="chefonia.png" itemprop="logo" class="img-responsive" alt="Chefonia"
+                 style="margin-top: 15px;margin-left: 5px;">
             <span style="display: none" itemprop="name">Chefonia</span>
         </a>
     </ul>
-    <div class="nav navbar-nav navbar-right mobileView" style="margin: 0px">
-        <div data-ng-hide="isLoggedIn"
-             style="padding-right: 0px;padding-top: 5px;">
-            <div class="pull-right" style="font-size: 25px; color: #FFFFFF">
-                <a href="#!cart" style="color: #f2f2f2"> <i class="fa fa-shopping-cart"
-                                                            style="font-size: 25px;margin-top: 3px;margin-right: 5px">
-                    <sup style="top: -1em;margin-left: -10px;" class="badge">{{cartItemCount}}</sup>
-                </i></a>
-                <i class="fa fa-user" data-ng-click="vm.mobileLogin()" style="margin-right: 8px;margin-left: 5px"></i>
-            </div>
-        </div>
-        <div data-ng-show="isLoggedIn" style="float: right;padding-top: 5px;">
+    <div class="nav navbar-nav navbar-right mobileView" style="margin: 0">
+        <div data-ng-show="isLoggedIn" style="float: right;padding-top: 5px;" class="pull-right">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"
-                    style="padding: 0px;">
+                    style="padding: 0;">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
         </div>
+        <div style="padding-right: 0;padding-top: 5px;" class="pull-right">
+            <div style="font-size: 25px; color: #FFFFFF">
+                <a href="#!cart" style="color: #f2f2f2"> <i class="fa fa-shopping-cart"
+                                                            style="font-size: 25px;margin-top: 3px;margin-right: 5px">
+                    <sup style="top: -1em;margin-left: -10px;" class="badge">{{cartItemCount}}</sup>
+                </i></a>
+                <i data-ng-hide="isLoggedIn" class="fa fa-user" data-ng-click="vm.mobileLogin()"
+                   style="margin-right: 8px;margin-left: 5px"></i>
+            </div>
+        </div>
     </div>
     <div class="container-fluid" style="padding-left: 0px;padding-right: 0px;">
         <div class="collapse navbar-collapse" style="width: 100%;padding-right: 0px;">
             <ul class="pull-right" style="padding-top: 10px; color: white;width: 100%;text-align: right">
-                <li data-toggle="collapse" data-target=".navbar-collapse"  style="padding-top: 15px;font-size: 16px">Welcome, {{currentUser.userName}}
+                <li data-toggle="collapse" data-target=".navbar-collapse" style="padding-top: 15px;font-size: 16px">
+                    Welcome, {{currentUser.userName}}
                 </li>
                 <li style="padding-top: 15px;font-size: 16px;"><a data-ng-click="vm.home()"
-                                                                       data-toggle="collapse" data-target=".navbar-collapse">
-                <i class="fa fa-home"></i> Home </a>
-            </li>
-                <li style="padding-top: 15px;font-size: 16px;"><a href="http://www.chefonia.com/chefonia/chef-register.html"
                                                                   data-toggle="collapse" data-target=".navbar-collapse">
+                    <i class="fa fa-home"></i> Home </a>
+                </li>
+                <li style="padding-top: 15px;font-size: 16px;"><a
+                        href="http://www.chefonia.com/chefonia/chef-register.html"
+                        data-toggle="collapse" data-target=".navbar-collapse">
                     <i class="fa fa-home"></i> Become Chef </a>
                 </li>
                 <li class="divider"></li>
                 <li style="padding-top: 15px; font-size: 16px;"><a
-                        data-toggle="collapse" data-target=".navbar-collapse" href="#!orders"><i class="fa fa-list-ol"></i> Your orders
-                    </a>
+                        data-toggle="collapse" data-target=".navbar-collapse" href="#!orders"><i
+                        class="fa fa-list-ol"></i> Your orders
+                </a>
                 </li>
                 <li style="padding-top: 15px;font-size: 16px;"><a data-toggle="collapse" data-target=".navbar-collapse"
-                                                                data-ng-click="vm.mobileLogout()"><i class="fa fa-sign-out"></i> Logout
-                    </a>
+                                                                  data-ng-click="vm.mobileLogout()">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
                 </li>
             </ul>
         </div>

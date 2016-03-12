@@ -3,11 +3,11 @@
     angular
         .module('Chefonia')
         .controller('CheckoutController', CheckoutController);
-    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService', 'UserService', 'AuthenticationService','EventHandlingService','$scope'];
+    CheckoutController.$inject = ['SessionService', '$location', 'FlashService', 'OrderService', 'UserService', 'AuthenticationService', 'EventHandlingService', '$scope', '$window'];
 
-    function CheckoutController(SessionService, $location, FlashService, OrderService, UserService, AuthenticationService,EventHandlingService,$scope) {
+    function CheckoutController(SessionService, $location, FlashService, OrderService, UserService, AuthenticationService, EventHandlingService, $scope, $window) {
         var vm = this;
-        if (!SessionService.get('isOrderInProgress') && SessionService.get('bagId')==undefined) {
+        if (!SessionService.get('isOrderInProgress') && SessionService.get('bagId') == undefined) {
             FlashService.ClearAllFlashMessage();
             $location.path('home');
             return;
@@ -93,7 +93,11 @@
         }
 
         function login() {
-            $("#myModal").modal();
+            if ($window.innerWidth <= 767) {
+                $location.path('login-mble');
+            } else {
+                $("#myModal").modal();
+            }
         }
 
         function openGuestLogin(callback) {
@@ -106,8 +110,9 @@
                 }
             });
         }
-        $scope.$on('handleLoginUpdate', function() {
-            if(EventHandlingService.message==true){
+
+        $scope.$on('handleLoginUpdate', function () {
+            if (EventHandlingService.message == true) {
                 vm.loggedInUserEmail = SessionService.get(SessionService.Session.CurrentUser).email;
                 vm.isGuestLogin = false;
                 $('#loginPanel').collapse('hide');
