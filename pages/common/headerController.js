@@ -24,11 +24,12 @@
 
         function logout() {
             AuthenticationService.ClearCredentials();
-            $location.path("/home");
+            $location.path("home");
         }
 
         function mobileLogin() {
-            $location.path("/login-mble");
+            SessionService.put('mobileLogin',true);
+            $location.path("login-mble");
         }
 
         function mobileLogout() {

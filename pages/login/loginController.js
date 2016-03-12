@@ -24,7 +24,9 @@
                     //for mobile view
                     AuthenticationService.SetCredentials(response.data);
                     CartManager.loadUserBag(undefined);
-                    $location.path('home');
+                    if (SessionService.get('mobileLogin')) {
+                        $location.path('home');
+                    }
                 } else {
                     vm.pageMsg = "User email or password is incorrect";
                 }

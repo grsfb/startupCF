@@ -7,9 +7,9 @@
 
     function CheckoutController(SessionService, $location, FlashService, OrderService, UserService, AuthenticationService) {
         var vm = this;
-        if (!SessionService.get('isOrderInProgress') && SessionService.get('bagId')) {
+        if (!SessionService.get('isOrderInProgress') && SessionService.get('bagId')==undefined) {
             FlashService.ClearAllFlashMessage();
-            $location.path('#!home');
+            $location.path('home');
             return;
         }
         vm.shippingCost = SessionService.get('shippingCost');
