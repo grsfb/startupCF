@@ -132,8 +132,8 @@
             vm.showMessageEditor = !vm.showMessageEditor;
         }
 
-        function CouponDTO(userId, couponCode) {
-            this.userId = userId;
+        function CouponDTO(bagId, couponCode) {
+            this.bagId = bagId;
             this.couponCode = couponCode;
         }
     }
