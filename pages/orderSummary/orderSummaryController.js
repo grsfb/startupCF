@@ -15,8 +15,7 @@
         vm.contactDetail = false;
         vm.localize = localize;
         vm.sendInvoice = sendInvoice;
-        SessionService.put('bagId',null);
-        SessionService.putInRootScope('cartItemCount',0);
+
         FlashService.ClearAllFlashMessage();
         OrderService.getAllItemForOrder($routeParams.orderId, function (response) {
             if (response.success) {
@@ -51,7 +50,10 @@
             SessionService.remove('cartTotal');
             SessionService.remove('discount');
             SessionService.remove('couponCode');
-            SessionService.putInRootScope('cartItemCount', 0);
+            if(SessionService.get('isOrderInProgress')==true) {
+                SessionService.put('bagId', null);
+                SessionService.putInRootScope('cartItemCount', 0);
+            }
             SessionService.putInRootScope('isOrderInProgress', false);
             SessionService.putInRootScope('deliverAddress', undefined);
             SessionService.deleteFromRootScope('deliverAddress');
