@@ -281,7 +281,7 @@ ul li a:hover, ul li a:focus {
 }
 
 .up-arrow {
-    background-color: mintcream;
+    background-color: white;
     display: inline-block;
     height: auto;
     position: absolute;
@@ -301,7 +301,7 @@ ul li a:hover, ul li a:focus {
     bottom: 100%;
     right: 50px;
     border: 10px solid transparent;
-    border-bottom-color: mintcream;
+    border-bottom-color: white;
 }
 
 .myButton {

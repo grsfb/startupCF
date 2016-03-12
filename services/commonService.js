@@ -14,8 +14,20 @@
         service.post = postCall;
         service.delete = deleteCall;
         service.update = update;
+        service.getExternal= getExternalCall;
         return service;
-
+        function getExternalCall(url, callback) {
+            var response;
+            $http.get(url)
+                .success(function (res) {
+                    response = {success: true, data: res};
+                    callback(response);
+                })
+                .error(function (res) {
+                    response = {success: false, data: res};
+                    callback(response);
+                });
+        }
         function getCall(relativeUrl, callback) {
             var response;
             $http.get(baseURL + relativeUrl)

@@ -28,6 +28,5 @@
         function getEstimatedDelivery(addressId, callback) {
             CommonService.get('/address/delivery-estimates/' + addressId, callback);
         }
-
     }
 })();

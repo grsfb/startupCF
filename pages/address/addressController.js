@@ -3,8 +3,8 @@
     angular
         .module('Chefonia')
         .controller('AddressController', AddressController);
-    AddressController.$inject = ['SessionService', '$window', 'AddressService', 'FlashService', 'EventHandlingService'];
-    function AddressController(SessionService, $window, AddressService, FlashService, EventHandlingService) {
+    AddressController.$inject = ['SessionService', '$window', 'AddressService', 'FlashService', 'EventHandlingService','$scope'];
+    function AddressController(SessionService, $window, AddressService, FlashService, EventHandlingService,$scope) {
         var avm = this;
         avm.showAddressEditor = true;
         avm.allAddress = [];
@@ -43,6 +43,9 @@
                     if (avm.allAddress.length == 0) {
                         enableAddressEditor();
                     }
+                    if (avm.allAddress.length == 1) {
+                        setSelectedAddress(avm.allAddress[0],0);
+                    }
                 });
             }
             else {
@@ -54,9 +57,9 @@
 
         function setSelectedAddress(address, index) {
             SessionService.putInRootScope('deliverAddress', address);
-            EventHandlingService.eventForAddressSelectionBroadcast(true);
             avm.selectedIndex = index;
-            getEstimatedDelivery(address.addressId)
+            getEstimatedDelivery(address.addressId);
+            EventHandlingService.eventForAddressSelectionBroadcast(true);
         }
 
         function getEstimatedDelivery(addressId) {
