@@ -111,18 +111,6 @@
             });
         }
 
-        $scope.$on('handleLoginUpdate', function () {
-            if (EventHandlingService.message == true) {
-                vm.loggedInUserEmail = SessionService.get(SessionService.Session.CurrentUser).email;
-                vm.isGuestLogin = false;
-                $('#loginPanel').collapse('hide');
-                $('#addressPanel').collapse('show');
-                vm.hasLogged = true;
-
-            }
-
-        });
-
         function guestLogin(guestEmail) {
             var user = {"name": "Guest", "email": guestEmail};
             UserService.create(user, function (response) {
@@ -141,5 +129,22 @@
             });
 
         }
+        $scope.$on('handleAddressSelected', function () {
+            if (EventHandlingService.message == true) {
+                notifyDeliveryAddressSelected();
+            }
+
+        });
+        $scope.$on('handleLoginUpdate', function () {
+            if (EventHandlingService.message == true) {
+                vm.loggedInUserEmail = SessionService.get(SessionService.Session.CurrentUser).email;
+                vm.isGuestLogin = false;
+                $('#loginPanel').collapse('hide');
+                $('#addressPanel').collapse('show');
+                vm.hasLogged = true;
+
+            }
+
+        });
     }
 })();
