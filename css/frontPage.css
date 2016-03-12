@@ -1,7 +1,7 @@
 .frontbackground {
-    background-image: url(../img/1.jpg) !important;
+    background-image: url(../front.jpg) !important;
     background-repeat: repeat-x;
-    background-size: 100%;
+    background-size: cover;
     width: 100%;
     max-width: 100%;
     max-height: 100%;
