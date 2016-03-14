@@ -71,7 +71,11 @@ html, body {
     }
 
 }
-
+@media (max-width: 768px) {
+    .mobileView {
+        padding-right: 0px !important;
+    }
+}
 .paddingClass {
     padding-left: 0 !important;
     padding-right: 0 !important;

@@ -13,7 +13,7 @@
 .frontcontainer {
     padding: 80px 0 80px 0;
     /*position: fixed !important;*/
-    /*z-index: 2;*/
+    z-index: 2;
 }
 
 #dishes {
@@ -64,7 +64,10 @@
         /*margin-top: -20px;*/
         height: 100px;
     }
+    .frontcontainer {
+        padding: 100px 0 90px 0;
 
+    }
     /*.divElement{*/
     /*top:15% !important;*/
     /*}*/
@@ -87,7 +90,7 @@
         top:0% !important;
     }*/
     .frontcontainer {
-        padding: 50px 0 45px 0;
+        padding: 50px 0 50px 0;
 
     }
 
@@ -106,7 +109,6 @@
 }
 
 .divElementMble {
-    margin-top: -20px !important;
 }
 
 .location {

@@ -106,9 +106,9 @@
 
         window.fbAsyncInit = function () {
             FB.init({
-                appId: '1721100084768505',
+                appId: '1720962481448932',
                 cookie: true,  // enable cookies to allow the server to access
-                channelUrl: 'localhost/client/channel.html',      // the session
+                channelUrl: 'http://www.chefonia.com',      // the session
                 xfbml: true,  // parse social plugins on this page
                 version: 'v2.5' // use version 2.2
             });
