@@ -101,6 +101,12 @@
                 <div class="col-sm-12" style="padding: 0">Shipping <label class="pull-right"><i
                         class="fa fa-inr"></i> {{vm.shippingCost}}</label></div>
             </div>
+            <div class="col-sm-12" data-ng-hide="vm.coupon['discount']==undefined"
+                 style="padding-left: 0px; padding-top:10px;
+                 padding-bottom:10px;border-bottom: 1px #B3AFA8 solid">
+                <div class="col-sm-12" style="padding: 0">Coupon Discount <label class="pull-right"><i
+                        class="fa fa-inr"></i> {{vm.coupon.discount}}</label></div>
+            </div>
             <div class="col-sm-12" style="padding-left: 0; padding-top: 10px;;">
                 <div class="col-sm-12" style="padding: 0">Total <label class="pull-right"><i
                         class="fa fa-inr"></i> {{vm.cartItemTotal+vm.shippingCost-vm.coupon['discount']}}
