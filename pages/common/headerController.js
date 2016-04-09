@@ -45,7 +45,7 @@
 
         function viewBag() {
             vm.itemAdded = false;
-            $location.path('cart');
+            $location.path('cart-details');
         }
 
         function isUserLoggedIn() {

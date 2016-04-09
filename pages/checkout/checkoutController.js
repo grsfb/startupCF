@@ -70,7 +70,7 @@
                 OrderService.create(userOrder, function (response) {
                     if (response.success) {
                         if (vm.paymentType == 'COD') {
-                            $location.path('/orderDetail/' + response.data.orderId);
+                            $location.path('/order-detail/' + response.data.orderId);
                         } else {
                             $location.path('/payu-redirect/' + response.data.orderId)
                         }
