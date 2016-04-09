@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ng-app="Chefonia">
 <head>
+    <base href="/">
     <meta charset="utf-8">
     <meta name="fragment" content="!"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,7 @@
           content="Order homemade delicacies snacks and sweets online. Best online place for homemade delicacies like achar, papad, namkeen, snacks and sweets.">
     <meta name="author" content="Chefonia">
     <meta name="keywords" content="Order,Online,Snacks,Sweets,Achar,Papad,Pickle,Homemade,Namkeen">
-    <title>Order online snacks and sweets | Chefonia India</title>
+    <title ng-bind="title">Order online snacks and sweets | Chefonia India</title>
     <link href="lib/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.min.css" rel="stylesheet">
     <link href="css/product.css" rel="stylesheet">
@@ -29,21 +30,92 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/56e51c1aab6e87da5474b3cd/default';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/56e51c1aab6e87da5474b3cd/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
         })();
     </script>
     <!--End of Tawk.to Script-->
     <![endif]-->
+    <script src="lib/jquery/jquery-2.1.1.min.js"></script>
+    <script src="lib/jquery/modernizr.min.js"></script>
+    <script src="lib/owlCarousel/owl.carousel.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Scrolling Nav JavaScript --> 
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular/angular-route.min.js"></script>
+    <script src="lib/angular/angular-cookies.min.js"></script>
+    <script src="js/script.min.js"></script>
+    <script src="js/toastr.min.js"></script>
+    <script src="js/jquery.lettering-0.6.min.js"></script>
+    <script src="js/jquery.textillate.min.js"></script>
+    <script src="pages/payu/paymentController.js"></script>
+    <script src="pages/common/headerController.js"></script>
+    <script src="pages/login/loginController.js"></script>
+    <script src="pages/common/cartManager.js"></script>
+    <script src="pages/orderSummary/orderSummaryController.js"></script>
+    <script src="pages/categories/categoryController.js"></script>
+    <script src="pages/orders/OrdersController.js"></script>
+    <script src="pages/front/frontPageController.js"></script>
+    <script src="pages/register/registerController.js"></script>
+    <script src="pages/items/itemController.js"></script>
+    <script src="services/wishListService.js"></script>
+    <script src="services/authenticationService.js"></script>
+    <script src="services/inventoryService.js"></script>
+    <script src="services/flashService.js"></script>
+    <script src="services/userService.js"></script>
+    <script src="services/campaignService.js"></script>
+    <script src="services/clientDataService.js"></script>
+    <script src="pages/address/addressController.js"></script>
+    <script src="services/addressService.js"></script>
+    <script src="pages/checkout/checkoutController.js"></script>
+    <script src="pages/cart/cartController.js"></script>
+    <script src="pages/common/resetPasswordController.js"></script>
+    <script src="services/cartService.js"></script>
+    <script src="services/commonService.js"></script>
+    <script src="services/orderService.js"></script>
+    <script src="services/imageService.js"></script>
+    <script src="services/sessionService.js"></script>
+    <script src="services/niraliService.js"></script>
+    <script src="services/eventHandingService.js"></script>
+    <script type="application/ld+json">
+            {
+              "@context" : "http://schema.org",
+              "@type" : "Organization",
+              "url" : "http://www.chefonia.com",
+              "contactPoint" : [{
+                "@type" : "ContactPoint",
+                "telephone" : "+91-7507887655",
+                "contactType" : "customer service"
+              }]
+            }
+
+    </script>
+    <script type="application/ld+json">
+            {
+              "@context" : "http://schema.org",
+              "@type" : "Organization",
+              "name" : "Chefonia.com",
+              "url" : "http://www.chefonia.com",
+              "sameAs" : [
+                "https://www.facebook.com/Chefonia-1175645462450331/",
+                "https://twitter.com/Chefonia",
+                "https://plus.google.com/103260594664466655297/posts"
+              ]
+            }
+
+    </script>
+
 </head>
 
-<body data-ng-cloak data-ng-app="Chefonia">
+<body data-ng-cloak>
 <div class="se-pre-con"></div>
 <div ng-include="'pages/common/header.html'"></div>
 <div class="container">
@@ -59,78 +131,6 @@
 </div>
 <div style="background: #404040;" class="footer">
     <div data-ng-include="'pages/common/footer.html'"></div>
-    <div style="background-color: #404040">
-        <script src="lib/jquery/jquery-2.1.1.min.js"></script>
-        <script src="lib/jquery/modernizr.min.js"></script>
-        <script src="lib/owlCarousel/owl.carousel.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-
-        <!-- Scrolling Nav JavaScript --> 
-        <script src="js/jquery.easing.min.js"></script>
-        <script src="lib/angular/angular.min.js"></script>
-        <script src="lib/angular/angular-route.min.js"></script>
-        <script src="lib/angular/angular-cookies.min.js"></script>
-        <script src="js/script.min.js"></script>
-        <script src="js/toastr.min.js"></script>
-        <script src="js/jquery.lettering-0.6.min.js"></script>
-        <script src="js/jquery.textillate.min.js"></script>
-        <script src="pages/payu/paymentController.js"></script>
-        <script src="pages/common/headerController.js"></script>
-        <script src="pages/login/loginController.js"></script>
-        <script src="pages/common/cartManager.js"></script>
-        <script src="pages/orderSummary/orderSummaryController.js"></script>
-        <script src="pages/categories/categoryController.js"></script>
-        <script src="pages/orders/OrdersController.js"></script>
-        <script src="pages/front/frontPageController.js"></script>
-        <script src="pages/register/registerController.js"></script>
-        <script src="pages/items/itemController.js"></script>
-        <script src="services/wishListService.js"></script>
-        <script src="services/authenticationService.js"></script>
-        <script src="services/inventoryService.js"></script>
-        <script src="services/flashService.js"></script>
-        <script src="services/userService.js"></script>
-        <script src="services/campaignService.js"></script>
-        <script src="services/clientDataService.js"></script>
-        <script src="pages/address/addressController.js"></script>
-        <script src="services/addressService.js"></script>
-        <script src="pages/checkout/checkoutController.js"></script>
-        <script src="pages/cart/cartController.js"></script>
-        <script src="pages/common/resetPasswordController.js"></script>
-        <script src="services/cartService.js"></script>
-        <script src="services/commonService.js"></script>
-        <script src="services/orderService.js"></script>
-        <script src="services/imageService.js"></script>
-        <script src="services/sessionService.js"></script>
-        <script src="services/niraliService.js"></script>
-        <script src="services/eventHandingService.js"></script>
-        <script type="application/ld+json">
-            {
-              "@context" : "http://schema.org",
-              "@type" : "Organization",
-              "url" : "http://www.chefonia.com",
-              "contactPoint" : [{
-                "@type" : "ContactPoint",
-                "telephone" : "+91-7507887655",
-                "contactType" : "customer service"
-              }]
-            }
-
-        </script>
-        <script type="application/ld+json">
-            {
-              "@context" : "http://schema.org",
-              "@type" : "Organization",
-              "name" : "Chefonia.com",
-              "url" : "http://www.chefonia.com",
-              "sameAs" : [
-                "https://www.facebook.com/Chefonia-1175645462450331/",
-                "https://twitter.com/Chefonia",
-                "https://plus.google.com/103260594664466655297/posts"
-              ]
-            }
-
-        </script>
-    </div>
 </div>
 </body>
 

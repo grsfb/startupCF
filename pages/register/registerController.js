@@ -24,7 +24,7 @@
                         if (response.success) {
                             AuthenticationService.SetCredentials(response.data);
                             $('#myModal').modal('hide');
-                            $location.path('#!home');
+                            $location.path('home');
                         }
                     });
                 } else {

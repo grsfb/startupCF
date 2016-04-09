@@ -76,7 +76,7 @@
 
         function buy(item) {
             CartManager.addOrUpdateItem(item, function () {
-                $location.path("cart");
+                $location.path("cart-details");
             });
         }
 
