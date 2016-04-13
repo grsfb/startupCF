@@ -50,7 +50,7 @@ html, body {
     }
 
     .footer, .push {
-        height: 195px !important;
+        height: 250px !important;
         clear: both !important;
     }
 
@@ -220,7 +220,7 @@ html, body {
 }
 
 ul li a:hover, ul li a:focus {
-    color: #16b594 !important;
+    color: #FFFFFF !important;
 }
 
 .oddPanel {

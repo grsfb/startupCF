@@ -257,7 +257,11 @@
 }
 
 ul li:hover, ul li:focus {
-    background-color: lightsteelblue;
+    text-decoration: none;
+}
+
+ul li a:hover{
+    text-decoration: none;
 }
 
 /*.thumbnail{
