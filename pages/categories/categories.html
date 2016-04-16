@@ -1,13 +1,13 @@
 <div id="items" class="product">
     <div class="container categoryContainer">
         <div class="row">
-            <div class="col-md-12 page-title dishesCarousel" style="margin-top: 0px;margin-bottom:10px; ">
-                <div class="container">Popular Categories</div>
+            <div class="col-md-12 page-title dishesCarousel" style="margin-top: 0;margin-bottom:10px; ">
+                <div class="container">All Categories</div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-12 col-sm-12" style="padding: 0">
+            <div class="col-md-12 col-sm-12 hidden-xs" style="padding: 0">
                 <div class="container categoryContainer" style="padding: 0">
                     <div ng-repeat="item in vm.categories" itemscope itemtype="https://schema.org/category">
                         <div class="col-md-4 col-sm-6">
@@ -15,16 +15,13 @@
                                 <div class="panel-heading" ng-class-odd="'oddPanel'" ng-class-even="'evenPanel'">
                                     <span class="fontawesome fa fa-heart">  </span>&nbsp;<label itemprop="name">{{item.category}}</label>
                                     <label class="pull-right">{{item.totalItems}} items</label>
-                                    <!--<div>
-                                        <span class="pull-left"> Achar</span>
-                                        <span class="pull-right"> 50 items</span>
-                                    </div>-->
                                 </div>
                                 <div class="panel-body" style="padding: 5px">
                                     <img bn-lazy-src="img/all-categories/{{item.imageHash}}.png"
                                          class="bn-lazy-img popularCategoryimg  img-responsive" itemprop="image">
 
-                                    <p class="slideDescription" style="padding-left: 10px;" itemprop="description"> {{item.description}}</p>
+                                    <p class="slideDescription" style="padding-left: 10px;" itemprop="description">
+                                        {{item.description}}</p>
                                 </div>
                                 <div class="panel-footer"
                                      style="border: none;background-color: transparent;margin-bottom: 10px">
@@ -32,6 +29,58 @@
                                        class="jbtn add-to-cart"><i></i>View All Items</a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-xs-12 hidden-lg hidden-sm hidden-md" style="padding: 0">
+                            <div ng-repeat="item in vm.categories">
+                                <div class="panel panel-default">
+                                    <div class="panel-body" style="padding: 0!important;">
+                                        <img bn-lazy-src="img/all-categories/{{item.imageHash}}.png"
+                                             class="popularCategoryimg img-responsive"
+                                             style="border-radius: 5px;">
+
+                                        <div style="margin-top:-5rem;position: absolute;padding:1rem 3rem;background: rgba(255,255,255,0.7);color: #333">
+                                            {{item.totalItems}}+ items
+                                        </div>
+                                        <div style="padding: 5px;">
+                                            <h1 style="font-size: 18px;margin: 0">{{item.category}}</h1>
+
+                                            <h2 style="font-size: 13px;margin: 0;padding-top: 5px;">
+                                                {{item.description}}</h2>
+                                        </div>
+
+                                    </div>
+                                    <div class="panel-footer text-right"
+                                         style="border: none;background-color: transparent;margin-bottom: 10px;padding-right: 10px!important;">
+                                        <a data-ng-click="vm.loadCategoryItems(item.category)" style="color: teal"
+                                           class="jbtn add-to-cart"><i></i>View all items</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 hidden-md hidden-sm hidden-lg" style="padding: 10px;margin-top: 5px;">
+                <div ng-repeat="item in vm.categories">
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="padding: 0!important;">
+                            <img bn-lazy-src="img/all-categories/{{item.imageHash}}.png"
+                                 class="popularCategoryimg img-responsive"
+                                 style="border-radius: 5px;">
+
+                            <div style="margin-top:-5rem;position: absolute;padding:1rem 3rem;background: rgba(255,255,255,0.7);color: #333">
+                                {{item.totalItems}}+ items
+                            </div>
+                            <div style="padding: 5px;">
+                                <h1 style="font-size: 18px;margin: 0">{{item.category}}</h1>
+
+                                <h2 style="font-size: 13px;margin: 0;padding-top: 5px;">{{item.description}}</h2>
+                            </div>
+                        </div>
+                        <div class="panel-footer text-right"
+                             style="border: none;background-color: transparent;margin-bottom: 10px;padding-right: 10px!important;">
+                            <a data-ng-click="vm.foodChange(item.category)" style="color: teal"
+                               class="jbtn add-to-cart"><i></i>View all items</a>
                         </div>
                     </div>
                 </div>

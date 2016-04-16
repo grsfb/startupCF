@@ -64,10 +64,12 @@
         /*margin-top: -20px;*/
         height: 100px;
     }
+
     .frontcontainer {
         padding: 100px 0 90px 0;
 
     }
+
     /*.divElement{*/
     /*top:15% !important;*/
     /*}*/
@@ -90,7 +92,7 @@
         top:0% !important;
     }*/
     .frontcontainer {
-        padding: 50px 0 50px 0;
+        padding: 35px 0 25px 0;
 
     }
 
@@ -260,7 +262,7 @@ ul li:hover, ul li:focus {
     text-decoration: none;
 }
 
-ul li a:hover{
+ul li a:hover {
     text-decoration: none;
 }
 
@@ -312,3 +314,17 @@ ul li a:hover{
     min-width: 100% !important;
     height: 500px !important;
 }
+
+.stylish-input-group .input-group-addon{
+    background: white !important;
+}
+.stylish-input-group .form-control{
+    border-right:0;
+    box-shadow:0 0 0;
+    border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+.calendar-text { margin-top: .3em; }
