@@ -62,21 +62,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Controls -->
-                <!--<a class="left carousel-control" href="#myCarousel" data-slide="prev">-->
-                <!--<span class="icon-prev"></span>-->
-                <!--</a>-->
-                <!--<a class="right carousel-control" href="#myCarousel" data-slide="next">-->
-                <!--<span class="icon-next"></span>-->
-                <!--</a>-->
-                <!--<div id="carouselButtons">-->
-                <!--<button id="playButton" type="button" class="btn btn-default btn-xs">-->
-                <!--<span class="glyphicon glyphicon-play"></span>-->
-                <!--</button>-->
-                <!--<button id="pauseButton" type="button" class="btn btn-default btn-xs">-->
-                <!--<span class="glyphicon glyphicon-pause"></span>-->
-                <!--</button>-->
-                <!--</div>-->
                 <div class="divElement container">
                     <div class="container">
                         <div class="locationdiv inner-addon left-addon col-md-3 col-sm-3 col-xs-12">
@@ -104,7 +89,7 @@
                                     ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:7"
                                     style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
                                     <span class="badge">Popularity ***</span>{{snack}}
-                                    </l i>
+                                </li>
                                 <li class="list-group-item disabled"
                                     ng-show="(vm.popularFoodList | filter:search:strict | limitTo:0).length">Popular
                                     Delicacies
@@ -409,7 +394,8 @@
                         <input data-toggle="dropdown" type="text" ng-model="search.$" class="form-control"
                                placeholder="Search homemade food...">
                     <span class="input-group-addon"
-                          style="border-top-right-radius:5px; border-bottom-right-radius: 5px;;">
+                          style="border-top-right-radius:5px; border-bottom-right-radius: 5px;;"
+                          data-ng-click="vm.loadItems()">
                             <span style="color: teal" class="fa fa-search"></span>
                     </span>
 
@@ -449,23 +435,6 @@
         </div>
 
         <div id="testMobile-new" style="margin-top: 10px;" class="col-xs-12">
-            <!--<div class="col-xs-12 page-title"
-                 style=" font-size:16px!important;margin-top: 0;margin-bottom: 5px;background: teal !important;">
-                <div class="row">
-                    <a data-toggle="dropdown" style="color: white;text-decoration: none" class="col-xs-6 pull-left"><i
-                            class="fa fa-bars"></i> Menu</a>
-                    <a href="#" style="color: white;text-align: right" class="col-xs-6 pull-right"><i
-                            class="fa fa-phone-square"></i></a>
-                    <ul class="dropdown-menu list-group"
-                        style="width: 100%;z-index: 9999;overflow: visible;padding: 0;">
-                        <li id="categories" class="list-group-item itemlist"
-                            ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:5"
-                            style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
-                            {{snack}}
-                        </li>
-                    </ul>
-                </div>
-            </div>-->
             <div class="col-xs-12 page-title"
                  style=" font-size:16px!important;margin-top: 0;margin-bottom: 5px;background: teal !important;color: white!important;">
                 Popular Categories
@@ -483,9 +452,9 @@
                                     {{item.totalItems}}+ items
                                 </div>
                                 <div style="padding: 5px;">
-                                    <h1 style="font-size: 18px;margin: 0">{{item.category}}</h1>
+                                    <h1 style="color:teal;font-size: 18px;margin: 0">{{item.category}}</h1>
 
-                                    <h2 style="font-size: 13px;margin: 0;padding-top: 5px;">{{item.description}}</h2>
+                                    <h2 style="font-size: 14px;margin: 0;padding-top: 5px;">{{item.description}}</h2>
                                 </div>
 
                             </div>
@@ -499,6 +468,34 @@
                 </div>
             </div>
             <a class="btn home_page_button" href="categories">BROWSE ALL COLLECTIONS</a>
+            <hr>
+            <div class="text-center text-capitalize" style="font-size: 18px;margin-bottom: 5px;">Why we?</div>
+            <div style="margin-bottom: 5px">
+                <div class="text-center"
+                     style="padding:5px 10px;background: rgba(255,255,255,0.9);box-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                    <h5 style="color: teal">Focus On Quality</h5>
+
+                    <p>We only work with experienced chef under strict guideline to provide you hygienic and
+                        mouthwatering taste</p>
+                </div>
+            </div>
+            <div style="margin-bottom: 5px">
+                <div class="text-center"
+                     style="padding:5px 10px;background: rgba(255,255,255,0.9);box-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                    <h5 style="color: teal">Free Home Delivery</h5>
+
+                    <p>We serve your order at doorstep in good packaging without any extra cost.</p>
+                </div>
+            </div>
+            <div style="margin-bottom: 5px">
+                <div class="text-center"
+                     style="padding:5px 10px;background: rgba(255,255,255,0.9);box-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                    <h5 style="color: teal">Easy Ordering</h5>
+
+                    <p>It is very easy to order on Chefonia. To order, call or whatsapp on +91-7507887655 or use our website.</p>
+                </div>
+            </div>
+
         </div>
     </div>
     <div style="clear: both"></div>

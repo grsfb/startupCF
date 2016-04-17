@@ -2,25 +2,25 @@
   {
     "category": "SNACKS",
     "totalItems": 20,
-    "description": "Indulge into wide range of snacks ranging from crunchiest Khakhra to buttery Thepla.",
+    "description": "Indulge into wide range of homemade snacks ranging from crunchiest khakhra to buttery Thepla.",
     "imageHash":"f42f024415c983c091fdef3d4bdc27da"
   },
   {
     "category": "MIXTURES",
     "totalItems": 91,
-    "description": "Find best quality homemade Namkeen, Chips and munches prepared at home using quality oil.",
+    "description": "Find best quality homemade Namkeen, Chips and munches prepared at home  using quality oil.",
     "imageHash":"4a54823d79113a0b32fab29a66547cd6"
   },
   {
     "category": "CHOCOLATES",
     "totalItems": 52,
-    "description": "Taste insanely delicious home made chocolates, made by experienced chefs to give mouthwatering experience to your taste buds",
+    "description": "Taste delicious homemade chocolates, made by experienced chefs to give mouthwatering taste.",
     "imageHash":"2d473f0039e580f5e2970cd7b514ca4a"
   },
   {
     "category": "SWEETS",
     "totalItems": 16,
-    "description": "Looking for sweets made in pure GHEE ? Now enjoy homemade taste of Ladoo, Barfi and many other sweets without preparing at home. ",
+    "description": "Enjoy homemade taste of pure Ghee Ladoo, Barfi and many other sweets without preparing at home.",
     "imageHash":"2cf526b094e5d3ce9e0a56ab78658868"
   }
 ]

@@ -1,23 +1,29 @@
 <div class="navbar navbar-fixed-top">
-    <div class="container mobileView" style="padding-right: 0px;" >
+    <div class="container mobileView" style="padding-right: 0px;">
         <div class="collapse navbar-collapse hidden-xs" data-ng-controller="NavbarController as vm">
             <ul class="nav navbar-nav navbar-left" style="width: 100px;height: 40px">
                 <a class="header-link navbar-brand" href="home" style="padding: 0">
-                    <img src="chefonia.png" itemprop="logo" class="img-responsive" alt="Chefonia" style="margin-top: 10px;height: 30px;">
+                    <img src="chefonia.png" itemprop="logo" class="img-responsive" alt="Chefonia"
+                         style="margin-top: 10px;height: 30px;">
                     <span style="display: none" itemprop="name">Chefonia</span>
                 </a>
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <li ng-if="!isLoggedIn" class="hidden-xs">
                     <a class="text-center" href="http://www.chefonia.com/chefonia/chef-register.html"
-                       style="padding-left: 30px;padding-right: 30px;cursor: pointer;color: whitesmoke;letter-spacing: 1px">BECOME A CHEF </a>
+                       style="background-color:transparent!important;padding-left: 30px;padding-right: 30px;cursor: pointer;color: whitesmoke;letter-spacing: 1px">BECOME
+                        A CHEF </a>
                 </li>
                 <li class="hidden-xs" ng-if="!isLoggedIn">
-                    <a href="tel:+91-892-852-3737" style="font-size: 16px;font-size: 16px;letter-spacing: 1px"><i class="fa fa-phone"></i> &nbsp;+91-892-852-3737</a>
+                    <a href="tel:+91-892-852-3737"
+                       style="background-color:transparent!important;font-size: 16px;letter-spacing: 1px"><i
+                            class="fa fa-phone"></i> &nbsp;+91-892-852-3737</a>
                 </li>
                 <li ng-if="!isLoggedIn" class="hidden-xs">
                     <a class="text-center" data-ng-click="vm.login()"
-                       style="padding-left: 30px;padding-right: 30px; cursor: pointer;color: whitesmoke;font-family: Helvetica">LOG IN</a>
+                       style="background-color:transparent!important;padding-left: 30px;padding-right: 30px; cursor: pointer;color: whitesmoke;font-family: Helvetica">LOG
+                        IN</a>
                 </li>
                 <li ng-if="!isLoggedIn" class="hidden-lg hidden-md hidden-sm">
                     <button data-toggle="collapse" data-target=".navbar-collapse.in" href="login_mble"
@@ -26,50 +32,63 @@
                 </li>
 
                 <li style="text-decoration: none">
-                    <div style="margin-top: 15px; width: 50px"  ng-mouseleave="vm.itemAdded=false" ng-mouseenter="vm.viewcart()">
+                    <div style="margin-top: 15px; width: 50px" ng-mouseleave="vm.itemAdded=false"
+                         ng-mouseenter="vm.viewcart()">
                         <a class="mylink" data-target=".navbar-collapse.in" href="cart-details"
                            style="cursor: pointer;text-decoration: none"><i class="fa  fa-1.5x fa-shopping-cart">
                             <sup class="badge">{{cartItemCount}}</sup></i></a>
+
                         <div class="up-arrow" ng-if="vm.itemAdded" ng-show="vm.itemAdded && {{cartItemCount}}>0">
-                            <div class="row" style="text-align: center ;color: black;margin: 5px;font-weight: 600">YOUR BAG ({{vm.cart.length}} ITEMS)</div>
-                          <div style="overflow-y: auto;max-height: 250px;overflow-x: hidden">
-                              <div data-ng-repeat="item in vm.cart" class="row">
-                              <div class="col-md-12" style="padding-left: 0; padding-top: 10px;padding-right: 0">
+                            <div class="row" style="text-align: center ;color: black;margin: 5px;font-weight: 600">YOUR
+                                BAG ({{vm.cart.length}} ITEMS)
+                            </div>
+                            <div style="overflow-y: auto;max-height: 250px;overflow-x: hidden">
+                                <div data-ng-repeat="item in vm.cart" class="row">
+                                    <div class="col-md-12" style="padding-left: 0; padding-top: 10px;padding-right: 0">
 
-                                  <div class="col-md-3" style="padding-left: 20px;padding-bottom: 10px;padding-top: 5px;padding-right: 0px;margin: 0px">
+                                        <div class="col-md-3"
+                                             style="padding-left: 20px;padding-bottom: 10px;padding-top: 5px;padding-right: 0px;margin: 0px">
 
-                                      <img bn-lazy-src="img/md/{{item.imageHash}}.png" class="img-responsive"
-                                           style="height: 80px;width: 120px;">
-                                  </div>
-                                  <div class="col-md-7" style="padding: 0px;color: black;margin: 0px;margin-bottom: 2px" >
-                                      <div class="col-sm-12">
-                                          <div class="col-md-12" style="padding: 0">{{item.itemName}}</div>
-                                      </div>
+                                            <img bn-lazy-src="img/md/{{item.imageHash}}.png" class="img-responsive"
+                                                 style="height: 80px;width: 120px;">
+                                        </div>
+                                        <div class="col-md-7"
+                                             style="padding: 0px;color: black;margin: 0px;margin-bottom: 2px">
+                                            <div class="col-sm-12">
+                                                <div class="col-md-12" style="padding: 0">{{item.itemName}}</div>
+                                            </div>
 
-                                      <div class="col-sm-12 col-md-12" style="padding-top: 2px;margin-top: 0px;padding-left: 2px">
-                                          <div class="col-sm-4 col-xs-4" style="padding-top: 0px;margin-top: 0px">Quantity:</div>
-                                          <div class=" col-xs-8" style="padding-top: 0px;margin-top: 0px">
-                                              <label> {{item.quantity}}</label>
-                                          </div>
-                                      </div>
-                                      <div class="col-md-12" style="padding-top:0px;padding-bottom: 10px;margin-top: 0px;padding-left: 2px">
-                                          <div class=" col-xs-4" >Weight:</div>
-                                          <div class=" col-xs-8"><label> {{item.weight}}</label></div>
-                                      </div>
+                                            <div class="col-sm-12 col-md-12"
+                                                 style="padding-top: 2px;margin-top: 0px;padding-left: 2px">
+                                                <div class="col-sm-4 col-xs-4" style="padding-top: 0px;margin-top: 0px">
+                                                    Quantity:
+                                                </div>
+                                                <div class=" col-xs-8" style="padding-top: 0px;margin-top: 0px">
+                                                    <label> {{item.quantity}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12"
+                                                 style="padding-top:0px;padding-bottom: 10px;margin-top: 0px;padding-left: 2px">
+                                                <div class=" col-xs-4">Weight:</div>
+                                                <div class=" col-xs-8"><label> {{item.weight}}</label></div>
+                                            </div>
 
-                                  </div>
-                                  <div class="col-md-2" style="padding: 0px;color: black;margin: 0px" >
-                                      <div class="col-md-12" style="padding: 5px">
-                                          <label><i class="fa fa-inr"></i> {{item.price * item.quantity}}</label>
-                                      </div>
-                                  </div>
-                              </div>
+                                        </div>
+                                        <div class="col-md-2" style="padding: 0px;color: black;margin: 0px">
+                                            <div class="col-md-12" style="padding: 5px">
+                                                <label><i class="fa fa-inr"></i> {{item.price * item.quantity}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                          </div></div>
+                                </div>
+                            </div>
 
-                            <div class="col-sm-12 col-xs-12" style="font-size: 14px !important; padding: 20px;color: black">
+                            <div class="col-sm-12 col-xs-12"
+                                 style="font-size: 14px !important; padding: 20px;color: black">
                                 <div class="col-sm-12 col-xs-12" style="padding-left: 0; padding-top: 10px;">
-                                    <div class="col-sm-12 col-xs-12" style="padding: 0">Merchandise <label class="pull-right"><i
+                                    <div class="col-sm-12 col-xs-12" style="padding: 0">Merchandise <label
+                                            class="pull-right"><i
                                             class="fa fa-inr"></i> {{vm.cartItemTotal}}</label></div>
                                 </div>
                                 <div class="col-sm-12"
@@ -80,11 +99,14 @@
                                 </div>
                                 <div class="col-sm-12" style="padding-left: 0; padding-top: 10px;;">
                                     <div class="col-sm-12" style="padding: 0">Total Price<label class="pull-right"><i
-                                            class="fa fa-inr"></i> {{vm.cartItemTotal+vm.shippingCost-vm.coupon['discount']}}
+                                            class="fa fa-inr"></i>
+                                        {{vm.cartItemTotal+vm.shippingCost-vm.coupon['discount']}}
                                     </label></div>
                                 </div>
                                 <div class="col-md-12" style="text-align:center; margin: 10px">
-                                    <a class="btn btn-filled text-uppercase row" data-ng-click="vm.viewBag()" style="margin-top:5px;width: 100px;background-color: brown;color: white "> view bag</a>
+                                    <a class="btn btn-filled text-uppercase row" data-ng-click="vm.viewBag()"
+                                       style="margin-top:5px;width: 100px;background-color: brown;color: white "> view
+                                        bag</a>
                                 </div>
                             </div>
                         </div>

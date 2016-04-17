@@ -24,12 +24,13 @@
     margin-top: 10px !important;
     margin-bottom: 10px !important;
     border-color: darkgrey !important;
-    width: 100%;
+    width: 70%;
     background-color: #fff !important;
     color: teal !important;
     text-transform: uppercase !important;
     text-align: center !important;
     overflow: hidden;
+    margin-left: 15%;
     text-overflow: ellipsis !important;
 }
 
