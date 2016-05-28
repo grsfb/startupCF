@@ -1,0 +1,24 @@
+<div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="panel panel-default" data-ng-click="vm.loadCategoryItems(category.category)">
+        <div class="panel-body" style="padding: 0!important;">
+            <img bn-lazy-src="img/all-categories/{{category.imageHash}}.png"
+                 class="popularCategoryimg img-responsive"
+                 style="border-radius: 5px;">
+
+            <div style="margin-top:-5rem;position: absolute;padding:1rem 3rem;background: rgba(255,255,255,0.7);color: #333">
+                {{category.totalItems}}+ items
+            </div>
+            <div style="padding: 5px;">
+                <h1 style="color:teal;font-size: 18px;margin: 0">{{category.category}}</h1>
+
+                <h2 style="margin: 0;padding-top: 5px;">
+                    {{category.description}}</h2>
+            </div>
+        </div>
+        <div class="panel-footer text-right"
+             style="border: none;background-color: transparent;margin-bottom: 10px;padding-right: 10px!important;">
+            <a style="color: teal"
+               class="jbtn add-to-cart"><i></i>View all items</a>
+        </div>
+    </div>
+</div>

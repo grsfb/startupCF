@@ -1,503 +1,154 @@
 <div>
     <div class="hidden-xs">
-        <!-- Carousel -->
         <div style="height: 70%">
-            <div id="homeCarousel" style="margin-top:-20px;padding-top: 0;width: 100%;overflow-x: hidden;height: 100% "
-                 class="carousel slide hidden-xs hidden-sm">
-                <!-- Menu -->
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-
-                <!-- Items -->
-                <div class="carousel-inner">
-
-                    <!-- Item 1 -->
-                    <div class="item active" style="background: #4B5B5E">
-                        <img class="sliderImg" bn-lazy-src="front.jpg"/>
-
-                        <div class="container">
-                            <div class="carousel-caption">
-                                <p class="frontCarouselHeading">Your Personal home chef</p>
-
-                                <p class="frontCarouselText">Browse home made items made from wisely chosen expert
-                                    chefs.</p>
-
-                                <p><a class="myButton btn-lg" href="categories">See Everything</a>
-                                </p></div>
-                        </div>
-                    </div>
-
-                    <!-- Item 2 -->
-                    <div class="item">
-                        <img class="sliderImg" src="choco.jpg"/>
-
-                        <div class="container">
-                            <div class="carousel-caption">
-                                <p class="frontCarouselHeading">Awesome homemade chocolates</p>
-
-                                <p class="frontCarouselText">Order delicious home made chocolates with beautiful
-                                    packaging. </p>
-
-                                <p><a class="myButton btn-large" href="item/Chocolates/All">View Chocolates</a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 3 -->
-                    <div class="item">
-                        <img class="sliderImg " src="snacks.jpg"/>
-
-                        <div class="container">
-                            <div class="carousel-caption">
-                                <p class="frontCarouselHeading">Homemade snacks at amazing rates</p>
-
-                                <p class="frontCarouselText">Get best quality snacks, prepared on demand specially for
-                                    you.</p>
-
-                                <p><a class="myButton btn-large" href="item/Snacks/All">Browse Snacks</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="divElement container">
-                    <div class="container">
-                        <div class="locationdiv inner-addon left-addon col-md-3 col-sm-3 col-xs-12">
-                            <!--<span>  <i class="fa fa-location-arrow"></i></span>-->
-                            <button data-toggle="dropdown"
-                                    class="location form-control dropdown-toggle" style="text-align: left;">
-                                <span><i class="fa fa-location-arrow"></i> {{vm.city}} Chef's Items</span>
-                            </button>
-                            <ul class="dropdown-menu list-group-item-heading"
-                                style="width: 100%;padding: 0;margin-top: 5px">
-                                <li class="list-group-item"
-                                    style="cursor: pointer;"
-                                    ng-repeat="city in vm.cityList" data-ng-click="vm.cityChange(city)">
-                                    <span style="margin-left: 10px;font-weight: 400;font-family:'Tahoma', Geneva, sans-serif">{{city}} Chef's Items</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="fooddiv inner-addon left-addon col-md-6 col-sm-6 col-xs-12">
-                            <span>  <i class="fontawesome fa fa-cutlery"></i></span>
-                            <input data-toggle="dropdown" class="form-control dropdown-toggle delicacy" type="text"
-                                   placeholder="Search Homemade Delicacies" ng-model="search.$">
-                            <ul class="dropdown-menu list-group"
-                                style="width: 100%;z-index: 9999;overflow: visible;padding: 0px;margin-top: 5px">
-                                <li id="jquery-list-view-limit" class="list-group-item itemlist"
-                                    ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:7"
-                                    style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
-                                    <span class="badge">Popularity ***</span>{{snack}}
-                                </li>
-                                <li class="list-group-item disabled"
-                                    ng-show="(vm.popularFoodList | filter:search:strict | limitTo:0).length">Popular
-                                    Delicacies
-                                </li>
-                                <li class="list-group-item" style="cursor: pointer;"
-                                    ng-repeat="snack in vm.popularFoodList | filter:search:strict | limitTo:0"
-                                    data-ng-click="vm.foodChange(snack)">
-                                    <span class="badge">Popularity *****</span>{{snack}}
-                                </li>
-                                <li class="list-group-item disabled"
-                                    ng-show="(vm.newFoodList | filter:search:strict).length">
-                                    Newly Launched Delicacies
-                                </li>
-                                <li class="list-group-item" style="cursor: pointer;"
-                                    ng-repeat="snack in vm.newFoodList | filter:search:strict"
-                                    data-ng-click="vm.foodChange(snack)">
-                                    <span class="badge">New</span>{{snack}}
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="searchdiv col-md-2 col-sm-3 col-xs-12"
-                             style="padding-left: 0px;padding-right:0px;height: 45px;">
-                            <a href="" data-ng-click="vm.loadItems()" class="btn btn-info btn-lg" id="searchbtn">
-                                <span class="fontawesome fa fa-search" style="align-content: center"></span> Search All</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="hidden-sm">
+                <div data-ng-include="'pages/front/desktop-front-view.html'"></div>
 
             </div>
-        </div>
-
-        <div lazy-background class="frontcontainer  col-xs-12 col-sm-12 hidden-lg hidden-md"
-             style="margin-top: -25px;background-color: #1b6d85">
-            <div class="divElementMble">
-                <div class="container">
-                    <div class="locationdiv inner-addon left-addon col-md-3 col-sm-3 col-xs-12">
-                        <button data-toggle="dropdown"
-                                class="location form-control dropdown-toggle" style="text-align: left;">
-                            <span><i class="fa fa-location-arrow"></i> {{vm.city}} Chef's Items</span>
-                        </button>
-                        <ul class="dropdown-menu list-group-item-heading"
-                            style="width: 100%;padding: 0;margin-top: 5px">
-                            <li class="list-group-item"
-                                style="cursor: pointer;"
-                                ng-repeat="city in vm.cityList" data-ng-click="vm.cityChange(city)">
-                                <span style="margin-left: 10px;font-weight: 400;font-family:'Tahoma', Geneva, sans-serif">{{city}} Chef's Items</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="fooddiv inner-addon left-addon col-md-7 col-sm-6 col-xs-12">
-                        <span>  <i class="fontawesome fa fa-cutlery"></i></span>
-                        <input data-toggle="dropdown" class="form-control dropdown-toggle delicacy" type="text"
-                               placeholder="Search Homemade Delicacies" ng-model="search.$">
-                        <ul class="dropdown-menu list-group"
-                            style="width: 100%;z-index: 9999;overflow: visible;padding: 0px;margin-top: 5px">
-                            <li id="jquery-list-view-limit-1" class="list-group-item itemlist"
-                                ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:10"
-                                style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
-                                <span class="badge">Popularity ***</span>{{snack}}
-                            </li>
-                            <li class="list-group-item disabled"
-                                ng-show="(vm.popularFoodList | filter:search:strict | limitTo:0).length">Popular
-                                Delicacies
-                            </li>
-                            <li class="list-group-item" style="cursor: pointer;"
-                                ng-repeat="snack in vm.popularFoodList | filter:search:strict | limitTo:0"
-                                data-ng-click="vm.foodChange(snack)">
-                                <span class="badge">Popularity *****</span>{{snack}}
-                            </li>
-                            <li class="list-group-item disabled"
-                                ng-show="(vm.newFoodList | filter:search:strict).length">
-                                Newly Launched Delicacies
-                            </li>
-                            <li class="list-group-item" style="cursor: pointer;"
-                                ng-repeat="snack in vm.newFoodList | filter:search:strict"
-                                data-ng-click="vm.foodChange(snack)">
-                                <span class="badge">New</span>{{snack}}
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="searchdiv col-md-2 col-sm-3 col-xs-12"
-                         style="padding-left: 0px;padding-right:0px;height: 45px;">
-                        <a href="" data-ng-click="vm.loadItems()" class="btn btn-info btn-lg" id="searchbtn">
-                            <span class="fontawesome fa fa-search" style="align-content: center"></span> Search All</a>
-                    </div>
-                </div>
+            <div class="hidden-md hidden-lg">
+                <div data-ng-include="'pages/front/tablet-front-view.html'"></div>
             </div>
-        </div>
 
-        <div id="dishes" class="hidden-xs">
+        </div>
+        <div>
             <div>
+                <div class="col-md-12 page-title" style="background: teal !important;color: white !important;">
+                    <div class="container">Popular Dishes</div>
+                </div>
                 <div>
-                    <div class="col-md-12 page-title" style="background: teal !important;color: white !important;">
-                        <div class="container">Popular Dishes</div>
-                    </div>
-                    <div>
-                        <div class="col-md-12" style="margin-top: 20px;">
-                            <div style="float: left;position: absolute;bottom: 50%;margin-left: 30px;z-index: 666">
-                                <a class="prev" id="popularowlPrev">
+                    <div class="col-md-12" style="margin-top: 20px;">
+                        <div style="float: left;position: absolute;bottom: 50%;margin-left: 30px;z-index: 666">
+                            <a class="prev" id="popularowlPrev">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x" style="color: teal"></i>
                                     <i class="fa fa-chevron-left fa-stack-1x fa-inverse"></i>
                                 </span>
-                                </a>
-                            </div>
-                            <div class="container">
-                                <data-owl-carousel style="height: 280px;width: auto;margin-left: 35px"
-                                                   id="owl-demo" class="owl-carousel" data-options="{rewindNav : true}">
-                                    <div owl-carousel-item="" ng-repeat="item in vm.slides" class="item"
-                                         style="width: 275px;margin-right: 20px;border: none">
-                                        <div class="thumbnail">
-                                            <img bn-lazy-src="img/md/{{item.imageHash}}.png"
-                                                 class="bn-lazy-img popularimg img-responsive">
+                            </a>
+                        </div>
+                        <div class="container">
+                            <data-owl-carousel style="height: 280px;width: auto;margin-left: 35px"
+                                               id="owl-demo" class="owl-carousel" data-options="{rewindNav : true}">
+                                <div owl-carousel-item="" ng-repeat="item in vm.slides" class="item"
+                                     style="width: 275px;margin-right: 20px;border: none">
+                                    <div class="thumbnail">
+                                        <img bn-lazy-src="img/md/{{item.imageHash}}.png"
+                                             class="bn-lazy-img popularimg img-responsive">
 
-                                            <h4 style="color: #FE980F;padding-top: 5px;" class="slideItem">
-                                                <i class="fa fa-inr"></i>
-                                                {{item.price}}
-                                            </h4>
+                                        <h4 style="color: #FE980F;padding-top: 5px;" class="slideItem">
+                                            <i class="fa fa-inr"></i>
+                                            {{item.price}}
+                                        </h4>
 
-                                            <h5 class="slideItem">{{item.name}} - {{item.weight}}
-                                            </h5>
+                                        <h5 class="slideItem">{{item.name}} - {{item.weight}}
+                                        </h5>
 
-                                            <div class="caption caption-half-down" style="background-color: white;">
-                                                <p class="shutterFont">{{vm.slides[$index].name}} -
-                                                    {{vm.slides[$index].quantity}}</p>
+                                        <div class="caption caption-half-down" style="background-color: white;">
+                                            <p class="shutterFont">{{vm.slides[$index].name}} -
+                                                {{vm.slides[$index].quantity}}</p>
 
-                                                <div class="btn-group">
-                                                    <button class="btn btn-default" style="padding: 0;width: auto;">
-                                                        <span style="padding-left: 5px;float:left">{{item.weight}}</span>
+                                            <div class="btn-group">
+                                                <button class="btn btn-default" style="padding: 0;width: auto;">
+                                                    <span style="padding-left: 5px;float:left">{{item.weight}}</span>
                                                 <span class="pull-right" style="padding-right: 5px;padding-left: 15px;">
                                                     <i class="fa fa-inr" style="color: #EB5C31;"></i> {{item.price}}
                                                 </span>
-                                                    </button>
-                                                    <button data-toggle="dropdown"
-                                                            style="padding-top: 0;padding-bottom: 0"
-                                                            class="btn btn-default dropdown-toggle"
-                                                            data-placeholder="false"><span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" style="min-width: 100%;max-height: 50px;
+                                                </button>
+                                                <button data-toggle="dropdown"
+                                                        style="padding-top: 0;padding-bottom: 0"
+                                                        class="btn btn-default dropdown-toggle"
+                                                        data-placeholder="false"><span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" style="min-width: 100%;max-height: 50px;
                                         overflow-y: auto">
-                                                        <li style="padding-left: 5px;padding-right: 15px;cursor: pointer"
-                                                            data-ng-repeat="(weight,price) in item.weightToPrice"
-                                                            data-ng-click="item.weight=weight.trim();
+                                                    <li style="padding-left: 5px;padding-right: 15px;cursor: pointer"
+                                                        data-ng-repeat="(weight,price) in item.weightToPrice"
+                                                        data-ng-click="item.weight=weight.trim();
                                                 item.price=price.trim()">
-                                                            <span>{{weight}} </span>
+                                                        <span>{{weight}} </span>
                                                 <span class="pull-right">
                                                     <i class="fa fa-inr" style="color: #EB5C31;"></i> {{price}}
                                                 </span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
 
-                                                <h4 class="shutterItemPrice"><i class="fa fa-inr"></i>
-                                                    {{item.price}}</h4>
-                                            </div>
-                                            <div class="caption caption-half-up" style="background-color: white;">
-                                                <p class="shutterFontChef" style="color: #262626;margin-top: 0">Chef
-                                                    Detail</p>
-                                                <h5 class="shutterFont" style="margin-top: 0">{{item.chefName}} ,
-                                                    {{item.chefLocation}}</h5>
-                                                <a href="" data-ng-click="vm.buy(item)"
-                                                   style="background-color: teal;color: white;margin-top: 0;text-align: center"
-                                                   class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i> Buy</a>
-                                            </div>
+                                            <h4 class="shutterItemPrice"><i class="fa fa-inr"></i>
+                                                {{item.price}}</h4>
+                                        </div>
+                                        <div class="caption caption-half-up" style="background-color: white;">
+                                            <p class="shutterFontChef" style="color: #262626;margin-top: 0">Chef
+                                                Detail</p>
+                                            <h5 class="shutterFont" style="margin-top: 0">{{item.chefName}} ,
+                                                {{item.chefLocation}}</h5>
+                                            <a href="" data-ng-click="vm.buy(item)"
+                                               style="background-color: teal;color: white;margin-top: 0;text-align: center"
+                                               class="btn btn-default add-to-cart"><i
+                                                    class="fa fa-shopping-cart"></i> Buy</a>
                                         </div>
                                     </div>
+                                </div>
 
-                                </data-owl-carousel>
-                            </div>
-                            <div style="position: absolute;bottom: 50%;right: 20px;margin-right: 30px;">
-                                <a class="next" id="popularowlNext">
+                            </data-owl-carousel>
+                        </div>
+                        <div style="position: absolute;bottom: 50%;right: 20px;margin-right: 30px;">
+                            <a class="next" id="popularowlNext">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x" style="color: teal"></i>
                                     <i class="fa fa-chevron-right fa-stack-1x fa-inverse"></i>
                                 </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="col-md-12 col-sm-12 page-title dishesCarousel"
-                         style="background: teal !important;color: white !important;margin-top: 0;margin-bottom:10px; ">
-                        <div class="container">
-                            <div class="pull-left">Popular Categories</div>
-                            <div class="pull-right">
-                                <div style="text-align: center"><a href="categories" class="btn btn-info"
-                                                                   id="searchbtn1">
-                                    <span class="fontawesome fa fa-search" style="align-content: center"></span> Browse
-                                    All
-                                    Categories</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12" style="padding: 0">
-                        <div class="container" style="padding: 0">
-                            <div ng-repeat="item in vm.categories">
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" ng-class-odd="'oddPanel'"
-                                             ng-class-even="'evenPanel'">
-                                            <span class="fontawesome fa fa-heart">  </span>&nbsp;<label>{{item.category}}</label>
-                                            <label class="pull-right">{{item.totalItems}} items</label>
-                                        </div>
-                                        <div class="panel-body" style="padding: 5px">
-                                            <img bn-lazy-src="img/all-categories/{{item.imageHash}}.png"
-                                                 class="bn-lazy-img popularCategoryimg img-responsive">
-
-                                            <p class="slideDescription" style="padding-left: 5px">
-                                                {{item.description}}</p>
-                                        </div>
-                                        <div class="panel-footer"
-                                             style="border: none;background-color: transparent;margin-bottom: 10px">
-                                            <a href="" data-ng-click="vm.foodChange(item.category)"
-                                               class="jbtn add-to-cart"><i></i>View All Items</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="testMobile" style="margin-top: 10px;" class="hidden-lg hidden-md hidden-sm col-xs-12">
-            <div class="col-xs-12 page-title" style="margin-top: 0;margin-bottom: 5px">
-                <div>Popular Dishes</div>
-            </div>
-
             <div>
-                <div ng-repeat="item in vm.slides" class="item">
-                    <div class="thumbnail col-xs-12" style="width: 100%; height: 250px">
-                        <img bn-lazy-src="img/md/{{item.imageHash}}.png"
-                             class="bn-lazy-img popularimg img-responsive">
-
-
-                        <h4 style="color: #FE980F;padding-top: 5px;" class="slideItem">
-                            <i class="fa fa-inr"></i>
-                            {{item.price}}
-                        </h4>
-
-                        <h5 class="slideItem">{{item.name}} - {{item.weight}}
-                        </h5>
-
-                        <div class="caption caption-half-down" style="background-color: white;">
-                            <p class="shutterFont">{{vm.slides[$index].name}} -
-                                {{vm.slides[$index].quantity}}</p>
-
-                            <div class="btn-group">
-                                <button class="btn btn-default" style="padding: 0;width: auto;">
-                                    <span style="padding-left: 5px">{{item.weight}}</span>
-                                                <span class="pull-right" style="padding-right: 5px;padding-left: 15px;">
-                                                    <i class="fa fa-inr" style="color: #EB5C31;"></i> {{item.price}}
-                                                </span>
-                                </button>
-                                <button data-toggle="dropdown" style="padding-top: 0;padding-bottom: 0"
-                                        class="btn btn-default dropdown-toggle"
-                                        data-placeholder="false"><span class="caret"></span></button>
-                                <ul class="dropdown-menu" style="min-width: 100%;max-height: 35px;
-                                        overflow-y: auto">
-                                    <li style="padding-left: 5px;padding-right: 15px;cursor: pointer"
-                                        data-ng-repeat="(weight,price) in item.weightToPrice"
-                                        data-ng-click="item.weight=weight.trim();
-                                                item.price=price.trim()">
-                                        <span>{{weight}} </span>
-                                                <span class="pull-right">
-                                                    <i class="fa fa-inr" style="color: #EB5C31;"></i> {{price}}
-                                                </span>
-                                    </li>
-                                </ul>
+                <div class="col-md-12 col-sm-12 page-title dishesCarousel"
+                     style="background: teal !important;color: white !important;margin-top: 0;margin-bottom:10px; ">
+                    <div class="container">
+                        <div class="pull-left">Popular Categories</div>
+                        <div class="pull-right">
+                            <div style="text-align: center"><a href="categories" class="btn btn-info"
+                                                               id="searchbtn1">
+                                <span class="fa fa-search" style="align-content: center"/>
+                                Browse All Categories
+                            </a>
                             </div>
-
-                            <h4 class="shutterItemPrice"><i class="fa fa-inr"></i>
-                                {{item.price}}</h4>
                         </div>
-                        <div class="caption caption-half-up" style="background-color: white;">
-                            <p class="shutterFontChef" style="color: #262626;margin-top: 0">Chef Detail</p>
-                            <h5 class="shutterFont" style="margin-top: 0">{{item.chefName}} , {{item.chefLocation}}</h5>
-                            <a href="" data-ng-click="vm.buy(item)"
-                               style="background-color: teal;color: white;margin-top: 0;text-align: center"
-                               class="btn btn-default add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i> Buy</a>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12" style="padding: 0">
+                    <div class="container" style="padding: 0">
+                        <div ng-repeat="category in vm.categories" `>
+                            <div data-ng-include="'pages/categories/category-view.html'"/>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <a class="btn home_page_button" href="categories">BROWSE ALL COLLECTIONS</a>
-
         </div>
+        <div style="clear: both;margin-top: 5px;">
+            <div class="col-md-12 page-title" style="background: teal !important;color: white !important;margin-bottom: 10px;">
+                <div class="container" style="">Why Order From Chefonia?</div>
+            </div>
+            <div class="container" style="padding: 0">
+                <div data-ng-include="'pages/front/why-chefonia.html'"></div>
+            </div>
+        </div>
+        <!--<div style="clear: both;margin-top: 5px">
+            <div class="col-md-12 page-title" style="background: teal !important;color: white !important;">
+                <div class="container">Our Customers Love Us</div>
+            </div>
+            <div data-ng-include="'pages/testimonial/testimonial.html'"></div>
+        </div>-->
     </div>
-    <div class="hidden-md hidden-lg hidden-sm">
+</div>
 
-        <div lazy-background class="frontcontainer col-xs-12"
-             style="background-color: #1b6d85;margin-top: -30px;">
-            <div class="divElementMble">
-                <div class="container">
-                    <div class="input-group stylish-input-group">
-
-                        <input data-toggle="dropdown" type="text" ng-model="search.$" class="form-control"
-                               placeholder="Search homemade food...">
-                    <span class="input-group-addon"
-                          style="border-top-right-radius:5px; border-bottom-right-radius: 5px;;"
-                          data-ng-click="vm.loadItems()">
-                            <span style="color: teal" class="fa fa-search"></span>
-                    </span>
-
-                        <ul class="dropdown-menu list-group"
-                            style="width: 100%;z-index: 9999;overflow: visible;padding: 0;">
-                            <li id="jquery-list-view-limit-new" class="list-group-item itemlist"
-                                ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:5"
-                                style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
-                                {{snack}}
-                            </li>
-                            <li class="list-group-item" style="cursor: pointer;"
-                                ng-repeat="snack in vm.popularFoodList | filter:search:strict | limitTo:0"
-                                data-ng-click="vm.foodChange(snack)">
-                                {{snack}}
-                            </li>
-                            <li class="list-group-item" style="cursor: pointer;"
-                                ng-repeat="snack in vm.newFoodList | filter:search:strict"
-                                data-ng-click="vm.foodChange(snack)">
-                                <span class="badge">New</span>{{snack}}
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-4 col-xs-offset-4 text-center" style="margin-bottom: 1rem;margin-top: 1rem">
-                    <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x" style="color: #f2f2f2"></i>
-                                    <i class="fa-stack" style="color: #333;font-size: 12px">OR</i>
-                    </span>
-                    </div>
-                    <div class="col-xs-8 col-xs-offset-2 text-center"
-                         style="padding:1rem 1rem;background: rgba(255,255,255,0.7);color: #333">
-                        <a href="categories" style="text-decoration:none;color: #333;font-weight: bold">Browse all
-                            categories</a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div id="testMobile-new" style="margin-top: 10px;" class="col-xs-12">
-            <div class="col-xs-12 page-title"
-                 style=" font-size:16px!important;margin-top: 0;margin-bottom: 5px;background: teal !important;color: white!important;">
-                Popular Categories
-            </div>
-            <div id="popular-categories">
-                <div class="col-xs-12" style="padding: 0">
-                    <div ng-repeat="item in vm.categories">
-                        <div class="panel panel-default">
-                            <div class="panel-body" style="padding: 0!important;">
-                                <img bn-lazy-src="img/all-categories/{{item.imageHash}}.png"
-                                     class="popularCategoryimg img-responsive"
-                                     style="border-radius: 5px;">
-
-                                <div style="margin-top:-5rem;position: absolute;padding:1rem 3rem;background: rgba(255,255,255,0.7);color: #333">
-                                    {{item.totalItems}}+ items
-                                </div>
-                                <div style="padding: 5px;">
-                                    <h1 style="color:teal;font-size: 18px;margin: 0">{{item.category}}</h1>
-
-                                    <h2 style="font-size: 14px;margin: 0;padding-top: 5px;">{{item.description}}</h2>
-                                </div>
-
-                            </div>
-                            <div class="panel-footer text-right"
-                                 style="border: none;background-color: transparent;margin-bottom: 10px;padding-right: 10px!important;">
-                                <a data-ng-click="vm.foodChange(item.category)" style="color: teal"
-                                   class="jbtn add-to-cart"><i></i>View all items</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="btn home_page_button" href="categories">BROWSE ALL COLLECTIONS</a>
-            <hr>
-            <div class="text-center text-capitalize" style="font-size: 18px;margin-bottom: 5px;">Why we?</div>
-            <div style="margin-bottom: 5px">
-                <div class="text-center"
-                     style="padding:5px 10px;background: rgba(255,255,255,0.9);box-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
-                    <h5 style="color: teal">Focus On Quality</h5>
-
-                    <p>We only work with experienced chef under strict guideline to provide you hygienic and
-                        mouthwatering taste</p>
-                </div>
-            </div>
-            <div style="margin-bottom: 5px">
-                <div class="text-center"
-                     style="padding:5px 10px;background: rgba(255,255,255,0.9);box-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
-                    <h5 style="color: teal">Free Home Delivery</h5>
-
-                    <p>We serve your order at doorstep in good packaging without any extra cost.</p>
-                </div>
-            </div>
-            <div style="margin-bottom: 5px">
-                <div class="text-center"
-                     style="padding:5px 10px;background: rgba(255,255,255,0.9);box-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
-                    <h5 style="color: teal">Easy Ordering</h5>
-
-                    <p>It is very easy to order on Chefonia. To order, call or whatsapp on +91-7507887655 or use our website.</p>
-                </div>
-            </div>
-
-        </div>
+<div class="hidden-sm hidden-md hidden-lg">
+    <div data-ng-include="'pages/front/mobile-front-view.html'"></div>
+    <div class="col-xs-12 page-title"
+         style=" font-size:16px!important;margin-top: 0;margin-bottom: 5px;background: teal !important;color: white!important;">
+        Why order from Chefonia?
     </div>
-    <div style="clear: both"></div>
-    <div class="push"></div>
+    <div data-ng-include="'pages/front/why-chefonia.html'"></div>
+</div>
+<div style="clear: both" class="push"></div>
 </div>

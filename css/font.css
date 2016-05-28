@@ -1,0 +1,38 @@
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+    h2 {
+        font-size: 1.25rem !important;
+    }
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+    h2 {
+        font-size: 1.35rem!important;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    h2 {
+        font-size: 1.45rem!important;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    h2 {
+        font-size: 1.5rem!important;
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    h2 {
+        font-size: 1.55rem!important;
+    }
+}
+
+
+

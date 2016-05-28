@@ -51,7 +51,7 @@
     function FrontPageController(CartManager, ClientDataService, $location, MappingService) {
         var vm = this;
         vm.cityChange = cityChange;
-        vm.foodChange = foodChange;
+        vm.loadCategoryItems = loadCategoryItems;
         vm.city = 'All';
         vm.loadItems = loadItems;
         vm.slides = undefined;
@@ -66,7 +66,7 @@
             $location.path('item/all' + '/' + city.toLowerCase());
         }
 
-        function foodChange(snack) {
+        function loadCategoryItems(snack) {
             $location.path('item/' + snack + '/' + vm.city.toLowerCase());
         }
 
