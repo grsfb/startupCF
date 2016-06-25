@@ -15,17 +15,17 @@
                     style="width: 100%;z-index: 9999;overflow: visible;padding: 0;">
                     <li id="jquery-list-view-limit-new" class="list-group-item itemlist"
                         ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:5"
-                        style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
+                        style="cursor: pointer;" data-ng-click="vm.loadCategoryItems(snack)">
                         {{snack}}
                     </li>
                     <li class="list-group-item" style="cursor: pointer;"
                         ng-repeat="snack in vm.popularFoodList | filter:search:strict | limitTo:0"
-                        data-ng-click="vm.foodChange(snack)">
+                        data-ng-click="vm.loadCategoryItems(snack)">
                         {{snack}}
                     </li>
                     <li class="list-group-item" style="cursor: pointer;"
                         ng-repeat="snack in vm.newFoodList | filter:search:strict"
-                        data-ng-click="vm.foodChange(snack)">
+                        data-ng-click="vm.loadCategoryItems(snack)">
                         <span class="badge">New</span>{{snack}}
                     </li>
                 </ul>

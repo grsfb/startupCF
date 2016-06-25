@@ -15,14 +15,25 @@
             <img class="sliderImg" bn-lazy-src="front.jpg"/>
 
             <div class="container">
-                <div class="carousel-caption">
-                    <p class="frontCarouselHeading">Your Personal home chef</p>
+                <!--<div style="clear: both;margin-top: 5px;">
+                    <div class="col-md-12 page-title" style="background: teal !important;color: white !important;margin-bottom: 10px;">
+                        <div class="container" style="">Why Order From Chefonia?</div>
+                    </div>
+                    <div class="container" style="padding: 0">
+                        <div data-ng-include="'pages/front/why-chefonia.html'"></div>
+                    </div>
+                </div>-->
+                <div class="carousel-caption" style="width: 80%!important;left: 10%!important;">
+                    <p class="frontCarouselHeading" style="color: #FFFFFF">Why Order From Chefonia?</p>
+                    <div class="frontCarouselText" style="color:#4B5B5E ">
+                        <div data-ng-include="'pages/front/why-chefonia.html'"></div>
+                    </div>
 
-                    <p class="frontCarouselText">Browse home made items made from wisely chosen expert
+                    <!--<p class="frontCarouselText">Browse home made items made from wisely chosen expert
                         chefs.</p>
 
                     <p><a class="myButton btn-lg" href="categories">See Everything</a>
-                    </p></div>
+                    </p>--></div>
             </div>
         </div>
 
@@ -86,7 +97,7 @@
                 style="width: 100%;z-index: 9999;overflow: visible;padding: 0px;margin-top: 5px">
                 <li id="jquery-list-view-limit" class="list-group-item itemlist"
                     ng-repeat="snack in vm.foodList | filter:search:strict | limitTo:7"
-                    style="cursor: pointer;" data-ng-click="vm.foodChange(snack)">
+                    style="cursor: pointer;" data-ng-click="vm.loadCategoryItems(snack)">
                     <span class="badge">Popularity ***</span>{{snack}}
                 </li>
                 <li class="list-group-item disabled"
@@ -95,7 +106,7 @@
                 </li>
                 <li class="list-group-item" style="cursor: pointer;"
                     ng-repeat="snack in vm.popularFoodList | filter:search:strict | limitTo:0"
-                    data-ng-click="vm.foodChange(snack)">
+                    data-ng-click="vm.loadCategoryItems(snack)">
                     <span class="badge">Popularity *****</span>{{snack}}
                 </li>
                 <li class="list-group-item disabled"
@@ -104,7 +115,7 @@
                 </li>
                 <li class="list-group-item" style="cursor: pointer;"
                     ng-repeat="snack in vm.newFoodList | filter:search:strict"
-                    data-ng-click="vm.foodChange(snack)">
+                    data-ng-click="vm.loadCategoryItems(snack)">
                     <span class="badge">New</span>{{snack}}
                 </li>
             </ul>

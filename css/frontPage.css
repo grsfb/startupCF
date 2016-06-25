@@ -300,14 +300,12 @@ ul li a:hover {
 }
 
 .frontCarouselText {
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
     font-size: 22px;
     font-weight: 500;
     text-shadow: black 10px 0 50px;
 }
 
 .frontCarouselHeading {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: xx-large !important;
 }
 
