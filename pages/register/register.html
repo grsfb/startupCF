@@ -5,7 +5,7 @@
 
         <div class="form-group"
              ng-class="{'has-error': registerForm.newUserName.$invalid &amp;&amp; registerForm.newUserName.$dirty}">
-            <label><span class="fa fa-user"></span> Name</label>
+            <label><span class="fa fa-user"></span>Full Name</label>
             <input type="text" class="form-control loginInput" id="newUserName" name="newUserName"
                    data-ng-model="vm.user.name" ng-minlength="3" data-ng-pattern="/^[A-z ]+$/"
                    placeholder="Enter your name" required="">
